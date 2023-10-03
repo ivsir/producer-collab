@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inspiration&family=Montserrat:wght@300;400;500;600;700&family=Pacifico&display=swap");
+
+:root {
+  --color-yellow: #ffc442;
+  --color-light-blue: #4dc4d2;
+  --color-dark-blue: #175d8f;
+  --color-bg: #1c1c1d;
+  --color-black: #000000;
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: "Courier Prime", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Courier prime", monospace;
+}
+
+* {
+  box-sizing: border-box;
+} 
