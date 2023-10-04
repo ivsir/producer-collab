@@ -58,69 +58,6 @@ const resolvers = {
 
       return { token, user };
     },
-    // addFolder: async (parent, { userId, folderName }, context) => {
-    //   if (context.user) {
-    //     try {
-    //       // Assuming you have a function to create a folder here
-    //       const user = await User.findOneAndUpdate(
-    //         { _id: context.user._id },
-    //         {
-    //           userId: context.user._id,
-    //           folderName,
-    //         }
-    //       );
-    //       // You may use the AWS SDK to create a folder in your S3 bucket
-    //       const folderKey = `${userId}/${folderName}/`;
-
-    //       // Create the folder using your S3 library
-    //       await s3.createFolder();
-    //       return user && `Folder '${folderName}' created successfully`;
-    //     } catch (error) {
-    //       console.error("Error creating folder:", error);
-    //       throw new Error("Failed to create folder");
-    //     }
-    //   }
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
-    // addFolder: async (parent, { userId, folderName }, context) => {
-    //   if (context.user) {
-    //     try {
-    //       // Assuming you have a function to create a folder in MongoDB
-    //       console.log("User ID from context:", context.user._id);
-          
-    //       const updatedUser = await User.findByIdAndUpdate(
-    //         { _id: context.user._id },
-    //         { folderName }, // Set the folder name directly
-    //         { new: true }
-    //       );
-
-    //       if (!updatedUser) {
-    //         throw new Error("User not found");
-    //       }
-
-    //       // // You may use the AWS SDK to create a folder in your S3 bucket
-    //       // const folderKey = `${userId}/${folderName}/`;
-
-    //       // // Create the folder using your S3 library
-    //       // await s3.createFolder(folderKey);
-
-    //       // return {
-    //       //   userId: updatedUser._id,
-    //       //   folderName: updatedUser.folderName,
-    //       //   user: {
-    //       //     _id: updatedUser._id,
-    //       //     username: updatedUser.username,
-    //       //   },
-    //       // };
-    //       console.log(updatedUser);
-    //       return updatedUser;
-    //     } catch (error) {
-    //       console.error("Error creating folder:", error);
-    //       throw new Error("Failed to create folder");
-    //     }
-    //   }
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
     addProject: async (
       parent,
       { projectTitle, projectDescription },

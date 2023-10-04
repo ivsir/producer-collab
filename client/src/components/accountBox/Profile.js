@@ -7,10 +7,6 @@ import { useQuery } from "@apollo/client";
 import { ProjectAuthor } from "./Common";
 
 const Profile = (props) => {
-  // const { loading, data: userData } = useQuery(QUERY_USER, {
-  //   variables: { username: AuthService.getUsername() },
-  // });
-
   const { loading, data: userData } = useQuery(QUERY_ME, {
     variables: { username: AuthService.getUsername() },
   });
