@@ -14,12 +14,10 @@ import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
-// import fldrMutation from "../../utils/fldrMutation";
-import imgQuery from "../../utils/imgQuery";
 
 import { FormContainer } from "./Common";
 import Auth from "../../utils/auth";
-import { QUERY_USER } from "../../utils/queries";
+
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -36,7 +34,6 @@ const ProjectForm = () => {
   const [uploading, setUploading] = useState(false);
 
   const URL = "/images";
-  // const URLTwo= '/upload-image'
 
   const userId = Auth.getProfile().data.username; // Adjust this line based on your Auth implementation
   console.log(userId);
@@ -120,12 +117,10 @@ const ProjectForm = () => {
     const { name, value } = event.target;
     if (name === "projectTitle" && value.length <= 280) {
       setProjectTitle(value);
-      // setCharacterCount(value.length);
     }
     if (name === "projectDescription" && value.length <= 2000) {
       setProjectDescription(value);
-      //   setCharacterCount2(value.length);
-      // }
+
     }
   };
 
@@ -144,7 +139,6 @@ const ProjectForm = () => {
                 id="imageInput"
                 type="file"
                 hidden
-                // onChange={handleUpload}
               />
               <UploadButton>
               <Button
