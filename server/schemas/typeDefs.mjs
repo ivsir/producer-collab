@@ -8,7 +8,6 @@ const typeDefs = gql`
     email: String!
     password: String!
     projects: [Project]
-    # folderName: String!
   }
 
   type Project {
