@@ -13,7 +13,8 @@ const typeDefs = gql`
   type Project {
     _id: ID
     projectTitle: String!
-    projectDescription: String
+    projectDescription: String!
+    projectImage: String!
     projectAuthor: String
     projectMembers: [Member]
     createdAt: String
@@ -51,7 +52,11 @@ const typeDefs = gql`
     addFolder(userId: ID!, folderName: String!): User
     login(email: String!, password: String!): Auth
     addMember(projectId: ID!, memberId: ID!): Project
-    addProject(projectTitle: String!, projectDescription: String!): Project
+    addProject(
+      projectTitle: String!
+      projectDescription: String!
+      projectImage: String!
+    ): Project
     addComment(
       projectId: ID!
       commentText: String!

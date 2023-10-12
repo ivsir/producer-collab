@@ -10,9 +10,9 @@ export const QUERY_USER = gql`
         _id
         projectTitle
         projectDescription
+        projectImage
         createdAt
       }
-      # folderName
     }
   }
 `;
@@ -23,6 +23,7 @@ export const QUERY_PROJECTS = gql`
       _id
       projectTitle
       projectDescription
+      projectImage
       projectAuthor
       createdAt
       projectMembers {
@@ -40,6 +41,7 @@ export const QUERY_SINGLE_PROJECT = gql`
       _id
       projectTitle
       projectDescription
+      projectImage
       projectAuthor
       createdAt
       comments {
@@ -62,6 +64,7 @@ export const QUERY_ME = gql`
         _id
         projectTitle
         projectText
+        projectImage
         projectAuthor
         createdAt
       }

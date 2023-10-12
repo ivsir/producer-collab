@@ -21,7 +21,7 @@ const useQuery = (url, refetch, userId) => {
     };
 
     fetch();
-  }, [url, refetch]);
+  }, [url, refetch, userId]);
 
   return state;
 };
