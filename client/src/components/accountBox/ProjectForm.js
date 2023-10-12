@@ -18,32 +18,44 @@ import imgMutation from "../../utils/imgMutation";
 import { FormContainer } from "./Common";
 import Auth from "../../utils/auth";
 
-
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 
-const ErrorText = ({ children, ...props }) => (
-  <Text fontSize="lg" color="red.300" {...props}>
-    {children}
-  </Text>
-);
+const URL = "/images";
+// const ErrorText = ({ children, ...props }) => (
+//   <Text fontSize="lg" color="red.300" {...props}>
+//     {children}
+//   </Text>
+// );
+const ErrorText = ({ error }) => {
+  if (error) {
+    return (
+      <Text fontSize="lg" color="red.300">
+        {error}
+      </Text>
+    );
+  }
+  return null; // Return null when there is no error
+};
 
 const ProjectForm = () => {
   // Handles Image
   const [refetch, setRefetch] = useState(0);
   const [imgError, setImgError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [projectImage, setProjectImage] = useState("");
 
-  const URL = "/images";
 
   const userId = Auth.getProfile().data.username; // Adjust this line based on your Auth implementation
-  console.log(userId);
   const {
     mutate: uploadImage,
+    responseData: imageKeyResponse,
     // isLoading: uploading,
+
     error: uploadError,
   } = imgMutation({ url: URL }, userId);
 
   const handleUpload = async (file) => {
+    // setImgError("");
     if (!validFileTypes.find((type) => type === file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
@@ -51,12 +63,22 @@ const ProjectForm = () => {
 
     const form = new FormData();
     form.append("image", file);
+    
+    console.log(form);
+    try {
+      const data = await uploadImage(form);
 
-    await uploadImage(form);
+      if (imageKeyResponse && imageKeyResponse.key) {
+        setProjectImage(imageKeyResponse.key);
+      }
 
-    setTimeout(() => {
-      setRefetch((s) => s + 1);
-    }, 1000);
+  
+      setTimeout(() => {
+        setRefetch((s) => s + 1);
+      }, 1000);
+    } catch (error) {
+      console.error("Error uploading image to S3:", error);
+    }
   };
 
   const [addProject, { error }] = useMutation(ADD_PROJECT, {
@@ -96,16 +118,20 @@ const ProjectForm = () => {
         await handleUpload(file);
         setUploading(false);
       }
-
-      const { data } = await addProject({
+      console.log("projectImage", projectImage);
+      const {
+        data
+      } = await addProject({
         variables: {
           projectTitle,
           projectDescription,
+          projectImage, // Use responseData.key,
           projectAuthor: Auth.getProfile().data.username,
         },
       });
       setProjectTitle("");
       setProjectDescription("");
+      setProjectImage("");
       window.location.assign("/profile");
       console.log("success");
     } catch (err) {
@@ -120,14 +146,12 @@ const ProjectForm = () => {
     }
     if (name === "projectDescription" && value.length <= 2000) {
       setProjectDescription(value);
-
     }
   };
 
   return (
     <FormContainer>
       <div className="top-container">
-        {/* <Slide className="slide-text"> */}
         <h1>What do you want to create?</h1>
         {Auth.loggedIn() ? (
           <>
@@ -135,28 +159,27 @@ const ProjectForm = () => {
               className="flex-row justify-center justify-space-between-md align-center box"
               onSubmit={handleFormSubmit}
             >
-              <Input
-                id="imageInput"
-                type="file"
-                hidden
-              />
+              <Input id="imageInput" type="file" hidden />
               <UploadButton>
-              <Button
-                className="submitButton"
-                as="label"
-                htmlFor="imageInput"
-                colorScheme="blue"
-                color="white"
-                variant="outline"
-                mb={4}
-                cursor="pointer"
-                isLoading={uploading}
-              >
-                Upload Image
-              </Button>
+                <Button
+                  className="submitButton"
+                  as="label"
+                  htmlFor="imageInput"
+                  colorScheme="blue"
+                  color="white"
+                  variant="outline"
+                  mb={4}
+                  cursor="pointer"
+                  isLoading={uploading}
+                >
+                  Upload Image
+                </Button>
               </UploadButton>
-              {error && <ErrorText>{error}</ErrorText>}
-              {uploadError && <ErrorText>{uploadError}</ErrorText>}
+              {/* {error && <ErrorText>{error}</ErrorText>}
+              {uploadError && <ErrorText>{uploadError}</ErrorText>} */}
+              {/* <ErrorText error={error && error.message} /> */}
+              <ErrorText error={uploadError && uploadError.message} />
+
               <div className=" col-lg-9 textarea-div">
                 <textarea
                   className="first-textarea"
