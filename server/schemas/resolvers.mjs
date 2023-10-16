@@ -55,7 +55,7 @@ const resolvers = {
       }
 
       const token = signToken(user);
-
+console.log("token:",token)
       return { token, user };
     },
     addProject: async (

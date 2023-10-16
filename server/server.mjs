@@ -92,7 +92,8 @@ app.post("/images", upload.single("image"), async (req, res) => {
 
   if (!file || !userId) return res.status(400).json({ message: "Bad request" });
 
-  const { error, key } = uploadToS3({ file, userId });
+  const { key, error } = await uploadToS3({ file, userId });
+
   if (error) return res.status(500).json({ message: error.message });
 
   return res.status(201).json({ key });
