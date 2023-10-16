@@ -2,12 +2,12 @@ import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import axiosClient from "../config/axios";
 
-const useMutation = ({ url, method = "POST" }, userId, imageKey) => {
+const useMutation = ({ url, method = "POST" }, userId) => {
   const toast = useToast();
   const [state, setState] = useState({
     isLoading: false,
     error: "",
-    responseData: null, // Add a responseData field to store the response
+    responseData: null,
   });
 
   const fn = async (data) => {
@@ -15,30 +15,36 @@ const useMutation = ({ url, method = "POST" }, userId, imageKey) => {
       ...prev,
       isLoading: true,
     }));
-    axiosClient.defaults.headers.common["x-user-id"] = userId;
-    axiosClient({ url, method, data })
-      .then((response) => {
-        // Store the response data
-        console.log("response", response.data);
-        setState({
+
+    try {
+      axiosClient.defaults.headers.common["x-user-id"] = userId;
+      const response = await axiosClient({ url, method, data });
+      const key = response.data.key;
+      if (key) {
+        console.log(key);
+        setState((prev) => ({
+          ...prev,
           isLoading: false,
           error: "",
-          responseData: response.data, // Store the response data
-        });
+          responseData: key,
+        }));
         toast({
           title: "Successfully Added Image",
           status: "success",
           duration: 2000,
           position: "top",
         });
-      })
-      .catch((error) => {
-        setState({
-          isLoading: false,
-          error: error.message,
-          responseData: null, // Clear responseData on error
-        });
+      } else {
+        console.error("Key not found in the response data.");
+      }
+    } catch (error) {
+      console.error("Error in the request:", error);
+      setState({
+        isLoading: false,
+        error: error.message,
+        responseData: null,
       });
+    }
   };
 
   return { mutate: fn, ...state };

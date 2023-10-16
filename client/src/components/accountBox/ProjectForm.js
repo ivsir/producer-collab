@@ -44,18 +44,14 @@ const ProjectForm = () => {
   const [uploading, setUploading] = useState(false);
   const [projectImage, setProjectImage] = useState("");
 
-
   const userId = Auth.getProfile().data.username; // Adjust this line based on your Auth implementation
   const {
     mutate: uploadImage,
-    responseData: imageKeyResponse,
-    // isLoading: uploading,
-
     error: uploadError,
+    responseData: imageResponse,
   } = imgMutation({ url: URL }, userId);
 
   const handleUpload = async (file) => {
-    // setImgError("");
     if (!validFileTypes.find((type) => type === file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
@@ -63,16 +59,16 @@ const ProjectForm = () => {
 
     const form = new FormData();
     form.append("image", file);
-    
-    console.log(form);
+
+    // console.log(form);
     try {
       const data = await uploadImage(form);
+      console.log("response", imageResponse);
 
-      if (imageKeyResponse && imageKeyResponse.key) {
-        setProjectImage(imageKeyResponse.key);
+      if (imageResponse) {
+        setProjectImage(imageResponse);
       }
 
-  
       setTimeout(() => {
         setRefetch((s) => s + 1);
       }, 1000);
@@ -118,14 +114,11 @@ const ProjectForm = () => {
         await handleUpload(file);
         setUploading(false);
       }
-      console.log("projectImage", projectImage);
-      const {
-        data
-      } = await addProject({
+      const { data } = await addProject({
         variables: {
           projectTitle,
           projectDescription,
-          projectImage, // Use responseData.key,
+          projectImage,
           projectAuthor: Auth.getProfile().data.username,
         },
       });
