@@ -19,12 +19,9 @@ export const uploadToS3 = async ({ file, userId }) => {
     Body: file.buffer,
     ContentType: file.mimetype,
   });
-  console.log(command);
 
   try {
     await s3.send(command);
-    console.log("Uploaded key:", key); // Log the key
-
     return { key };
   } catch (error) {
     console.log(error);
