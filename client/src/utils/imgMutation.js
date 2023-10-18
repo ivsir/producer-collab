@@ -15,19 +15,18 @@ const useMutation = ({ url, method = "POST" }, userId) => {
       ...prev,
       isLoading: true,
     }));
-
+    
     try {
       axiosClient.defaults.headers.common["x-user-id"] = userId;
       const response = await axiosClient({ url, method, data });
       const key = response.data.key;
       if (key) {
         console.log(key);
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
+        setState({
+          isLoading: true,
           error: "",
-          responseData: key,
-        }));
+          responseData: response.data,
+        });
         toast({
           title: "Successfully Added Image",
           status: "success",

@@ -1,31 +1,16 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Image,
-  Input,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Box, Button, Input, Text } from "@chakra-ui/react";
 import { UploadButton } from "./Common";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
-
 import { FormContainer } from "./Common";
 import Auth from "../../utils/auth";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
-
 const URL = "/images";
-// const ErrorText = ({ children, ...props }) => (
-//   <Text fontSize="lg" color="red.300" {...props}>
-//     {children}
-//   </Text>
-// );
+
 const ErrorText = ({ error }) => {
   if (error) {
     return (
@@ -38,13 +23,11 @@ const ErrorText = ({ error }) => {
 };
 
 const ProjectForm = () => {
-  // Handles Image
-  const [refetch, setRefetch] = useState(0);
   const [imgError, setImgError] = useState("");
   const [uploading, setUploading] = useState(false);
   const [projectImage, setProjectImage] = useState("");
+  const userId = Auth.getProfile().data.username;
 
-  const userId = Auth.getProfile().data.username; // Adjust this line based on your Auth implementation
   const {
     mutate: uploadImage,
     error: uploadError,
@@ -52,7 +35,7 @@ const ProjectForm = () => {
   } = imgMutation({ url: URL }, userId);
 
   const handleUpload = async (file) => {
-    if (!validFileTypes.find((type) => type === file.type)) {
+    if (!validFileTypes.includes(file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
     }
@@ -60,36 +43,32 @@ const ProjectForm = () => {
     const form = new FormData();
     form.append("image", file);
 
-    // console.log(form);
     try {
-      const data = await uploadImage(form);
-      console.log("response", imageResponse);
-
-      if (imageResponse) {
-        setProjectImage(imageResponse);
+      uploadImage(form);
+      if (imageResponse && imageResponse.key) {
+        setProjectImage(imageResponse.key);
       }
-
-      setTimeout(() => {
-        setRefetch((s) => s + 1);
-      }, 1000);
     } catch (error) {
       console.error("Error uploading image to S3:", error);
     }
   };
+  // useEffect(() => {
+    //   if (imageResponse) {
+  //     if (imageResponse.key) {
+  //       setProjectImage(imageResponse.key);
+  //       console.log(imageResponse);
+  //       console.log(projectImage);
+  //       // setImageUploadCompleted(true);
+  //     }
+  //   }
+  // }, [imageResponse, projectImage]);
+  console.log(imageResponse, "project");
+  console.log(projectImage, "project image");
 
-  const [addProject, { error }] = useMutation(ADD_PROJECT, {
-    update(cache, { data: { addProject } }) {
-      try {
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
+  const [addProject, { error }] = useMutation(ADD_PROJECT);
 
-  // Handles Project information
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -111,24 +90,36 @@ const ProjectForm = () => {
       if (file) {
         // If a file is selected, upload it
         setUploading(true);
+
+        // This line was missing in the previous code, include it to await the image upload
         await handleUpload(file);
-        setUploading(false);
+
+        // if (!error) {
+        const { data } = await addProject({
+          variables: {
+            projectTitle,
+            projectDescription,
+            projectImage,
+            projectAuthor: Auth.getProfile().data.username,
+          },
+        });
+
+        setProjectTitle("");
+        // Reset form fields
+        setProjectDescription("");
+        setProjectImage("");
+        
+        window.location.assign("/profile");
+        console.log("success");
+        // if (!error) {
+        // }
       }
-      const { data } = await addProject({
-        variables: {
-          projectTitle,
-          projectDescription,
-          projectImage,
-          projectAuthor: Auth.getProfile().data.username,
-        },
-      });
-      setProjectTitle("");
-      setProjectDescription("");
-      setProjectImage("");
-      window.location.assign("/profile");
-      console.log("success");
+
+      setUploading(false); // Set uploading to false after the upload is complete
+      // }
     } catch (err) {
       console.error(err);
+      setUploading(false); // Make sure to set uploading to false in case of errors
     }
   };
 
@@ -152,7 +143,6 @@ const ProjectForm = () => {
               className="flex-row justify-center justify-space-between-md align-center box"
               onSubmit={handleFormSubmit}
             >
-              <Input id="imageInput" type="file" hidden />
               <UploadButton>
                 <Button
                   className="submitButton"
@@ -167,10 +157,8 @@ const ProjectForm = () => {
                 >
                   Upload Image
                 </Button>
+                <Input id="imageInput" type="file" hidden />
               </UploadButton>
-              {/* {error && <ErrorText>{error}</ErrorText>}
-              {uploadError && <ErrorText>{uploadError}</ErrorText>} */}
-              {/* <ErrorText error={error && error.message} /> */}
               <ErrorText error={uploadError && uploadError.message} />
 
               <div className=" col-lg-9 textarea-div">
@@ -198,6 +186,10 @@ const ProjectForm = () => {
                 <button
                   className="btn btn-primary btn-block py-3"
                   type="submit"
+                  disabled={
+                    uploading
+                    //  || imageUploadCompleted
+                  }
                 >
                   Add Project
                 </button>
