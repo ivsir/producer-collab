@@ -25,7 +25,7 @@ const ErrorText = ({ error }) => {
 const ProjectForm = () => {
   const [imgError, setImgError] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [projectImage, setProjectImage] = useState("");
+  const [projectImage, setProjectImage] = useState(""); // Keep track of the projectImage
   const userId = Auth.getProfile().data.username;
 
   const {
@@ -44,31 +44,23 @@ const ProjectForm = () => {
     form.append("image", file);
 
     try {
-      uploadImage(form);
-      if (imageResponse && imageResponse.key) {
-        setProjectImage(imageResponse.key);
-      }
+      await uploadImage(form);
     } catch (error) {
       console.error("Error uploading image to S3:", error);
     }
   };
-  // useEffect(() => {
-    //   if (imageResponse) {
-  //     if (imageResponse.key) {
-  //       setProjectImage(imageResponse.key);
-  //       console.log(imageResponse);
-  //       console.log(projectImage);
-  //       // setImageUploadCompleted(true);
-  //     }
-  //   }
-  // }, [imageResponse, projectImage]);
-  console.log(imageResponse, "project");
-  console.log(projectImage, "project image");
+
+  useEffect(() => {
+    if (imageResponse && imageResponse.key) {
+      setProjectImage(imageResponse.key);
+    }
+  }, [imageResponse]);
 
   const [addProject, { error }] = useMutation(ADD_PROJECT);
 
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -87,36 +79,37 @@ const ProjectForm = () => {
         return;
       }
 
-      if (file) {
+      // If projectImage is not set, try to upload the image
+      if (!projectImage) {
         // If a file is selected, upload it
         setUploading(true);
 
-        // This line was missing in the previous code, include it to await the image upload
         await handleUpload(file);
 
-        // if (!error) {
-        const { data } = await addProject({
-          variables: {
-            projectTitle,
-            projectDescription,
-            projectImage,
-            projectAuthor: Auth.getProfile().data.username,
-          },
-        });
+        // Handle the response to get the image key
+        if (imageResponse && imageResponse.key) {
+          setProjectImage(imageResponse.key);
+        }
 
-        setProjectTitle("");
-        // Reset form fields
-        setProjectDescription("");
-        setProjectImage("");
-        
-        window.location.assign("/profile");
-        console.log("success");
-        // if (!error) {
-        // }
+        setUploading(false);
       }
 
-      setUploading(false); // Set uploading to false after the upload is complete
-      // }
+      // Add the project with the projectImage
+      const { data } = await addProject({
+        variables: {
+          projectTitle,
+          projectDescription,
+          projectImage,
+          projectAuthor: Auth.getProfile().data.username,
+        },
+      });
+
+      setProjectTitle("");
+      setProjectDescription("");
+      setProjectImage("");
+
+      // Redirect to the profile page
+      window.location.assign("/profile");
     } catch (err) {
       console.error(err);
       setUploading(false); // Make sure to set uploading to false in case of errors
@@ -186,10 +179,7 @@ const ProjectForm = () => {
                 <button
                   className="btn btn-primary btn-block py-3"
                   type="submit"
-                  disabled={
-                    uploading
-                    //  || imageUploadCompleted
-                  }
+                  disabled={uploading}
                 >
                   Add Project
                 </button>

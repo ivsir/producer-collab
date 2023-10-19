@@ -174,6 +174,16 @@ const SingleProject = () => {
             }}
           >
             {project.projectDescription}
+          </blockquote>        <blockquote
+            className="p-4"
+            style={{
+              fontSize: "1.5rem",
+              fontStyle: "italic",
+              lineHeight: "1.5",
+              overflow: "auto",
+            }}
+          >
+            {project.projectImage}
           </blockquote>
         </div>
       </div>

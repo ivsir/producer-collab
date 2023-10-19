@@ -23,7 +23,7 @@ const useMutation = ({ url, method = "POST" }, userId) => {
       if (key) {
         console.log(key);
         setState({
-          isLoading: true,
+          isLoading: false,
           error: "",
           responseData: response.data,
         });
