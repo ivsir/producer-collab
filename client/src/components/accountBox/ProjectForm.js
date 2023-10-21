@@ -206,6 +206,7 @@
 // };
 
 // export default ProjectForm;
+
 import React, { useState, useEffect } from "react";
 import { Box, Button, Input, Text } from "@chakra-ui/react";
 import { UploadButton } from "./Common";
@@ -234,6 +235,8 @@ const ProjectForm = () => {
   const [imgError, setImgError] = useState("");
   const [uploading, setUploading] = useState(false);
   const [projectImage, setProjectImage] = useState(""); // Keep track of the projectImage
+  const [addProjectClicked, setAddProjectClicked] = useState(false);
+  const [addProjectLinkPerformed, setAddProjectLinkPerformed] = useState(false); // Track if addProjectLink is performed
 
   const userId = Auth.getProfile().data.username;
 
@@ -275,6 +278,10 @@ const ProjectForm = () => {
   console.log("projectimage", projectImage);
 
   const addProjectLink = async (link) => {
+    // if (addProjectLinkPerformed) {
+    //   return; // Do nothing if addProjectLink is performed
+    // }
+
     try {
       await addProject({
         variables: {
@@ -286,9 +293,13 @@ const ProjectForm = () => {
       });
 
       console.log("projectimage2", projectImage);
+
+      setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
       setProjectTitle("");
       setProjectDescription("");
       setProjectImage("");
+      window.location.assign("/profile");
+      return;
     } catch (err) {
       console.error(err);
     } finally {
@@ -297,7 +308,11 @@ const ProjectForm = () => {
   };
 
   if (projectImage) {
+    if (addProjectLinkPerformed) {
+      return; // Do nothing if addProjectLink is performed
+    }
     addProjectLink(imageResponse.key);
+    setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
   }
 
   const uploadProject = async (file) => {
