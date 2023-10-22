@@ -235,10 +235,10 @@ const ProjectForm = () => {
   const [imgError, setImgError] = useState("");
   const [uploading, setUploading] = useState(false);
   const [projectImage, setProjectImage] = useState(""); // Keep track of the projectImage
-  const [addProjectClicked, setAddProjectClicked] = useState(false);
   const [addProjectLinkPerformed, setAddProjectLinkPerformed] = useState(false); // Track if addProjectLink is performed
-
+  const [uploadCompleted, setUploadCompleted] = useState(false); // Track image upload completion
   const userId = Auth.getProfile().data.username;
+  const [projectCounter, setProjectCounter] = useState(0);
 
   const {
     mutate: uploadImage,
@@ -269,32 +269,29 @@ const ProjectForm = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
 
-  useEffect(() => {
-    if (imageResponse && imageResponse.key) {
-      setProjectImage(imageResponse.key);
-    }
-  }, [imageResponse]);
-
   console.log("projectimage", projectImage);
-
+  
+  if (imageResponse && imageResponse.key && !uploadCompleted) {
+    setProjectImage(imageResponse.key);
+    setUploadCompleted(true);
+  }
   const addProjectLink = async (link) => {
-    // if (addProjectLinkPerformed) {
-    //   return; // Do nothing if addProjectLink is performed
-    // }
-
     try {
+      console.log(projectCounter,"counter 1")
       await addProject({
         variables: {
           projectTitle,
           projectDescription,
-          projectImage: link,
+          projectImage,
           projectAuthor: Auth.getProfile().data.username,
         },
       });
 
+
+      setProjectCounter(prevCounter => prevCounter + 1);
+      console.log(projectCounter,"counter 2")
       console.log("projectimage2", projectImage);
 
-      setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
       setProjectTitle("");
       setProjectDescription("");
       setProjectImage("");
@@ -304,27 +301,25 @@ const ProjectForm = () => {
       console.error(err);
     } finally {
       setUploading(false);
+      setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
+      setUploadCompleted(true);
     }
   };
 
-  if (projectImage) {
-    if (addProjectLinkPerformed) {
-      return; // Do nothing if addProjectLink is performed
+  useEffect(() => {
+    if (projectImage && !addProjectLinkPerformed) {
+      setAddProjectLinkPerformed(true);
+      addProjectLink(imageResponse.key);
     }
-    addProjectLink(imageResponse.key);
-    setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
-  }
+  }, [projectImage, addProjectLinkPerformed]);
+
 
   const uploadProject = async (file) => {
     try {
       if (!projectImage) {
         setUploading(true);
         await handleUpload(file);
-
-        // Now, after the image upload, you can safely add the project.
       }
-
-      console.log("projectimage 3", projectImage);
     } catch (err) {
       console.error(err);
     }
