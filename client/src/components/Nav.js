@@ -16,33 +16,6 @@ const Nav = () => {
           src={require("../assets/prodcollab.png")}
         ></img>
       </a>
-      {/* <nav className="navbar">
-        <input type="checkbox" id="nav-check" />
-        <div class="nav-btn">
-          <label for="nav-check">
-            <span></span>
-            <span></span>
-            <span></span>
-          </label>
-        </div>
-
-        <div class="nav-links">
-          <a href="/explore">Explore</a>
-
-          <a href="/about">About</a>
-
-          {Auth.loggedIn() ? (
-            <>
-              <a href="/profile">Profile</a>
-              <a onClick={logout} href="/">
-                Logout
-              </a>
-            </>
-          ) : (
-            <a href="/">Login</a>
-          )}
-        </div>
-      </nav> */}
     </header>
   );
 };

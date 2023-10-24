@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axiosClient from '../config/axios';
 
-const useQuery = (url, refetch, userId) => {
+const useQuery = (url, refetch) => {
   const [state, setState] = useState({
     data: null,
     isLoading: true,
@@ -10,8 +10,6 @@ const useQuery = (url, refetch, userId) => {
 
   useEffect(() => {
     const fetch = async () => {
-      axiosClient.defaults.headers.common["x-user-id"] = userId;
-      
       axiosClient
         .get(url)
         .then(({ data }) => setState({ data, isLoading: false, error: '' }))
@@ -21,7 +19,7 @@ const useQuery = (url, refetch, userId) => {
     };
 
     fetch();
-  }, [url, refetch, userId]);
+  }, [url, refetch]);
 
   return state;
 };

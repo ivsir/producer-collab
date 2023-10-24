@@ -7,6 +7,7 @@ const useMutation = ({ url, method = "POST" }, userId) => {
   const [state, setState] = useState({
     isLoading: false,
     error: "",
+    responseData: null,
   });
 
   const fn = async (data) => {
@@ -14,23 +15,35 @@ const useMutation = ({ url, method = "POST" }, userId) => {
       ...prev,
       isLoading: true,
     }));
-
-    // data.userId = userId;
-    axiosClient.defaults.headers.common["x-user-id"] = userId;
-
-    axiosClient({ url, method, data })
-      .then(() => {
-        setState({ isLoading: false, error: "" });
+    
+    try {
+      axiosClient.defaults.headers.common["x-user-id"] = userId;
+      const response = await axiosClient({ url, method, data });
+      const key = response.data.key;
+      if (key) {
+        console.log(key);
+        setState({
+          isLoading: false,
+          error: "",
+          responseData: response.data,
+        });
         toast({
           title: "Successfully Added Image",
           status: "success",
           duration: 2000,
           position: "top",
         });
-      })
-      .catch((error) => {
-        setState({ isLoading: false, error: error.message });
+      } else {
+        console.error("Key not found in the response data.");
+      }
+    } catch (error) {
+      console.error("Error in the request:", error);
+      setState({
+        isLoading: false,
+        error: error.message,
+        responseData: null,
       });
+    }
   };
 
   return { mutate: fn, ...state };

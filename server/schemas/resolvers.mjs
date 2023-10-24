@@ -55,18 +55,19 @@ const resolvers = {
       }
 
       const token = signToken(user);
-
+console.log("token:",token)
       return { token, user };
     },
     addProject: async (
       parent,
-      { projectTitle, projectDescription },
+      { projectTitle, projectDescription, projectImage },
       context
     ) => {
       if (context.user) {
         const project = await Project.create({
           projectTitle,
           projectDescription,
+          projectImage,
           projectAuthor: context.user.username,
         });
 
