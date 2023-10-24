@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { formatTimestamp} from "../utils/dateFormat.mjs";
+import { formatTimestamp } from "../utils/dateFormat.mjs";
 
 const projectSchema = new Schema({
   projectTitle: {
@@ -16,6 +16,10 @@ const projectSchema = new Schema({
     minlength: 1,
     maxlength: 40000,
     trim: true,
+  },
+  projectImage: {
+    type: String,
+    required: "You need to upload an image",
   },
   projectAuthor: {
     type: String,
@@ -35,12 +39,6 @@ const projectSchema = new Schema({
       },
     },
   ],
-  projectPhoto: {
-    key: String, // S3 key or file path
-    url: String, // URL to access the file on S3
-    size: Number, // File size in bytes
-    mimeType: String, // MIME type of the file
-  },
   createdAt: {
     type: Date,
     default: Date.now,

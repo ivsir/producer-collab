@@ -10,6 +10,7 @@ import typeDefs from "./schemas/typeDefs.mjs";
 import resolvers from "./schemas/resolvers.mjs";
 import AWS from "aws-sdk";
 import path from "path";
+import Project from "./models/Project.mjs";
 import User from "./models/User.mjs";
 // Now you can use typeDefs, schema1Resolvers, schema2TypeDefs, and resolvers in your code.
 
@@ -85,80 +86,18 @@ app.post("/create-s3-folder", async (req, res) => {
   }
 });
 
-app.post("/images", upload.single("image"), (req, res) => {
+app.post("/images", upload.single("image"), async (req, res) => {
   const { file } = req;
   const userId = req.headers["x-user-id"];
 
   if (!file || !userId) return res.status(400).json({ message: "Bad request" });
 
-  const { error, key } = uploadToS3({ file, userId });
+  const { key, error } = await uploadToS3({ file, userId });
+
   if (error) return res.status(500).json({ message: error.message });
 
   return res.status(201).json({ key });
 });
-
-// Define the route for image uploads
-app.post("/upload-image", async (req, res) => {
-  // const { userId } = req.body;
-  const { file } = req;
-  const userId = req.headers["x-user-id"];
-  console.log("userId:", userId);
-  try {
-    // Check if the user ID is provided (you can add more validation here)
-    if (!userId) {
-      return res.status(400).json({ error: "User ID is required" });
-      const { file } = req;
-    }
-
-    // Retrieve the uploaded file from the request
-    // const file = req.files.image; // Assuming you are using a middleware like `express-fileupload` to handle file uploads
-    // console.log(file);
-    // Specify the S3 bucket name and folder key (object key) based on the user's ID
-    const { error, key } = uploadToS3({ file, userId });
-    if (error) return res.status(500).json({ message: error.message });
-  } catch (error) {
-    console.error("Error uploading image to S3:", error);
-    res.status(500).json({ error: "Failed to upload image to S3" });
-  }
-});
-
-// Define the route for file upload
-// app.post("/upload-image", upload.single("image"), async (req, res) => {
-//   const { userId } = req.body;
-//   console.log(userId);
-
-//   if (!userId) {
-//     return res.status(400).json({ message: "Missing userId" });
-//   }
-
-//   if (!req.file) {
-//     return res.status(400).json({ message: "No file provided" });
-//   }
-
-//   try {
-//     // Specify the S3 bucket name and folder key (object key)
-//     const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
-//     const folderKey = `${userId}/`; // Use the userId to specify the folder
-
-//     // Generate a unique key for the uploaded file
-//     const fileKey = `${folderKey}${uuid()}-${req.file.originalname}`;
-
-//     // Upload the file to S3
-//     await s3
-//       .putObject({
-//         Bucket: bucketName,
-//         Key: fileKey,
-//         Body: req.file.buffer,
-//         ContentType: req.file.mimetype,
-//       })
-//       .promise();
-
-//     res.status(200).json({ message: "File uploaded successfully", fileKey });
-//   } catch (error) {
-//     console.error("Error uploading file to S3:", error);
-//     res.status(500).json({ error: "Failed to upload file to S3" });
-//   }
-// });
 
 app.get("/images", async (req, res) => {
   const userId = req.headers["x-user-id"];
@@ -169,6 +108,23 @@ app.get("/images", async (req, res) => {
   if (error) return res.status(400).json({ message: error.message });
 
   return res.json(presignedUrls);
+});
+
+app.get("/all-images", async (req, res) => {
+  try {
+    // Add logic to fetch image links from all users here
+    // For example, retrieve image links from your database
+    // You might use Mongoose or another database library for this
+
+    // Sample code using Mongoose to retrieve image links from a MongoDB
+    const allImageLinks = await ImageModel.find({});
+
+    // You should send these image links as a response to the client
+    res.status(200).json(allImageLinks);
+  } catch (error) {
+    console.error("Error retrieving image links:", error);
+    res.status(500).json({ error: "Failed to retrieve image links" });
+  }
 });
 
 // Call the async function to start the server

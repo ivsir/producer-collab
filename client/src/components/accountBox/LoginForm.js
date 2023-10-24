@@ -42,7 +42,7 @@ export function LoginForm(props) {
       });
 
       AuthService.login(data.login.token);
-      console.log(data.login.token);
+      console.log("token", data.login.token);
     } catch (e) {
       console.error(e);
     }

@@ -1,50 +1,47 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Image,
-  Input,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Box, Button, Input, Text } from "@chakra-ui/react";
 import { UploadButton } from "./Common";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
-
 import { FormContainer } from "./Common";
 import Auth from "../../utils/auth";
-
+import { useRef } from "react";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+const URL = "/images";
 
-const ErrorText = ({ children, ...props }) => (
-  <Text fontSize="lg" color="red.300" {...props}>
-    {children}
-  </Text>
-);
+const ErrorText = ({ error }) => {
+  if (error) {
+    return (
+      <Text fontSize="lg" color="red.300">
+        {error}
+      </Text>
+    );
+  }
+  return null; // Return null when there is no error
+};
 
 const ProjectForm = () => {
-  // Handles Image
-  const [refetch, setRefetch] = useState(0);
   const [imgError, setImgError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [projectImage, setProjectImage] = useState(""); // Keep track of the projectImage
+  const [addProjectLinkPerformed, setAddProjectLinkPerformed] = useState(false); // Track if addProjectLink is performed
+  const [uploadCompleted, setUploadCompleted] = useState(false); // Track image upload completion
+  const userId = Auth.getProfile().data.username;
+  const [projectCounter, setProjectCounter] = useState(0);
+  const fileInputRef = useRef(null);
+  const [uploadTriggered, setUploadTriggered] = useState(false);
 
-  const URL = "/images";
-
-  const userId = Auth.getProfile().data.username; // Adjust this line based on your Auth implementation
-  console.log(userId);
   const {
     mutate: uploadImage,
-    // isLoading: uploading,
     error: uploadError,
+    responseData: imageResponse,
   } = imgMutation({ url: URL }, userId);
 
   const handleUpload = async (file) => {
-    if (!validFileTypes.find((type) => type === file.type)) {
+    if (!validFileTypes.includes(file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
     }
@@ -52,25 +49,69 @@ const ProjectForm = () => {
     const form = new FormData();
     form.append("image", file);
 
-    await uploadImage(form);
-
-    setTimeout(() => {
-      setRefetch((s) => s + 1);
-    }, 1000);
+    try {
+      await uploadImage(form);
+    } catch (error) {
+      console.error("Error uploading image to S3:", error);
+    }
   };
 
-  const [addProject, { error }] = useMutation(ADD_PROJECT, {
-    update(cache, { data: { addProject } }) {
-      try {
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
+  const [addProject, { error }] = useMutation(ADD_PROJECT);
 
-  // Handles Project information
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+
+  if (imageResponse && imageResponse.key && !uploadCompleted) {
+    setProjectImage(imageResponse.key);
+    setUploadCompleted(true);
+  }
+  const addProjectLink = async (link) => {
+    try {
+      console.log(projectCounter, "counter 1");
+      await addProject({
+        variables: {
+          projectTitle,
+          projectDescription,
+          projectImage,
+          projectAuthor: Auth.getProfile().data.username,
+        },
+      });
+
+      setProjectCounter((prevCounter) => prevCounter + 1);
+      console.log(projectCounter, "counter 2");
+      console.log("projectimage2", projectImage);
+
+      setProjectTitle("");
+      setProjectDescription("");
+      setProjectImage("");
+      window.location.assign("/profile");
+      return;
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUploading(false);
+      setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
+      setUploadCompleted(true);
+    }
+  };
+
+  useEffect(() => {
+    if (projectImage && !addProjectLinkPerformed) {
+      setAddProjectLinkPerformed(true);
+      addProjectLink(imageResponse.key);
+    }
+  }, [projectImage, addProjectLinkPerformed]);
+
+  const uploadProject = async (file) => {
+    try {
+      if (uploadTriggered && !projectImage) {
+        setUploading(true);
+        await handleUpload(file);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -79,38 +120,29 @@ const ProjectForm = () => {
       const file = document.getElementById("imageInput").files[0];
 
       if (!file) {
-        // Handle the case where no image is selected (optional)
         console.error("No image selected");
         return;
       }
 
-      // Check if title and description are not empty
       if (!projectTitle || !projectDescription) {
         console.error("Title and description cannot be empty");
         return;
       }
 
-      if (file) {
-        // If a file is selected, upload it
-        setUploading(true);
-        await handleUpload(file);
-        setUploading(false);
-      }
+      fileInputRef.current.value = "";
 
-      const { data } = await addProject({
-        variables: {
-          projectTitle,
-          projectDescription,
-          projectAuthor: Auth.getProfile().data.username,
-        },
-      });
-      setProjectTitle("");
-      setProjectDescription("");
-      window.location.assign("/profile");
-      console.log("success");
+      setUploadTriggered(true);
+
+      await uploadProject(file);
     } catch (err) {
       console.error(err);
     }
+  };
+
+
+  const handleFileChange = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
   };
 
   const handleChange = (event) => {
@@ -120,14 +152,14 @@ const ProjectForm = () => {
     }
     if (name === "projectDescription" && value.length <= 2000) {
       setProjectDescription(value);
-
     }
   };
+
+  
 
   return (
     <FormContainer>
       <div className="top-container">
-        {/* <Slide className="slide-text"> */}
         <h1>What do you want to create?</h1>
         {Auth.loggedIn() ? (
           <>
@@ -135,28 +167,31 @@ const ProjectForm = () => {
               className="flex-row justify-center justify-space-between-md align-center box"
               onSubmit={handleFormSubmit}
             >
-              <Input
-                id="imageInput"
-                type="file"
-                hidden
-              />
               <UploadButton>
-              <Button
-                className="submitButton"
-                as="label"
-                htmlFor="imageInput"
-                colorScheme="blue"
-                color="white"
-                variant="outline"
-                mb={4}
-                cursor="pointer"
-                isLoading={uploading}
-              >
-                Upload Image
-              </Button>
+                <Button
+                  className="submitButton"
+                  as="label"
+                  htmlFor="imageInput"
+                  colorScheme="blue"
+                  color="white"
+                  variant="outline"
+                  mb={4}
+                  cursor="pointer"
+                  isLoading={uploading}
+                  type="button"
+                >
+                  Upload Image
+                </Button>
+                <Input
+                  id="imageInput"
+                  type="file"
+                  ref={fileInputRef}
+                  hidden
+                  onChange={handleFileChange} 
+                />
               </UploadButton>
-              {error && <ErrorText>{error}</ErrorText>}
-              {uploadError && <ErrorText>{uploadError}</ErrorText>}
+              <ErrorText error={uploadError && uploadError.message} />
+
               <div className=" col-lg-9 textarea-div">
                 <textarea
                   className="first-textarea"
@@ -182,6 +217,7 @@ const ProjectForm = () => {
                 <button
                   className="btn btn-primary btn-block py-3"
                   type="submit"
+                  disabled={uploading}
                 >
                   Add Project
                 </button>

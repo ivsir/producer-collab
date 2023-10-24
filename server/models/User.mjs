@@ -31,10 +31,6 @@ const userSchema = new Schema({
     size: Number, // File size in bytes
     mimeType: String, // MIME type of the file
   },
-  // folderName: {
-  //   type: String, // You can adjust the type as needed (e.g., String or ObjectId)
-  //   unique: true,
-  // },
 });
 
 userSchema.pre("save", async function (next) {

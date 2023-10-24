@@ -24,28 +24,18 @@ export const ADD_USER = gql`
   }
 `;
 
-// export const ADD_FOLDER = gql`
-//   mutation addFolder($userId: ID!, $folderName: String) {
-//     addFolder(userId: $userId, folderName: $folderName) {
-//       userId
-//       folderName
-//       user {
-//         _id
-//         username
-//       }
-//     }
-//   }
-// `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($projectTitle: String!, $projectDescription: String!) {
+  mutation addProject($projectTitle: String!, $projectDescription: String!, $projectImage: String!) {
     addProject(
       projectTitle: $projectTitle
       projectDescription: $projectDescription
+      projectImage: $projectImage
     ) {
       _id
       projectTitle
       projectDescription
+      projectImage
       projectAuthor
       createdAt
       comments {
@@ -63,6 +53,7 @@ export const ADD_MEMBER = gql`
       createdAt
       projectAuthor
       projectDescription
+      projectImage
       projectMembers {
         _id
         memberUsername
@@ -88,6 +79,7 @@ export const ADD_COMMENT = gql`
       projectAuthor
       projectDescription
       projectTitle
+      projectImage
       projectMembers {
         _id
         memberUsername
