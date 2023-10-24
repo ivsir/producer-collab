@@ -110,5 +110,22 @@ app.get("/images", async (req, res) => {
   return res.json(presignedUrls);
 });
 
+app.get("/all-images", async (req, res) => {
+  try {
+    // Add logic to fetch image links from all users here
+    // For example, retrieve image links from your database
+    // You might use Mongoose or another database library for this
+
+    // Sample code using Mongoose to retrieve image links from a MongoDB
+    const allImageLinks = await ImageModel.find({});
+
+    // You should send these image links as a response to the client
+    res.status(200).json(allImageLinks);
+  } catch (error) {
+    console.error("Error retrieving image links:", error);
+    res.status(500).json({ error: "Failed to retrieve image links" });
+  }
+});
+
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
