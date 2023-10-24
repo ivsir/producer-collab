@@ -58,3 +58,23 @@ export const getUserPresignedUrls = async (userId) => {
     return { error };
   }
 };
+
+export const getUserImageKeysAndPresignedUrls = async (userId) => {
+  try {
+    const imageKeys = await getImageKeysByUser(userId);
+
+    const presignedUrls = await Promise.all(
+      imageKeys.map((key) => {
+        const command = new GetObjectCommand({ Bucket: BUCKET, Key: key });
+        const presignedUrl = getSignedUrl(s3, command, { expiresIn: 900 });
+        return { key, presignedUrl };
+      })
+    );
+
+    return { imageUrls: presignedUrls };
+  } catch (error) {
+    console.log(error);
+    return { error };
+  }
+}
+
