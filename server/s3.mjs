@@ -62,7 +62,7 @@ export const getUserPresignedUrls = async (userId) => {
 export const getUserImageKeysAndPresignedUrls = async (userId) => {
   try {
     const imageKeys = await getImageKeysByUser(userId);
-
+    // console.log("imagekey",imageKeys);
     const presignedUrls = await Promise.all(
       imageKeys.map((key) => {
         const command = new GetObjectCommand({ Bucket: BUCKET, Key: key });
@@ -76,5 +76,4 @@ export const getUserImageKeysAndPresignedUrls = async (userId) => {
     console.log(error);
     return { error };
   }
-}
-
+};

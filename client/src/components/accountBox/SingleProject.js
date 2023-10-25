@@ -9,12 +9,12 @@ import { CircularProgress, Text } from "@chakra-ui/react";
 import { ImageCard, ImageContainer } from "./Common.js";
 import Auth from "../../utils/auth";
 import imgQuery from "../../utils/imgQuery";
+import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import { SinglePostContainer } from "./Common";
 import { ADD_MEMBER } from "../../utils/mutations";
-
 
 const SingleProject = () => {
   const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
@@ -56,13 +56,17 @@ const SingleProject = () => {
   const [refetch, setRefetch] = useState(0);
   const userId = Auth.getProfile().data.username;
   const URL = "/images";
+  // const URL =  "/all-user-images"
+  // const URL ="/user-folders"
 
   const {
     data: imageUrls = [],
     isLoading: imagesLoading,
     error: fetchError,
-  // } = imgQueries(URL, refetch, userId);
-} = imgQuery(URL, refetch,userId);
+    } = imgQuery(URL, refetch, userId);
+  // } = imgQueries(URL, refetch);
+
+  console.log(imageUrls)
 
   const projectImageUrl = imageUrls
     ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))

@@ -17,6 +17,7 @@ const useQuery = (url, refetch) => {
           setState({ data: null, isLoading: false, error: error.message })
         );
     };
+    
 
     fetch();
   }, [url, refetch]);

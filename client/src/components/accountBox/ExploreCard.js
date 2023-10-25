@@ -57,7 +57,6 @@ function ExploreCard(props) {
                 {projects.projectTitle}
               </Link>
               <PostTime>{projects.createdAt}</PostTime>
-              <PostTime>@{projects.projecImage}</PostTime>
             </ProjectTitle>
           </CardTitle>
         </ExplorerCard>
