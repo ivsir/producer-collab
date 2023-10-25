@@ -26,6 +26,7 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 const s3 = new AWS.S3();
+const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
@@ -65,7 +66,6 @@ app.post("/create-s3-folder", async (req, res) => {
     // Initialize AWS S3
 
     // Specify the existing S3 bucket name where you want to create the folder
-    const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
     // Specify the folder key (object key ending with a trailing slash)
     // const folderKey = `${userId}/${folderName}/`;
@@ -84,6 +84,27 @@ app.post("/create-s3-folder", async (req, res) => {
     console.error("Error creating S3 folder:", error);
     res.status(500).json({ error: "Failed to create S3 folder" });
   }
+});
+
+app.get("/user-folders", async (req, res) => {
+
+  // Use the listObjectsV2 method to get a list of objects in the bucket
+  s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to retrieve objects from S3' });
+    }
+
+    // The list of objects is in data.Contents
+    const objects = data.Contents.map((object) => ({
+      key: object.Key,
+      lastModified: object.LastModified,
+      size: object.Size,
+    }));
+    console.log("object key",objects)
+
+    res.json(objects);
+  });
 });
 
 app.post("/images", upload.single("image"), async (req, res) => {
@@ -110,20 +131,38 @@ app.get("/images", async (req, res) => {
   return res.json(presignedUrls);
 });
 
-app.get("/all-images", async (req, res) => {
+app.get("/all-user-images", async (req, res) => {
   try {
-    // Add logic to fetch image links from all users here
-    // For example, retrieve image links from your database
-    // You might use Mongoose or another database library for this
+    const users = await User.find(); // Assuming you have a User model
+    // console.log(users);
+    const allUserImages = await Promise.all(
+      users.map(async (user) => {
+        const { imageUrls, error } = await getUserImageKeysAndPresignedUrls(
+          user._id
+        ); // Assuming user._id is the user identifier
+        console.log(imageUrls);
+        if (error) {
+          console.error(`Error for user ${user._id}:`, error);
+          return null; // Handle the error
+        }
 
-    // Sample code using Mongoose to retrieve image links from a MongoDB
-    const allImageLinks = await ImageModel.find({});
+        return { userId: user._id, images: imageUrls };
+      })
+    );
 
-    // You should send these image links as a response to the client
-    res.status(200).json(allImageLinks);
+    // console.log(allUserImages);
+
+    // Filter out users with errors, if needed
+    const validUserImages = allUserImages.filter(
+      (userImages) => userImages !== null
+    );
+
+    // console.log(validUserImages)
+
+    return res.json(validUserImages);
   } catch (error) {
-    console.error("Error retrieving image links:", error);
-    res.status(500).json({ error: "Failed to retrieve image links" });
+    console.error(error);
+    return res.status(500).json({ error: "Failed to retrieve user images" });
   }
 });
 
