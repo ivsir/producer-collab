@@ -1,26 +1,27 @@
-import { useEffect, useState } from 'react';
-import axiosClient from '../config/axios';
+import { useEffect, useState } from "react";
+import axiosClient from "../config/axios";
 
-const useQuery = (url, refetch) => {
+const useQuery = (url, refetch, projectAuthor) => {
   const [state, setState] = useState({
     data: null,
     isLoading: true,
-    error: '',
+    error: "",
   });
 
   useEffect(() => {
     const fetch = async () => {
+      axiosClient.defaults.headers.common["x-project-author"] = projectAuthor;
+
       axiosClient
         .get(url)
-        .then(({ data }) => setState({ data, isLoading: false, error: '' }))
-        .catch(error =>
+        .then(({ data }) => setState({ data, isLoading: false, error: "" }))
+        .catch((error) =>
           setState({ data: null, isLoading: false, error: error.message })
         );
     };
-    
 
     fetch();
-  }, [url, refetch]);
+  }, [url, refetch, projectAuthor]);
 
   return state;
 };
