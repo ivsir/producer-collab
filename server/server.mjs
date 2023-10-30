@@ -2,7 +2,11 @@ import "dotenv/config";
 import express, { json } from "express";
 import cors from "cors";
 import multer, { memoryStorage } from "multer";
-import { getUserPresignedUrls, uploadToS3 } from "./s3.mjs";
+import {
+  getAllUserImageKeysAndPresignedUrls,
+  getUserPresignedUrls,
+  uploadToS3,
+} from "./s3.mjs";
 import { ApolloServer } from "apollo-server-express";
 import { authMiddleware } from "./utils/auth.mjs";
 import dbConnection from "./config/connection.mjs";
@@ -87,12 +91,13 @@ app.post("/create-s3-folder", async (req, res) => {
 });
 
 app.get("/user-folders", async (req, res) => {
-
   // Use the listObjectsV2 method to get a list of objects in the bucket
   s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Failed to retrieve objects from S3' });
+      return res
+        .status(500)
+        .json({ error: "Failed to retrieve objects from S3" });
     }
 
     // The list of objects is in data.Contents
@@ -101,7 +106,7 @@ app.get("/user-folders", async (req, res) => {
       lastModified: object.LastModified,
       size: object.Size,
     }));
-    console.log("object key",objects)
+    console.log("object key", objects);
 
     res.json(objects);
   });
@@ -131,40 +136,46 @@ app.get("/images", async (req, res) => {
   return res.json(presignedUrls);
 });
 
-app.get("/all-user-images", async (req, res) => {
-  try {
-    const users = await User.find(); // Assuming you have a User model
-    // console.log(users);
-    const allUserImages = await Promise.all(
-      users.map(async (user) => {
-        const { imageUrls, error } = await getUserImageKeysAndPresignedUrls(
-          user._id
-        ); // Assuming user._id is the user identifier
-        console.log(imageUrls);
-        if (error) {
-          console.error(`Error for user ${user._id}:`, error);
-          return null; // Handle the error
-        }
+app.get("/singlepost-image", async (req, res) => {
+  const projectAuthor = req.headers["x-project-author"];
 
-        return { userId: user._id, images: imageUrls };
-      })
-    );
+  if (!projectAuthor) return res.status(400).json({ message: "Bad request" });
 
-    // console.log(allUserImages);
+  const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
+  if (error) return res.status(400).json({ message: error.message });
 
-    // Filter out users with errors, if needed
-    const validUserImages = allUserImages.filter(
-      (userImages) => userImages !== null
-    );
-
-    // console.log(validUserImages)
-
-    return res.json(validUserImages);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Failed to retrieve user images" });
-  }
+  return res.json(presignedUrls);
 });
+
+// app.get("/all-user-images", async (req, res) => {
+//   try {
+//     const allUserIds = await getAllUserIds();
+//     console.log(allUserIds);
+//     // Send the result as JSON
+//     const { signedUrls } = await getPresignedUrls(allUserIds);
+//     console.log("presigned urls,",signedUrls);
+//     return res.json(signedUrls);
+//   } catch (error) {
+//     // Handle errors and send an error response
+//     console.error(error);
+//     res.status(500).json({ error: "An error occurred" });
+//   }
+// });
+
+// app.get("/all-user-images", async (req, res) => {
+//   try {
+//     const { presignedUrls, error } = await getAllUserImageKeysAndPresignedUrls();
+
+//     if (error) {
+//       return res.status(500).json({ error: "An error occurred" });
+//     }
+
+//     return res.json(presignedUrls);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ error: "An error occurred" });
+//   }
+// });
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);

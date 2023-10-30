@@ -17,15 +17,34 @@ import { SinglePostContainer } from "./Common";
 import { ADD_MEMBER } from "../../utils/mutations";
 
 const SingleProject = () => {
-  const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-  // Use `useParams()` to retrieve value of the route parameter `:profileId`
+  const [refetch, setRefetch] = useState(0);
   const { projectId } = useParams();
-  const navigate = useNavigate();
 
+  // const userId = Auth.getProfile().data.username;
+  // const URL = "/images";
+  // const URL =  "/all-user-images"
+  // const URL ="/user-folders"
+  const URL = "/singlepost-image";
+  
+  const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
+    // pass URL parameter
+    variables: { projectId: projectId },
+  });
+  const project = data?.project || {};
+  const currentAuthor = project.projectAuthor;
+  const {
+    data: imageUrls = [],
+    isLoading: imagesLoading,
+    error: fetchError,
+  } = imgQueries(URL, refetch, currentAuthor);
+  // Use `useParams()` to retrieve value of the route parameter `:profileId`
+  const navigate = useNavigate();
+  const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
+  
   const onJoin = async (event) => {
     event.preventDefault();
     const memberId = AuthService.getId();
-
+    
     try {
       const { data } = await member({
         variables: {
@@ -46,33 +65,23 @@ const SingleProject = () => {
     }
   };
 
-  const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
-    // pass URL parameter
-    variables: { projectId: projectId },
-  });
 
   // console.log(data);
-  const project = data?.project || {};
-  const [refetch, setRefetch] = useState(0);
-  const userId = Auth.getProfile().data.username;
-  const URL = "/images";
-  // const URL =  "/all-user-images"
-  // const URL ="/user-folders"
+  // } = imgQuery(URL, refetch, userId);
 
-  const {
-    data: imageUrls = [],
-    isLoading: imagesLoading,
-    error: fetchError,
-    } = imgQuery(URL, refetch, userId);
-  // } = imgQueries(URL, refetch);
-
-  console.log(imageUrls)
-
+  console.log(project.projectImage);
+  
   const projectImageUrl = imageUrls
-    ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
-    : null;
+  ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
+  : null;
 
-  console.log("images", imageUrls);
+  const cacheBustedImageUrl = projectImageUrl
+  ? `${projectImageUrl}?${Date.now()}`
+  : null;
+
+  console.log(imageUrls);
+
+  console.log("images", projectImageUrl);
 
   const ErrorText = ({ children, ...props }) => (
     <Text fontSize="lg" color="red.300" {...props}>
@@ -110,7 +119,8 @@ const SingleProject = () => {
             imageUrls.map((url) => (
               <ImageCard src={url} alt="Image" key={url} />
               ))} */}
-          <ImageCard src={projectImageUrl} alt="Image" key={projectImageUrl} />
+          {/* <ImageCard src={projectImageUrl} alt="Image" key={projectImageUrl} /> */}
+          <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} />
         </ImageContainer>
         <h2 className="card-header bg-dark text-light p-2 m-0">
           {project.projectTitle} <br />
