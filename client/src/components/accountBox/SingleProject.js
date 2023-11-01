@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 import { CircularProgress, Text } from "@chakra-ui/react";
 import { ImageCard, ImageContainer } from "./Common.js";
-import Auth from "../../utils/auth";
-import imgQuery from "../../utils/imgQuery";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
@@ -20,10 +18,6 @@ const SingleProject = () => {
   const [refetch, setRefetch] = useState(0);
   const { projectId } = useParams();
 
-  // const userId = Auth.getProfile().data.username;
-  // const URL = "/images";
-  // const URL =  "/all-user-images"
-  // const URL ="/user-folders"
   const URL = "/singlepost-image";
   
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
@@ -65,23 +59,11 @@ const SingleProject = () => {
     }
   };
 
-
-  // console.log(data);
-  // } = imgQuery(URL, refetch, userId);
-
-  console.log(project.projectImage);
   
   const projectImageUrl = imageUrls
   ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
   : null;
 
-  const cacheBustedImageUrl = projectImageUrl
-  ? `${projectImageUrl}?${Date.now()}`
-  : null;
-
-  console.log(imageUrls);
-
-  console.log("images", projectImageUrl);
 
   const ErrorText = ({ children, ...props }) => (
     <Text fontSize="lg" color="red.300" {...props}>
@@ -89,7 +71,6 @@ const SingleProject = () => {
     </Text>
   );
 
-  // console.log(project);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -106,9 +87,6 @@ const SingleProject = () => {
             isIndeterminate
           />
         )}
-        {fetchError && (
-          <ErrorText textAlign="left">Failed to load images</ErrorText>
-        )}
         {!fetchError && imageUrls?.length === 0 && (
           <Text textAlign="left" fontSize="lg" color="gray.500">
             No images found
@@ -119,8 +97,8 @@ const SingleProject = () => {
             imageUrls.map((url) => (
               <ImageCard src={url} alt="Image" key={url} />
               ))} */}
-          {/* <ImageCard src={projectImageUrl} alt="Image" key={projectImageUrl} /> */}
-          <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} />
+          <ImageCard src={projectImageUrl} alt="Image" key={projectImageUrl} />
+          {/* <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} /> */}
         </ImageContainer>
         <h2 className="card-header bg-dark text-light p-2 m-0">
           {project.projectTitle} <br />

@@ -52,7 +52,7 @@ export const getUserPresignedUrls = async (userId) => {
         return getSignedUrl(s3, command, { expiresIn: 900 }); // default
       })
     );
-    console.log(presignedUrls)
+    // console.log(presignedUrls)
     return { presignedUrls };
   } catch (error) {
     console.log(error);
