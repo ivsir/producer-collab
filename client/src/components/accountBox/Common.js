@@ -379,7 +379,7 @@ export const ProjectAuthor = styled.h4`
   margin-bottom: 1rem;
   text-decoration: none:
 `;
-export const PostTime = styled.h4`
+export const PostTime = styled.div`
   color: #989898;
   text-align: left;
   font: 300 18px "Satoshi-VariableItalic", sans-serif;
