@@ -2,7 +2,11 @@ import "dotenv/config";
 import express, { json } from "express";
 import cors from "cors";
 import multer, { memoryStorage } from "multer";
-import { getUserPresignedUrls, uploadToS3 } from "./s3.mjs";
+import {
+  getAllUserImageKeysAndPresignedUrls,
+  getUserPresignedUrls,
+  uploadToS3,
+} from "./s3.mjs";
 import { ApolloServer } from "apollo-server-express";
 import { authMiddleware } from "./utils/auth.mjs";
 import dbConnection from "./config/connection.mjs";
@@ -26,6 +30,7 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 const s3 = new AWS.S3();
+const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
@@ -65,7 +70,6 @@ app.post("/create-s3-folder", async (req, res) => {
     // Initialize AWS S3
 
     // Specify the existing S3 bucket name where you want to create the folder
-    const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
     // Specify the folder key (object key ending with a trailing slash)
     // const folderKey = `${userId}/${folderName}/`;
@@ -84,6 +88,28 @@ app.post("/create-s3-folder", async (req, res) => {
     console.error("Error creating S3 folder:", error);
     res.status(500).json({ error: "Failed to create S3 folder" });
   }
+});
+
+app.get("/user-folders", async (req, res) => {
+  // Use the listObjectsV2 method to get a list of objects in the bucket
+  s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
+    if (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Failed to retrieve objects from S3" });
+    }
+
+    // The list of objects is in data.Contents
+    const objects = data.Contents.map((object) => ({
+      key: object.Key,
+      lastModified: object.LastModified,
+      size: object.Size,
+    }));
+    console.log("object key", objects);
+
+    res.json(objects);
+  });
 });
 
 app.post("/images", upload.single("image"), async (req, res) => {
@@ -110,22 +136,46 @@ app.get("/images", async (req, res) => {
   return res.json(presignedUrls);
 });
 
-app.get("/all-images", async (req, res) => {
-  try {
-    // Add logic to fetch image links from all users here
-    // For example, retrieve image links from your database
-    // You might use Mongoose or another database library for this
+app.get("/singlepost-image", async (req, res) => {
+  const projectAuthor = req.headers["x-project-author"];
+  // console.log(projectAuthor);
+  if (!projectAuthor) return res.status(400).json({ message: "Bad request" });
 
-    // Sample code using Mongoose to retrieve image links from a MongoDB
-    const allImageLinks = await ImageModel.find({});
+  const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
+  if (error) return res.status(400).json({ message: error.message });
 
-    // You should send these image links as a response to the client
-    res.status(200).json(allImageLinks);
-  } catch (error) {
-    console.error("Error retrieving image links:", error);
-    res.status(500).json({ error: "Failed to retrieve image links" });
-  }
+  return res.json(presignedUrls);
 });
+
+// app.get("/all-user-images", async (req, res) => {
+//   try {
+//     const allUserIds = await getAllUserIds();
+//     console.log(allUserIds);
+//     // Send the result as JSON
+//     const { signedUrls } = await getPresignedUrls(allUserIds);
+//     console.log("presigned urls,",signedUrls);
+//     return res.json(signedUrls);
+//   } catch (error) {
+//     // Handle errors and send an error response
+//     console.error(error);
+//     res.status(500).json({ error: "An error occurred" });
+//   }
+// });
+
+// app.get("/all-user-images", async (req, res) => {
+//   try {
+//     const { presignedUrls, error } = await getAllUserImageKeysAndPresignedUrls();
+
+//     if (error) {
+//       return res.status(500).json({ error: "An error occurred" });
+//     }
+
+//     return res.json(presignedUrls);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ error: "An error occurred" });
+//   }
+// });
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);

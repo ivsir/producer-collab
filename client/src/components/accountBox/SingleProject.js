@@ -7,25 +7,38 @@ import { useNavigate } from "react-router-dom";
 
 import { CircularProgress, Text } from "@chakra-ui/react";
 import { ImageCard, ImageContainer } from "./Common.js";
-import Auth from "../../utils/auth";
-import imgQuery from "../../utils/imgQuery";
+import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import { SinglePostContainer } from "./Common";
 import { ADD_MEMBER } from "../../utils/mutations";
 
-
 const SingleProject = () => {
-  const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-  // Use `useParams()` to retrieve value of the route parameter `:profileId`
+  const [refetch, setRefetch] = useState(0);
   const { projectId } = useParams();
-  const navigate = useNavigate();
 
+  const URL = "/singlepost-image";
+  
+  const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
+    // pass URL parameter
+    variables: { projectId: projectId },
+  });
+  const project = data?.project || {};
+  const currentAuthor = project.projectAuthor;
+  const {
+    data: imageUrls = [],
+    isLoading: imagesLoading,
+    error: fetchError,
+  } = imgQueries(URL, refetch, currentAuthor);
+  // Use `useParams()` to retrieve value of the route parameter `:profileId`
+  const navigate = useNavigate();
+  const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
+  
   const onJoin = async (event) => {
     event.preventDefault();
     const memberId = AuthService.getId();
-
+    
     try {
       const { data } = await member({
         variables: {
@@ -46,29 +59,11 @@ const SingleProject = () => {
     }
   };
 
-  const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
-    // pass URL parameter
-    variables: { projectId: projectId },
-  });
-
-  // console.log(data);
-  const project = data?.project || {};
-  const [refetch, setRefetch] = useState(0);
-  const userId = Auth.getProfile().data.username;
-  const URL = "/images";
-
-  const {
-    data: imageUrls = [],
-    isLoading: imagesLoading,
-    error: fetchError,
-  // } = imgQueries(URL, refetch, userId);
-} = imgQuery(URL, refetch,userId);
-
+  
   const projectImageUrl = imageUrls
-    ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
-    : null;
+  ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
+  : null;
 
-  console.log("images", imageUrls);
 
   const ErrorText = ({ children, ...props }) => (
     <Text fontSize="lg" color="red.300" {...props}>
@@ -76,7 +71,6 @@ const SingleProject = () => {
     </Text>
   );
 
-  // console.log(project);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -93,9 +87,6 @@ const SingleProject = () => {
             isIndeterminate
           />
         )}
-        {fetchError && (
-          <ErrorText textAlign="left">Failed to load images</ErrorText>
-        )}
         {!fetchError && imageUrls?.length === 0 && (
           <Text textAlign="left" fontSize="lg" color="gray.500">
             No images found
@@ -107,6 +98,7 @@ const SingleProject = () => {
               <ImageCard src={url} alt="Image" key={url} />
               ))} */}
           <ImageCard src={projectImageUrl} alt="Image" key={projectImageUrl} />
+          {/* <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} /> */}
         </ImageContainer>
         <h2 className="card-header bg-dark text-light p-2 m-0">
           {project.projectTitle} <br />
