@@ -55,7 +55,24 @@ const resolvers = {
       }
 
       const token = signToken(user);
-console.log("token:",token)
+      console.log("token:", token);
+      return { token, user };
+    },
+    removeUser: async (parent, { email, password }) => {
+      const user = await User.findOneAndDelete({ email });
+
+      if (!user) {
+        throw new AuthenticationError("No user found with this email address");
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+      console.log("token:", token);
       return { token, user };
     },
     addProject: async (

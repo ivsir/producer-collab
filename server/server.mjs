@@ -138,7 +138,7 @@ app.get("/images", async (req, res) => {
 
 app.get("/singlepost-image", async (req, res) => {
   const projectAuthor = req.headers["x-project-author"];
-
+  // console.log(projectAuthor);
   if (!projectAuthor) return res.status(400).json({ message: "Bad request" });
 
   const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);

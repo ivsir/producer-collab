@@ -52,6 +52,7 @@ function ProfileCard(props) {
     error: fetchError,
   } = imgQuery(URL, refetch, userId);
 
+  console.log(imageUrls)
   const findTargetProjects = () => {
     if (!projectData) {
       return;
