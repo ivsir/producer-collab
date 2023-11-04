@@ -26,17 +26,19 @@ export const ADD_USER = gql`
 
 
 export const ADD_PROJECT = gql`
-  mutation addProject($projectTitle: String!, $projectDescription: String!, $projectImage: String!) {
+  mutation addProject($projectTitle: String!, $projectDescription: String!, $projectImage: String!, $projectAudio: String!) {
     addProject(
       projectTitle: $projectTitle
       projectDescription: $projectDescription
       projectImage: $projectImage
+      projectAudio: $projectAudio
     ) {
       _id
       projectTitle
       projectDescription
       projectImage
       projectAuthor
+      projectAudio
       createdAt
       comments {
         _id
@@ -54,6 +56,7 @@ export const ADD_MEMBER = gql`
       projectAuthor
       projectDescription
       projectImage
+      projectAudio
       projectMembers {
         _id
         memberUsername
@@ -80,6 +83,7 @@ export const ADD_COMMENT = gql`
       projectDescription
       projectTitle
       projectImage
+      projectAudio
       projectMembers {
         _id
         memberUsername

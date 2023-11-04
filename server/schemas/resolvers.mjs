@@ -77,7 +77,7 @@ const resolvers = {
     },
     addProject: async (
       parent,
-      { projectTitle, projectDescription, projectImage },
+      { projectTitle, projectDescription, projectImage, projectAudio },
       context
     ) => {
       if (context.user) {
@@ -85,6 +85,7 @@ const resolvers = {
           projectTitle,
           projectDescription,
           projectImage,
+          projectAudio,
           projectAuthor: context.user.username,
         });
 

@@ -15,6 +15,7 @@ const typeDefs = gql`
     projectTitle: String!
     projectDescription: String!
     projectImage: String!
+    projectAudio: String!
     projectAuthor: String
     projectMembers: [Member]
     createdAt: String
@@ -57,6 +58,7 @@ const typeDefs = gql`
       projectTitle: String!
       projectDescription: String!
       projectImage: String!
+      projectAudio: String!
     ): Project
     addComment(
       projectId: ID!

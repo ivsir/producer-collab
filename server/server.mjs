@@ -24,6 +24,10 @@ const PORT = process.env.PORT || 3001;
 
 const storage = memoryStorage();
 const upload = multer({ storage });
+
+const audioStorage = multer.memoryStorage();
+const audioUpload = multer({ storage: audioStorage });
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -72,9 +76,7 @@ app.post("/create-s3-folder", async (req, res) => {
     // Specify the existing S3 bucket name where you want to create the folder
 
     // Specify the folder key (object key ending with a trailing slash)
-    // const folderKey = `${userId}/${folderName}/`;
     const folderKey = `${userId}/`;
-    // Create a dummy object to represent the folder
     await s3
       .putObject({
         Bucket: bucketName,
@@ -114,6 +116,8 @@ app.get("/user-folders", async (req, res) => {
 
 app.post("/images", upload.single("image"), async (req, res) => {
   const { file } = req;
+  console.log(file)
+
   const userId = req.headers["x-user-id"];
 
   if (!file || !userId) return res.status(400).json({ message: "Bad request" });
@@ -125,7 +129,33 @@ app.post("/images", upload.single("image"), async (req, res) => {
   return res.status(201).json({ key });
 });
 
+app.post("/audiofiles", audioUpload.single("audio"), async (req, res) => {
+  const { file } = req;
+  console.log(file)
+  const userId = req.headers["x-user-id"];
+
+  if (!file || !userId) return res.status(400).json({ message: "Bad request" });
+
+  const { key, error } = await uploadToS3({ file, userId });
+
+  if (error) return res.status(500).json({ message: error.message });
+
+  return res.status(201).json({ key });
+});
+
+
 app.get("/images", async (req, res) => {
+  const userId = req.headers["x-user-id"];
+
+  if (!userId) return res.status(400).json({ message: "Bad request" });
+
+  const { error, presignedUrls } = await getUserPresignedUrls(userId);
+  if (error) return res.status(400).json({ message: error.message });
+
+  return res.json(presignedUrls);
+});
+
+app.get("/audiofiles", async (req, res) => {
   const userId = req.headers["x-user-id"];
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
@@ -147,35 +177,4 @@ app.get("/singlepost-image", async (req, res) => {
   return res.json(presignedUrls);
 });
 
-// app.get("/all-user-images", async (req, res) => {
-//   try {
-//     const allUserIds = await getAllUserIds();
-//     console.log(allUserIds);
-//     // Send the result as JSON
-//     const { signedUrls } = await getPresignedUrls(allUserIds);
-//     console.log("presigned urls,",signedUrls);
-//     return res.json(signedUrls);
-//   } catch (error) {
-//     // Handle errors and send an error response
-//     console.error(error);
-//     res.status(500).json({ error: "An error occurred" });
-//   }
-// });
-
-// app.get("/all-user-images", async (req, res) => {
-//   try {
-//     const { presignedUrls, error } = await getAllUserImageKeysAndPresignedUrls();
-
-//     if (error) {
-//       return res.status(500).json({ error: "An error occurred" });
-//     }
-
-//     return res.json(presignedUrls);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ error: "An error occurred" });
-//   }
-// });
-
-// Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
