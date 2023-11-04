@@ -224,4 +224,4 @@ function ProfileCard(props) {
 //   );
 // }
 
-// export default ProfileCard;
+export default ProfileCard;
