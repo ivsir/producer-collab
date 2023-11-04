@@ -27,11 +27,9 @@ function ProfileCard(props) {
   const { loading, data: userData } = useQuery(QUERY_USER, {
     variables: { username: AuthService.getUsername() },
   });
-  console.log(userData,"user")
   const projects = userData?.user.projects || [];
 
   const { data: projectData } = useQuery(QUERY_PROJECTS);
-  console.log(projects,"projects")
   const URL = "/images";
 
   if (loading && !userData && userData?.length <= 0 && !projectData) {
@@ -52,7 +50,6 @@ function ProfileCard(props) {
     error: fetchError,
   } = imgQuery(URL, refetch, userId);
 
-  console.log(imageUrls)
   const findTargetProjects = () => {
     if (!projectData) {
       return;
