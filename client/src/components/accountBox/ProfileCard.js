@@ -21,6 +21,8 @@ import Auth from "../../utils/auth";
 
 import AuthService from "../../utils/auth";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axiosClient from "../../config/axios.js";
 
 function ProfileCard(props) {
   const [refetch, setRefetch] = useState(0);
@@ -41,8 +43,7 @@ function ProfileCard(props) {
     </Text>
   );
 
-
-  const userId= Auth.getProfile().data.username; 
+  const userId= Auth.getProfile().data.username;
 
   const {
     data: imageUrls = [],
@@ -135,7 +136,7 @@ function ProfileCard(props) {
         </Text>
       )}
       <ImageContainer>
-        <ImageGrid>
+        <ImageGrid >
           {imageUrls?.length > 0 &&
             imageUrls.map((url) => (
               <ImageCard src={url} alt="Image" key={url} />
@@ -154,4 +155,73 @@ function ProfileCard(props) {
     </ProfileContainer>
   );
 }
-export default ProfileCard;
+
+// function ProfileCard(props) {
+//   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
+//   const projects = apolloData?.projects || [];
+//   const URL = "/images";
+
+  
+//   const { loading, data: userData } = useQuery(QUERY_USER, {
+//     variables: { username: AuthService.getUsername() },
+//   });
+  
+  
+//   const userId = Auth.getProfile().data.username;
+//   const [imageUrls, setImageUrls] = useState({});
+//   const [refetch, setRefetch] = useState(0);
+  
+//   useEffect(() => {
+//     const fetchData = async (projectAuthor) => {
+//       axiosClient.defaults.headers.common["x-user-id"] = projectAuthor;
+
+//       try {
+//         const response = await axiosClient.get(URL);
+//         const data = response.data;
+//         setImageUrls((prevImageUrls) => ({
+//           ...prevImageUrls,
+//           [projectAuthor]: data,
+//         }));
+//       } catch (error) {
+//         console.error("Error fetching image data:", error);
+//       }
+//     };
+
+//     // projects.forEach((project) => {
+//       const currentUser = Auth.getProfile().data.username;;
+//       fetchData(currentUser);
+//     // });
+//   }, [projects, refetch]);
+
+//   const findProjectImageUrl = (projectImage, currentUser) => {
+//     const profileImageUrls = imageUrls[currentUser] || [];
+//     return profileImageUrls.find((imageUrl) => imageUrl.includes(projectImage));
+//   };
+
+//   return (
+//     <ProfileContainer>
+//       {projects.map((project) => {
+//         const projectImageUrl = findProjectImageUrl(
+//           project.projectImage,
+//           userId
+//         );
+
+//         return (
+//           <ImageContainer key={project._id}>
+//             <ImageGrid>
+//               <Link to={`/projects/${project._id}`}>
+//                 <ImageCard
+//                   src={projectImageUrl}
+//                   alt="Image"
+//                   key={projectImageUrl}
+//                 />
+//               </Link>
+//             </ImageGrid>
+//           </ImageContainer>
+//         );
+//       })}
+//     </ProfileContainer>
+//   );
+// }
+
+// export default ProfileCard;
