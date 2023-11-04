@@ -30,9 +30,8 @@ const ProjectForm = () => {
   const [addProjectLinkPerformed, setAddProjectLinkPerformed] = useState(false); // Track if addProjectLink is performed
   const [uploadCompleted, setUploadCompleted] = useState(false); // Track image upload completion
   const userId = Auth.getProfile().data.username;
-  const [projectCounter, setProjectCounter] = useState(0);
   const fileInputRef = useRef(null);
-  const [uploadTriggered, setUploadTriggered] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null); // New state variable to track the selected file
 
   const {
     mutate: uploadImage,
@@ -41,6 +40,8 @@ const ProjectForm = () => {
   } = imgMutation({ url: URL }, userId);
 
   const handleUpload = async (file) => {
+    console.log("step 4");
+
     if (!validFileTypes.includes(file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
@@ -51,6 +52,7 @@ const ProjectForm = () => {
 
     try {
       await uploadImage(form);
+      console.log(imageResponse, "key");
     } catch (error) {
       console.error("Error uploading image to S3:", error);
     }
@@ -65,9 +67,15 @@ const ProjectForm = () => {
     setProjectImage(imageResponse.key);
     setUploadCompleted(true);
   }
+
+  const handleUploadImage = () => {
+    fileInputRef.current.click(); // Trigger the click event on the file input element
+  };
+
   const addProjectLink = async (link) => {
     try {
-      console.log(projectCounter, "counter 1");
+      console.log(projectImage);
+      // console.log(projectCounter, "counter 1");
       await addProject({
         variables: {
           projectTitle,
@@ -77,8 +85,8 @@ const ProjectForm = () => {
         },
       });
 
-      setProjectCounter((prevCounter) => prevCounter + 1);
-      console.log(projectCounter, "counter 2");
+      // setProjectCounter((prevCounter) => prevCounter + 1);
+      // console.log(projectCounter, "counter 2");
       console.log("projectimage2", projectImage);
 
       setProjectTitle("");
@@ -91,6 +99,7 @@ const ProjectForm = () => {
     } finally {
       setUploading(false);
       setAddProjectLinkPerformed(true); // Set the flag to prevent multiple executions
+      console.log(addProjectLinkPerformed, "addProjectLinkPerformed");
       setUploadCompleted(true);
     }
   };
@@ -101,48 +110,52 @@ const ProjectForm = () => {
       addProjectLink(imageResponse.key);
     }
   }, [projectImage, addProjectLinkPerformed]);
-
-  const uploadProject = async (file) => {
-    try {
-      if (uploadTriggered && !projectImage) {
-        setUploading(true);
-        await handleUpload(file);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+  
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    if (!selectedFile) {
+      console.error("No image selected");
+      return;
+    }
+    
+    if (!projectTitle || !projectDescription) {
+      console.error("Title and description cannot be empty");
+      return;
+    }
     try {
-      const file = document.getElementById("imageInput").files[0];
-
-      if (!file) {
-        console.error("No image selected");
-        return;
-      }
-
-      if (!projectTitle || !projectDescription) {
-        console.error("Title and description cannot be empty");
-        return;
-      }
-
+      setImgError(""); // Clear any previous error messages.
       fileInputRef.current.value = "";
-
-      setUploadTriggered(true);
-
-      await uploadProject(file);
+      
+      console.log("step 2");
+      await uploadProject(selectedFile);
     } catch (err) {
       console.error(err);
     }
   };
-
+  
+  const uploadProject = async (file) => {
+      try {
+        if (!projectImage) {
+          setUploading(true);
+          await handleUpload(file);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
   const handleFileChange = (event) => {
+    console.log("filed changed");
     event.stopPropagation();
     event.preventDefault();
+
+    // Get the selected file from the event
+    const file = event.target.files[0];
+
+    if (file) {
+      setSelectedFile(file);
+      console.log(file);
+    }
   };
 
   const handleChange = (event) => {
@@ -154,8 +167,6 @@ const ProjectForm = () => {
       setProjectDescription(value);
     }
   };
-
-  
 
   return (
     <FormContainer>
@@ -171,13 +182,14 @@ const ProjectForm = () => {
                 <Button
                   className="submitButton"
                   as="label"
-                  htmlFor="imageInput"
+                  // htmlFor="imageInput"
                   colorScheme="blue"
                   color="white"
                   variant="outline"
                   mb={4}
                   cursor="pointer"
                   isLoading={uploading}
+                  onClick={handleUploadImage}
                   type="button"
                 >
                   Upload Image
@@ -187,7 +199,8 @@ const ProjectForm = () => {
                   type="file"
                   ref={fileInputRef}
                   hidden
-                  onChange={handleFileChange} 
+                  // style={{ position: 'absolute', left: '-9999px' }}
+                  onChange={handleFileChange}
                 />
               </UploadButton>
               <ErrorText error={uploadError && uploadError.message} />
