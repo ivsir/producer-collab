@@ -9,7 +9,7 @@ const Nav = () => {
   };
   return (
     <header>
-      <a href="/explore" class="brand-title">
+      <a href="/explore" className="brand-title">
         <img
           className="logo"
           alt="prodcollab logo"
