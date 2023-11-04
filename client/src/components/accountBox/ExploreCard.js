@@ -20,64 +20,6 @@ import {
 import { Link } from "react-router-dom";
 import Airforce from "../../assets/airforceanime.jpg";
 
-// function ExploreCard(props) {
-//   const { loading, data } = useQuery(QUERY_PROJECTS);
-//   const projects = data?.projects || [];
-//   const [refetch, setRefetch] = useState(0);
-//   console.log(projects);
-//   const URL = "/singlepost-image";
-
-//   return (
-//     <ExploreContainer>
-//       {projects.map((project) => {
-//         const currentAuthor = project.projectAuthor;
-//         // setCurrentAuthor(project.projectAuthor)
-//         const {
-//           data: imageUrls = [],
-//           isLoading: imagesLoading,
-//           error: fetchError,
-//         } = imgQueries(URL, refetch, currentAuthor);
-//         const projectImageUrl =
-//           imageUrls && imageUrls.length
-//             ? imageUrls.find((imageUrl) =>
-//                 imageUrl.includes(project.projectImage)
-//               )
-//             : null;
-
-//         return (
-//           <ExplorerCard key={project._id}>
-//             <CardImage
-//               src={projectImageUrl || Airforce}
-//               alt="Image"
-//               key={projectImageUrl}
-//             />
-//             <ExploreCardAuthor>
-//               <ProjectAuthor>@{currentAuthor}</ProjectAuthor>
-//             </ExploreCardAuthor>
-//             <CardTitle>
-//               <ProjectTitle>
-//                 <Link to={`/projects/${project._id}`}>
-//                   {project.projectTitle}
-//                 </Link>
-//                 <PostTime>{project.createdAt}</PostTime>
-//               </ProjectTitle>
-//             </CardTitle>
-//           </ExplorerCard>
-//         );
-//       })}
-//     </ExploreContainer>
-//   );
-// }
-
-// export default ExploreCard;
-
-// import React, { useEffect, useState } from "react";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_PROJECTS } from "../../utils/queries";
-// import { ExploreContainer, ExplorerCard, ExploreCardAuthor, ProjectAuthor, PostTime, CardTitle, ProjectTitle, CardImage } from "./Common.js";
-// import { Link } from "react-router-dom";
-// import Airforce from "../../assets/airforceanime.jpg";
-
 function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
   const projects = apolloData?.projects || [];
