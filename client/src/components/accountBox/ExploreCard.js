@@ -1,12 +1,10 @@
 import axiosClient from "../../config/axios";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { CircularProgress, Text } from "@chakra-ui/react";
-import { ImageCard, ImageContainer } from "./Common.js";
-import imgQueries from "../../utils/imgQueries";
-import Auth from "../../utils/auth";
-import imgQuery from "../../utils/imgQuery";
+import AudioPlayer from "./AudioPlayer.js";
+import LazyLoad from "react-lazyload";
 import {
   ExploreContainer,
   ExplorerCard,
@@ -24,23 +22,57 @@ function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
   const projects = apolloData?.projects || [];
   const URL = "/singlepost-image";
+  const URL2 = "/audiofiles";
+  // const URL = "/files";
+// const URL2 = "/files";
+
 
   const [imageUrls, setImageUrls] = useState({});
-  const [refetch, setRefetch] = useState(0);
+  const [audioUrls, setAudioUrls] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     const fetchData = async (projectAuthor) => {
       axiosClient.defaults.headers.common["x-project-author"] = projectAuthor;
 
       try {
-        const response = await axiosClient.get(URL);
-        const data = response.data;
+        const [imageResponse, audioResponse] = await Promise.all([
+          axiosClient.get(URL),
+          axiosClient.get(URL2),
+        ]);
+
+        // const imageResponse = await axiosClient.get(URL, {
+        //   headers: {
+        //     "x-project-author": projectAuthor,
+        //     "x-file-type": "image",
+        //   },
+        // });
+
+
+        // const audioResponse = await axiosClient.get(URL, {
+        //   headers: {
+        //     "x-project-author": projectAuthor,
+        //     "x-file-type": "audio",
+        //   },
+        // });
+        
+        const imageData = imageResponse.data;
+        const audioData = audioResponse.data;
+
         setImageUrls((prevImageUrls) => ({
           ...prevImageUrls,
-          [projectAuthor]: data,
+          [projectAuthor]: imageData,
+        }));
+        setAudioUrls((prevAudioUrls) => ({
+          ...prevAudioUrls,
+          [projectAuthor]: audioData,
         }));
       } catch (error) {
-        console.error("Error fetching image data:", error);
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -48,11 +80,16 @@ function ExploreCard(props) {
       const currentAuthor = project.projectAuthor;
       fetchData(currentAuthor);
     });
-  }, [projects, refetch]);
+  }, [projects]);
 
   const findProjectImageUrl = (projectImage, projectAuthor) => {
     const authorImageUrls = imageUrls[projectAuthor] || [];
     return authorImageUrls.find((imageUrl) => imageUrl.includes(projectImage));
+  };
+
+  const findProjectAudioUrl = (projectAudio, projectAuthor) => {
+    const authorAudioUrls = audioUrls[projectAuthor] || [];
+    return authorAudioUrls.find((audioUrl) => audioUrl.includes(projectAudio));
   };
 
   return (
@@ -63,14 +100,20 @@ function ExploreCard(props) {
           project.projectImage,
           currentAuthor
         );
-
+        const projectAudioUrl = findProjectAudioUrl(
+          project.projectAudio,
+          currentAuthor
+        );
         return (
           <ExplorerCard key={project._id}>
-            <CardImage
-              src={projectImageUrl || Airforce}
-              alt="Image"
-              key={projectImageUrl}
-            />
+            {/* <LazyLoad height={600} offset={100} debounce={false}> */}
+              <CardImage
+                src={projectImageUrl || Airforce}
+                alt="Image"
+                key={projectImageUrl}
+              />
+            {/* </LazyLoad> */}
+
             <ExploreCardAuthor>
               <ProjectAuthor>@{currentAuthor}</ProjectAuthor>
             </ExploreCardAuthor>
@@ -79,6 +122,13 @@ function ExploreCard(props) {
                 <Link to={`/projects/${project._id}`}>
                   {project.projectTitle}
                 </Link>
+                <div>
+                  {projectAudioUrl ? (
+                    <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
+                  ) : (
+                    <Text>No audio available</Text>
+                  )}
+                </div>
                 <PostTime>{project.createdAt}</PostTime>
               </ProjectTitle>
             </CardTitle>

@@ -65,7 +65,6 @@ const ProjectForm = () => {
 
     try {
       await uploadImage(form);
-      console.log(imageResponse, "key");
     } catch (error) {
       console.error("Error uploading image to S3:", error);
     }
@@ -127,8 +126,8 @@ const ProjectForm = () => {
         },
       });
 
-      // setProjectCounter((prevCounter) => prevCounter + 1);
-      // console.log(projectCounter, "counter 2");
+      console.log("projectAudio",projectAudio)
+
       console.log("projectimage2", projectImage);
 
       setProjectTitle("");
@@ -185,7 +184,7 @@ const ProjectForm = () => {
   const uploadProject = async (file, audioFile) => {
     try {
       if (!projectImage & !projectAudio) {
-        setUploading(true);
+        // setUploading(true);
         await handleUpload(file);
         await handleAudioUpload(audioFile);
       }
@@ -348,3 +347,4 @@ const ProjectForm = () => {
 };
 
 export default ProjectForm;
+
