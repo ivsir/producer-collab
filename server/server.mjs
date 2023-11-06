@@ -108,7 +108,6 @@ app.get("/user-folders", async (req, res) => {
       lastModified: object.LastModified,
       size: object.Size,
     }));
-    console.log("object key", objects);
 
     res.json(objects);
   });
@@ -116,7 +115,6 @@ app.get("/user-folders", async (req, res) => {
 
 app.post("/images", upload.single("image"), async (req, res) => {
   const { file } = req;
-  console.log(file)
 
   const userId = req.headers["x-user-id"];
 
@@ -131,7 +129,7 @@ app.post("/images", upload.single("image"), async (req, res) => {
 
 app.post("/audiofiles", audioUpload.single("audio"), async (req, res) => {
   const { file } = req;
-  console.log(file)
+
   const userId = req.headers["x-user-id"];
 
   if (!file || !userId) return res.status(400).json({ message: "Bad request" });
@@ -143,8 +141,24 @@ app.post("/audiofiles", audioUpload.single("audio"), async (req, res) => {
   return res.status(201).json({ key });
 });
 
+app.post("/upload", upload.single("file"), async (req, res) => {
+  const { file } = req;
+  const userId = req.headers["x-user-id"];
+  const fileType = req.headers["x-file-type"]; // "image" or "audio"
+
+  if (!file || !userId || !fileType) {
+    return res.status(400).json({ message: "Bad request" });
+  }
+
+  const { key, error } = await uploadToS3({ file, userId });
+
+  if (error) return res.status(500).json({ message: error.message });
+
+  return res.status(201).json({ key });
+});
 
 app.get("/images", async (req, res) => {
+  
   const userId = req.headers["x-user-id"];
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
@@ -162,13 +176,13 @@ app.get("/audiofiles", async (req, res) => {
 
   const { error, presignedUrls } = await getUserPresignedUrls(userId);
   if (error) return res.status(400).json({ message: error.message });
-
+  
   return res.json(presignedUrls);
 });
 
 app.get("/singlepost-image", async (req, res) => {
   const projectAuthor = req.headers["x-project-author"];
-  // console.log(projectAuthor);
+
   if (!projectAuthor) return res.status(400).json({ message: "Bad request" });
 
   const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
@@ -176,5 +190,29 @@ app.get("/singlepost-image", async (req, res) => {
 
   return res.json(presignedUrls);
 });
+
+app.get("/files", async (req, res) => {
+  const userId = req.headers["x-project-author"];
+  const fileType = req.headers["x-file-type"]; // "image" or "audio"
+
+  if (!userId || !fileType) {
+    return res.status(400).json({ message: "Bad request" });
+  }
+
+  let presignedUrls;
+  if (fileType === "image") {
+    presignedUrls = await getUserPresignedUrls(userId, "image"); // Pass "image" as the file type
+  } else if (fileType === "audio") {
+    presignedUrls = await getUserPresignedUrls(userId, "audio"); // Pass "audio" as the file type
+  }
+
+  if (presignedUrls.error) {
+    return res.status(400).json({ message: presignedUrls.error.message });
+  }
+
+  return res.json(presignedUrls);
+});
+
+
 
 startApolloServer(typeDefs, resolvers);

@@ -25,8 +25,8 @@ export const QUERY_PROJECTS = gql`
       projectTitle
       projectDescription
       projectImage
-      # projectAudio
       projectAuthor
+      projectAudio
       createdAt
       projectMembers {
         _id
