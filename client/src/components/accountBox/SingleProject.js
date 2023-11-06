@@ -19,7 +19,7 @@ const SingleProject = () => {
   const { projectId } = useParams();
 
   const URL = "/singlepost-image";
-  
+  const URL2 = "/audiofiles"
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
     // pass URL parameter
     variables: { projectId: projectId },
@@ -63,7 +63,6 @@ const SingleProject = () => {
   const projectImageUrl = imageUrls
   ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
   : null;
-
 
   const ErrorText = ({ children, ...props }) => (
     <Text fontSize="lg" color="red.300" {...props}>
