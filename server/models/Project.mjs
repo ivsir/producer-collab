@@ -26,7 +26,10 @@ const projectSchema = new Schema({
     required: true,
     trim: true,
   },
-
+  projectAudio: {
+    type: String,
+    required: "You need to upload an audio file.",
+  },
   projectMembers: [
     {
       memberId: {

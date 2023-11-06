@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
-
+import AudioPlayer from "./AudioPlayer.js";
 import { CircularProgress, Text } from "@chakra-ui/react";
-import { ImageCard, ImageContainer } from "./Common.js";
+import { ImageCard, ImageContainer, ExploreContainer } from "./Common.js";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
@@ -19,7 +19,7 @@ const SingleProject = () => {
   const { projectId } = useParams();
 
   const URL = "/singlepost-image";
-  
+  const URL2 = "/audiofiles";
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
     // pass URL parameter
     variables: { projectId: projectId },
@@ -31,14 +31,19 @@ const SingleProject = () => {
     isLoading: imagesLoading,
     error: fetchError,
   } = imgQueries(URL, refetch, currentAuthor);
+  const {
+    data: audioUrls = [],
+    isLoading: audioLoading,
+    error: fetchAudioError,
+  } = imgQueries(URL2, refetch, currentAuthor);
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const navigate = useNavigate();
   const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-  
+
   const onJoin = async (event) => {
     event.preventDefault();
     const memberId = AuthService.getId();
-    
+
     try {
       const { data } = await member({
         variables: {
@@ -59,11 +64,13 @@ const SingleProject = () => {
     }
   };
 
-  
   const projectImageUrl = imageUrls
-  ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
-  : null;
+    ? imageUrls.find((imageUrl) => imageUrl.includes(project.projectImage))
+    : null;
 
+  const projectAudioUrl = audioUrls
+    ? audioUrls.find((audioUrl) => audioUrl.includes(project.projectAudio))
+    : null;
 
   const ErrorText = ({ children, ...props }) => (
     <Text fontSize="lg" color="red.300" {...props}>
@@ -76,6 +83,7 @@ const SingleProject = () => {
   }
 
   return (
+    <ExploreContainer>
     <SinglePostContainer>
       <div className="my-3 single-post-container">
         {imagesLoading && (
@@ -100,25 +108,23 @@ const SingleProject = () => {
           <ImageCard src={projectImageUrl} alt="Image" key={projectImageUrl} />
           {/* <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} /> */}
         </ImageContainer>
-        <h2 className="card-header bg-dark text-light p-2 m-0">
+        <h2>
           {project.projectTitle} <br />
         </h2>
-        <h3 className="card-header bg-dark text-light p-2 m-0">
+        <h3>
           {project.projectAuthor} created this project on {project.createdAt}
         </h3>
-        <div className="bg-light py-4 blockquote-container">
-          <blockquote
-            className="p-4"
-            style={{
-              fontSize: "1.5rem",
-              fontStyle: "italic",
-              lineHeight: "1.5",
-              overflow: "auto",
-            }}
-          >
-            {project.projectDescription}
-          </blockquote>{" "}
+        <div>
+          <blockquote>{project.projectDescription}</blockquote>{" "}
+          <div>
+                  {projectAudioUrl ? (
+                    <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
+                  ) : (
+                    <Text>No audio available</Text>
+                  )}
+                </div>
         </div>
+
       </div>
       <div className="link-button-wrapper">
         <button onClick={onJoin} className="profile-button content">
@@ -126,6 +132,7 @@ const SingleProject = () => {
         </button>
       </div>
     </SinglePostContainer>
+    </ExploreContainer>
   );
 };
 

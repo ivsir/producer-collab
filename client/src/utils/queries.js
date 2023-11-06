@@ -11,6 +11,7 @@ export const QUERY_USER = gql`
         projectTitle
         projectDescription
         projectImage
+        projectAudio
         createdAt
       }
     }
@@ -25,6 +26,7 @@ export const QUERY_PROJECTS = gql`
       projectDescription
       projectImage
       projectAuthor
+      projectAudio
       createdAt
       projectMembers {
         _id
@@ -43,6 +45,7 @@ export const QUERY_SINGLE_PROJECT = gql`
       projectDescription
       projectImage
       projectAuthor
+      projectAudio
       createdAt
       comments {
         _id
@@ -65,6 +68,7 @@ export const QUERY_ME = gql`
         projectTitle
         projectText
         projectImage
+        projectAudio
         projectAuthor
         createdAt
       }
