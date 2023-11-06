@@ -591,13 +591,12 @@ color: white;`
 
 export const SinglePostContainer = styled.div`
 .single-post-container {
-  border: 1px solid var(--color-light-blue);
   border-radius: 5px;
   padding: 4rem;
   margin: 4rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+
 }
 
 h2 {
