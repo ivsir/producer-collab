@@ -155,9 +155,9 @@ export const AppContainer = styled.div`
   @media (max-width: 600px) {
     padding: 0rem 2rem;
   }
-`;
-
-export const BoxContainer = styled.div`
+  `;
+  
+  export const BoxContainer = styled.div`
   box-sizing: border-box;
   display: inline-flex;
   padding: 50px;
@@ -238,6 +238,7 @@ export const Input = styled.input`
   }
   border-radius: 16px;
   color: rgba(255, 255, 255, 0.5);
+  width: 15rem;
   background: transparent;
   padding: 20px 24px 20px 24px;
   border: none;
@@ -590,13 +591,12 @@ color: white;`
 
 export const SinglePostContainer = styled.div`
 .single-post-container {
-  border: 1px solid var(--color-light-blue);
   border-radius: 5px;
   padding: 4rem;
   margin: 4rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+
 }
 
 h2 {
@@ -689,5 +689,6 @@ button:focus {
   font-family: "Courier Prime", monospace;
 }
 `;
+
 
 // export const FormContainer = styled.div``
