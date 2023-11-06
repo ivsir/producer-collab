@@ -35,14 +35,7 @@ function ExploreCard(props) {
     setLoading(true);
 
     const fetchData = async (projectAuthor) => {
-      // axiosClient.defaults.headers.common["x-project-author"] = projectAuthor;
-
       try {
-        // const [imageResponse, audioResponse] = await Promise.all([
-        //   axiosClient.get(URL),
-        //   axiosClient.get(URL2),
-        // ]);
-
         const imageResponse = await axiosClient.get(URL, {
           headers: {
             "x-project-author": projectAuthor,

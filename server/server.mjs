@@ -170,7 +170,8 @@ app.get("/images", async (req, res) => {
 });
 
 app.get("/audiofiles", async (req, res) => {
-  const userId = req.headers["x-user-id"];
+  // const userId = req.headers["x-user-id"];
+  const userId = req.headers["x-project-author"]
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
 
