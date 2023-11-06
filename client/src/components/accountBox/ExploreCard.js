@@ -22,7 +22,7 @@ function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
   const projects = apolloData?.projects || [];
   const URL = "/singlepost-image";
-  const URL2 = "/audiofiles";
+  // const URL2 = "/audiofiles";
   // const URL = "/files";
 // const URL2 = "/files";
 
@@ -35,28 +35,28 @@ function ExploreCard(props) {
     setLoading(true);
 
     const fetchData = async (projectAuthor) => {
-      axiosClient.defaults.headers.common["x-project-author"] = projectAuthor;
+      // axiosClient.defaults.headers.common["x-project-author"] = projectAuthor;
 
       try {
-        const [imageResponse, audioResponse] = await Promise.all([
-          axiosClient.get(URL),
-          axiosClient.get(URL2),
-        ]);
+        // const [imageResponse, audioResponse] = await Promise.all([
+        //   axiosClient.get(URL),
+        //   axiosClient.get(URL2),
+        // ]);
 
-        // const imageResponse = await axiosClient.get(URL, {
-        //   headers: {
-        //     "x-project-author": projectAuthor,
-        //     "x-file-type": "image",
-        //   },
-        // });
+        const imageResponse = await axiosClient.get(URL, {
+          headers: {
+            "x-project-author": projectAuthor,
+            "x-file-type": "image",
+          },
+        });
 
 
-        // const audioResponse = await axiosClient.get(URL, {
-        //   headers: {
-        //     "x-project-author": projectAuthor,
-        //     "x-file-type": "audio",
-        //   },
-        // });
+        const audioResponse = await axiosClient.get(URL, {
+          headers: {
+            "x-project-author": projectAuthor,
+            "x-file-type": "audio",
+          },
+        });
         
         const imageData = imageResponse.data;
         const audioData = audioResponse.data;
@@ -108,7 +108,9 @@ function ExploreCard(props) {
           <ExplorerCard key={project._id}>
             {/* <LazyLoad height={600} offset={100} debounce={false}> */}
               <CardImage
-                src={projectImageUrl || Airforce}
+                src={projectImageUrl
+                  //  || Airforce
+                  }
                 alt="Image"
                 key={projectImageUrl}
               />
