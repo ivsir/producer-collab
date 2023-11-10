@@ -143,8 +143,6 @@ export default createGlobalStyle`
 }
 `;
 
-
-
 export const AppContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -155,9 +153,9 @@ export const AppContainer = styled.div`
   @media (max-width: 600px) {
     padding: 0rem 2rem;
   }
-  `;
-  
-  export const BoxContainer = styled.div`
+`;
+
+export const BoxContainer = styled.div`
   box-sizing: border-box;
   display: inline-flex;
   padding: 50px;
@@ -555,139 +553,176 @@ export const InnerContainer = styled.div`
 // PROFILE
 export const ProfileContainer = styled.div`
   width: 65%;
-  display: flex;
-  flex-direction: column;
+  // padding: 0 5rem;
 `;
 
-
 export const ImageContainer = styled.div`
-width: 100%;
+  // align-items: center;
+  // display: flex;
+
+  // justify-content:space-between;
+`;
+
+// ****** profile grid styling ******
+
+export const ProfileGrid = styled.div`
+  padding: 0.5rem 5.5rem;
+  justify-content: flex-end;
 `;
 
 export const ImageGrid = styled.div`
-display: grid;
-
-grid-template-columns: 50% 50% 50%;
-align-items: center;
-justify-content: space-between;
-`;
-
-export const ImageCard = styled.img`
-  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  // flex-direction: row-reverse;
+  `;
+  
+  export const ProjectImageCard = styled.img`
+  // box-sizing: border-box;
   background: linear-gradient(
     180deg,
     rgba(20, 20, 20, 0) 0%,
     rgba(20, 20, 20, 1) 100%
   );
-  gap: 2px;
-  margin: 1rem;
-  flex: 1;
-  position: relative;
-  width: 90%;
+  // gap: 2px;
+  // flex: 1;
+  margin-left: 2rem;
+  // position: relative;
+  width: 30rem;
+  // height: 200px;
+`;
+export const ProfileImageContainer = styled.div`
+  // margin-bottom: 0.5rem;
+  // width: 50%;
+  // height: 20rem;
+  width: 24.5rem; /* Adjust the width as needed */
+  border-radius: 0.5rem;
+  height: 25rem; /* Adjust the height as needed */
+  margin-bottom: 1rem; /* Add margin between image cards if desired */
+  overflow: hidden; /* Hide overflow content */
+  display: flex;
+  align-items: center;
 `;
 
+export const ImageCard = styled.img`
+  // box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  // gap: 2px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  align-self: center;
+  
+`;
+
+// ****** profile grid styling ******
+
 export const UploadButton = styled.button`
-color: white;`
+  color: white;
+`;
 
 export const SinglePostContainer = styled.div`
-.single-post-container {
-  border-radius: 5px;
-  padding: 4rem;
-  margin: 4rem;
-  display: flex;
-  flex-direction: column;
+  .single-post-container {
+    border-radius: 5px;
+    padding: 4rem;
+    margin: 4rem;
+    display: flex;
+    flex-direction: column;
+  }
 
-}
+  h2 {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    font-family: montserrat;
+    font-weight: bold;
+    color: var(--color-yellow);
+  }
 
-h2 {
-  margin-left: 1rem;
-  font-size: 1.5rem;
-  font-family: montserrat;
-  font-weight: bold;
-  color: var(--color-yellow);
-}
+  h3 {
+    margin-left: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-light-blue);
+    font-style: italic;
+    font-family: montserrat;
+  }
 
-h3 {
-  margin-left: 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--color-light-blue);
-  font-style: italic;
-  font-family: montserrat;
-}
+  p {
+    font-size: 2rem;
+    color: var(--color-yellow);
+  }
 
-p {
-  font-size: 2rem;
-  color: var(--color-yellow);
-}
+  .blockquote-container {
+    flex: 1; /* set to 1 to fill remaining space */
+    border: 1px solid var(--color-yellow);
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--color-dark-blue);
+    overflow: auto;
+  }
 
-.blockquote-container {
-  flex: 1; /* set to 1 to fill remaining space */
-  border: 1px solid var(--color-yellow);
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem;
-  background-color: var(--color-dark-blue);
-  overflow: auto;
-}
+  blockquote {
+    font-size: 1rem;
+    font-family: montserrat;
+    color: var(--color-yellow);
+    border: none;
+    padding: 0.5rem;
+    overflow: auto;
+    max-height: 100%;
+    white-space: pre-wrap;
+    padding: 1rem;
+  }
 
-blockquote {
-  font-size: 1rem;
-  font-family: montserrat;
-  color: var(--color-yellow);
-  border: none;
-  padding: 0.5rem;
-  overflow: auto;
-  max-height: 100%;
-  white-space: pre-wrap;
-  padding: 1rem;
-}
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: montserrat;
+    width: 200px;
+    color: var(--color-dark-blue);
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 10px;
+    padding-top: 7px;
+    transition: 0.5s;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    background: var(--color-yellow);
+    margin-top: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0px 7px 0px 0px #cf920d;
+  }
 
-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: montserrat;
-  width: 200px;
-  color: var(--color-dark-blue);
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding: 10px;
-  padding-top: 7px;
-  transition: 0.5s;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  border: none;
-  background: var(--color-yellow);
-  margin-top: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0px 7px 0px 0px #cf920d;
-}
+  button:hover {
+    box-shadow: none;
+    transform: translateY(5px);
+    transition: all 0.1s linear;
+  }
 
-button:hover {
-  box-shadow: none;
-  transform: translateY(5px);
-  transition: all 0.1s linear;
-}
-
-button:focus {
-  outline: none;
-}
-.link-button-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  text-decoration: none;
-  font-family: "Courier Prime", monospace;
-}
+  button:focus {
+    outline: none;
+  }
+  .link-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    text-decoration: none;
+    font-family: "Courier Prime", monospace;
+  }
 `;
 
 
