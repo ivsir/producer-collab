@@ -24,8 +24,7 @@ function ExploreCard(props) {
   const URL = "/singlepost-image";
   // const URL2 = "/audiofiles";
   // const URL = "/files";
-// const URL2 = "/files";
-
+  // const URL2 = "/files";
 
   const [imageUrls, setImageUrls] = useState({});
   const [audioUrls, setAudioUrls] = useState({});
@@ -43,14 +42,13 @@ function ExploreCard(props) {
           },
         });
 
-
         const audioResponse = await axiosClient.get(URL, {
           headers: {
             "x-project-author": projectAuthor,
             "x-file-type": "audio",
           },
         });
-        
+
         const imageData = imageResponse.data;
         const audioData = audioResponse.data;
 
@@ -99,16 +97,8 @@ function ExploreCard(props) {
         );
         return (
           <ExplorerCard key={project._id}>
-            {/* <LazyLoad height={600} offset={100} debounce={false}> */}
-              <CardImage
-                src={projectImageUrl
-                  //  || Airforce
-                  }
-                alt="Image"
-                key={projectImageUrl}
-              />
-            {/* </LazyLoad> */}
 
+            <CardImage src={projectImageUrl} key={projectImageUrl} />
             <ExploreCardAuthor>
               <ProjectAuthor>@{currentAuthor}</ProjectAuthor>
             </ExploreCardAuthor>

@@ -1,18 +1,16 @@
-import { Box, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Image, Text, VStack, Flex, Center } from "@chakra-ui/react";
 import ProfileCard from "./ProfileCard";
 import AuthService from "../../utils/auth";
-import { ProfileContainer } from "./Common";
-import { QUERY_PROJECTS, QUERY_USER, QUERY_ME} from "../../utils/queries";
+import { ImageContainer, ProfileContainer, ImageGrid, ProfileGrid } from "./Common";
+import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { ProjectAuthor } from "./Common";
 
 const Profile = (props) => {
-  const { loading, data: userData } = useQuery(QUERY_ME, {
+  const { loading, data: userData } = useQuery(QUERY_USER, {
     variables: { username: AuthService.getUsername() },
   });
-
-  const user = userData?.user.username || '';
-
+  const user = userData?.user.username || "";
   return (
     <ProfileContainer>
       <VStack p={7} m="auto" width="fit-content" borderRadius={6} bg="gray.700">
@@ -25,11 +23,11 @@ const Profile = (props) => {
         <Text>
           <ProjectAuthor>@{user}</ProjectAuthor>
         </Text>
-        <Text fontSize="lg" color="gray.400">
-          Software Engineer
-        </Text>
+        <Text fontSize="lg" color="gray.400"></Text>
       </VStack>
-      <ProfileCard />
+      <ProfileGrid>
+        <ProfileCard />
+      </ProfileGrid>
     </ProfileContainer>
   );
 };
