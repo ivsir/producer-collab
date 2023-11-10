@@ -9,15 +9,21 @@ const resolvers = {
       return User.find().populate("projects");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("projects");
+      return User.findOne({ username }).populate({
+        path: "projects",
+        options: { sort: { createdAt: -1 } }, // Sorting projects within the populate
+      });
     },
+
     projects: async (parent, { username }) => {
       const params = username ? { username } : {};
+      // return Project.find(params).sort({ createdAt: 1 });
       return Project.find(params).sort({ createdAt: -1 });
     },
     project: async (parent, { projectId }) => {
       console.log(projectId);
-      return Project.findOne({ _id: projectId });
+      return Project.findOne({ _id: projectId }).sort({ createdAt: 1 });
+      // return Project.findOne({ _id: projectId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -55,7 +61,6 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log("token:", token);
       return { token, user };
     },
     removeUser: async (parent, { email, password }) => {
