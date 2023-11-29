@@ -70,25 +70,22 @@ function ProfileCard(props) {
         // direction={"column-reverse"}
       > */}
       {/* <ProfileGrid> */}
-        {projects.map((project) => {
-          const projectImageUrl = findProjectImageUrl(
-            project.projectImage,
-            userId
-          );
+      {projects.map((project) => {
+        const projectImageUrl = findProjectImageUrl(
+          project.projectImage,
+          userId
+        );
 
-          return (
-            <Link to={`/projects/${project._id}`}>
-              <ProfileImageContainer >
-              <ImageCard
-                src={projectImageUrl}
-                key={projectImageUrl}
-              />
-              </ProfileImageContainer>
-            </Link>
-          );
-        })}
+        return (
+          <Link to={`/projects/${project._id}`}>
+            <ProfileImageContainer>
+              <ImageCard src={projectImageUrl} key={projectImageUrl} />
+            </ProfileImageContainer>
+          </Link>
+        );
+      })}
       {/* </ProfileGrid> */}
-    {/* </Flex> */}
+      {/* </Flex> */}
     </ImageGrid>
   );
 }

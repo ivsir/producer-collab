@@ -18,17 +18,16 @@ function sideNav() {
       <NavLinks>
         <Link style={LinkStyle} to="/explore">
           <NavIcon src={Home} />
-          <NavLinkA>Home</NavLinkA>
         </Link>
         {Auth.loggedIn() ? (
           <>
             <Link style={LinkStyle} to="/projectform">
               <NavIcon src={Upload} />
-              <NavLinkA>Upload</NavLinkA>
+              
             </Link>
             <Link style={LinkStyle} to="/profile">
               <NavIcon src={Profile} />
-              <NavLinkA>Profile</NavLinkA>
+              
             </Link>
             <Link style={LinkStyle} onClick={logout} to="/">
               <NavLinkA>Logout</NavLinkA>
