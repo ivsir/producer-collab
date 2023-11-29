@@ -335,7 +335,6 @@ export const ExploreContainer = styled.div`
   position: relative;
   @media (max-width: 600px) {
     width: 100%;
-    background: #0a0a09;
   }
 `;
 
@@ -440,10 +439,19 @@ export const NavLinks = styled.div`
   margin: 1rem;
   flex-direction: column;
   position: absolute;
-  align-items: flex-start;
+  @media (max-width: 768px) {
+    background: rgb(11, 11, 12);
+
+    width: 100vw;
+    flex-direction: row;
+    z-index: 100;
+    justify-content: center;
+    bottom: 0;
+    margin-bottom: 0;
+  }
   @media (max-width: 600px) {
     background: rgb(11, 11, 12);
-    // position: relative;
+
     width: 100vw;
     flex-direction: row;
     z-index: 100;
@@ -553,7 +561,9 @@ export const InnerContainer = styled.div`
 // PROFILE
 export const ProfileContainer = styled.div`
   width: 65%;
-  // padding: 0 5rem;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -566,18 +576,24 @@ export const ImageContainer = styled.div`
 // ****** profile grid styling ******
 
 export const ProfileGrid = styled.div`
-  padding: 0.5rem 5.5rem;
+  // padding: 0.5rem 5.5rem;
   justify-content: flex-end;
+  @media (max-width: 600px) {
+    padding: 0rem 0rem;
+  }
 `;
 
 export const ImageGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
   // flex-direction: row-reverse;
-  `;
-  
-  export const ProjectImageCard = styled.img`
+`;
+
+export const ProjectImageCard = styled.img`
   // box-sizing: border-box;
   background: linear-gradient(
     180deg,
@@ -592,16 +608,26 @@ export const ImageGrid = styled.div`
   // height: 200px;
 `;
 export const ProfileImageContainer = styled.div`
-  // margin-bottom: 0.5rem;
-  // width: 50%;
-  // height: 20rem;
   width: 24.5rem; /* Adjust the width as needed */
   border-radius: 0.5rem;
   height: 25rem; /* Adjust the height as needed */
-  margin-bottom: 1rem; /* Add margin between image cards if desired */
+  margin: 1rem; /* Add margin between image cards if desired */
   overflow: hidden; /* Hide overflow content */
   display: flex;
   align-items: center;
+  @media (max-width: 576px) {
+    align-items: center;
+    width: 12.25rem;
+    height: 12rem; 
+  }
+  @media (max-width: 768px) {
+    width: 15.25rem;
+    height: 15rem; 
+  }
+  @media (max-width: 992px) {
+    width: 16.25rem;
+    height: 16rem; 
+  }
 `;
 
 export const ImageCard = styled.img`
@@ -616,7 +642,6 @@ export const ImageCard = styled.img`
   height: 100%;
   object-fit: cover;
   align-self: center;
-  
 `;
 
 // ****** profile grid styling ******
@@ -724,6 +749,5 @@ export const SinglePostContainer = styled.div`
     font-family: "Courier Prime", monospace;
   }
 `;
-
 
 // export const FormContainer = styled.div``
