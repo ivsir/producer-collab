@@ -22,10 +22,7 @@ function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
   const projects = apolloData?.projects || [];
   const URL = "/singlepost-image";
-  // const URL2 = "/audiofiles";
-  // const URL = "/files";
-  // const URL2 = "/files";
-
+ 
   const [imageUrls, setImageUrls] = useState({});
   const [audioUrls, setAudioUrls] = useState({});
   const [loading, setLoading] = useState(true);
@@ -97,8 +94,14 @@ function ExploreCard(props) {
         );
         return (
           <ExplorerCard key={project._id}>
-
-            <CardImage src={projectImageUrl} key={projectImageUrl} />
+            {loading ? (
+              <CircularProgress isIndeterminate color="green.300" />
+            ) : (
+              projectImageUrl && (
+                <CardImage src={projectImageUrl} key={projectImageUrl} />
+              )
+            )}
+            {!loading && !projectImageUrl && <Text>No image available</Text>}
             <ExploreCardAuthor>
               <ProjectAuthor>@{currentAuthor}</ProjectAuthor>
             </ExploreCardAuthor>
@@ -108,9 +111,17 @@ function ExploreCard(props) {
                   {project.projectTitle}
                 </Link>
                 <div>
-                  {projectAudioUrl ? (
-                    <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
+                  {loading ? (
+                    <CircularProgress isIndeterminate color="green.300" />
                   ) : (
+                    projectAudioUrl && (
+                      <AudioPlayer
+                        src={projectAudioUrl}
+                        key={projectAudioUrl}
+                      />
+                    )
+                  )}
+                  {!loading && !projectAudioUrl && (
                     <Text>No audio available</Text>
                   )}
                 </div>
