@@ -1,12 +1,24 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
 import AudioPlayer from "./AudioPlayer.js";
-import { CircularProgress, Text } from "@chakra-ui/react";
-import { ProjectImageCard, ImageContainer, ExploreContainer } from "./Common.js";
+import { CircularProgress, Text, Box, Skeleton } from "@chakra-ui/react";
+import {
+  ProjectImageCard,
+  ImageContainer,
+  ExploreContainer,
+  ExplorerCard,
+  ExploreCardAuthor,
+  ProjectAuthor,
+  PostTime,
+  CardTitle,
+  ProjectTitle,
+  ImageCard,
+} from "./Common.js";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
@@ -85,50 +97,52 @@ const SingleProject = () => {
   return (
     <ExploreContainer>
       <SinglePostContainer>
-        <div className="my-3 single-post-container">
-          {imagesLoading && (
-            <CircularProgress
-              color="gray.600"
-              trackColor="blue.300"
-              size={7}
-              thickness={10}
-              isIndeterminate
-            />
-          )}
-          {!fetchError && imageUrls?.length === 0 && (
-            <Text textAlign="left" fontSize="lg" color="gray.500">
-              No images found
-            </Text>
-          )}
-          <ImageContainer>
-            {/* {imageUrls?.length > 0 &&
-            imageUrls.map((url) => (
-              <ImageCard src={url} alt="Image" key={url} />
-              ))} */}
-            <ProjectImageCard
-              src={projectImageUrl}
-              alt="Image"
-              key={projectImageUrl}
-            />
-            {/* <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} /> */}
-          </ImageContainer>
-          <h2>
-            {project.projectTitle} <br />
-          </h2>
-          <h3>
-            {project.projectAuthor} created this project on {project.createdAt}
-          </h3>
-          <div>
-            <blockquote>{project.projectDescription}</blockquote>{" "}
-            <div>
-              {projectAudioUrl ? (
-                <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
-              ) : (
-                <Text>No audio available</Text>
-              )}
-            </div>
-          </div>
-        </div>
+        <ExplorerCard key={project._id}>
+          {loading ? (
+            <Skeleton
+              height="25rem"
+              // isLoaded={true}
+              bg="green.500"
+              color="white"
+              fadeDuration={1}
+            >
+              <Box>Hello React!</Box>
+              <CircularProgress isIndeterminate color="green.300" />
+            </Skeleton>
+          ) : (
+            projectImageUrl && (
+              <ImageCard src={projectImageUrl} key={projectImageUrl} />
+            )
+          )}ç
+          {!loading && !projectImageUrl && <Text>No image available</Text>}
+          <ExploreCardAuthor>
+            <ProjectAuthor>@{currentAuthor}</ProjectAuthor>
+          </ExploreCardAuthor>
+          <CardTitle>
+            <ProjectTitle>
+              <Link to={`/projects/${project._id}`}>
+                {project.projectTitle}
+              </Link>
+              <div>
+                {loading ? (
+                  <CircularProgress isIndeterminate color="green.300" />
+                ) : (
+                  projectAudioUrl && (
+                    <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
+                  )
+                )}
+                {!loading && !projectAudioUrl && (
+                  <Text>No audio available</Text>
+                )}
+              </div>
+              <PostTime>
+                {project.projectAuthor} created this project on{" "}
+                {project.createdAt}
+              </PostTime>
+            </ProjectTitle>
+          </CardTitle>
+        </ExplorerCard>
+
         <div className="link-button-wrapper">
           <button onClick={onJoin} className="profile-button content">
             Join project

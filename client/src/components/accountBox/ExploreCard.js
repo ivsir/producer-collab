@@ -2,7 +2,14 @@ import axiosClient from "../../config/axios";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { CircularProgress, Text } from "@chakra-ui/react";
+import {
+  Box,
+  CircularProgress,
+  Text,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+} from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer.js";
 import LazyLoad from "react-lazyload";
 import {
@@ -14,6 +21,7 @@ import {
   CardTitle,
   ProjectTitle,
   CardImage,
+  ImageCard
 } from "./Common.js";
 import { Link } from "react-router-dom";
 import Airforce from "../../assets/airforceanime.jpg";
@@ -22,7 +30,7 @@ function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
   const projects = apolloData?.projects || [];
   const URL = "/singlepost-image";
- 
+
   const [imageUrls, setImageUrls] = useState({});
   const [audioUrls, setAudioUrls] = useState({});
   const [loading, setLoading] = useState(true);
@@ -59,15 +67,25 @@ function ExploreCard(props) {
         }));
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
+      // } finally {
+      //   setLoading(false);
+      // }
     };
 
-    projects.forEach((project) => {
-      const currentAuthor = project.projectAuthor;
-      fetchData(currentAuthor);
-    });
+    // projects.forEach((project) => {
+    //   const currentAuthor = project.projectAuthor;
+    //   fetchData(currentAuthor);
+    // });
+    const fetchDataForAllProjects = async () => {
+      setLoading(true);
+      await Promise.all(
+        projects.map((project) => fetchData(project.projectAuthor))
+      );
+      setLoading(false);
+    };
+
+    fetchDataForAllProjects();
   }, [projects]);
 
   const findProjectImageUrl = (projectImage, projectAuthor) => {
@@ -95,10 +113,19 @@ function ExploreCard(props) {
         return (
           <ExplorerCard key={project._id}>
             {loading ? (
-              <CircularProgress isIndeterminate color="green.300" />
+              <Skeleton
+                height="25rem"
+                // isLoaded={true}
+                bg="green.500"
+                color="white"
+                fadeDuration={1}
+              >
+                <Box>Hello React!</Box>
+                <CircularProgress isIndeterminate color="green.300" />
+              </Skeleton>
             ) : (
               projectImageUrl && (
-                <CardImage src={projectImageUrl} key={projectImageUrl} />
+                <ImageCard src={projectImageUrl} key={projectImageUrl} />
               )
             )}
             {!loading && !projectImageUrl && <Text>No image available</Text>}
