@@ -380,7 +380,7 @@ export const ProjectAuthor = styled.h4`
 export const PostTime = styled.div`
   color: #989898;
   text-align: left;
-  font: 300 18px "Satoshi-VariableItalic", sans-serif;
+  margin:2rem;
   position: relative;
 `;
 
