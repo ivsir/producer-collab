@@ -8,6 +8,9 @@ mongoose.connect(
   }
 );
 
+mongoose.set('strictQuery', false);
+
+
 const dbConnection = mongoose.connection;
 
 export default dbConnection;
