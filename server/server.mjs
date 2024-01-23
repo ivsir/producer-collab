@@ -8,6 +8,7 @@ import {
   uploadToS3,
 } from "./s3.mjs";
 import { ApolloServer } from "apollo-server-express";
+// import { ApolloServer } from "@apollo/server";
 import { authMiddleware } from "./utils/auth.mjs";
 import dbConnection from "./config/connection.mjs";
 import typeDefs from "./schemas/typeDefs.mjs";
