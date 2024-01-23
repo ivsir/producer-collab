@@ -7,8 +7,6 @@ import {
   CircularProgress,
   Text,
   Skeleton,
-  SkeletonCircle,
-  SkeletonText,
 } from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer.js";
 // import LazyLoad from "react-lazyload";
@@ -20,7 +18,6 @@ import {
   PostTime,
   CardTitle,
   ProjectTitle,
-  CardImage,
   ImageCard
 } from "./Common.js";
 import { Link } from "react-router-dom";
