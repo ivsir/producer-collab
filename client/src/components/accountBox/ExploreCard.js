@@ -11,7 +11,7 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer.js";
-import LazyLoad from "react-lazyload";
+// import LazyLoad from "react-lazyload";
 import {
   ExploreContainer,
   ExplorerCard,
