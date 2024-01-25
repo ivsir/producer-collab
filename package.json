@@ -4,7 +4,8 @@
   "description": "",
   "main": "server/server.mjs",
   "engines": {
-    "node": "20.5.0"
+    "node": "20.5.0",
+    "npm": ""
   },
   "scripts": {
     "start": "node server/server.mjs",
