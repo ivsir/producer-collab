@@ -5,7 +5,7 @@
   "main": "server/server.mjs",
   "engines": {
     "node": "20.5.0",
-    "npm": ""
+    "npm": "10.4.0"
   },
   "scripts": {
     "start": "node server/server.mjs",
