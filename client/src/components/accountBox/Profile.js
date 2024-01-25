@@ -1,25 +1,12 @@
 import { Box, Image, Text, VStack, Flex, Center } from "@chakra-ui/react";
 import ProfileCard from "./ProfileCard";
-import { Link } from "react-router-dom";
 import AuthService from "../../utils/auth";
-import {
-  ImageContainer,
-  ProfileContainer,
-  ImageGrid,
-  ProfileGrid,
-  LinkStyle,
-  NavLinkA
-} from "./Common";
+import { ImageContainer, ProfileContainer, ImageGrid, ProfileGrid } from "./Common";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { ProjectAuthor } from "./Common";
-import Auth from "../../utils/auth.js";
 
 const Profile = (props) => {
-  const logout = (event) => {
-    event.preventDefault();
-    Auth.logout();
-  };
   const { loading, data: userData } = useQuery(QUERY_USER, {
     variables: { username: AuthService.getUsername() },
   });
@@ -33,9 +20,6 @@ const Profile = (props) => {
           src="https://bit.ly/kent-c-dodds"
           alt="Profile"
         />
-        <Link style={LinkStyle} onClick={logout} to="/">
-          <NavLinkA>Logout</NavLinkA>
-        </Link>
         <Text>
           <ProjectAuthor>@{user}</ProjectAuthor>
         </Text>
