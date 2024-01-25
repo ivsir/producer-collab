@@ -10,8 +10,6 @@ mongoose.connect(
   }
 );
 
-
-
 const dbConnection = mongoose.connection;
 
 export default dbConnection;
