@@ -41,9 +41,9 @@ const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
 
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  // });
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  });
 
   dbConnection.once("open", () => {
     app.listen(PORT, () => {
