@@ -29,9 +29,9 @@ function sideNav() {
               <NavIcon src={Profile} />
               
             </Link>
-            {/* <Link style={LinkStyle} onClick={logout} to="/">
+            <Link style={LinkStyle} onClick={logout} to="/">
               <NavLinkA>Logout</NavLinkA>
-            </Link> */}
+            </Link>
           </>
         ) : (
           <Link style={LinkStyle} to="/">
