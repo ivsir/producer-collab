@@ -14,10 +14,18 @@ import dbConnection from "./config/connection.mjs";
 import typeDefs from "./schemas/typeDefs.mjs";
 import resolvers from "./schemas/resolvers.mjs";
 import AWS from "aws-sdk";
-import path from "path";
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// import path from "path";
 import Project from "./models/Project.mjs";
 import User from "./models/User.mjs";
 // Now you can use typeDefs, schema1Resolvers, schema2TypeDefs, and resolvers in your code.
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 const app = express();
 
