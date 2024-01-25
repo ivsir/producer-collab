@@ -12,6 +12,7 @@ const BUCKET = process.env.BUCKET;
 
 export const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
+  console.log(key);
   const command = new PutObjectCommand({
     Bucket: BUCKET,
     Key: key,
@@ -51,6 +52,7 @@ export const getUserPresignedUrls = async (userId) => {
         return getSignedUrl(s3, command, { expiresIn: 900 }); // default
       })
     );
+    // console.log(presignedUrls)
     return { presignedUrls };
   } catch (error) {
     console.log(error);
