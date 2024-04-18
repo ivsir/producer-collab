@@ -14,6 +14,7 @@ import dbConnection from "./config/connection.mjs";
 import typeDefs from "./schemas/typeDefs.mjs";
 import resolvers from "./schemas/resolvers.mjs";
 import AWS from "aws-sdk";
+import path from "path";
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
