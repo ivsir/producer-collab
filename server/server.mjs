@@ -27,7 +27,6 @@ import User from "./models/User.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
 const app = express();
 
 const PORT = process.env.PORT || 3001;
@@ -69,8 +68,16 @@ app.use(express.json());
 app.use(
   cors({
     origin: "*",
+    // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
   })
 );
+// CORS configuration
+// app.use(cors({
+//   origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
+// }));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
@@ -225,5 +232,12 @@ app.get("/files", async (req, res) => {
 });
 
 
+// Handling preflight requests
+// app.options('*', cors({
+//   origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
+// }));
 
 startApolloServer(typeDefs, resolvers);
