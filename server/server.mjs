@@ -65,12 +65,17 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//     // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
+//   })
+// );
+app.use(cors({
+  origin: "*", // Allow requests from all origins (replace with your specific origins)
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
+}));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
