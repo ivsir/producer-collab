@@ -71,13 +71,6 @@ app.use(
     // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
   })
 );
-// CORS configuration
-// app.use(cors({
-//   origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
-//   credentials: true,
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
-// }));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
