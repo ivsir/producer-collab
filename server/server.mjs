@@ -37,15 +37,15 @@ const upload = multer({ storage });
 const audioStorage = multer.memoryStorage();
 const audioUpload = multer({ storage: audioStorage });
 
-const corsOptions = {
-  origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
-};
+// const corsOptions = {
+//   origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
+// };
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight requests
+// app.use(cors(corsOptions));
+// app.options('*', cors(corsOptions)); // Handle preflight requests
 
 
 const server = new ApolloServer({
@@ -76,12 +76,14 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(
-//   cors({
-//     origin: "*",
-//     // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
-//   })
-// );
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
+    // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
+  })
+);
 // CORS configuration
 // app.use(cors({
 //   origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
@@ -89,6 +91,10 @@ app.use(express.json());
 //   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 //   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
 // }));
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
