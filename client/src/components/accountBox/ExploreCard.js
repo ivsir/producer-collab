@@ -38,8 +38,6 @@ function ExploreCard(props) {
             "x-file-type": "image",
           },
         });
-        console.log(projectAuthor)
-
         const audioResponse = await axiosClient.get(URL, {
           headers: {
             "x-project-author": projectAuthor,
