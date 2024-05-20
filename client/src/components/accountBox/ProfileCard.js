@@ -1,21 +1,9 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Image,
-  Input,
-  SimpleGrid,
-  Text,
-  Flex,
-} from "@chakra-ui/react";
+
 import React, { useState } from "react";
 import {
   ProfileImageContainer,
-  ProfileContainer,
-  ProfileGrid,
   ImageGrid,
   ImageCard,
-  ImageContainer,
 } from "./Common.js";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
