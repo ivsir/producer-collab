@@ -41,7 +41,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
-  playground: false,
+  playground: process.env.NODE_ENV !== 'production',
   introspection: true, // Enable introspection
 });
 const s3 = new AWS.S3();
