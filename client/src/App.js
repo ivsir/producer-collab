@@ -26,7 +26,7 @@ import Profile from "./components/accountBox/Profile";
 //   uri: "/graphql",
 // });
 const httpLink = createHttpLink({
-  uri: "https://gentle-headland-15406-059764510da4.herokuapp.com/graphql",
+  uri: "/graphql",
 });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
