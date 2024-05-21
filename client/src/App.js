@@ -22,8 +22,11 @@ import SideNav from "./components/accountBox/SideNav";
 import { AppContainer, Container } from "./components/accountBox/Common";
 import Profile from "./components/accountBox/Profile";
 
+// const httpLink = createHttpLink({
+//   uri: "/graphql",
+// });
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: "https://gentle-headland-15406-059764510da4.herokuapp.com/graphql",
 });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
