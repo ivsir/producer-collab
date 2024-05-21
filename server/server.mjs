@@ -29,7 +29,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 const storage = memoryStorage();
 const upload = multer({ storage });
@@ -41,9 +41,6 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
-  // context: ({ req }) => ({ req }),
-  playground: process.env.NODE_ENV !== 'production',
-  introspection: true, // Enable introspection
 });
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
@@ -53,22 +50,22 @@ const startApolloServer = async () => {
   // server.applyMiddleware({ app });
   server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
-  if (process.env.NODE_ENV === "production") {
+  // if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
     app.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "../client/build/index.html"));
     });
-  }
+  // }
 
   // app.get("*", (req, res) => {
   //   res.sendFile(path.join(__dirname, "../client/build/index.html"));
   // });
 
   dbConnection.once("open", () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
+    app.listen(port, () => {
+      console.log(`API server running on port ${port}!`);
       console.log(
-        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
+        `Use GraphQL at http://localhost:${port}${server.graphqlPath}`
       );
     });
   });
