@@ -29,7 +29,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-const port = process.env.PORT || 3001;
+const port = Number.parseInt(process.env.PORT) || 3001;
 
 const storage = memoryStorage();
 const upload = multer({ storage });
@@ -50,12 +50,12 @@ const startApolloServer = async () => {
   server.applyMiddleware({ app });
   // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
-  // if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
     app.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "../client/build/index.html"));
     });
-  // }
+  }
 
   // app.get("*", (req, res) => {
   //   res.sendFile(path.join(__dirname, "../client/build/index.html"));
