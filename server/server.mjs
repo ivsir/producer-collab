@@ -40,19 +40,28 @@ const audioUpload = multer({ storage: audioStorage });
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true, // Enable introspection
   context: authMiddleware,
+  playground: false,
+  introspection: true, // Enable introspection
 });
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 // Create a new instance of an Apollo server with the GraphQL schema
-const startApolloServer = async (typeDefs, resolvers) => {
+const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app });
+  // server.applyMiddleware({ app });
+  server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  });
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/build")));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../client/build/index.html"));
+    });
+  }
+
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  // });
 
   dbConnection.once("open", () => {
     app.listen(PORT, () => {
@@ -239,4 +248,4 @@ app.get("/files", async (req, res) => {
 //   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
 // }));
 
-startApolloServer(typeDefs, resolvers);
+startApolloServer();
