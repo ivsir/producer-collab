@@ -47,8 +47,8 @@ const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bu
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-  // server.applyMiddleware({ app });
-  server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
+  server.applyMiddleware({ app });
+  // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
   // if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
