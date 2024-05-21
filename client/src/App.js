@@ -26,7 +26,7 @@ import Profile from "./components/accountBox/Profile";
 //   uri: "/graphql",
 // });
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT, 
 });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists

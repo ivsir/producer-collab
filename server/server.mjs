@@ -40,7 +40,8 @@ const audioUpload = multer({ storage: audioStorage });
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
+  // context: authMiddleware,
+  context: ({ req }) => ({ req }),
   playground: process.env.NODE_ENV !== 'production',
   introspection: true, // Enable introspection
 });
