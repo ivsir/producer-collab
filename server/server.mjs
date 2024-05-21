@@ -40,6 +40,7 @@ const audioUpload = multer({ storage: audioStorage });
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true, // Enable introspection
   context: authMiddleware,
 });
 const s3 = new AWS.S3();
