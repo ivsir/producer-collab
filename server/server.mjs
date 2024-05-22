@@ -15,13 +15,9 @@ import typeDefs from "./schemas/typeDefs.mjs";
 import resolvers from "./schemas/resolvers.mjs";
 import AWS from "aws-sdk";
 import path from "path";
-
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// import path from "path";
-import Project from "./models/Project.mjs";
-import User from "./models/User.mjs";
 // Now you can use typeDefs, schema1Resolvers, schema2TypeDefs, and resolvers in your code.
 
 const __filename = fileURLToPath(import.meta.url);
@@ -30,7 +26,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 const port = Number.parseInt(process.env.PORT) || 3001;
-console.log("port Number",port)
+console.log("port Number", port)
 
 const storage = memoryStorage();
 const upload = multer({ storage });
@@ -74,22 +70,11 @@ const startApolloServer = async () => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(
-//   cors({
-//     origin: "*",
-//     // origin: "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com",
-//   })
-// );
 app.use(cors({
   origin: "*", // Allow requests from all origins (replace with your specific origins)
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 }));
-
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../client/build")));
-// }
-
 // Define your routes for image upload and retrieval here
 app.post("/create-s3-folder", async (req, res) => {
   const { userId } = req.body;
@@ -182,7 +167,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 app.get("/images", async (req, res) => {
-  
+
   const userId = req.headers["x-user-id"];
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
@@ -201,7 +186,7 @@ app.get("/audiofiles", async (req, res) => {
 
   const { error, presignedUrls } = await getUserPresignedUrls(userId);
   if (error) return res.status(400).json({ message: error.message });
-  
+
   return res.json(presignedUrls);
 });
 
@@ -237,14 +222,5 @@ app.get("/files", async (req, res) => {
 
   return res.json(presignedUrls);
 });
-
-
-// Handling preflight requests
-// app.options('*', cors({
-//   origin: ["http://localhost:3000", "http://producer-collab.eba-gvnfyzbd.us-east-1.elasticbeanstalk.com"],
-//   credentials: true,
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"],
-// }));
 
 startApolloServer();
