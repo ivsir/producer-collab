@@ -26,7 +26,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 // const port = Number.parseInt(process.env.PORT) || 3001;
-const port = Number.parseInt(process.env.PORT) || 3001;
+const PORT= process.env.PORT || 3001;
 console.log("port Number", port)
 
 const storage = memoryStorage();
@@ -60,10 +60,10 @@ const startApolloServer = async () => {
   // });
 
   dbConnection.once("open", () => {
-    app.listen(port, () => {
-      console.log(`API server running on port ${port}!`);
+    app.listen(PORT, () => {
+      console.log(`API server running on PORT ${PORT}!`);
       console.log(
-        `Use GraphQL at http://localhost:${port}${server.graphqlPath}`
+        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
       );
     });
   });
