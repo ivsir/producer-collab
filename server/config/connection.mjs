@@ -17,6 +17,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    ssl: true
   }
 );
 
