@@ -38,7 +38,6 @@ export default function AccountBox(props) {
 
   //   this toggles
   const switchToSignup = () => {
-    console.log("running");
     // playExpandingAnimation();
     setTimeout(() => {
       setActive("signup");
