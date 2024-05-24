@@ -11,7 +11,7 @@ mongoose.set('strictQuery', false);
 // );
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+  process.env.MONGODB_URI || "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
