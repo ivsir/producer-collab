@@ -57,15 +57,17 @@ const startApolloServer = async (typeDefs, resolvers) => {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
-
-  dbConnection.once("open", () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on PORT ${PORT}!`);
-      console.log(
-        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
-      );
+  if (process.env.NODE_ENV === "production") {
+    dbConnection.once("open", () => {
+      app.listen(PORT, () => {
+        console.log(`API server running on PORT ${PORT}!`);
+        console.log(
+          `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
+        );
+      });
     });
-  });
+  }
+
 };
 
 app.use(express.urlencoded({ extended: false }));
