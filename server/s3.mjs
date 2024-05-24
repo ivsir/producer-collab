@@ -12,6 +12,7 @@ const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
 console.log(BUCKET)
 export const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
+  console.log(key);
   
   const command = new PutObjectCommand({
     Bucket: BUCKET,

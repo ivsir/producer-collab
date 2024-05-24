@@ -26,8 +26,8 @@ const __dirname = dirname(__filename);
 const app = express();
 
 // const port = Number.parseInt(process.env.PORT) || 3001;
-const PORT = process.env.PORT || 3001;
-console.log("port Number", PORT);
+const PORT= process.env.PORT || 3001;
+console.log("port Number", PORT)
 
 const storage = memoryStorage();
 const upload = multer({ storage });
@@ -44,22 +44,6 @@ const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 // Create a new instance of an Apollo server with the GraphQL schema
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(
-  cors({
-    origin: "*", // Allow requests from all origins (replace with your specific origins)
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "x-user-id",
-      "x-file-type",
-      "x-project-author",
-    ], // Allow specified headers
-  })
-);
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 
@@ -70,9 +54,16 @@ const startApolloServer = async (typeDefs, resolvers) => {
   server.applyMiddleware({ app });
   // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  });
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/build")));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../client/build/index.html"));
+    });
+  }
+
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  // });
 
   dbConnection.once("open", () => {
     app.listen(PORT, () => {
@@ -232,4 +223,4 @@ app.get("/files", async (req, res) => {
   return res.json(presignedUrls);
 });
 
-startApolloServer(typeDefs, resolvers);
+startApolloServer();
