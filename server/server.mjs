@@ -70,11 +70,11 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-  origin: "*", // Allow requests from all origins (replace with your specific origins)
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
-}));
+// app.use(cors({
+//   origin: "*", // Allow requests from all origins (replace with your specific origins)
+//   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
+//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
+// }));
 // Define your routes for image upload and retrieval here
 app.post("/create-s3-folder", async (req, res) => {
   const { userId } = req.body;
