@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid";
 
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET;
-
+console.log(BUCKET)
 export const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
   
