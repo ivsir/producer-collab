@@ -57,6 +57,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
+  
   if (process.env.NODE_ENV === "production") {
     dbConnection.once("open", () => {
       app.listen(PORT, () => {
