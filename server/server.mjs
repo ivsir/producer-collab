@@ -58,7 +58,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
   
-  if (process.env.NODE_ENV === "production") {
+  // if (process.env.NODE_ENV === "production") {
     dbConnection.once("open", () => {
       app.listen(PORT, () => {
         console.log(`API server running on PORT ${PORT}!`);
@@ -67,7 +67,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
         );
       });
     });
-  }
+  // }
 
 };
 
