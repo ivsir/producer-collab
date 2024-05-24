@@ -24,7 +24,7 @@ import {
 
 const baseURL = process.env.REACT_APP_API_URL;
 
-
+console.log(baseURL)
 export function SignupForm() {
   const [formState, setFormState] = useState({
     username: "",
