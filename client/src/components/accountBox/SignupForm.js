@@ -22,7 +22,7 @@ import {
   SubmitButton,
 } from "../accountBox/Common";
 
-const baseURL = process.env.REACT_APP_API_URL || "ec2-54-153-127-238.us-west-1.compute.amazonaws.com";
+const baseURL = process.env.REACT_APP_API_URL || "https://main.dan6kz7trfabu.amplifyapp.com/";
 
 console.log(baseURL)
 export function SignupForm() {
