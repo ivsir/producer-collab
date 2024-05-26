@@ -1,6 +1,0 @@
-BUCKET="react-image-upload-ivsir"
-AWS_PROFILE=ivsir-general
-AWS_REGION=us-west-1
-# MONGODB_URI="mongodb://127.0.0.1:27017/prodcollabDB"
-PORT=3001
-MONGODB_URI="mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
