@@ -23,7 +23,7 @@ import { AppContainer, Container } from "./components/accountBox/Common";
 import Profile from "./components/accountBox/Profile";
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: "https://ec2-54-153-127-238.us-west-1.compute.amazonaws.com/graphql",
 });
 // const httpLink = createHttpLink({
 //   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT, 
