@@ -26,7 +26,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 // const port = Number.parseInt(process.env.PORT) || 3001;
-const PORT= process.env.PORT || 3001;
+const PORT= process.env.PORT || "https://54.153.127.238";
 console.log("port Number", PORT)
 
 const storage = memoryStorage();
