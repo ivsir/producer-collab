@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid";
 
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
-console.log(BUCKET)
+console.log('Bucket Name:', process.env.BUCKET);
 export const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
   console.log(key);
