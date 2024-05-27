@@ -22,7 +22,7 @@ import {
   SubmitButton,
 } from "../accountBox/Common";
 
-const baseURL = process.env.REACT_APP_API_URL ;
+const baseURL = process.env.REACT_APP_API_URL
 
 console.log(baseURL)
 export function SignupForm() {

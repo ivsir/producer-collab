@@ -17,7 +17,6 @@ import AWS from "aws-sdk";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-
 // Now you can use typeDefs, schema1Resolvers, schema2TypeDefs, and resolvers in your code.
 
 const __filename = fileURLToPath(import.meta.url);
