@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-producercollab-dev-b95fe-authRole",
+      "UnauthRoleArn": "arn:aws:iam::614288690243:role/amplify-producercollab-dev-b95fe-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::614288690243:role/amplify-producercollab-dev-b95fe-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-producercollab-dev-b95fe-deployment",
+      "UnauthRoleName": "amplify-producercollab-dev-b95fe-unauthRole",
+      "StackName": "amplify-producercollab-dev-b95fe",
+      "StackId": "arn:aws:cloudformation:us-west-1:614288690243:stack/amplify-producercollab-dev-b95fe/06fdd9e0-1a45-11ef-b380-06a29cc4f891",
+      "AmplifyAppId": "d2hw52uululrvr"
+    }
+  }
+}
