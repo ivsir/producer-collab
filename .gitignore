@@ -24,13 +24,11 @@ yarn-error.log*
 
 package-lock.json
 
-# Ignore environment variables
-.env
-server/.env
-client/.env
 
-# Ignore build folder inside client
-client/build/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend

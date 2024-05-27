@@ -8,8 +8,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { v4 as uuid } from "uuid";
 
 const s3 = new S3Client();
-const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
-console.log('Bucket Name:', process.env.BUCKET);
+const BUCKET = process.env.BUCKET;
+
 export const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
   console.log(key);

@@ -24,16 +24,11 @@ import Profile from "./components/accountBox/Profile";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
-  // uri: "http://ec2-54-153-127-238.us-west-1.compute.amazonaws.com:3001/graphql",
 });
-// const httpLink = createHttpLink({
-//   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT, 
-// });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
-
   return {
     headers: {
       ...headers,

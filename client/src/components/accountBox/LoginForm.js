@@ -40,8 +40,9 @@ export function LoginForm(props) {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log(data);
+
       AuthService.login(data.login.token);
+      console.log("token", data.login.token);
     } catch (e) {
       console.error(e);
     }
