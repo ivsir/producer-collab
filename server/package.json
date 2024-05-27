@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.mjs",
+  "proxy":"http://localhost:3001",
   "scripts": {
     "start": "node server.mjs",
     "watch": "nodemon",
