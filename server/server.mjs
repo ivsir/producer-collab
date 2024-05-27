@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === "production") {
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   // server.applyMiddleware({ app });
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app });
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
