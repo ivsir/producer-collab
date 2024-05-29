@@ -16,8 +16,7 @@ mongoose.connect(
   process.env.MONGODB_URI || uri,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    ssl: true
+    useUnifiedTopology: true
   }
 );
 
