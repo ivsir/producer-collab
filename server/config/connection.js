@@ -1,17 +1,42 @@
+// const mongoose = require('mongoose');
+
+// const uri = "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab";
+
+// mongoose.set('strictQuery', false);
+
+// mongoose.connect(
+//   process.env.MONGODB_URI || uri,
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   }
+// );
+
+// const dbConnection = mongoose.connection;
+
+// module.exports = dbConnection;
+
 const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab";
+let cachedDbConnection = null;
 
-mongoose.set('strictQuery', false);
+async function connectToDatabase() {
+  if (cachedDbConnection) {
+    return cachedDbConnection;
+  }
 
-mongoose.connect(
-  process.env.MONGODB_URI || uri,
-  {
+  const uri = "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab";
+
+  mongoose.set('strictQuery', false);
+
+  const dbConnection = await mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  }
-);
+  });
 
-const dbConnection = mongoose.connection;
+  cachedDbConnection = dbConnection;
 
-module.exports = dbConnection;
+  return dbConnection;
+}
+
+module.exports = connectToDatabase;
