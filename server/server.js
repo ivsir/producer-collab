@@ -15,8 +15,8 @@ const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
 const AWS = require('aws-sdk');
 const path = require('path');
-const { fileURLToPath } = require('url');
-const { dirname } = require('path');
+// const { fileURLToPath } = require('url');
+// const { dirname } = require('path');
 
 // const __filename = fileURLToPath(__filename);
 // const __dirname = dirname(__filename);
