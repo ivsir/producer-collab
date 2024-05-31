@@ -45,15 +45,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// Function to clear the cache
-const clearCache = () => {
-  client.cache.reset(); // Reset the cache
-};
-
-// Call the function to clear the cache whenever needed
-clearCache();
-console.log(client.link)
-
 function App() {
   return (
     <ApolloProvider client={client}>
