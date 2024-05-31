@@ -63,4 +63,4 @@ const formatTimestamp = (
   return formattedTimeStamp;
 };
 
-export { formatTimestamp };
+module.exports = { formatTimestamp };
