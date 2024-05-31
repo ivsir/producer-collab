@@ -36,6 +36,10 @@ const server = new ApolloServer({
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
+
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
