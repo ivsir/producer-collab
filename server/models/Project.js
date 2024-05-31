@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { formatTimestamp } from "../utils/dateFormat.mjs";
+const { Schema, model } = require("mongoose");
+const { formatTimestamp } = require("../utils/dateFormat");
 
 const projectSchema = new Schema({
   projectTitle: {
@@ -70,6 +70,4 @@ const projectSchema = new Schema({
 
 const Project = model("Project", projectSchema);
 
-export default Project;
-
-// module.exports = Project;
+module.exports = Project;
