@@ -23,8 +23,8 @@ import { AppContainer, Container } from "./components/accountBox/Common";
 import Profile from "./components/accountBox/Profile";
 
 const httpLink = createHttpLink({
-  // uri: "/graphql",
-  uri: "http://ec2-54-153-127-238.us-west-1.compute.amazonaws.com:3001/graphql",
+  uri: "/graphql",
+  // uri: "http://ec2-54-153-127-238.us-west-1.compute.amazonaws.com:3001/graphql",
 });
 // const httpLink = createHttpLink({
 //   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT, 
@@ -46,6 +46,15 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+// Function to clear the cache
+const clearCache = () => {
+  client.cache.reset(); // Reset the cache
+};
+
+// Call the function to clear the cache whenever needed
+clearCache();
+console.log(client.link)
 
 function App() {
   return (
