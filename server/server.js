@@ -18,8 +18,8 @@ const AWS = require('aws-sdk');
 const path = require('path');
 const connectToDatabase = require('./config/connection');
 const app = express();
-const port = process.env.PORT || 3001;
-console.log("port Number", port);
+const PORT = process.env.PORT || 3001;
+console.log("port Number", PORT);
 
 const storage = memoryStorage();
 const upload = multer({ storage });
@@ -56,11 +56,12 @@ const startApolloServer = async () => {
   //   console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
   // });
 
-  dbConnection.once('open', () => {
-    // Start the server after the database connection is established
-    app.listen(port, () => {
-      console.log(`API server running on port ${port}!`);
-      console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+  dbConnection.once("open", () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on PORT ${PORT}!`);
+      console.log(
+        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
+      );
     });
   });
 };
