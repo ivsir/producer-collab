@@ -7,7 +7,7 @@ const {
   getAllUserImageKeysAndPresignedUrls,
   getUserPresignedUrls,
   uploadToS3,
-} = require('./s3');
+} = require('./utils/s3');
 const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
 const dbConnection = require('./config/connection');
@@ -15,12 +15,7 @@ const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
 const AWS = require('aws-sdk');
 const path = require('path');
-// const { fileURLToPath } = require('url');
-// const { dirname } = require('path');
-
-// const __filename = fileURLToPath(__filename);
-// const __dirname = dirname(__filename);
-
+const connectToDatabase = require('./config/connection');
 const app = express();
 const port = Number.parseInt(process.env.PORT) || 3001;
 console.log("port Number", port);
@@ -51,11 +46,12 @@ const startApolloServer = async () => {
     });
   }
 
-  dbConnection.once("open", () => {
-    app.listen(port, () => {
-      console.log(`API server running on port ${port}!`);
-      console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
-    });
+  await connectToDatabase()
+
+  // Start the server after the database connection is established
+  app.listen(port, () => {
+    console.log(`API server running on port ${port}!`);
+    console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
   });
 };
 
