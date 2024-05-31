@@ -13,11 +13,12 @@ const { authMiddleware } = require('./utils/auth');
 const dbConnection = require('./config/connection');
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
+const serverless = require('serverless-http')
 const AWS = require('aws-sdk');
 const path = require('path');
 const connectToDatabase = require('./config/connection');
 const app = express();
-const port = Number.parseInt(process.env.PORT) || 3001;
+const port = process.env.PORT || 3001;
 console.log("port Number", port);
 
 const storage = memoryStorage();
@@ -197,3 +198,6 @@ app.get("/files", async (req, res) => {
 });
 
 startApolloServer();
+
+// Export the Express app wrapped with serverless
+// module.exports.handler = serverless(app);
