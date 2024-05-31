@@ -1,0 +1,316 @@
+{
+  "/Users/risvitareq/code/producer-collab": {
+    "versionSfCore": null,
+    "versionFramework": "4.0.33",
+    "isWithinCompose": false,
+    "composeOrgName": null,
+    "servicePath": "/Users/risvitareq/code/producer-collab",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "producer-collab-app",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs14.x",
+        "stage": "dev",
+        "region": "us-east-1",
+        "versionFunctions": true,
+        "compiledCloudFormationTemplate": {
+          "AWSTemplateFormatVersion": "2010-09-09",
+          "Description": "The AWS CloudFormation template for this Serverless application",
+          "Resources": {
+            "ServerlessDeploymentBucket": {
+              "Type": "AWS::S3::Bucket",
+              "Properties": {
+                "BucketEncryption": {
+                  "ServerSideEncryptionConfiguration": [
+                    {
+                      "ServerSideEncryptionByDefault": {
+                        "SSEAlgorithm": "AES256"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "ServerlessDeploymentBucketPolicy": {
+              "Type": "AWS::S3::BucketPolicy",
+              "Properties": {
+                "Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "PolicyDocument": {
+                  "Statement": [
+                    {
+                      "Action": "s3:*",
+                      "Effect": "Deny",
+                      "Principal": "*",
+                      "Resource": [
+                        {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":s3:::",
+                              {
+                                "Ref": "ServerlessDeploymentBucket"
+                              },
+                              "/*"
+                            ]
+                          ]
+                        },
+                        {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":s3:::",
+                              {
+                                "Ref": "ServerlessDeploymentBucket"
+                              }
+                            ]
+                          ]
+                        }
+                      ],
+                      "Condition": {
+                        "Bool": {
+                          "aws:SecureTransport": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "AppLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/producer-collab-app-dev-app"
+              }
+            },
+            "IamRoleLambdaExecution": {
+              "Type": "AWS::IAM::Role",
+              "Properties": {
+                "AssumeRolePolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Principal": {
+                        "Service": [
+                          "lambda.amazonaws.com"
+                        ]
+                      },
+                      "Action": [
+                        "sts:AssumeRole"
+                      ]
+                    }
+                  ]
+                },
+                "Policies": [
+                  {
+                    "PolicyName": {
+                      "Fn::Join": [
+                        "-",
+                        [
+                          "producer-collab-app",
+                          "dev",
+                          "lambda"
+                        ]
+                      ]
+                    },
+                    "PolicyDocument": {
+                      "Version": "2012-10-17",
+                      "Statement": [
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "logs:CreateLogStream",
+                            "logs:CreateLogGroup",
+                            "logs:TagResource"
+                          ],
+                          "Resource": [
+                            {
+                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/producer-collab-app-dev*:*"
+                            }
+                          ]
+                        },
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "logs:PutLogEvents"
+                          ],
+                          "Resource": [
+                            {
+                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/producer-collab-app-dev*:*:*"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "Path": "/",
+                "RoleName": {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      "producer-collab-app",
+                      "dev",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      "lambdaRole"
+                    ]
+                  ]
+                }
+              }
+            }
+          },
+          "Outputs": {
+            "ServerlessDeploymentBucketName": {
+              "Value": {
+                "Ref": "ServerlessDeploymentBucket"
+              }
+            }
+          }
+        },
+        "coreCloudFormationTemplate": {
+          "AWSTemplateFormatVersion": "2010-09-09",
+          "Description": "The AWS CloudFormation template for this Serverless application",
+          "Resources": {
+            "ServerlessDeploymentBucket": {
+              "Type": "AWS::S3::Bucket",
+              "Properties": {
+                "BucketEncryption": {
+                  "ServerSideEncryptionConfiguration": [
+                    {
+                      "ServerSideEncryptionByDefault": {
+                        "SSEAlgorithm": "AES256"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "ServerlessDeploymentBucketPolicy": {
+              "Type": "AWS::S3::BucketPolicy",
+              "Properties": {
+                "Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "PolicyDocument": {
+                  "Statement": [
+                    {
+                      "Action": "s3:*",
+                      "Effect": "Deny",
+                      "Principal": "*",
+                      "Resource": [
+                        {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":s3:::",
+                              {
+                                "Ref": "ServerlessDeploymentBucket"
+                              },
+                              "/*"
+                            ]
+                          ]
+                        },
+                        {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":s3:::",
+                              {
+                                "Ref": "ServerlessDeploymentBucket"
+                              }
+                            ]
+                          ]
+                        }
+                      ],
+                      "Condition": {
+                        "Bool": {
+                          "aws:SecureTransport": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "Outputs": {
+            "ServerlessDeploymentBucketName": {
+              "Value": {
+                "Ref": "ServerlessDeploymentBucket"
+              }
+            }
+          }
+        }
+      },
+      "functions": {
+        "app": {
+          "handler": "server/app.handler",
+          "events": [
+            {
+              "httpApi": "*"
+            }
+          ],
+          "name": "producer-collab-app-dev-app",
+          "package": {}
+        }
+      }
+    },
+    "serviceRawFile": "service: producer-collab-app\n\nprovider:\n  name: aws\n  runtime: nodejs14.x\n  stage: dev\n  region: us-east-1\n\nfunctions:\n  app:\n    handler: server/app.handler # Specify the handler for your Lambda function\n    events:\n      - httpApi: '*' # Add HTTP events for your API endpoints\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {},
+    "error": {
+      "message": "Cannot read file client/node_modules/@apollo/client/testing/core/mocking/mockQueryManager.d.ts due to: EMFILE: too many open files, open '/Users/risvitareq/code/producer-collab/client/node_modules/@apollo/client/testing/core/mocking/mockQueryManager.d.ts'",
+      "stack": "ServerlessError3: Cannot read file client/node_modules/@apollo/client/testing/core/mocking/mockQueryManager.d.ts due to: EMFILE: too many open files, open '/Users/risvitareq/code/producer-collab/client/node_modules/@apollo/client/testing/core/mocking/mockQueryManager.d.ts'\n    at file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:817:26576\n    at tryCatcher (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:443:81525)\n    at Promise2._settlePromiseFromHandler (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:621:10135)\n    at Promise2._settlePromise (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:621:11454)\n    at Promise2._settlePromise0 (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:621:12511)\n    at Promise2._settlePromises (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:621:14107)\n    at _drainQueueStep (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:450:583)\n    at _drainQueue (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:450:479)\n    at Async._drainQueues (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:450:716)\n    at Async.drainQueues [as _onImmediate] (file:///Users/risvitareq/.serverless/releases/4.0.33/package/dist/sf-core.js:446:3279)\n    at process.processImmediate (node:internal/timers:478:21)",
+      "code": "CANNOT_READ_FILE"
+    },
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "031ce66e-846a-4177-9803-7027e5d26c87",
+    "orgName": "producercollab",
+    "userId": "Y2DkMTBGVXz0HjQ6bv",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "producercollab",
+    "subscription": null,
+    "userEmail": "ivsirqerat@gmail.com",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "614288690243",
+    "versionSf": "4.0.33",
+    "serviceProviderAwsCfStackName": "producer-collab-app-dev",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}

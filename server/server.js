@@ -47,12 +47,21 @@ const startApolloServer = async () => {
     });
   }
 
-  await connectToDatabase()
+  // await connectToDatabase()
 
   // Start the server after the database connection is established
-  app.listen(port, () => {
-    console.log(`API server running on port ${port}!`);
-    console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+
+  // app.listen(port, () => {
+  //   console.log(`API server running on port ${port}!`);
+  //   console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+  // });
+
+  dbConnection.once('open', () => {
+    // Start the server after the database connection is established
+    app.listen(port, () => {
+      console.log(`API server running on port ${port}!`);
+      console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+    });
   });
 };
 
