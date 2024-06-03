@@ -1,27 +1,27 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const multer = require('multer');
-const { memoryStorage } = multer;
-const {
-  getAllUserImageKeysAndPresignedUrls,
-  getUserPresignedUrls,
-  uploadToS3,
-} = require('./utils/s3');
-const { ApolloServer } = require('apollo-server-express');
-const { authMiddleware } = require('./utils/auth');
-const dbConnection = require('./config/connection');
-const typeDefs = require('./schemas/typeDefs');
-const resolvers = require('./schemas/resolvers');
-const serverless = require('serverless-http')
-const AWS = require('aws-sdk');
-const path = require('path');
-const connectToDatabase = require('./config/connection');
-const app = express();
-const PORT = process.env.PORT || 4000;
-console.log("port Number", PORT);
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const multer = require("multer");
+const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3 } = require("./s3.js");
+const { ApolloServer } = require("apollo-server-express");
+// const { ApolloServer } = require("@apollo/server");
+const { authMiddleware } = require("./utils/auth.js");
+const dbConnection = require("./config/connection.js");
+const typeDefs = require("./schemas/typeDefs.js");
+const resolvers = require("./schemas/resolvers.js");
+const AWS = require("aws-sdk");
+const path = require("path");
+const connectToDatabase = require("./config/connection.js");
 
-const storage = memoryStorage();
+// const __filename = __filename;
+// const __dirname = path.dirname(__filename);
+
+const app = express();
+
+const port = Number.parseInt(process.env.PORT) || 3001;
+console.log("port Number", port);
+
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const audioStorage = multer.memoryStorage();
@@ -36,14 +36,11 @@ const server = new ApolloServer({
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-}
-
+// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
+  // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
@@ -52,15 +49,19 @@ const startApolloServer = async () => {
     });
   }
 
-  await connectToDatabase()
+  // await connectToDatabase()
 
-  // Start the server after the database connection is established
+  // app.listen(PORT, () => {
+  //   console.log(`API server running on port ${PORT}!`);
+  //   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  // });
 
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  dbConnection.once("open", () => {
+    app.listen(port, () => {
+      console.log(`API server running on port ${port}!`);
+      console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+    });
   });
-
 };
 
 app.use(express.urlencoded({ extended: false }));
@@ -76,12 +77,19 @@ app.post("/create-s3-folder", async (req, res) => {
   const { userId } = req.body;
 
   try {
+    // Initialize AWS S3
+
+    // Specify the existing S3 bucket name where you want to create the folder
+
+    // Specify the folder key (object key ending with a trailing slash)
     const folderKey = `${userId}/`;
-    await s3.putObject({
-      Bucket: bucketName,
-      Key: folderKey,
-      Body: "", // Empty body to represent a folder
-    }).promise();
+    await s3
+      .putObject({
+        Bucket: bucketName,
+        Key: folderKey,
+        Body: "", // Empty body to represent a folder
+      })
+      .promise();
 
     res.status(200).json({ message: "S3 folder created successfully" });
   } catch (error) {
@@ -91,12 +99,14 @@ app.post("/create-s3-folder", async (req, res) => {
 });
 
 app.get("/user-folders", async (req, res) => {
+  // Use the listObjectsV2 method to get a list of objects in the bucket
   s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: "Failed to retrieve objects from S3" });
     }
 
+    // The list of objects is in data.Contents
     const objects = data.Contents.map((object) => ({
       key: object.Key,
       lastModified: object.LastModified,
@@ -109,6 +119,7 @@ app.get("/user-folders", async (req, res) => {
 
 app.post("/images", upload.single("image"), async (req, res) => {
   const { file } = req;
+
   const userId = req.headers["x-user-id"];
 
   if (!file || !userId) return res.status(400).json({ message: "Bad request" });
@@ -122,6 +133,7 @@ app.post("/images", upload.single("image"), async (req, res) => {
 
 app.post("/audiofiles", audioUpload.single("audio"), async (req, res) => {
   const { file } = req;
+
   const userId = req.headers["x-user-id"];
 
   if (!file || !userId) return res.status(400).json({ message: "Bad request" });
@@ -161,6 +173,7 @@ app.get("/images", async (req, res) => {
 });
 
 app.get("/audiofiles", async (req, res) => {
+  // const userId = req.headers["x-user-id"];
   const userId = req.headers["x-project-author"];
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
@@ -192,9 +205,9 @@ app.get("/files", async (req, res) => {
 
   let presignedUrls;
   if (fileType === "image") {
-    presignedUrls = await getUserPresignedUrls(userId, "image");
+    presignedUrls = await getUserPresignedUrls(userId, "image"); // Pass "image" as the file type
   } else if (fileType === "audio") {
-    presignedUrls = await getUserPresignedUrls(userId, "audio");
+    presignedUrls = await getUserPresignedUrls(userId, "audio"); // Pass "audio" as the file type
   }
 
   if (presignedUrls.error) {
@@ -205,6 +218,3 @@ app.get("/files", async (req, res) => {
 });
 
 startApolloServer();
-
-// Export the Express app wrapped with serverless
-// module.exports.handler = serverless(app);
