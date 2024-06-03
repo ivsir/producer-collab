@@ -25,7 +25,6 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("projects");
       }
-      
       throw new AuthenticationError("You need to be logged in!");
     },
   },
@@ -56,7 +55,6 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log(token)
       return { token, user };
     },
     removeUser: async (parent, { email, password }) => {
