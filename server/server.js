@@ -18,7 +18,7 @@ const AWS = require('aws-sdk');
 const path = require('path');
 const connectToDatabase = require('./config/connection');
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
 console.log("port Number", PORT);
 
 const storage = memoryStorage();
@@ -35,6 +35,7 @@ const server = new ApolloServer({
 
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
@@ -60,14 +61,6 @@ const startApolloServer = async () => {
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 
-  // dbConnection.once("open", () => {
-  //   app.listen(PORT, () => {
-  //     console.log(`API server running on PORT ${PORT}!`);
-  //     console.log(
-  //       `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
-  //     );
-  //   });
-  // });
 };
 
 app.use(express.urlencoded({ extended: false }));
