@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { formatTimestamp } = require("../utils/dateFormat");
-
+const { formatTimestamp } = require("../utils/dateFormat.js");
 
 const projectSchema = new Schema({
   projectTitle: {
