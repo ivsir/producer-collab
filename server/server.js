@@ -11,6 +11,7 @@ const typeDefs = require("./schemas/typeDefs.js");
 const resolvers = require("./schemas/resolvers.js");
 const AWS = require("aws-sdk");
 const path = require("path");
+const connectToDatabase = require("./config/connection.js");
 
 // const __filename = __filename;
 // const __dirname = path.dirname(__filename);
@@ -47,6 +48,13 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, "../client/build/index.html"));
     });
   }
+
+  // await connectToDatabase()
+
+  // app.listen(PORT, () => {
+  //   console.log(`API server running on port ${PORT}!`);
+  //   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  // });
 
   dbConnection.once("open", () => {
     app.listen(port, () => {
