@@ -1,9 +1,8 @@
-import { AuthenticationError } from "apollo-server-express";
-import { User, Project } from "../models/index.mjs";
-import { signToken } from "../utils/auth.mjs";
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Project } = require("../models/index.js");
+const { signToken } = require("../utils/auth.js");
 
 const resolvers = {
-  // fetches the following data to be loaded onto the page
   Query: {
     users: async () => {
       return User.find().populate("projects");
@@ -11,19 +10,16 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate({
         path: "projects",
-        options: { sort: { createdAt: -1 } }, // Sorting projects within the populate
+        options: { sort: { createdAt: -1 } },
       });
     },
-
     projects: async (parent, { username }) => {
       const params = username ? { username } : {};
-      // return Project.find(params).sort({ createdAt: 1 });
       return Project.find(params).sort({ createdAt: -1 });
     },
     project: async (parent, { projectId }) => {
       console.log(projectId);
       return Project.findOne({ _id: projectId }).sort({ createdAt: 1 });
-      // return Project.findOne({ _id: projectId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -32,8 +28,6 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
   },
-
-  // alters and updates the data sets from our schemas
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({
@@ -172,4 +166,4 @@ const resolvers = {
   },
 };
 
-export default resolvers;
+module.exports = resolvers;

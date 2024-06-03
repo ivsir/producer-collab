@@ -1,19 +1,20 @@
-import {
+const {
   GetObjectCommand,
   ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
-} from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { v4 as uuid } from "uuid";
+} = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const { v4: uuid } = require("uuid");
 
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
 console.log('Bucket Name:', process.env.BUCKET);
-export const uploadToS3 = async ({ file, userId }) => {
+
+const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
   console.log(key);
-  
+
   const command = new PutObjectCommand({
     Bucket: BUCKET,
     Key: key,
@@ -25,12 +26,12 @@ export const uploadToS3 = async ({ file, userId }) => {
     await s3.send(command);
     return { key };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { error };
   }
 };
 
-export const getImageKeysByUser = async (userId) => {
+const getImageKeysByUser = async (userId) => {
   const command = new ListObjectsV2Command({
     Bucket: BUCKET,
     Prefix: userId,
@@ -43,25 +44,24 @@ export const getImageKeysByUser = async (userId) => {
   ).map((image) => image.Key);
 };
 
-export const getUserPresignedUrls = async (userId) => {
+const getUserPresignedUrls = async (userId) => {
   try {
     const imageKeys = await getImageKeysByUser(userId);
 
     const presignedUrls = await Promise.all(
       imageKeys.map((key) => {
         const command = new GetObjectCommand({ Bucket: BUCKET, Key: key });
-        return getSignedUrl(s3, command, { expiresIn: 900 }); // default
+        return getSignedUrl(s3, command, { expiresIn: 900 }); // default 15 minutes
       })
     );
-    // console.log(presignedUrls)
     return { presignedUrls };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { error };
   }
 };
 
-export const getPresignedUrls = async (userId) => {
+const getPresignedUrls = async (userId) => {
   try {
     const imageKeys = await getImageKeysByUser(userId);
 
@@ -73,12 +73,12 @@ export const getPresignedUrls = async (userId) => {
     );
     return { signedUrls };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { error };
   }
 };
 
-export const getAllUserIds = async () => {
+const getAllUserIds = async () => {
   const command = new ListObjectsV2Command({
     Bucket: BUCKET,
   });
@@ -93,7 +93,7 @@ export const getAllUserIds = async () => {
   return userIds;
 };
 
-export const getImageKeysFromFolders = async (folderNames) => {
+const getImageKeysFromFolders = async (folderNames) => {
   const allImageKeys = [];
 
   for (const folderName of folderNames) {
@@ -115,7 +115,7 @@ export const getImageKeysFromFolders = async (folderNames) => {
   return allImageKeys;
 };
 
-export const getAllUserImageKeysAndPresignedUrls = async () => {
+const getAllUserImageKeysAndPresignedUrls = async () => {
   try {
     const allUserIds = await getAllUserIds();
     const allImageKeys = await getImageKeysFromFolders(allUserIds);
@@ -129,8 +129,17 @@ export const getAllUserImageKeysAndPresignedUrls = async () => {
 
     return { imageUrls: presignedUrls };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { error };
   }
 };
 
+module.exports = {
+  uploadToS3,
+  getImageKeysByUser,
+  getUserPresignedUrls,
+  getPresignedUrls,
+  getAllUserIds,
+  getImageKeysFromFolders,
+  getAllUserImageKeysAndPresignedUrls,
+};
