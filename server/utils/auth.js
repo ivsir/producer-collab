@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
 const secret = 'mysecretssshhhhhhh';
 const expiration = '2h';
 
-export function authMiddleware({ req }) {
+function authMiddleware({ req }) {
   let token = req.body.token || req.query.token || req.headers.authorization;
 
   if (req.headers.authorization) {
@@ -24,7 +24,9 @@ export function authMiddleware({ req }) {
   return req;
 }
 
-export function signToken({ email, username, _id }) {
+function signToken({ email, username, _id }) {
   const payload = { email, username, _id };
   return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 }
+
+module.exports = {authMiddleware, signToken}

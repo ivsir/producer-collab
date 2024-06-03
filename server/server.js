@@ -1,34 +1,26 @@
-import "dotenv/config";
-import express, { json } from "express";
-import cors from "cors";
-import multer, { memoryStorage } from "multer";
-import {
-  getAllUserImageKeysAndPresignedUrls,
-  getUserPresignedUrls,
-  uploadToS3,
-} from "./s3.mjs";
-import { ApolloServer } from "apollo-server-express";
-// import { ApolloServer } from "@apollo/server";
-import { authMiddleware } from "./utils/auth.mjs";
-import dbConnection from "./config/connection.mjs";
-import typeDefs from "./schemas/typeDefs.mjs";
-import resolvers from "./schemas/resolvers.mjs";
-import AWS from "aws-sdk";
-import path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const multer = require("multer");
+const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3 } = require("./s3.js");
+const { ApolloServer } = require("apollo-server-express");
+// const { ApolloServer } = require("@apollo/server");
+const { authMiddleware } = require("./utils/auth.js");
+const dbConnection = require("./config/connection.js");
+const typeDefs = require("./schemas/typeDefs.js");
+const resolvers = require("./schemas/resolvers.js");
+const AWS = require("aws-sdk");
+const path = require("path");
 
-// Now you can use typeDefs, schema1Resolvers, schema2TypeDefs, and resolvers in your code.
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = __filename;
+// const __dirname = path.dirname(__filename);
 
 const app = express();
 
 const port = Number.parseInt(process.env.PORT) || 3001;
-console.log("port Number", port)
+console.log("port Number", port);
 
-const storage = memoryStorage();
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const audioStorage = multer.memoryStorage();
@@ -39,8 +31,10 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
 });
+
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
+
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
@@ -54,16 +48,10 @@ const startApolloServer = async () => {
     });
   }
 
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  // });
-
   dbConnection.once("open", () => {
     app.listen(port, () => {
       console.log(`API server running on port ${port}!`);
-      console.log(
-        `Use GraphQL at http://localhost:${port}${server.graphqlPath}`
-      );
+      console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
     });
   });
 };
@@ -75,6 +63,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 }));
+
 // Define your routes for image upload and retrieval here
 app.post("/create-s3-folder", async (req, res) => {
   const { userId } = req.body;
@@ -106,9 +95,7 @@ app.get("/user-folders", async (req, res) => {
   s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
     if (err) {
       console.error(err);
-      return res
-        .status(500)
-        .json({ error: "Failed to retrieve objects from S3" });
+      return res.status(500).json({ error: "Failed to retrieve objects from S3" });
     }
 
     // The list of objects is in data.Contents
@@ -167,7 +154,6 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 app.get("/images", async (req, res) => {
-
   const userId = req.headers["x-user-id"];
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
@@ -180,7 +166,7 @@ app.get("/images", async (req, res) => {
 
 app.get("/audiofiles", async (req, res) => {
   // const userId = req.headers["x-user-id"];
-  const userId = req.headers["x-project-author"]
+  const userId = req.headers["x-project-author"];
 
   if (!userId) return res.status(400).json({ message: "Bad request" });
 
