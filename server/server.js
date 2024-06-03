@@ -17,11 +17,6 @@ const connectToDatabase = require("./config/connection.js");
 // const __dirname = path.dirname(__filename);
 
 const app = express();
-<<<<<<< HEAD
-const port = process.env.PORT || 4000;
-console.log("port Number", port);
-=======
->>>>>>> 665cb0f8a71929d5ff25b7b80ffc5a0c26fbe28e
 
 const port = Number.parseInt(process.env.PORT) || 3001;
 console.log("port Number", port);
@@ -56,20 +51,11 @@ const startApolloServer = async () => {
 
   // await connectToDatabase()
 
-<<<<<<< HEAD
-  // // Start the server after the database connection is established
-
-  // app.listen(PORT, () => {
-  //   console.log(`API server running on port ${PORT}!`);
-  //   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-  // });
-=======
   // app.listen(PORT, () => {
   //   console.log(`API server running on port ${PORT}!`);
   //   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   // });
 
->>>>>>> 665cb0f8a71929d5ff25b7b80ffc5a0c26fbe28e
   dbConnection.once("open", () => {
     app.listen(port, () => {
       console.log(`API server running on port ${port}!`);

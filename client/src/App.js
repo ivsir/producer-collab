@@ -22,14 +22,13 @@ import SideNav from "./components/accountBox/SideNav";
 import { AppContainer, Container } from "./components/accountBox/Common";
 import Profile from "./components/accountBox/Profile";
 
-// const httpLink = createHttpLink({
-//   uri: "http://ec2-54-153-127-238.us-west-1.compute.amazonaws.com:3001/graphql",
-// });
-
 const httpLink = createHttpLink({
-  uri: "/graphql"
+  uri: "/graphql",
+  // uri: "http://ec2-54-153-127-238.us-west-1.compute.amazonaws.com:3001/graphql",
 });
-
+// const httpLink = createHttpLink({
+//   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT, 
+// });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem("id_token");
@@ -47,9 +46,6 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
-
-console.log("Apollo client URL:", httpLink.uri); // Log the URL here
 
 function App() {
   return (

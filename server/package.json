@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "proxy":"http://localhost:3001",
-
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",
@@ -30,8 +29,6 @@
     "mongoose": "^6.1.8",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.3",
-    "serverless": "^4.0.24",
-    "serverless-http": "^3.2.0",
     "simple-update-notifier": "^2.0.0",
     "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
