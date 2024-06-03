@@ -2,7 +2,7 @@
   "name": "prod-collab",
   "version": "1.0.0",
   "description": "",
-  "main": "server/server.mjs",
+  "main": "server/server.js",
   "engines": {
     "node": "20.5.0",
     "npm": "10.4.0"
