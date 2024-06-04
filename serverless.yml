@@ -1,0 +1,51 @@
+service: serverless-express-apollo
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  environment:
+    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
+    BUCKET: react-image-upload-ivsir
+
+functions:
+  app:
+    handler: server/server.handler
+    events:
+      - http:
+          path: create-s3-folder
+          method: post
+      - http:
+          path: user-folders
+          method: get
+      - http:
+          path: images
+          method: post
+      - http:
+          path: audiofiles
+          method: post
+      - http:
+          path: upload
+          method: post
+      - http:
+          path: images
+          method: get
+      - http:
+          path: audiofiles
+          method: get
+      - http:
+          path: singlepost-image
+          method: get
+      - http:
+          path: files
+          method: get
+      - http:
+          path: graphql
+          method: any
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 4001
