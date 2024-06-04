@@ -178,7 +178,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717529049190-2024-06-04T19:24:09.190Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.handler",
               "Runtime": "nodejs20.x",
@@ -202,14 +202,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM": {
+          "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "CONeeGl9yoT85MqqzTK0XEnj/gpv/1UIs2MkFzo8x0Y="
+              "CodeSha256": "yYJW8+gLEAb9Dg2yCH7sbkg5kRuSny18xtI1IPx/EMU="
             }
           },
           "ApiGatewayRestApi": {
@@ -804,7 +804,7 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1717527614593": {
+          "ApiGatewayDeployment1717529045667": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -875,7 +875,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM"
+              "Ref": "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -1083,7 +1083,7 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM"
+        "versionLogicalId": "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw"
       }
     },
     "configValidationMode": "warn",
@@ -1103,17 +1103,19 @@
         "$ref": "$[\"service\"][\"custom\"]"
       },
       "package": {
-        "include": [
-          "src/**",
-          "handler.js"
-        ],
         "exclude": [
           "tests/**",
-          "node_modules/**"
+          "node_modules/**",
+          "client/node_modules/**",
+          "server/node_modules/**",
+          "client/build/**",
+          "package-lock.json",
+          "client/package-lock.json",
+          "server/package-lock.json"
         ],
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717529049190-2024-06-04T19:24:09.190Z"
       }
     },
     "appId": null,
@@ -1122,7 +1124,7 @@
     "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z",
+    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717529049190-2024-06-04T19:24:09.190Z",
     "artifact": "serverless-express-apollo.zip"
   }
 }

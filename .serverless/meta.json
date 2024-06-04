@@ -182,7 +182,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717529049190-2024-06-04T19:24:09.190Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.handler",
                 "Runtime": "nodejs20.x",
@@ -206,14 +206,14 @@
                 "AppLogGroup"
               ]
             },
-            "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM": {
+            "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AppLambdaFunction"
                 },
-                "CodeSha256": "CONeeGl9yoT85MqqzTK0XEnj/gpv/1UIs2MkFzo8x0Y="
+                "CodeSha256": "yYJW8+gLEAb9Dg2yCH7sbkg5kRuSny18xtI1IPx/EMU="
               }
             },
             "ApiGatewayRestApi": {
@@ -808,7 +808,7 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1717527614593": {
+            "ApiGatewayDeployment1717529045667": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -879,7 +879,7 @@
             "AppLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM"
+                "Ref": "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -1078,7 +1078,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM"
+          "versionLogicalId": "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw"
         }
       },
       "plugins": [
@@ -1090,29 +1090,27 @@
         }
       },
       "package": {
-        "include": [
-          "src/**",
-          "handler.js"
-        ],
         "exclude": [
           "tests/**",
-          "node_modules/**"
+          "node_modules/**",
+          "client/node_modules/**",
+          "server/node_modules/**",
+          "client/build/**",
+          "package-lock.json",
+          "client/package-lock.json",
+          "server/package-lock.json"
         ],
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717529049190-2024-06-04T19:24:09.190Z"
       }
     },
-    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    handler: server/server.handler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: images\n          method: post\n      - http:\n          path: audiofiles\n          method: post\n      - http:\n          path: upload\n          method: post\n      - http:\n          path: images\n          method: get\n      - http:\n          path: audiofiles\n          method: get\n      - http:\n          path: singlepost-image\n          method: get\n      - http:\n          path: files\n          method: get\n      - http:\n          path: graphql\n          method: any\n\nplugins:\n  - serverless-offline\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n\npackage:\n  include:\n    - src/**\n    - handler.js\n  exclude:\n    - tests/**\n    - node_modules/**",
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    handler: server/server.handler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: images\n          method: post\n      - http:\n          path: audiofiles\n          method: post\n      - http:\n          path: upload\n          method: post\n      - http:\n          path: images\n          method: get\n      - http:\n          path: audiofiles\n          method: get\n      - http:\n          path: singlepost-image\n          method: get\n      - http:\n          path: files\n          method: get\n      - http:\n          path: graphql\n          method: any\n\nplugins:\n  - serverless-offline\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n\npackage:\n  exclude:\n    - tests/**\n    - node_modules/**\n    - client/node_modules/**\n    - server/node_modules/**\n    - client/build/**\n    - package-lock.json\n    - client/package-lock.json\n    - server/package-lock.json",
     "command": [
       "deploy"
     ],
     "options": {},
-    "error": {
-      "message": "An error occurred: AppLambdaFunction - Resource handler returned message: \"Unzipped size must be smaller than 262144000 bytes (Service: Lambda, Status Code: 400, Request ID: f9b6218f-91b7-4e63-a541-56a46bef3564)\" (RequestToken: 9ba1286f-23fa-d616-14a0-2f5a7d80b3eb, HandlerErrorCode: InvalidRequest).",
-      "stack": "ServerlessError3: An error occurred: AppLambdaFunction - Resource handler returned message: \"Unzipped size must be smaller than 262144000 bytes (Service: Lambda, Status Code: 400, Request ID: f9b6218f-91b7-4e63-a541-56a46bef3564)\" (RequestToken: 9ba1286f-23fa-d616-14a0-2f5a7d80b3eb, HandlerErrorCode: InvalidRequest).\n    at file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:840:832\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AwsDeploy.update (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:840:25477)",
-      "code": "AWS_CLOUD_FORMATION_UPDATE_STACK_INTERNAL_LAMBDA_FUNCTION_CREATE_FAILED"
-    },
+    "error": null,
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
     "orgId": "031ce66e-846a-4177-9803-7027e5d26c87",
@@ -1136,12 +1134,25 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:614288690243:stack/serverless-express-apollo-dev/a73a55d0-229e-11ef-8669-120b3274691f",
     "serviceProviderAwsCfStackCreated": "2024-06-04T18:17:07.845Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-04T19:02:07.312Z",
-    "serviceProviderAwsCfStackStatus": "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+    "serviceProviderAwsCfStackUpdated": "2024-06-04T19:24:21.574Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
+        "OutputKey": "AppLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-app:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://17yjc57zyk.execute-api.us-east-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-serverless-express-apollo-dev-ServiceEndpoint"
+      },
+      {
         "OutputKey": "ServerlessDeploymentBucketName",
-        "OutputValue": "serverless-express-apollo-serverlessdeploymentbuck-7gewbzrgdmy1"
+        "OutputValue": "serverless-express-apollo-serverlessdeploymentbuck-7gewbzrgdmy1",
+        "ExportName": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
       }
     ]
   }
