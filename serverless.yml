@@ -5,9 +5,8 @@ provider:
   runtime: nodejs20.x
   region: us-east-1
   environment:
-    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
-    BUCKET: react-image-upload-ivsir
-
+  #   MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
+  #   BUCKET: react-image-upload-ivsir
 functions:
   app:
     handler: server/server.handler
@@ -45,18 +44,16 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-dotenv-plugin
 
 custom:
   serverless-offline:
     httpPort: 4001
+  dotenv:
+    path: ./server/.env
 
 package:
   exclude:
-    - tests/**
-    - node_modules/**
-    - client/node_modules/**
-    - server/node_modules/**
-    - client/build/**
+    - client/** 
     - package-lock.json
-    - client/package-lock.json
-    - server/package-lock.json
+    - node_modules

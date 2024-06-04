@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717529049190-2024-06-04T19:24:09.190Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717541883893-2024-06-04T22:58:03.893Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.handler",
         "Runtime": "nodejs20.x",
@@ -171,8 +171,10 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-            "BUCKET": "react-image-upload-ivsir"
+            "BUCKET": "react-image-upload-ivsir",
+            "MY_AWS_PROFILE": "ivsir-general",
+            "MY_AWS_REGION": "us-west-1",
+            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
           }
         },
         "Role": {
@@ -186,14 +188,14 @@
         "AppLogGroup"
       ]
     },
-    "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw": {
+    "AppLambdaVersionFGFFUYbU7Tcz37VU5I2bO06j6gy1GtJ01V6XJfUNEKI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "yYJW8+gLEAb9Dg2yCH7sbkg5kRuSny18xtI1IPx/EMU="
+        "CodeSha256": "pfDxTE/xbo/GtcIiD0Hz/M7gbuP07NB7+BlN5F65wxQ="
       }
     },
     "ApiGatewayRestApi": {
@@ -788,7 +790,7 @@
         "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717529045667": {
+    "ApiGatewayDeployment1717541857652": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -859,7 +861,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionrkw75XXkRg9FC9aHZOCAaTwi90Tf4Aw8k1FwWMeCNw"
+        "Ref": "AppLambdaVersionFGFFUYbU7Tcz37VU5I2bO06j6gy1GtJ01V6XJfUNEKI"
       },
       "Export": {
         "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"

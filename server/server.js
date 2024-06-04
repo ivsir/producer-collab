@@ -1,11 +1,11 @@
-require("dotenv").config();
+const dotenv = require('dotenv');
+
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const serverless = require('serverless-http');
 const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3 } = require("./s3.js");
 const { ApolloServer } = require("apollo-server-express");
-// const { ApolloServer } = require("@apollo/server");
 const { authMiddleware } = require("./utils/auth.js");
 const dbConnection = require("./config/connection.js");
 const typeDefs = require("./schemas/typeDefs.js");
@@ -66,6 +66,8 @@ const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bu
 // };
 
 // startApolloServer();
+
+dotenv.config();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

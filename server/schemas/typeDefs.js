@@ -1,4 +1,6 @@
 const { gql } = require("apollo-server-express");
+// const {gql} = require("apollo-server-lambda");
+
 
 const typeDefs = gql`
   type User {
