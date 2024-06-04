@@ -2,7 +2,7 @@ service: serverless-express-apollo
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs20.x
   region: us-east-1
   environment:
     MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
@@ -49,3 +49,11 @@ plugins:
 custom:
   serverless-offline:
     httpPort: 4001
+
+package:
+  include:
+    - src/**
+    - handler.js
+  exclude:
+    - tests/**
+    - node_modules/**

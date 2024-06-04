@@ -38,32 +38,34 @@ const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
 // Create a new instance of an Apollo server with the GraphQL schema
-const startApolloServer = async () => {
-  await server.start();
-  server.applyMiddleware({ app });
-  // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
+// const startApolloServer = async () => {
+//   await server.start();
+//   server.applyMiddleware({ app });
+//   // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
 
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/build")));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "../client/build/index.html"));
-    });
-  }
+//   if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, "../client/build")));
+//     app.get("*", (req, res) => {
+//       res.sendFile(path.join(__dirname, "../client/build/index.html"));
+//     });
+//   }
 
-  await connectToDatabase()
+//   await connectToDatabase()
 
-  app.listen(port, () => {
-    console.log(`API server running on port ${port}!`);
-    console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
-  });
+//   app.listen(port, () => {
+//     console.log(`API server running on port ${port}!`);
+//     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+//   });
 
-  // dbConnection.once("open", () => {
-  //   app.listen(port, () => {
-  //     console.log(`API server running on port ${port}!`);
-  //     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
-  //   });
-  // });
-};
+//   // dbConnection.once("open", () => {
+//   //   app.listen(port, () => {
+//   //     console.log(`API server running on port ${port}!`);
+//   //     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+//   //   });
+//   // });
+// };
+
+// startApolloServer();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -218,6 +220,17 @@ app.get("/files", async (req, res) => {
   return res.json(presignedUrls);
 });
 
-startApolloServer();
+const startServer = async () => {
+  await connectToDatabase();
+  await server.start();
+  server.applyMiddleware({ app });
+
+  app.listen(port, () => {
+    console.log(`API server running on port ${port}!`);
+    console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+  });
+};
+
+startServer();
 
 module.exports.handler = serverless(app);

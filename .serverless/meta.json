@@ -10,7 +10,7 @@
       "service": "serverless-express-apollo",
       "provider": {
         "name": "aws",
-        "runtime": "nodejs14.x",
+        "runtime": "nodejs20.x",
         "region": "us-east-1",
         "environment": {
           "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
@@ -174,12 +174,741 @@
                   ]
                 }
               }
+            },
+            "AppLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": {
+                    "Ref": "ServerlessDeploymentBucket"
+                  },
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z/serverless-express-apollo.zip"
+                },
+                "Handler": "server/server.handler",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "serverless-express-apollo-dev-app",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
+                    "BUCKET": "react-image-upload-ivsir"
+                  }
+                },
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "AppLogGroup"
+              ]
+            },
+            "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "AppLambdaFunction"
+                },
+                "CodeSha256": "CONeeGl9yoT85MqqzTK0XEnj/gpv/1UIs2MkFzo8x0Y="
+              }
+            },
+            "ApiGatewayRestApi": {
+              "Type": "AWS::ApiGateway::RestApi",
+              "Properties": {
+                "Name": "dev-serverless-express-apollo",
+                "EndpointConfiguration": {
+                  "Types": [
+                    "EDGE"
+                  ]
+                },
+                "Policy": ""
+              }
+            },
+            "ApiGatewayResourceCreateDashs3Dashfolder": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "create-s3-folder",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceUserDashfolders": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "user-folders",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceImages": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "images",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceAudiofiles": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "audiofiles",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceUpload": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "upload",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceSinglepostDashimage": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "singlepost-image",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceFiles": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "files",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceGraphql": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "graphql",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayMethodCreateDashs3DashfolderPost": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "POST",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceCreateDashs3Dashfolder"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodUserDashfoldersGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceUserDashfolders"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodImagesPost": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "POST",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceImages"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodAudiofilesPost": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "POST",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceAudiofiles"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodUploadPost": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "POST",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceUpload"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodImagesGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceImages"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodAudiofilesGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceAudiofiles"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodSinglepostDashimageGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceSinglepostDashimage"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodFilesGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceFiles"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodGraphqlAny": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "ANY",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceGraphql"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayDeployment1717527614593": {
+              "Type": "AWS::ApiGateway::Deployment",
+              "Properties": {
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "StageName": "dev"
+              },
+              "DependsOn": [
+                "ApiGatewayMethodCreateDashs3DashfolderPost",
+                "ApiGatewayMethodUserDashfoldersGet",
+                "ApiGatewayMethodImagesPost",
+                "ApiGatewayMethodAudiofilesPost",
+                "ApiGatewayMethodUploadPost",
+                "ApiGatewayMethodImagesGet",
+                "ApiGatewayMethodAudiofilesGet",
+                "ApiGatewayMethodSinglepostDashimageGet",
+                "ApiGatewayMethodFilesGet",
+                "ApiGatewayMethodGraphqlAny"
+              ]
+            },
+            "AppLambdaPermissionApiGateway": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "AppLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "ApiGatewayRestApi"
+                      },
+                      "/*/*"
+                    ]
+                  ]
+                }
+              }
             }
           },
           "Outputs": {
             "ServerlessDeploymentBucketName": {
               "Value": {
                 "Ref": "ServerlessDeploymentBucket"
+              },
+              "Export": {
+                "Name": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
+              }
+            },
+            "AppLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM"
+              },
+              "Export": {
+                "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
+              }
+            },
+            "ServiceEndpoint": {
+              "Description": "URL of the service endpoint",
+              "Value": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "https://",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    ".execute-api.",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ".",
+                    {
+                      "Ref": "AWS::URLSuffix"
+                    },
+                    "/dev"
+                  ]
+                ]
+              },
+              "Export": {
+                "Name": "sls-serverless-express-apollo-dev-ServiceEndpoint"
               }
             }
           }
@@ -265,7 +994,8 @@
               }
             }
           }
-        }
+        },
+        "vpc": {}
       },
       "functions": {
         "app": {
@@ -274,66 +1004,81 @@
             {
               "http": {
                 "path": "create-s3-folder",
-                "method": "post"
+                "method": "post",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "user-folders",
-                "method": "get"
+                "method": "get",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "images",
-                "method": "post"
+                "method": "post",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "audiofiles",
-                "method": "post"
+                "method": "post",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "upload",
-                "method": "post"
+                "method": "post",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "images",
-                "method": "get"
+                "method": "get",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "audiofiles",
-                "method": "get"
+                "method": "get",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "singlepost-image",
-                "method": "get"
+                "method": "get",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "files",
-                "method": "get"
+                "method": "get",
+                "integration": "AWS_PROXY"
               }
             },
             {
               "http": {
                 "path": "graphql",
-                "method": "any"
+                "method": "any",
+                "integration": "AWS_PROXY"
               }
             }
           ],
           "name": "serverless-express-apollo-dev-app",
-          "package": {}
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "AppLambdaVersionLAX8e9j7CAv8xUI2Qlv7KiQSfgfhm5QgWp15dP8zuM"
         }
       },
       "plugins": [
@@ -343,17 +1088,30 @@
         "serverless-offline": {
           "httpPort": 4001
         }
+      },
+      "package": {
+        "include": [
+          "src/**",
+          "handler.js"
+        ],
+        "exclude": [
+          "tests/**",
+          "node_modules/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
+        "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717527659496-2024-06-04T19:00:59.496Z"
       }
     },
-    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs14.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    handler: server/server.handler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: images\n          method: post\n      - http:\n          path: audiofiles\n          method: post\n      - http:\n          path: upload\n          method: post\n      - http:\n          path: images\n          method: get\n      - http:\n          path: audiofiles\n          method: get\n      - http:\n          path: singlepost-image\n          method: get\n      - http:\n          path: files\n          method: get\n      - http:\n          path: graphql\n          method: any\n\nplugins:\n  - serverless-offline\n\ncustom:\n  serverless-offline:\n    httpPort: 4001",
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    handler: server/server.handler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: images\n          method: post\n      - http:\n          path: audiofiles\n          method: post\n      - http:\n          path: upload\n          method: post\n      - http:\n          path: images\n          method: get\n      - http:\n          path: audiofiles\n          method: get\n      - http:\n          path: singlepost-image\n          method: get\n      - http:\n          path: files\n          method: get\n      - http:\n          path: graphql\n          method: any\n\nplugins:\n  - serverless-offline\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n\npackage:\n  include:\n    - src/**\n    - handler.js\n  exclude:\n    - tests/**\n    - node_modules/**",
     "command": [
       "deploy"
     ],
     "options": {},
     "error": {
-      "message": "Cannot read file client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js due to: EMFILE: too many open files, open '/Users/risvitareq/code/producer-collab/client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js'",
-      "stack": "ServerlessError3: Cannot read file client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js due to: EMFILE: too many open files, open '/Users/risvitareq/code/producer-collab/client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js'\n    at file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:818:26575\n    at tryCatcher (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:443:81525)\n    at Promise2._settlePromiseFromHandler (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:10135)\n    at Promise2._settlePromise (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:11454)\n    at Promise2._settlePromise0 (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:12511)\n    at Promise2._settlePromises (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:14107)\n    at _drainQueueStep (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:450:583)\n    at _drainQueue (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:450:479)\n    at Async._drainQueues (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:450:716)\n    at Async.drainQueues [as _onImmediate] (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:446:3279)\n    at process.processImmediate (node:internal/timers:478:21)",
-      "code": "CANNOT_READ_FILE"
+      "message": "An error occurred: AppLambdaFunction - Resource handler returned message: \"Unzipped size must be smaller than 262144000 bytes (Service: Lambda, Status Code: 400, Request ID: f9b6218f-91b7-4e63-a541-56a46bef3564)\" (RequestToken: 9ba1286f-23fa-d616-14a0-2f5a7d80b3eb, HandlerErrorCode: InvalidRequest).",
+      "stack": "ServerlessError3: An error occurred: AppLambdaFunction - Resource handler returned message: \"Unzipped size must be smaller than 262144000 bytes (Service: Lambda, Status Code: 400, Request ID: f9b6218f-91b7-4e63-a541-56a46bef3564)\" (RequestToken: 9ba1286f-23fa-d616-14a0-2f5a7d80b3eb, HandlerErrorCode: InvalidRequest).\n    at file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:840:832\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AwsDeploy.update (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:840:25477)",
+      "code": "AWS_CLOUD_FORMATION_UPDATE_STACK_INTERNAL_LAMBDA_FUNCTION_CREATE_FAILED"
     },
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
@@ -376,10 +1134,15 @@
     "serviceProviderAwsAccountId": "614288690243",
     "versionSf": "4.0.35",
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
-    "serviceProviderAwsCfStackId": null,
-    "serviceProviderAwsCfStackCreated": null,
-    "serviceProviderAwsCfStackUpdated": null,
-    "serviceProviderAwsCfStackStatus": null,
-    "serviceProviderAwsCfStackOutputs": null
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:614288690243:stack/serverless-express-apollo-dev/a73a55d0-229e-11ef-8669-120b3274691f",
+    "serviceProviderAwsCfStackCreated": "2024-06-04T18:17:07.845Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-04T19:02:07.312Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-express-apollo-serverlessdeploymentbuck-7gewbzrgdmy1"
+      }
+    ]
   }
 }
