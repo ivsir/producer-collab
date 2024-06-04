@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
+const serverless = require('serverless-http');
 const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3 } = require("./s3.js");
 const { ApolloServer } = require("apollo-server-express");
 // const { ApolloServer } = require("@apollo/server");
@@ -218,3 +219,5 @@ app.get("/files", async (req, res) => {
 });
 
 startApolloServer();
+
+module.exports.handler = serverless(app);
