@@ -12,7 +12,7 @@ node_modules
 /build
 
 #serverless
-.serverless/serverless-express-apollo.zip
+.serverless/
 
 # misc
 .DS_Store
