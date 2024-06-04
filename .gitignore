@@ -11,6 +11,9 @@ node_modules
 # production
 /build
 
+#serverless
+.serverless/serverless-express-apollo.zip
+
 # misc
 .DS_Store
 .env.local
@@ -54,5 +57,3 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 
-#serverless
-.serverless/
