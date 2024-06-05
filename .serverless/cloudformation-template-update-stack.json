@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717564053977-2024-06-05T05:07:33.977Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717628813619-2024-06-05T23:06:53.619Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.handler",
         "Runtime": "nodejs20.x",
@@ -188,14 +188,14 @@
         "AppLogGroup"
       ]
     },
-    "AppLambdaVersion8qra0FsbwFvR69h6ngghAe0Eo5aD9OH03Ja3GqRISQ": {
+    "AppLambdaVersionuU39d34pF0WnDaC4yZqrmJ19VDmubIpXZeZc2XsTG0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "2OHILsb+ou4kBkRkXRv7RmzyPM0aBH04yPuX2rNc9GI="
+        "CodeSha256": "zZT0IjETpSfiQg5tFpkuBlVLfRp863/DNDHy16PQUTs="
       }
     },
     "ApiGatewayRestApi": {
@@ -790,7 +790,7 @@
         "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717564044465": {
+    "ApiGatewayDeployment1717628804426": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -861,7 +861,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersion8qra0FsbwFvR69h6ngghAe0Eo5aD9OH03Ja3GqRISQ"
+        "Ref": "AppLambdaVersionuU39d34pF0WnDaC4yZqrmJ19VDmubIpXZeZc2XsTG0"
       },
       "Export": {
         "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
