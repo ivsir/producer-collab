@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717560533512-2024-06-05T04:08:53.512Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717564053977-2024-06-05T05:07:33.977Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.handler",
         "Runtime": "nodejs20.x",
@@ -171,10 +171,10 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "BUCKET": "react-image-upload-ivsir",
+            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
             "MY_AWS_PROFILE": "ivsir-general",
             "MY_AWS_REGION": "us-west-1",
-            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+            "BUCKET": "react-image-upload-ivsir"
           }
         },
         "Role": {
@@ -790,7 +790,7 @@
         "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717560526294": {
+    "ApiGatewayDeployment1717564044465": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {

@@ -14,9 +14,6 @@ const AWS = require("aws-sdk");
 const path = require("path");
 const connectToDatabase = require("./config/connection.js");
 
-// const __filename = __filename;
-// const __dirname = path.dirname(__filename);
-
 const app = express();
 
 const port = Number.parseInt(process.env.PORT) || 3001;
@@ -37,45 +34,16 @@ const server = new ApolloServer({
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
-// Create a new instance of an Apollo server with the GraphQL schema
-// const startApolloServer = async () => {
-//   await server.start();
-//   server.applyMiddleware({ app });
-//   // server.applyMiddleware({ app, path: '/graphql' }); // Explicitly set the path
-
-//   if (process.env.NODE_ENV === "production") {
-//     app.use(express.static(path.join(__dirname, "../client/build")));
-//     app.get("*", (req, res) => {
-//       res.sendFile(path.join(__dirname, "../client/build/index.html"));
-//     });
-//   }
-
-//   await connectToDatabase()
-
-//   app.listen(port, () => {
-//     console.log(`API server running on port ${port}!`);
-//     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
-//   });
-
-//   // dbConnection.once("open", () => {
-//   //   app.listen(port, () => {
-//   //     console.log(`API server running on port ${port}!`);
-//   //     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
-//   //   });
-//   // });
-// };
-
-// startApolloServer();
-
 dotenv.config();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-  origin: "*", // Allow requests from all origins (replace with your specific origins)
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
-}));
+// app.use(cors({
+//   origin: "*", // Allow requests from all origins (replace with your specific origins)
+//   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
+//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
+// }));
+app.use(cors());
 
 // Define your routes for image upload and retrieval here
 app.post("/create-s3-folder", async (req, res) => {
