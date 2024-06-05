@@ -10,6 +10,7 @@
       "service": "serverless-express-apollo",
       "provider": {
         "name": "aws",
+<<<<<<< HEAD
         "runtime": "nodejs20.x",
         "region": "us-east-1",
         "environment": {
@@ -17,6 +18,13 @@
           "MY_AWS_PROFILE": "ivsir-general",
           "MY_AWS_REGION": "us-west-1",
           "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+=======
+        "runtime": "nodejs14.x",
+        "region": "us-east-1",
+        "environment": {
+          "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
+          "BUCKET": "react-image-upload-ivsir"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
         },
         "stage": "dev",
         "versionFunctions": true,
@@ -176,6 +184,7 @@
                   ]
                 }
               }
+<<<<<<< HEAD
             },
             "AppLambdaFunction": {
               "Type": "AWS::Lambda::Function",
@@ -869,12 +878,15 @@
                   ]
                 }
               }
+=======
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
             }
           },
           "Outputs": {
             "ServerlessDeploymentBucketName": {
               "Value": {
                 "Ref": "ServerlessDeploymentBucket"
+<<<<<<< HEAD
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
@@ -913,6 +925,8 @@
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-ServiceEndpoint"
+=======
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             }
           }
@@ -998,8 +1012,12 @@
               }
             }
           }
+<<<<<<< HEAD
         },
         "vpc": {}
+=======
+        }
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
       },
       "functions": {
         "app": {
@@ -1008,75 +1026,116 @@
             {
               "http": {
                 "path": "create-s3-folder",
+<<<<<<< HEAD
                 "method": "post",
                 "integration": "AWS_PROXY"
+=======
+                "method": "post"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "user-folders",
+<<<<<<< HEAD
                 "method": "get",
                 "integration": "AWS_PROXY"
+=======
+                "method": "get"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "images",
+<<<<<<< HEAD
                 "method": "post",
                 "integration": "AWS_PROXY"
+=======
+                "method": "post"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "audiofiles",
+<<<<<<< HEAD
                 "method": "post",
                 "integration": "AWS_PROXY"
+=======
+                "method": "post"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "upload",
+<<<<<<< HEAD
                 "method": "post",
                 "integration": "AWS_PROXY"
+=======
+                "method": "post"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "images",
+<<<<<<< HEAD
                 "method": "get",
                 "integration": "AWS_PROXY"
+=======
+                "method": "get"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "audiofiles",
+<<<<<<< HEAD
                 "method": "get",
                 "integration": "AWS_PROXY"
+=======
+                "method": "get"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "singlepost-image",
+<<<<<<< HEAD
                 "method": "get",
                 "integration": "AWS_PROXY"
+=======
+                "method": "get"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "files",
+<<<<<<< HEAD
                 "method": "get",
                 "integration": "AWS_PROXY"
+=======
+                "method": "get"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             },
             {
               "http": {
                 "path": "graphql",
+<<<<<<< HEAD
                 "method": "any",
                 "integration": "AWS_PROXY"
+=======
+                "method": "any"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
               }
             }
           ],
           "name": "serverless-express-apollo-dev-app",
+<<<<<<< HEAD
           "package": {},
           "memory": 1024,
           "timeout": 6,
@@ -1088,10 +1147,18 @@
       "plugins": [
         "serverless-offline",
         "serverless-dotenv-plugin"
+=======
+          "package": {}
+        }
+      },
+      "plugins": [
+        "serverless-offline"
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
       ],
       "custom": {
         "serverless-offline": {
           "httpPort": 4001
+<<<<<<< HEAD
         },
         "dotenv": {
           "path": "./server/.env"
@@ -1109,11 +1176,25 @@
       }
     },
     "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  environment:\n  #   MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n  #   BUCKET: react-image-upload-ivsir\nfunctions:\n  app:\n    handler: server/server.handler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: images\n          method: post\n      - http:\n          path: audiofiles\n          method: post\n      - http:\n          path: upload\n          method: post\n      - http:\n          path: images\n          method: get\n      - http:\n          path: audiofiles\n          method: get\n      - http:\n          path: singlepost-image\n          method: get\n      - http:\n          path: files\n          method: get\n      - http:\n          path: graphql\n          method: any\n\nplugins:\n  - serverless-offline\n  - serverless-dotenv-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  dotenv:\n    path: ./server/.env\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules",
+=======
+        }
+      }
+    },
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs14.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    handler: server/server.handler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: images\n          method: post\n      - http:\n          path: audiofiles\n          method: post\n      - http:\n          path: upload\n          method: post\n      - http:\n          path: images\n          method: get\n      - http:\n          path: audiofiles\n          method: get\n      - http:\n          path: singlepost-image\n          method: get\n      - http:\n          path: files\n          method: get\n      - http:\n          path: graphql\n          method: any\n\nplugins:\n  - serverless-offline\n\ncustom:\n  serverless-offline:\n    httpPort: 4001",
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
     "command": [
       "deploy"
     ],
     "options": {},
+<<<<<<< HEAD
     "error": null,
+=======
+    "error": {
+      "message": "Cannot read file client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js due to: EMFILE: too many open files, open '/Users/risvitareq/code/producer-collab/client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js'",
+      "stack": "ServerlessError3: Cannot read file client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js due to: EMFILE: too many open files, open '/Users/risvitareq/code/producer-collab/client/node_modules/istanbul-lib-report/node_modules/semver/functions/rcompare.js'\n    at file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:818:26575\n    at tryCatcher (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:443:81525)\n    at Promise2._settlePromiseFromHandler (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:10135)\n    at Promise2._settlePromise (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:11454)\n    at Promise2._settlePromise0 (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:12511)\n    at Promise2._settlePromises (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:621:14107)\n    at _drainQueueStep (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:450:583)\n    at _drainQueue (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:450:479)\n    at Async._drainQueues (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:450:716)\n    at Async.drainQueues [as _onImmediate] (file:///Users/risvitareq/.serverless/releases/4.0.35/package/dist/sf-core.js:446:3279)\n    at process.processImmediate (node:internal/timers:478:21)",
+      "code": "CANNOT_READ_FILE"
+    },
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
     "orgId": "031ce66e-846a-4177-9803-7027e5d26c87",
@@ -1135,6 +1216,7 @@
     "serviceProviderAwsAccountId": "614288690243",
     "versionSf": "4.0.35",
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
+<<<<<<< HEAD
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:614288690243:stack/serverless-express-apollo-dev/a73a55d0-229e-11ef-8669-120b3274691f",
     "serviceProviderAwsCfStackCreated": "2024-06-04T18:17:07.845Z",
     "serviceProviderAwsCfStackUpdated": "2024-06-04T23:07:51.685Z",
@@ -1158,5 +1240,12 @@
         "ExportName": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
       }
     ]
+=======
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
   }
 }

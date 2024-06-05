@@ -44,6 +44,7 @@ functions:
 
 plugins:
   - serverless-offline
+<<<<<<< HEAD
   - serverless-dotenv-plugin
 
 custom:
@@ -57,3 +58,9 @@ package:
     - client/** 
     - package-lock.json
     - node_modules
+=======
+
+custom:
+  serverless-offline:
+    httpPort: 4001
+>>>>>>> 717463f364bb2018e52d7874d5bf6a1385cd87a6
