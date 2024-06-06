@@ -12,14 +12,14 @@
         "name": "aws",
         "runtime": "nodejs20.x",
         "region": "us-east-1",
-        "stage": "dev",
-        "versionFunctions": true,
         "environment": {
-          "BUCKET": "react-image-upload-ivsir",
+          "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
           "MY_AWS_PROFILE": "ivsir-general",
           "MY_AWS_REGION": "us-west-1",
-          "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+          "BUCKET": "react-image-upload-ivsir"
         },
+        "stage": "dev",
+        "versionFunctions": true,
         "compiledCloudFormationTemplate": {
           "AWSTemplateFormatVersion": "2010-09-09",
           "Description": "The AWS CloudFormation template for this Serverless application",
@@ -184,7 +184,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717653919488-2024-06-06T06:05:19.488Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717656851926-2024-06-06T06:54:11.926Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.graphqlHandler",
                 "Runtime": "nodejs20.x",
@@ -193,10 +193,10 @@
                 "Timeout": 6,
                 "Environment": {
                   "Variables": {
-                    "BUCKET": "react-image-upload-ivsir",
+                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
                     "MY_AWS_PROFILE": "ivsir-general",
                     "MY_AWS_REGION": "us-west-1",
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+                    "BUCKET": "react-image-upload-ivsir"
                   }
                 },
                 "Role": {
@@ -210,14 +210,14 @@
                 "AppLogGroup"
               ]
             },
-            "AppLambdaVersionVvqZ8YUDRlr18gEdJcEo0v79PN8FgS6tVZO057lPw": {
+            "AppLambdaVersionwpHwVK3wps7lP8QkpYysIntGPXUz9h7tyt924M62o": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AppLambdaFunction"
                 },
-                "CodeSha256": "qB6kJMnOkozeKzzjkVB4w0FXkRIyYiBu3Oq7pqzsK4U="
+                "CodeSha256": "JhOxiywODXI9cRrSM+1q9Z0P7e8USDn6MWr4HudC5iU="
               }
             },
             "ApiGatewayRestApi": {
@@ -277,7 +277,67 @@
                 }
               }
             },
+            "ApiGatewayResourcePlayground": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "playground",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
             "ApiGatewayMethodGraphqlOptions": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "AuthorizationType": "NONE",
+                "HttpMethod": "OPTIONS",
+                "MethodResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": true,
+                      "method.response.header.Access-Control-Allow-Headers": true,
+                      "method.response.header.Access-Control-Allow-Methods": true
+                    },
+                    "ResponseModels": {}
+                  }
+                ],
+                "RequestParameters": {},
+                "Integration": {
+                  "Type": "MOCK",
+                  "RequestTemplates": {
+                    "application/json": "{statusCode:200}"
+                  },
+                  "ContentHandling": "CONVERT_TO_TEXT",
+                  "IntegrationResponses": [
+                    {
+                      "StatusCode": "200",
+                      "ResponseParameters": {
+                        "method.response.header.Access-Control-Allow-Origin": "'*'",
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
+                      },
+                      "ResponseTemplates": {
+                        "application/json": ""
+                      }
+                    }
+                  ]
+                },
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceGraphql"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayMethodPlaygroundOptions": {
               "Type": "AWS::ApiGateway::Method",
               "Properties": {
                 "AuthorizationType": "NONE",
@@ -315,7 +375,7 @@
                   ]
                 },
                 "ResourceId": {
-                  "Ref": "ApiGatewayResourceGraphql"
+                  "Ref": "ApiGatewayResourcePlayground"
                 },
                 "RestApiId": {
                   "Ref": "ApiGatewayRestApi"
@@ -414,10 +474,10 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayMethodGraphqlAny": {
+            "ApiGatewayMethodGraphqlPost": {
               "Type": "AWS::ApiGateway::Method",
               "Properties": {
-                "HttpMethod": "ANY",
+                "HttpMethod": "POST",
                 "RequestParameters": {},
                 "ResourceId": {
                   "Ref": "ApiGatewayResourceGraphql"
@@ -460,7 +520,99 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1717653911741": {
+            "ApiGatewayMethodGraphqlGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceGraphql"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodPlaygroundAny": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "ANY",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourcePlayground"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "AppLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "AppLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayDeployment1717656844080": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -470,9 +622,12 @@
               },
               "DependsOn": [
                 "ApiGatewayMethodGraphqlOptions",
+                "ApiGatewayMethodPlaygroundOptions",
                 "ApiGatewayMethodCreateDashs3DashfolderPost",
                 "ApiGatewayMethodUserDashfoldersGet",
-                "ApiGatewayMethodGraphqlAny"
+                "ApiGatewayMethodGraphqlPost",
+                "ApiGatewayMethodGraphqlGet",
+                "ApiGatewayMethodPlaygroundAny"
               ]
             },
             "AppLambdaPermissionApiGateway": {
@@ -525,7 +680,7 @@
             "AppLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AppLambdaVersionVvqZ8YUDRlr18gEdJcEo0v79PN8FgS6tVZO057lPw"
+                "Ref": "AppLambdaVersionwpHwVK3wps7lP8QkpYysIntGPXUz9h7tyt924M62o"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -664,6 +819,54 @@
             {
               "http": {
                 "path": "graphql",
+                "method": "post",
+                "cors": {
+                  "origin": "*",
+                  "methods": [
+                    "OPTIONS",
+                    "POST"
+                  ],
+                  "headers": [
+                    "Content-Type",
+                    "X-Amz-Date",
+                    "Authorization",
+                    "X-Api-Key",
+                    "X-Amz-Security-Token",
+                    "X-Amz-User-Agent",
+                    "X-Amzn-Trace-Id"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                },
+                "integration": "AWS_PROXY"
+              }
+            },
+            {
+              "http": {
+                "path": "graphql",
+                "method": "get",
+                "cors": {
+                  "origin": "*",
+                  "methods": [
+                    "OPTIONS",
+                    "GET"
+                  ],
+                  "headers": [
+                    "Content-Type",
+                    "X-Amz-Date",
+                    "Authorization",
+                    "X-Api-Key",
+                    "X-Amz-Security-Token",
+                    "X-Amz-User-Agent",
+                    "X-Amzn-Trace-Id"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                },
+                "integration": "AWS_PROXY"
+              }
+            },
+            {
+              "http": {
+                "path": "playground",
                 "method": "any",
                 "cors": {
                   "origin": "*",
@@ -692,20 +895,16 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "AppLambdaVersionVvqZ8YUDRlr18gEdJcEo0v79PN8FgS6tVZO057lPw"
+          "versionLogicalId": "AppLambdaVersionwpHwVK3wps7lP8QkpYysIntGPXUz9h7tyt924M62o"
         }
       },
       "plugins": [
         "serverless-offline",
-        "serverless-dotenv-plugin",
         "serverless-prune-plugin"
       ],
       "custom": {
         "serverless-offline": {
           "httpPort": 4001
-        },
-        "dotenv": {
-          "path": "./server/.env"
         },
         "prune": {
           "automatic": true,
@@ -721,10 +920,10 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717653919488-2024-06-06T06:05:19.488Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717656851926-2024-06-06T06:54:11.926Z"
       }
     },
-    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  # environment:\n  #   MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n  #   MY_AWS_PROFILE: ivsir-general\n  #   MY_AWS_REGION: us-west-1\n  #   BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    # handler: server/server.handler\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: graphql\n          method: any\n          cors: true\n\n\nplugins:\n  - serverless-offline\n  - serverless-dotenv-plugin\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  dotenv:\n    path: ./server/.env\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    # handler: server/server.handler\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n      - http:\n          path: user-folders\n          method: get\n      - http:\n          path: graphql\n          method: POST\n          cors: true\n      - http:\n          path: graphql\n          method: GET\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n\nplugins:\n  - serverless-offline\n  # - serverless-dotenv-plugin\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  # dotenv:\n  #   path: ./server/.env\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
     "command": [
       "deploy"
     ],
@@ -753,12 +952,12 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:614288690243:stack/serverless-express-apollo-dev/a73a55d0-229e-11ef-8669-120b3274691f",
     "serviceProviderAwsCfStackCreated": "2024-06-04T18:17:07.845Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-06T06:05:45.595Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-06T06:54:31.252Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "AppLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-app:17",
+        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-app:22",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
       },

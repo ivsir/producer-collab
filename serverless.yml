@@ -4,11 +4,11 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  # environment:
-  #   MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
-  #   MY_AWS_PROFILE: ivsir-general
-  #   MY_AWS_REGION: us-west-1
-  #   BUCKET: react-image-upload-ivsir
+  environment:
+    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
+    MY_AWS_PROFILE: ivsir-general
+    MY_AWS_REGION: us-west-1
+    BUCKET: react-image-upload-ivsir
 
 functions:
   app:
@@ -23,20 +23,27 @@ functions:
           method: get
       - http:
           path: graphql
-          method: any
+          method: POST
           cors: true
-
+      - http:
+          path: graphql
+          method: GET
+          cors: true
+      - http:
+          path: playground
+          method: ANY
+          cors: true
 
 plugins:
   - serverless-offline
-  - serverless-dotenv-plugin
+  # - serverless-dotenv-plugin
   - serverless-prune-plugin
 
 custom:
   serverless-offline:
     httpPort: 4001
-  dotenv:
-    path: ./server/.env
+  # dotenv:
+  #   path: ./server/.env
   prune:
     automatic: true
     number: 3

@@ -45,8 +45,8 @@ app.use(express.json());
 //   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
 //   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 // }));
-// app.use(cors());
-app.use(cors(corsOptions));
+app.use(cors());
+// app.use(cors(corsOptions));
 
 // Define your routes for image upload and retrieval here
 app.post("/create-s3-folder", async (req, res) => {
@@ -197,6 +197,8 @@ app.get("/files", async (req, res) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  playground: true,
+  introspection: true,
   // context: authMiddleware,
 });
 
