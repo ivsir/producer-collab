@@ -21,33 +21,13 @@ functions:
           path: user-folders
           method: get
       - http:
-          path: images
-          method: post
-      - http:
-          path: audiofiles
-          method: post
-      - http:
-          path: upload
-          method: post
-      - http:
-          path: images
-          method: get
-      - http:
-          path: audiofiles
-          method: get
-      - http:
-          path: singlepost-image
-          method: get
-      - http:
-          path: files
-          method: get
-      - http:
-          path: graphql
+          path: graphql-api
           method: any
+          cors: true
 
 plugins:
   - serverless-offline
-  # - serverless-dotenv-plugin
+  - serverless-dotenv-plugin
   - serverless-prune-plugin
 
 custom:

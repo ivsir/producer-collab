@@ -5,7 +5,8 @@ const cors = require("cors");
 const multer = require("multer");
 const serverless = require('serverless-http');
 const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3 } = require("./s3.js");
-const { ApolloServer } = require("apollo-server-express");
+// const { ApolloServer } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-lambda");
 const { authMiddleware } = require("./utils/auth.js");
 const dbConnection = require("./config/connection.js");
 const typeDefs = require("./schemas/typeDefs.js");
@@ -24,12 +25,14 @@ const upload = multer({ storage });
 
 const audioStorage = multer.memoryStorage();
 const audioUpload = multer({ storage: audioStorage });
+const customGraphQLEndpoint = '/graphql-api';
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
 });
+
 
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
@@ -190,14 +193,22 @@ app.get("/files", async (req, res) => {
   return res.json(presignedUrls);
 });
 
+// const startServer = async () => {
+//   await connectToDatabase();
+//   await server.start();
+//   server.applyMiddleware({ app, path: customGraphQLEndpoint });
+
+//   app.listen(port, () => {
+//     console.log(`API server running on port ${port}!`);
+//     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+//   });
+// };
+
 const startServer = async () => {
   await connectToDatabase();
-  await server.start();
-  server.applyMiddleware({ app });
-
-  app.listen(port, () => {
-    console.log(`API server running on port ${port}!`);
-    console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+  server.createHandler({
+    expressApp: app,
+    path: customGraphQLEndpoint,
   });
 };
 
