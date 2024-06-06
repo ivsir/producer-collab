@@ -36,6 +36,13 @@ functions:
           path: playground
           method: ANY
           cors: true
+  getSinglePostImage:
+    handler: server/server.getSinglePostImage
+    events:
+      - http:
+          path: singlepost-image
+          method: get
+          cors: true
   # rest:
   #   handler: server/server.restHandler
   #   events:

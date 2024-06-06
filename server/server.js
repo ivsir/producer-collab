@@ -232,6 +232,44 @@ const server = new ApolloServer({
 // startServer();
 // module.exports.handler = serverless(app);
 
+exports.getSinglePostImage = async (event) => {
+  // Extract project author from request headers
+  const projectAuthor = event.headers["x-project-author"];
+
+  // Check if project author is present
+  if (!projectAuthor) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Bad request" }),
+    };
+  }
+
+  try {
+    // Get presigned URLs for images of the specified project author
+    const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
+
+    // If there is an error, return error response
+    if (error) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: error.message }),
+      };
+    }
+
+    // Return presigned URLs as response
+    return {
+      statusCode: 200,
+      body: JSON.stringify(presignedUrls),
+    };
+  } catch (error) {
+    // Return error response if an exception occurs
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Internal server error" }),
+    };
+  }
+};
+
 exports.graphqlHandler = server.createHandler({
   cors: {
       origin: '*',
