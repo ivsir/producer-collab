@@ -12,8 +12,8 @@ import { useRef } from "react";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
-const URL = "/dev/images";
-const audioURL = "/dev/audiofiles";
+const URL = "/images";
+const audioURL = "/audiofiles";
 
 const ErrorText = ({ error }) => {
   if (error) {

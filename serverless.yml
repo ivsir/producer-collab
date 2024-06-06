@@ -36,45 +36,45 @@ functions:
           path: playground
           method: ANY
           cors: true
-  rest:
-    handler: server/server.restHandler
-    events:
-      - http:
-          path: create-s3-folder
-          method: post
-          cors: true
-      - http:
-          path: user-folders
-          method: get
-          cors: true
-      - http:
-          path: images
-          method: post
-          cors: true
-      - http:
-          path: audiofiles
-          method: post
-          cors: true
-      - http:
-          path: upload
-          method: post
-          cors: true
-      - http:
-          path: images
-          method: get
-          cors: true
-      - http:
-          path: audiofiles
-          method: get
-          cors: true
-      - http:
-          path: files
-          method: get
-          cors: true
-      - http:
-          path: singlepost-image
-          method: get
-          cors: true
+  # rest:
+  #   handler: server/server.restHandler
+  #   events:
+  #     - http:
+  #         path: create-s3-folder
+  #         method: post
+  #         cors: true
+  #     - http:
+  #         path: user-folders
+  #         method: get
+  #         cors: true
+  #     - http:
+  #         path: images
+  #         method: post
+  #         cors: true
+  #     - http:
+  #         path: audiofiles
+  #         method: post
+  #         cors: true
+  #     - http:
+  #         path: upload
+  #         method: post
+  #         cors: true
+  #     - http:
+  #         path: images
+  #         method: get
+  #         cors: true
+  #     - http:
+  #         path: audiofiles
+  #         method: get
+  #         cors: true
+  #     - http:
+  #         path: files
+  #         method: get
+  #         cors: true
+  #     - http:
+  #         path: singlepost-image
+  #         method: get
+  #         cors: true
 
 plugins:
   - serverless-offline

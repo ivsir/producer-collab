@@ -21,7 +21,7 @@ import Airforce from "../../assets/airforceanime.jpg";
 function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
   const projects = apolloData?.projects || [];
-  const URL = "/dev/singlepost-image";
+  const URL = "/singlepost-image";
  
   const [imageUrls, setImageUrls] = useState({});
   const [audioUrls, setAudioUrls] = useState({});
