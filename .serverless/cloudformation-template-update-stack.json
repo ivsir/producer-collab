@@ -187,7 +187,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717704666509-2024-06-06T20:11:06.509Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717706295728-2024-06-06T20:38:15.728Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.graphqlHandler",
         "Runtime": "nodejs20.x",
@@ -220,7 +220,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717704666509-2024-06-06T20:11:06.509Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717706295728-2024-06-06T20:38:15.728Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.restHandler",
         "Runtime": "nodejs20.x",
@@ -246,24 +246,24 @@
         "RestLogGroup"
       ]
     },
-    "AppLambdaVersionkCeaczNW7DfKACeVHBYdK1xI53lUcnw3ymoaVAjlk": {
+    "AppLambdaVersionwiq4cSyhjdgZvz0hkpZtAv7TeZI7XFL1MedSHqU6E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "yh+Yy7usIhHD4yBLq/cDeaeKq/oZP8/P6sStl5CTm10="
+        "CodeSha256": "KmOlM60fUDPowPPlaLcVy/EE3n/Nw5SmbdUooOYxOz4="
       }
     },
-    "RestLambdaVersionTMtcrOBXJ5VHOl8u2w5YtZfDAASfORrU25wrSKvbaMM": {
+    "RestLambdaVersion89aVS86afOLjcwFW58nB8L7k4va04rBxkCvAM3pAG0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RestLambdaFunction"
         },
-        "CodeSha256": "yh+Yy7usIhHD4yBLq/cDeaeKq/oZP8/P6sStl5CTm10="
+        "CodeSha256": "KmOlM60fUDPowPPlaLcVy/EE3n/Nw5SmbdUooOYxOz4="
       }
     },
     "ApiGatewayRestApi": {
@@ -383,21 +383,6 @@
         }
       }
     },
-    "ApiGatewayResourceSinglepostDashimage": {
-      "Type": "AWS::ApiGateway::Resource",
-      "Properties": {
-        "ParentId": {
-          "Fn::GetAtt": [
-            "ApiGatewayRestApi",
-            "RootResourceId"
-          ]
-        },
-        "PathPart": "singlepost-image",
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        }
-      }
-    },
     "ApiGatewayResourceFiles": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
@@ -408,6 +393,21 @@
           ]
         },
         "PathPart": "files",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceSinglepostDashimage": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "singlepost-image",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -728,51 +728,6 @@
         }
       }
     },
-    "ApiGatewayMethodSinglepostDashimageOptions": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "OPTIONS",
-        "MethodResponses": [
-          {
-            "StatusCode": "200",
-            "ResponseParameters": {
-              "method.response.header.Access-Control-Allow-Origin": true,
-              "method.response.header.Access-Control-Allow-Headers": true,
-              "method.response.header.Access-Control-Allow-Methods": true
-            },
-            "ResponseModels": {}
-          }
-        ],
-        "RequestParameters": {},
-        "Integration": {
-          "Type": "MOCK",
-          "RequestTemplates": {
-            "application/json": "{statusCode:200}"
-          },
-          "ContentHandling": "CONVERT_TO_TEXT",
-          "IntegrationResponses": [
-            {
-              "StatusCode": "200",
-              "ResponseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-              },
-              "ResponseTemplates": {
-                "application/json": ""
-              }
-            }
-          ]
-        },
-        "ResourceId": {
-          "Ref": "ApiGatewayResourceSinglepostDashimage"
-        },
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        }
-      }
-    },
     "ApiGatewayMethodFilesOptions": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -812,6 +767,51 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceFiles"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodSinglepostDashimageOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceSinglepostDashimage"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1232,52 +1232,6 @@
         "RestLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayMethodSinglepostDashimageGet": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "HttpMethod": "GET",
-        "RequestParameters": {},
-        "ResourceId": {
-          "Ref": "ApiGatewayResourceSinglepostDashimage"
-        },
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        },
-        "ApiKeyRequired": false,
-        "AuthorizationType": "NONE",
-        "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition"
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region"
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "RestLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "/invocations"
-              ]
-            ]
-          }
-        },
-        "MethodResponses": []
-      },
-      "DependsOn": [
-        "RestLambdaPermissionApiGateway"
-      ]
-    },
     "ApiGatewayMethodFilesGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -1324,7 +1278,46 @@
         "RestLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717704657855": {
+    "ApiGatewayMethodSinglepostDashimageGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {
+          "headers": true
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceSinglepostDashimage"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "S3"
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessexpressapolloRequestValidator"
+        }
+      },
+      "DependsOn": [
+        "RestLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayServerlessexpressapolloRequestValidator": {
+      "Type": "AWS::ApiGateway::RequestValidator",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ValidateRequestBody": true,
+        "ValidateRequestParameters": true,
+        "Name": "serverless-express-apollo-dev | Validate request body and querystring parameters"
+      }
+    },
+    "ApiGatewayDeployment1717706287598": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1340,8 +1333,8 @@
         "ApiGatewayMethodImagesOptions",
         "ApiGatewayMethodAudiofilesOptions",
         "ApiGatewayMethodUploadOptions",
-        "ApiGatewayMethodSinglepostDashimageOptions",
         "ApiGatewayMethodFilesOptions",
+        "ApiGatewayMethodSinglepostDashimageOptions",
         "ApiGatewayMethodGraphqlAny",
         "ApiGatewayMethodPlaygroundAny",
         "ApiGatewayMethodCreateDashs3DashfolderPost",
@@ -1351,8 +1344,8 @@
         "ApiGatewayMethodUploadPost",
         "ApiGatewayMethodImagesGet",
         "ApiGatewayMethodAudiofilesGet",
-        "ApiGatewayMethodSinglepostDashimageGet",
-        "ApiGatewayMethodFilesGet"
+        "ApiGatewayMethodFilesGet",
+        "ApiGatewayMethodSinglepostDashimageGet"
       ]
     },
     "AppLambdaPermissionApiGateway": {
@@ -1442,7 +1435,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionkCeaczNW7DfKACeVHBYdK1xI53lUcnw3ymoaVAjlk"
+        "Ref": "AppLambdaVersionwiq4cSyhjdgZvz0hkpZtAv7TeZI7XFL1MedSHqU6E"
       },
       "Export": {
         "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -1451,7 +1444,7 @@
     "RestLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RestLambdaVersionTMtcrOBXJ5VHOl8u2w5YtZfDAASfORrU25wrSKvbaMM"
+        "Ref": "RestLambdaVersion89aVS86afOLjcwFW58nB8L7k4va04rBxkCvAM3pAG0"
       },
       "Export": {
         "Name": "sls-serverless-express-apollo-dev-RestLambdaFunctionQualifiedArn"

@@ -68,13 +68,20 @@ functions:
           method: get
           cors: true
       - http:
-          path: singlepost-image
-          method: get
-          cors: true
-      - http:
           path: files
           method: get
           cors: true
+      - http: # Add a new HTTP event for serving images directly from S3
+          path: singlepost-image # Adjust the path as needed
+          method: get
+          cors: true
+          integration: s3 # Use S3 integration for direct access to S3 bucket
+          request:
+            parameters:
+              headers:
+                x-project-author: true # Pass any necessary headers here
+          bucket: react-image-upload-ivsir # Specify your S3 bucket name
+          key: "{proxy}" # Use proxy to pass path parameters (e.g., image filenames)
 
 plugins:
   - serverless-offline

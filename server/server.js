@@ -170,35 +170,6 @@ app.get("/singlepost-image", async (req, res) => {
 
   return res.json(presignedUrls);
 });
-// app.get("/singlepost-image/:projectAuthor", async (req, res) => {
-//   const projectAuthor = req.params.projectAuthor;
-
-//   if (!projectAuthor) return res.status(400).json({ message: "Bad request" });
-
-//   try {
-//     // Fetch images directly from S3 bucket
-//     const objects = await s3
-//       .listObjectsV2({
-//         Bucket: bucketName,
-//         Prefix: `${projectAuthor}/`, // Prefix to filter images for the specific project author
-//       })
-//       .promise();
-
-//     // Construct image URLs from S3 object keys
-//     const imageUrls = objects.Contents.map((object) =>
-//       s3.getSignedUrl("getObject", {
-//         Bucket: bucketName,
-//         Key: object.Key,
-//       })
-//     );
-
-//     res.json(imageUrls);
-//   } catch (error) {
-//     console.error("Error fetching images from S3:", error);
-//     res.status(500).json({ error: "Failed to fetch images from S3" });
-//   }
-// });
-
 
 
 app.get("/files", async (req, res) => {
