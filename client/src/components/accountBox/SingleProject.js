@@ -18,8 +18,8 @@ const SingleProject = () => {
   const [refetch, setRefetch] = useState(0);
   const { projectId } = useParams();
 
-  const URL = "/singlepost-image";
-  const URL2 = "/audiofiles";
+  const URL = "https://5wgel7uoui.execute-api.us-east-1.amazonaws.com/singlepost-image";
+  const URL2 = "https://5wgel7uoui.execute-api.us-east-1.amazonaws.com/audiofiles";
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
     // pass URL parameter
     variables: { projectId: projectId },

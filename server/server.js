@@ -278,4 +278,4 @@ exports.graphqlHandler = server.createHandler({
   },
 });
 
-// module.exports.restHandler = serverless(app);
+module.exports.restHandler = serverless(app);

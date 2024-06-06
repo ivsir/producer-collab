@@ -170,7 +170,7 @@ const s3 = new S3Client({
 });
 
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
-console.log('Bucket Name:', process.env.BUCKET);
+console.log('Bucket Name inside server:', process.env.BUCKET);
 
 const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
