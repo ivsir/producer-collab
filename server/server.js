@@ -27,11 +27,6 @@ const audioStorage = multer.memoryStorage();
 const audioUpload = multer({ storage: audioStorage });
 const customGraphQLEndpoint = '/graphql-api';
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-});
 
 
 const s3 = new AWS.S3();
@@ -193,6 +188,13 @@ app.get("/files", async (req, res) => {
   return res.json(presignedUrls);
 });
 
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // context: authMiddleware,
+});
+
 // const startServer = async () => {
 //   await connectToDatabase();
 //   await server.start();
@@ -203,15 +205,15 @@ app.get("/files", async (req, res) => {
 //     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
 //   });
 // };
+// Apply Apollo Server Lambda handler to the path
+// app.use(customGraphQLEndpoint, server.createHandler());
 
-const startServer = async () => {
-  await connectToDatabase();
-  server.createHandler({
-    expressApp: app,
-    path: customGraphQLEndpoint,
-  });
-};
+// const startServer = async () => {
+//   await dbConnection();
+// };
 
-startServer();
+// startServer();
+// module.exports.handler = serverless(app);
 
-module.exports.handler = serverless(app);
+exports.graphqlHandler = server.createHandler();
+

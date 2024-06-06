@@ -180,9 +180,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717647663186-2024-06-06T04:21:03.186Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717653919488-2024-06-06T06:05:19.488Z/serverless-express-apollo.zip"
               },
-              "Handler": "server/server.handler",
+              "Handler": "server/server.graphqlHandler",
               "Runtime": "nodejs20.x",
               "FunctionName": "serverless-express-apollo-dev-app",
               "MemorySize": 1024,
@@ -206,14 +206,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion1ZBdAEs6ZShqU51b81HDDkmfuAulgfQnGObnNIg": {
+          "AppLambdaVersionVvqZ8YUDRlr18gEdJcEo0v79PN8FgS6tVZO057lPw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "QlVOwZz/5lNoFleqYaJ0MoBsB4c7hESWptZ+K7RlJP4="
+              "CodeSha256": "qB6kJMnOkozeKzzjkVB4w0FXkRIyYiBu3Oq7pqzsK4U="
             }
           },
           "ApiGatewayRestApi": {
@@ -258,7 +258,7 @@
               }
             }
           },
-          "ApiGatewayResourceGraphqlDashapi": {
+          "ApiGatewayResourceGraphql": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -267,13 +267,13 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "graphql-api",
+              "PathPart": "graphql",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodGraphqlDashapiOptions": {
+          "ApiGatewayMethodGraphqlOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -311,7 +311,7 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGraphqlDashapi"
+                "Ref": "ApiGatewayResourceGraphql"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -410,13 +410,13 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodGraphqlDashapiAny": {
+          "ApiGatewayMethodGraphqlAny": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "ANY",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGraphqlDashapi"
+                "Ref": "ApiGatewayResourceGraphql"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -456,7 +456,7 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1717647654630": {
+          "ApiGatewayDeployment1717653911741": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -465,10 +465,10 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodGraphqlDashapiOptions",
+              "ApiGatewayMethodGraphqlOptions",
               "ApiGatewayMethodCreateDashs3DashfolderPost",
               "ApiGatewayMethodUserDashfoldersGet",
-              "ApiGatewayMethodGraphqlDashapiAny"
+              "ApiGatewayMethodGraphqlAny"
             ]
           },
           "AppLambdaPermissionApiGateway": {
@@ -521,7 +521,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion1ZBdAEs6ZShqU51b81HDDkmfuAulgfQnGObnNIg"
+              "Ref": "AppLambdaVersionVvqZ8YUDRlr18gEdJcEo0v79PN8FgS6tVZO057lPw"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -659,7 +659,7 @@
     "pluginsData": {},
     "functions": {
       "app": {
-        "handler": "server/server.handler",
+        "handler": "server/server.graphqlHandler",
         "events": [
           {
             "http": {
@@ -677,7 +677,7 @@
           },
           {
             "http": {
-              "path": "graphql-api",
+              "path": "graphql",
               "method": "any",
               "cors": {
                 "origin": "*",
@@ -706,7 +706,7 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion1ZBdAEs6ZShqU51b81HDDkmfuAulgfQnGObnNIg"
+        "versionLogicalId": "AppLambdaVersionVvqZ8YUDRlr18gEdJcEo0v79PN8FgS6tVZO057lPw"
       }
     },
     "configValidationMode": "warn",
@@ -734,7 +734,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717647663186-2024-06-06T04:21:03.186Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717653919488-2024-06-06T06:05:19.488Z"
       }
     },
     "appId": null,
@@ -743,7 +743,7 @@
     "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717647663186-2024-06-06T04:21:03.186Z",
+    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717653919488-2024-06-06T06:05:19.488Z",
     "artifact": "serverless-express-apollo.zip"
   }
 }

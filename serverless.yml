@@ -12,7 +12,8 @@ provider:
 
 functions:
   app:
-    handler: server/server.handler
+    # handler: server/server.handler
+    handler: server/server.graphqlHandler
     events:
       - http:
           path: create-s3-folder
@@ -21,9 +22,10 @@ functions:
           path: user-folders
           method: get
       - http:
-          path: graphql-api
+          path: graphql
           method: any
           cors: true
+
 
 plugins:
   - serverless-offline
