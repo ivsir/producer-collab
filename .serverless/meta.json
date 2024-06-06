@@ -12,14 +12,35 @@
         "name": "aws",
         "runtime": "nodejs20.x",
         "region": "us-east-1",
-        "stage": "dev",
-        "versionFunctions": true,
         "environment": {
-          "BUCKET": "react-image-upload-ivsir",
+          "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
           "MY_AWS_PROFILE": "ivsir-general",
           "MY_AWS_REGION": "us-west-1",
-          "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+          "BUCKET": "react-image-upload-ivsir"
         },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:PutObject",
+              "s3:GetObject",
+              "s3:ListBucket"
+            ],
+            "Resource": [
+              "arn:aws:s3:::react-image-upload-ivsir/*",
+              "arn:aws:s3:::react-image-upload-ivsir"
+            ]
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "sts:AssumeRole"
+            ],
+            "Resource": "arn:aws:iam::614288690243:user/ivsir"
+          }
+        ],
+        "stage": "dev",
+        "versionFunctions": true,
         "compiledCloudFormationTemplate": {
           "AWSTemplateFormatVersion": "2010-09-09",
           "Description": "The AWS CloudFormation template for this Serverless application",
@@ -162,6 +183,25 @@
                               "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-apollo-dev*:*:*"
                             }
                           ]
+                        },
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "s3:PutObject",
+                            "s3:GetObject",
+                            "s3:ListBucket"
+                          ],
+                          "Resource": [
+                            "arn:aws:s3:::react-image-upload-ivsir/*",
+                            "arn:aws:s3:::react-image-upload-ivsir"
+                          ]
+                        },
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "sts:AssumeRole"
+                          ],
+                          "Resource": "arn:aws:iam::614288690243:user/ivsir"
                         }
                       ]
                     }
@@ -190,7 +230,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717697083488-2024-06-06T18:04:43.488Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717700155523-2024-06-06T18:55:55.523Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.graphqlHandler",
                 "Runtime": "nodejs20.x",
@@ -199,10 +239,10 @@
                 "Timeout": 6,
                 "Environment": {
                   "Variables": {
-                    "BUCKET": "react-image-upload-ivsir",
+                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
                     "MY_AWS_PROFILE": "ivsir-general",
                     "MY_AWS_REGION": "us-west-1",
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+                    "BUCKET": "react-image-upload-ivsir"
                   }
                 },
                 "Role": {
@@ -223,7 +263,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717697083488-2024-06-06T18:04:43.488Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717700155523-2024-06-06T18:55:55.523Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.restHandler",
                 "Runtime": "nodejs20.x",
@@ -232,10 +272,10 @@
                 "Timeout": 6,
                 "Environment": {
                   "Variables": {
-                    "BUCKET": "react-image-upload-ivsir",
+                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
                     "MY_AWS_PROFILE": "ivsir-general",
                     "MY_AWS_REGION": "us-west-1",
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab"
+                    "BUCKET": "react-image-upload-ivsir"
                   }
                 },
                 "Role": {
@@ -249,24 +289,24 @@
                 "RestLogGroup"
               ]
             },
-            "AppLambdaVersionDt2TM2nBjULVc2oS5UQFF1wKiPxtU04Xl2rxwu7U8mM": {
+            "AppLambdaVersiontOuAYMPIpJo7HwRUQrtmVNhi9GdYDZ0p1A32KZrskNc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AppLambdaFunction"
                 },
-                "CodeSha256": "35gDH4xb2nRqBevX/SKG61T5deY9VpLWDTcz6axvd38="
+                "CodeSha256": "RcsQBSg6Np3bocwMayOIUlbKzSIo8Jn0kyf8ilZQVuA="
               }
             },
-            "RestLambdaVersionZFtOLOL546knCV8uEZ6jPeFo7X56udqcHXrNDvidI0": {
+            "RestLambdaVersioneVjkbfdKifb6ThfFgcOHGIj3aNbBOOhheudKJbrZltc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "RestLambdaFunction"
                 },
-                "CodeSha256": "35gDH4xb2nRqBevX/SKG61T5deY9VpLWDTcz6axvd38="
+                "CodeSha256": "RcsQBSg6Np3bocwMayOIUlbKzSIo8Jn0kyf8ilZQVuA="
               }
             },
             "ApiGatewayRestApi": {
@@ -1327,7 +1367,7 @@
                 "RestLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1717697073894": {
+            "ApiGatewayDeployment1717700146539": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -1445,7 +1485,7 @@
             "AppLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AppLambdaVersionDt2TM2nBjULVc2oS5UQFF1wKiPxtU04Xl2rxwu7U8mM"
+                "Ref": "AppLambdaVersiontOuAYMPIpJo7HwRUQrtmVNhi9GdYDZ0p1A32KZrskNc"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -1454,7 +1494,7 @@
             "RestLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "RestLambdaVersionZFtOLOL546knCV8uEZ6jPeFo7X56udqcHXrNDvidI0"
+                "Ref": "RestLambdaVersioneVjkbfdKifb6ThfFgcOHGIj3aNbBOOhheudKJbrZltc"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-RestLambdaFunctionQualifiedArn"
@@ -1631,7 +1671,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "AppLambdaVersionDt2TM2nBjULVc2oS5UQFF1wKiPxtU04Xl2rxwu7U8mM"
+          "versionLogicalId": "AppLambdaVersiontOuAYMPIpJo7HwRUQrtmVNhi9GdYDZ0p1A32KZrskNc"
         },
         "rest": {
           "handler": "server/server.restHandler",
@@ -1859,20 +1899,16 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "RestLambdaVersionZFtOLOL546knCV8uEZ6jPeFo7X56udqcHXrNDvidI0"
+          "versionLogicalId": "RestLambdaVersioneVjkbfdKifb6ThfFgcOHGIj3aNbBOOhheudKJbrZltc"
         }
       },
       "plugins": [
         "serverless-offline",
-        "serverless-dotenv-plugin",
         "serverless-prune-plugin"
       ],
       "custom": {
         "serverless-offline": {
           "httpPort": 4001
-        },
-        "dotenv": {
-          "path": "./server/.env"
         },
         "prune": {
           "automatic": true,
@@ -1888,10 +1924,10 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717697083488-2024-06-06T18:04:43.488Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717700155523-2024-06-06T18:55:55.523Z"
       }
     },
-    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  # environment:\n  #   MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n  #   MY_AWS_PROFILE: ivsir-general\n  #   MY_AWS_REGION: us-west-1\n  #   BUCKET: react-image-upload-ivsir\n\nfunctions:\n  app:\n    # handler: server/server.handler\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  rest:\n    handler: server/server.restHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors: true\n      - http:\n          path: user-folders\n          method: get\n          cors: true\n      - http:\n          path: images\n          method: post\n          cors: true\n      - http:\n          path: audiofiles\n          method: post\n          cors: true\n      - http:\n          path: upload\n          method: post\n          cors: true\n      - http:\n          path: images\n          method: get\n          cors: true\n      - http:\n          path: audiofiles\n          method: get\n          cors: true\n      - http:\n          path: singlepost-image\n          method: get\n          cors: true\n      - http:\n          path: files\n          method: get\n          cors: true\n\nplugins:\n  - serverless-offline\n  - serverless-dotenv-plugin\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  dotenv:\n    path: ./server/.env\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\nfunctions:\n  app:\n    # handler: server/server.handler\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  rest:\n    handler: server/server.restHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors: true\n      - http:\n          path: user-folders\n          method: get\n          cors: true\n      - http:\n          path: images\n          method: post\n          cors: true\n      - http:\n          path: audiofiles\n          method: post\n          cors: true\n      - http:\n          path: upload\n          method: post\n          cors: true\n      - http:\n          path: images\n          method: get\n          cors: true\n      - http:\n          path: audiofiles\n          method: get\n          cors: true\n      - http:\n          path: singlepost-image\n          method: get\n          cors: true\n      - http:\n          path: files\n          method: get\n          cors: true\n\nplugins:\n  - serverless-offline\n  # - serverless-dotenv-plugin\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  # dotenv:\n  #   path: ./server/.env\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
     "command": [
       "deploy"
     ],
@@ -1920,18 +1956,18 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:614288690243:stack/serverless-express-apollo-dev/a73a55d0-229e-11ef-8669-120b3274691f",
     "serviceProviderAwsCfStackCreated": "2024-06-04T18:17:07.845Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-06T18:05:08.621Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-06T18:56:25.211Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "RestLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-rest:1",
+        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-rest:2",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-RestLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "AppLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-app:24",
+        "OutputValue": "arn:aws:lambda:us-east-1:614288690243:function:serverless-express-apollo-dev-app:25",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
       },

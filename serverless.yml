@@ -4,12 +4,25 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  # environment:
-  #   MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
-  #   MY_AWS_PROFILE: ivsir-general
-  #   MY_AWS_REGION: us-west-1
-  #   BUCKET: react-image-upload-ivsir
+  environment:
+    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
+    MY_AWS_PROFILE: ivsir-general
+    MY_AWS_REGION: us-west-1
+    BUCKET: react-image-upload-ivsir
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+        - s3:ListBucket
+      Resource:
+        - "arn:aws:s3:::react-image-upload-ivsir/*"
+        - "arn:aws:s3:::react-image-upload-ivsir"
+    - Effect: Allow
+      Action:
+        - sts:AssumeRole
+      Resource: "arn:aws:iam::614288690243:user/ivsir"
 functions:
   app:
     # handler: server/server.handler
@@ -65,14 +78,14 @@ functions:
 
 plugins:
   - serverless-offline
-  - serverless-dotenv-plugin
+  # - serverless-dotenv-plugin
   - serverless-prune-plugin
 
 custom:
   serverless-offline:
     httpPort: 4001
-  dotenv:
-    path: ./server/.env
+  # dotenv:
+  #   path: ./server/.env
   prune:
     automatic: true
     number: 3
