@@ -40,12 +40,12 @@ const corsOptions = {
 };
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(cors({
-//   origin: "*", // Allow requests from all origins (replace with your specific origins)
-//   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
-//   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
-// }));
-app.use(cors());
+app.use(cors({
+  origin: "*", // Allow requests from all origins (replace with your specific origins)
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
+}));
+// app.use(cors());
 // app.use(cors(corsOptions));
 
 // Define your routes for image upload and retrieval here
@@ -197,8 +197,17 @@ app.get("/files", async (req, res) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // playground: true,
-  // introspection: true,
+  context: async ({ event, context }) => {
+    // Ensure database connection is established
+    await connectToDatabase();
+    return {
+      headers: event.headers,
+      functionName: context.functionName,
+      event,
+      context,
+      user: context.user || null, // Add user from context if necessary
+    };
+  },
   // context: authMiddleware,
 });
 
@@ -222,5 +231,12 @@ const server = new ApolloServer({
 // startServer();
 // module.exports.handler = serverless(app);
 
-exports.graphqlHandler = server.createHandler();
+exports.graphqlHandler = server.createHandler({
+  cors: {
+      origin: '*',
+      credentials: true,
+      allowedHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token', 'x-user-id', 'x-file-type', 'x-project-author'],
+  },
+});
 
+module.exports.restHandler = serverless(app);
