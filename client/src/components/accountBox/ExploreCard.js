@@ -71,6 +71,7 @@ function ExploreCard(props) {
 
   const findProjectImageUrl = (projectImage, projectAuthor) => {
     const authorImageUrls = imageUrls[projectAuthor] || [];
+
     return authorImageUrls.find((imageUrl) => imageUrl.includes(projectImage));
   };
 
@@ -87,6 +88,7 @@ function ExploreCard(props) {
           project.projectImage,
           currentAuthor
         );
+        console.log(projectImageUrl)
         const projectAudioUrl = findProjectAudioUrl(
           project.projectAudio,
           currentAuthor
