@@ -20,7 +20,7 @@ function ProfileCard(props) {
     variables: { username: AuthService.getUsername() },
   });
   const projects = userData?.user.projects || [];
-  const URL = "/images";
+  const URL = "/dev/images";
 
   const [imageUrls, setImageUrls] = useState({});
   const [refetch, setRefetch] = useState(0);
