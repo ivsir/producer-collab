@@ -197,8 +197,8 @@ app.get("/files", async (req, res) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: true,
-  introspection: true,
+  // playground: true,
+  // introspection: true,
   // context: authMiddleware,
 });
 
