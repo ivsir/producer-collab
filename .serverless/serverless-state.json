@@ -240,7 +240,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.graphqlHandler",
               "Runtime": "nodejs20.x",
@@ -273,7 +273,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.restHandler",
               "Runtime": "nodejs20.x",
@@ -306,7 +306,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.getSinglePostImage",
               "Runtime": "nodejs20.x",
@@ -692,7 +692,7 @@
               "GetSinglePostImageLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1717736096421": {
+          "ApiGatewayDeployment1717779667098": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1232,7 +1232,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z"
       }
     },
     "appId": null,
@@ -1241,7 +1241,7 @@
     "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z",
+    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z",
     "artifact": "serverless-express-apollo.zip"
   }
 }
