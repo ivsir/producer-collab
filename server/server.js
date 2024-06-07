@@ -26,29 +26,17 @@ const upload = multer({ storage });
 const audioStorage = multer.memoryStorage();
 const audioUpload = multer({ storage: audioStorage });
 const customGraphQLEndpoint = '/graphql-api';
-
-
+const corsOptions = {
+  origin: 'https://main.dan6kz7trfabu.amplifyapp.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false
+};
 
 const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
 dotenv.config();
-const corsOptions = {
-  origin: ["https://main.dan6kz7trfabu.amplifyapp.com"],
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
-};
-// const handleOptionsRequest = (req, res, next) => {
-//   if (req.method === "OPTIONS") {
-//     res.set({
-//       "Access-Control-Allow-Origin": "*", // Update with your specific origins if needed
-//       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-//       "Access-Control-Allow-Headers": "Content-Type, Authorization, x-user-id, x-file-type, x-project-author",
-//     });
-//     return res.status(200).end();
-//   }
-//   next(); // Pass control to the next middleware function
-// };
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -59,11 +47,12 @@ app.use(express.json());
 //   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
 //   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 // }));
-app.use(cors({
-  origin: 'https://main.dan6kz7trfabu.amplifyapp.com',
-  // Additional options if needed
-}));
-// app.use(cors(corsOptions));
+// app.use(cors({
+//   origin: 'https://main.dan6kz7trfabu.amplifyapp.com',
+//   allowedHeaders: ['Content-Type', 'Authorization', 'x-user-id', 'x-file-type', 'x-project-author'],
+//   // Additional options if needed
+// }));
+app.use(cors(corsOptions));
 // app.use(handleOptionsRequest)
 
 // Define your routes for image upload and retrieval here
@@ -250,53 +239,6 @@ const server = new ApolloServer({
 // startServer();
 // module.exports.handler = serverless(app);
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*", // Change this to specific origins if needed
-  "Access-Control-Allow-Headers": "Content-Type, Authorization, x-user-id, x-file-type, x-project-author",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-};
-
-exports.getSinglePostImage = async (event) => {
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: JSON.stringify({ message: "CORS preflight response" }),
-    };
-  }
-
-  const projectAuthor = event.headers["x-project-author"];
-  if (!projectAuthor) {
-    return {
-      statusCode: 400,
-      headers: corsHeaders,
-      body: JSON.stringify({ message: "Bad request check message" }),
-    };
-  }
-
-  try {
-    const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
-    if (error) {
-      return {
-        statusCode: 400,
-        headers: corsHeaders,
-        body: JSON.stringify({ message: error.message }),
-      };
-    }
-
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: JSON.stringify(presignedUrls),
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ message: "Internal server error" }),
-    };
-  }
-};
 
 exports.graphqlHandler = server.createHandler({
   cors: {
@@ -306,4 +248,7 @@ exports.graphqlHandler = server.createHandler({
   },
 });
 
-module.exports.restHandler = serverless(app);
+// module.exports.restHandler = serverless(app);
+module.exports.restHandler = (event, context, callback) => {
+  return app(event, context, callback);
+};

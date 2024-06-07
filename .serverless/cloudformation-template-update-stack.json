@@ -71,22 +71,16 @@
         }
       }
     },
+    "GraphqlLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-graphql"
+      }
+    },
     "AppLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
         "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-app"
-      }
-    },
-    "RestApiHandlerLogGroup": {
-      "Type": "AWS::Logs::LogGroup",
-      "Properties": {
-        "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-restApiHandler"
-      }
-    },
-    "GetSinglePostImageLogGroup": {
-      "Type": "AWS::Logs::LogGroup",
-      "Properties": {
-        "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-getSinglePostImage"
       }
     },
     "IamRoleLambdaExecution": {
@@ -186,6 +180,39 @@
         }
       }
     },
+    "GraphqlLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-express-apollo/dev/1717798415351-2024-06-07T22:13:35.351Z/serverless-express-apollo.zip"
+        },
+        "Handler": "server/server.graphqlHandler",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "serverless-express-apollo-dev-graphql",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
+            "MY_AWS_PROFILE": "ivsir-general",
+            "MY_AWS_REGION": "us-west-1",
+            "BUCKET": "react-image-upload-ivsir"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GraphqlLogGroup"
+      ]
+    },
     "AppLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -193,9 +220,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717782445087-2024-06-07T17:47:25.087Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717798415351-2024-06-07T22:13:35.351Z/serverless-express-apollo.zip"
         },
-        "Handler": "server/server.graphqlHandler",
+        "Handler": "app.handler",
         "Runtime": "nodejs20.x",
         "FunctionName": "serverless-express-apollo-dev-app",
         "MemorySize": 1024,
@@ -219,100 +246,24 @@
         "AppLogGroup"
       ]
     },
-    "RestApiHandlerLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
+    "GraphqlLambdaVersionxEaoHD3gw5g23ElXZkMoI5noV1vXTNJPBqxav4KiM": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
       "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "ServerlessDeploymentBucket"
-          },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717782445087-2024-06-07T17:47:25.087Z/serverless-express-apollo.zip"
+        "FunctionName": {
+          "Ref": "GraphqlLambdaFunction"
         },
-        "Handler": "server/server.restHandler",
-        "Runtime": "nodejs20.x",
-        "FunctionName": "serverless-express-apollo-dev-restApiHandler",
-        "MemorySize": 1024,
-        "Timeout": 6,
-        "Environment": {
-          "Variables": {
-            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-            "MY_AWS_PROFILE": "ivsir-general",
-            "MY_AWS_REGION": "us-west-1",
-            "BUCKET": "react-image-upload-ivsir"
-          }
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "IamRoleLambdaExecution",
-            "Arn"
-          ]
-        }
-      },
-      "DependsOn": [
-        "RestApiHandlerLogGroup"
-      ]
+        "CodeSha256": "e5CVJlRMJesDd6fwWGGJzHkFrUz8gnhMeqym8obVPhU="
+      }
     },
-    "GetSinglePostImageLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "ServerlessDeploymentBucket"
-          },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717782445087-2024-06-07T17:47:25.087Z/serverless-express-apollo.zip"
-        },
-        "Handler": "server/server.getSinglePostImage",
-        "Runtime": "nodejs20.x",
-        "FunctionName": "serverless-express-apollo-dev-getSinglePostImage",
-        "MemorySize": 1024,
-        "Timeout": 6,
-        "Environment": {
-          "Variables": {
-            "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-            "MY_AWS_PROFILE": "ivsir-general",
-            "MY_AWS_REGION": "us-west-1",
-            "BUCKET": "react-image-upload-ivsir"
-          }
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "IamRoleLambdaExecution",
-            "Arn"
-          ]
-        }
-      },
-      "DependsOn": [
-        "GetSinglePostImageLogGroup"
-      ]
-    },
-    "AppLambdaVersionJpUvDFgBHNpWSqrFL1tMSknJbyoXDdIZ82ZywrTuGo": {
+    "AppLambdaVersion9bzlj5uCulLmoJ1jfb5qN8Pmioi5XdC2BlO8Uc2xeo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "+K45lY+p55sgcayfz745b7EjEyPMOE/JtjfHKEDrMnk="
-      }
-    },
-    "RestApiHandlerLambdaVersionfATxgSJ5WWQd2l1LFd2k8uUwxt75ud5CPqbFRXgJNE": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "RestApiHandlerLambdaFunction"
-        },
-        "CodeSha256": "+K45lY+p55sgcayfz745b7EjEyPMOE/JtjfHKEDrMnk="
-      }
-    },
-    "GetSinglePostImageLambdaVersion3YKwPKUFhvaumSnFKEYf8XPuqiNiIPXIMfjowd8u4": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "GetSinglePostImageLambdaFunction"
-        },
-        "CodeSha256": "+K45lY+p55sgcayfz745b7EjEyPMOE/JtjfHKEDrMnk="
+        "CodeSha256": "e5CVJlRMJesDd6fwWGGJzHkFrUz8gnhMeqym8obVPhU="
       }
     },
     "ApiGatewayRestApi": {
@@ -352,21 +303,6 @@
           ]
         },
         "PathPart": "playground",
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        }
-      }
-    },
-    "ApiGatewayResourceSinglepostDashimage": {
-      "Type": "AWS::ApiGateway::Resource",
-      "Properties": {
-        "ParentId": {
-          "Fn::GetAtt": [
-            "ApiGatewayRestApi",
-            "RootResourceId"
-          ]
-        },
-        "PathPart": "singlepost-image",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -462,7 +398,7 @@
         }
       }
     },
-    "ApiGatewayMethodSinglepostDashimageOptions": {
+    "ApiGatewayMethodOptions": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "AuthorizationType": "NONE",
@@ -489,9 +425,9 @@
             {
               "StatusCode": "200",
               "ResponseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'"
+                "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
               },
               "ResponseTemplates": {
                 "application/json": ""
@@ -500,7 +436,10 @@
           ]
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceSinglepostDashimage"
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -538,7 +477,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "AppLambdaFunction",
+                    "GraphqlLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -550,7 +489,7 @@
         "MethodResponses": []
       },
       "DependsOn": [
-        "AppLambdaPermissionApiGateway"
+        "GraphqlLambdaPermissionApiGateway"
       ]
     },
     "ApiGatewayMethodPlaygroundAny": {
@@ -584,7 +523,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "AppLambdaFunction",
+                    "GraphqlLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -596,16 +535,19 @@
         "MethodResponses": []
       },
       "DependsOn": [
-        "AppLambdaPermissionApiGateway"
+        "GraphqlLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayMethodSinglepostDashimageGet": {
+    "ApiGatewayMethodAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
-        "HttpMethod": "GET",
+        "HttpMethod": "ANY",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceSinglepostDashimage"
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -630,7 +572,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetSinglePostImageLambdaFunction",
+                    "AppLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -642,10 +584,10 @@
         "MethodResponses": []
       },
       "DependsOn": [
-        "GetSinglePostImageLambdaPermissionApiGateway"
+        "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717782437449": {
+    "ApiGatewayDeployment1717798407730": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -656,11 +598,48 @@
       "DependsOn": [
         "ApiGatewayMethodGraphqlOptions",
         "ApiGatewayMethodPlaygroundOptions",
-        "ApiGatewayMethodSinglepostDashimageOptions",
+        "ApiGatewayMethodOptions",
         "ApiGatewayMethodGraphqlAny",
         "ApiGatewayMethodPlaygroundAny",
-        "ApiGatewayMethodSinglepostDashimageGet"
+        "ApiGatewayMethodAny"
       ]
+    },
+    "GraphqlLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GraphqlLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     },
     "AppLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
@@ -698,157 +677,6 @@
           ]
         }
       }
-    },
-    "GetSinglePostImageLambdaPermissionApiGateway": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "GetSinglePostImageLambdaFunction",
-            "Arn"
-          ]
-        },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "/*/*"
-            ]
-          ]
-        }
-      }
-    },
-    "HttpApi": {
-      "Type": "AWS::ApiGatewayV2::Api",
-      "Properties": {
-        "Name": "dev-serverless-express-apollo",
-        "ProtocolType": "HTTP",
-        "CorsConfiguration": {
-          "AllowHeaders": [
-            "Content-Type",
-            "Authorization",
-            "x-user-id",
-            "x-file-type",
-            "x-project-author"
-          ],
-          "AllowMethods": [
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE",
-            "OPTIONS"
-          ],
-          "AllowOrigins": [
-            "*"
-          ]
-        }
-      }
-    },
-    "HttpApiStage": {
-      "Type": "AWS::ApiGatewayV2::Stage",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "StageName": "$default",
-        "AutoDeploy": true,
-        "DefaultRouteSettings": {
-          "DetailedMetricsEnabled": false
-        }
-      }
-    },
-    "RestApiHandlerLambdaPermissionHttpApi": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiHandlerLambdaFunction",
-            "Arn"
-          ]
-        },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "HttpApi"
-              },
-              "/*"
-            ]
-          ]
-        }
-      }
-    },
-    "HttpApiIntegrationRestApiHandler": {
-      "Type": "AWS::ApiGatewayV2::Integration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "IntegrationType": "AWS_PROXY",
-        "IntegrationUri": {
-          "Fn::GetAtt": [
-            "RestApiHandlerLambdaFunction",
-            "Arn"
-          ]
-        },
-        "PayloadFormatVersion": "2.0",
-        "TimeoutInMillis": 30000
-      }
-    },
-    "HttpApiRouteAnyProxyVar": {
-      "Type": "AWS::ApiGatewayV2::Route",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "RouteKey": "ANY /{proxy+}",
-        "Target": {
-          "Fn::Join": [
-            "/",
-            [
-              "integrations",
-              {
-                "Ref": "HttpApiIntegrationRestApiHandler"
-              }
-            ]
-          ]
-        }
-      },
-      "DependsOn": "HttpApiIntegrationRestApiHandler"
     }
   },
   "Outputs": {
@@ -860,31 +688,22 @@
         "Name": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
       }
     },
+    "GraphqlLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GraphqlLambdaVersionxEaoHD3gw5g23ElXZkMoI5noV1vXTNJPBqxav4KiM"
+      },
+      "Export": {
+        "Name": "sls-serverless-express-apollo-dev-GraphqlLambdaFunctionQualifiedArn"
+      }
+    },
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionJpUvDFgBHNpWSqrFL1tMSknJbyoXDdIZ82ZywrTuGo"
+        "Ref": "AppLambdaVersion9bzlj5uCulLmoJ1jfb5qN8Pmioi5XdC2BlO8Uc2xeo"
       },
       "Export": {
         "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
-      }
-    },
-    "RestApiHandlerLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "RestApiHandlerLambdaVersionfATxgSJ5WWQd2l1LFd2k8uUwxt75ud5CPqbFRXgJNE"
-      },
-      "Export": {
-        "Name": "sls-serverless-express-apollo-dev-RestApiHandlerLambdaFunctionQualifiedArn"
-      }
-    },
-    "GetSinglePostImageLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "GetSinglePostImageLambdaVersion3YKwPKUFhvaumSnFKEYf8XPuqiNiIPXIMfjowd8u4"
-      },
-      "Export": {
-        "Name": "sls-serverless-express-apollo-dev-GetSinglePostImageLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -911,40 +730,6 @@
       },
       "Export": {
         "Name": "sls-serverless-express-apollo-dev-ServiceEndpoint"
-      }
-    },
-    "HttpApiId": {
-      "Description": "Id of the HTTP API",
-      "Value": {
-        "Ref": "HttpApi"
-      },
-      "Export": {
-        "Name": "sls-serverless-express-apollo-dev-HttpApiId"
-      }
-    },
-    "HttpApiUrl": {
-      "Description": "URL of the HTTP API",
-      "Value": {
-        "Fn::Join": [
-          "",
-          [
-            "https://",
-            {
-              "Ref": "HttpApi"
-            },
-            ".execute-api.",
-            {
-              "Ref": "AWS::Region"
-            },
-            ".",
-            {
-              "Ref": "AWS::URLSuffix"
-            }
-          ]
-        ]
-      },
-      "Export": {
-        "Name": "sls-serverless-express-apollo-dev-HttpApiUrl"
       }
     }
   }

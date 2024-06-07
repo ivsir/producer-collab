@@ -4,22 +4,22 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  httpApi:
-    cors:
-      allowedOrigins:
-        - '*'
-      allowedHeaders:
-        - Content-Type
-        - Authorization
-        - x-user-id
-        - x-file-type
-        - x-project-author
-      allowedMethods:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - OPTIONS
+  # httpApi:
+  #   cors:
+  #     allowedOrigins:
+  #       - 'https://main.dan6kz7trfabu.amplifyapp.com'
+  #     allowedHeaders:
+  #       - Content-Type
+  #       - Authorization
+  #       - x-user-id
+  #       - x-file-type
+  #       - x-project-author
+  #     allowedMethods:
+  #       - GET
+  #       - POST
+  #       - PUT
+  #       - DELETE
+  #       - OPTIONS
   environment:
     MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
     MY_AWS_PROFILE: ivsir-general
@@ -41,7 +41,7 @@ provider:
       Resource: "arn:aws:iam::614288690243:user/ivsir"
 
 functions:
-  app:
+  graphql:
     handler: server/server.graphqlHandler
     events:
       - http:
@@ -52,29 +52,24 @@ functions:
           path: playground
           method: ANY
           cors: true
-  restApiHandler:
+  app:
     handler: server/server.restHandler
     events:
-      - httpApi:
-          path: /{proxy+}
-          method: ANY
-  getSinglePostImage:
-    handler: server/server.getSinglePostImage
-    events:
       - http:
-          path: singlepost-image
-          method: GET
+          path: /
+          method: any
           cors:
-            origin: '*'
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
             headers:
               - Content-Type
               - Authorization
-              - x-user-id
-              - x-file-type
-              - x-project-author
-            methods:
-              - GET
-              - OPTIONS        
+            allowCredentials: false        
+  # restApiHandler:
+  #   handler: server/server.restHandler
+  #   events:
+  #     - httpApi:
+  #         path: /{proxy+}
+  #         method: ANY     
 
 plugins:
   - serverless-offline
