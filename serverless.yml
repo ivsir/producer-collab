@@ -3,23 +3,7 @@ service: serverless-express-apollo
 provider:
   name: aws
   runtime: nodejs20.x
-  region: us-east-1
-  # httpApi:
-  #   cors:
-  #     allowedOrigins:
-  #       - 'https://main.dan6kz7trfabu.amplifyapp.com'
-  #     allowedHeaders:
-  #       - Content-Type
-  #       - Authorization
-  #       - x-user-id
-  #       - x-file-type
-  #       - x-project-author
-  #     allowedMethods:
-  #       - GET
-  #       - POST
-  #       - PUT
-  #       - DELETE
-  #       - OPTIONS
+  region: us-west-1
   environment:
     MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
     MY_AWS_PROFILE: ivsir-general
@@ -52,18 +36,133 @@ functions:
           path: playground
           method: ANY
           cors: true
-  app:
-    handler: server/server.restHandler
+  # app:
+  #   handler: server/server.restHandler
+  #   events:
+  #     - http:
+  #         path: /
+  #         method: any
+  #         cors:
+  #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+  #           headers:
+  #             - Content-Type
+  #             - Authorization
+  #             - x-user-id
+  #             - x-file-type
+  #             - x-project-author
+  #           allowCredentials: false
+  singlePostImage:
+    handler: server/server.singlePostImageHandler
     events:
       - http:
-          path: /
-          method: any
+          path: singlepost-image
+          method: get
           cors:
             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
             headers:
               - Content-Type
               - Authorization
-            allowCredentials: false        
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  createS3Folder:
+    handler: server/server.createS3FolderHandler
+    events:
+      - http:
+          path: create-s3-folder
+          method: post
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  upload:
+    handler: server/server.uploadHandler
+    events:
+      - http:
+          path: upload
+          method: post
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  getUserFolders:
+    handler: server/server.getUserFoldersHandler
+    events:
+      - http:
+          path: user-folders
+          method: get
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  getImages:
+    handler: server/server.getImagesHandler
+    events:
+      - http:
+          path: images
+          method: get
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  getAudioFiles:
+    handler: server/server.getAudioFilesHandler
+    events:
+      - http:
+          path: audiofiles
+          method: get
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  getFiles:
+    handler: server/server.getFilesHandler
+    events:
+      - http:
+          path: files
+          method: get
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+     
   # restApiHandler:
   #   handler: server/server.restHandler
   #   events:

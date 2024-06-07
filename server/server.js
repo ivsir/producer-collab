@@ -29,7 +29,7 @@ const customGraphQLEndpoint = '/graphql-api';
 const corsOptions = {
   origin: 'https://main.dan6kz7trfabu.amplifyapp.com',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-user-id', 'x-file-type', 'x-project-author'],
   credentials: false
 };
 
@@ -37,9 +37,11 @@ const s3 = new AWS.S3();
 const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
 dotenv.config();
-
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.options('*', cors(corsOptions)); // Handle pre-flight requests
+
 // Define the OPTIONS middleware
 
 // app.use(cors({
@@ -52,7 +54,7 @@ app.use(express.json());
 //   allowedHeaders: ['Content-Type', 'Authorization', 'x-user-id', 'x-file-type', 'x-project-author'],
 //   // Additional options if needed
 // }));
-app.use(cors(corsOptions));
+
 // app.use(handleOptionsRequest)
 
 // Define your routes for image upload and retrieval here
@@ -242,13 +244,279 @@ const server = new ApolloServer({
 
 exports.graphqlHandler = server.createHandler({
   cors: {
-      origin: '*',
-      credentials: true,
-      allowedHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token', 'x-user-id', 'x-file-type', 'x-project-author'],
+    origin: '*',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token', 'x-user-id', 'x-file-type', 'x-project-author'],
   },
 });
 
-// module.exports.restHandler = serverless(app);
-module.exports.restHandler = (event, context, callback) => {
-  return app(event, context, callback);
+exports.createS3FolderHandler = async (event, context, callback) => {
+  const { userId } = JSON.parse(event.body);
+
+  try {
+    const folderKey = `${userId}/`;
+    await s3.putObject({
+      Bucket: bucketName,
+      Key: folderKey,
+      Body: '', // Empty body to represent a folder
+    }).promise();
+
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'S3 folder created successfully' }),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error('Error creating S3 folder:', error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to create S3 folder' }),
+    };
+    callback(null, response);
+  }
 };
+
+exports.getUserFoldersHandler = async (event, context, callback) => {
+  try {
+    const data = await s3.listObjectsV2({ Bucket: bucketName }).promise();
+    const objects = data.Contents.map((object) => ({
+      key: object.Key,
+      lastModified: object.LastModified,
+      size: object.Size,
+    }));
+
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(objects),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error('Failed to retrieve objects from S3:', error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to retrieve objects from S3' }),
+    };
+    callback(null, response);
+  }
+};
+
+exports.uploadHandler = async (event, context, callback) => {
+  const { file } = JSON.parse(event.body);
+  const userId = event.headers['x-user-id'];
+  const fileType = event.headers['x-file-type'];
+
+  if (!file || !userId || !fileType) {
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Bad request' }),
+    };
+    callback(null, response);
+    return;
+  }
+
+  try {
+    const { key, error } = await uploadToS3({ file, userId });
+
+    if (error) {
+      const response = {
+        statusCode: 500,
+        body: JSON.stringify({ message: error.message }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const response = {
+      statusCode: 201,
+      body: JSON.stringify({ key }),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error('Error processing upload:', error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Internal server error' }),
+    };
+    callback(null, response);
+  }
+};
+
+exports.singlePostImageHandler = async (event, context, callback) => {
+  try {
+    const projectAuthor = event.headers["x-project-author"];
+
+    if (!projectAuthor) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Bad request" }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
+
+    if (error) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: error.message }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const response = {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify(presignedUrls),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error("Error processing request:", error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Internal server error" }),
+    };
+    callback(null, response);
+  }
+};
+
+exports.getImagesHandler = async (event, context, callback) => {
+  const userId = event.headers['x-user-id'];
+
+  if (!userId) {
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Bad request' }),
+    };
+    callback(null, response);
+    return;
+  }
+
+  try {
+    const { error, presignedUrls } = await getUserPresignedUrls(userId);
+
+    if (error) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: error.message }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const response = {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify(presignedUrls),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error('Error getting images:', error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Internal server error' }),
+    };
+    callback(null, response);
+  }
+};
+
+exports.getAudioFilesHandler = async (event, context, callback) => {
+  try {
+    const userId = event.headers['x-project-author'];
+
+    if (!userId) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Bad request" }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const { error, presignedUrls } = await getUserPresignedUrls(userId);
+
+    if (error) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: error.message }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const response = {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify(presignedUrls),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error("Error processing request:", error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Internal server error" }),
+    };
+    callback(null, response);
+  }
+};
+
+exports.getFilesHandler = async (event, context, callback) => {
+  try {
+    const userId = event.headers['x-project-author'];
+    const fileType = event.headers['x-file-type'];
+
+    if (!userId || !fileType) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Bad request" }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    let presignedUrls;
+    if (fileType === "image") {
+      presignedUrls = await getUserPresignedUrls(userId, "image");
+    } else if (fileType === "audio") {
+      presignedUrls = await getUserPresignedUrls(userId, "audio");
+    }
+
+    if (presignedUrls.error) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({ message: presignedUrls.error.message }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    const response = {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify(presignedUrls),
+    };
+    callback(null, response);
+  } catch (error) {
+    console.error("Error processing request:", error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Internal server error" }),
+    };
+    callback(null, response);
+  }
+};
+
+// module.exports.restHandler = serverless(app);
