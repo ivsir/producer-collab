@@ -252,7 +252,7 @@ exports.getSinglePostImage = async (event) => {
     return {
       statusCode: 400,
       headers: corsHeaders,
-      body: JSON.stringify({ message: "Bad request" }),
+      body: JSON.stringify({ message: "Bad request check message" }),
     };
   }
 

@@ -240,7 +240,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717780215005-2024-06-07T17:10:15.005Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.graphqlHandler",
               "Runtime": "nodejs20.x",
@@ -273,7 +273,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717780215005-2024-06-07T17:10:15.005Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.restHandler",
               "Runtime": "nodejs20.x",
@@ -306,7 +306,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717780215005-2024-06-07T17:10:15.005Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.getSinglePostImage",
               "Runtime": "nodejs20.x",
@@ -332,34 +332,34 @@
               "GetSinglePostImageLogGroup"
             ]
           },
-          "AppLambdaVersionLNLp1VRpjYAnoK8g9P1CFQ3esgdTC3qpBJhIspdtvQ": {
+          "AppLambdaVersion2CVwgXo5DyltGw2kVziuUQrstUVascj37P485jrOcg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "6u1oSrNbZ/JmvJPldBnSXFEDDJiybrOj7bj+RvGS3PE="
+              "CodeSha256": "6aAcuRZIAtTDDpuOSkSu0yGqTQSw0C1YmmOtCVjtcKA="
             }
           },
-          "RestApiHandlerLambdaVersionXUt2br2XQMOwO0ufw9oqYhUUnSS3X99qmIbVqQ8frk": {
+          "RestApiHandlerLambdaVersionmfWPEBsTwmTn0UtFwkGxEuoouJHvrF1C4pM4J8UhIY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RestApiHandlerLambdaFunction"
               },
-              "CodeSha256": "6u1oSrNbZ/JmvJPldBnSXFEDDJiybrOj7bj+RvGS3PE="
+              "CodeSha256": "6aAcuRZIAtTDDpuOSkSu0yGqTQSw0C1YmmOtCVjtcKA="
             }
           },
-          "GetSinglePostImageLambdaVersionNCpN3awjQsB7oIspYpHS8UrWiTCcfcAtH5tcDGP0": {
+          "GetSinglePostImageLambdaVersionX0h8IDw96PPbU2yaKGdk4cPEACMHPSsrSPF0HIaUdA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetSinglePostImageLambdaFunction"
               },
-              "CodeSha256": "6u1oSrNbZ/JmvJPldBnSXFEDDJiybrOj7bj+RvGS3PE="
+              "CodeSha256": "6aAcuRZIAtTDDpuOSkSu0yGqTQSw0C1YmmOtCVjtcKA="
             }
           },
           "ApiGatewayRestApi": {
@@ -692,7 +692,7 @@
               "GetSinglePostImageLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1717779667098": {
+          "ApiGatewayDeployment1717780206937": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -907,7 +907,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionLNLp1VRpjYAnoK8g9P1CFQ3esgdTC3qpBJhIspdtvQ"
+              "Ref": "AppLambdaVersion2CVwgXo5DyltGw2kVziuUQrstUVascj37P485jrOcg"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -916,7 +916,7 @@
           "RestApiHandlerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RestApiHandlerLambdaVersionXUt2br2XQMOwO0ufw9oqYhUUnSS3X99qmIbVqQ8frk"
+              "Ref": "RestApiHandlerLambdaVersionmfWPEBsTwmTn0UtFwkGxEuoouJHvrF1C4pM4J8UhIY"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-RestApiHandlerLambdaFunctionQualifiedArn"
@@ -925,7 +925,7 @@
           "GetSinglePostImageLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetSinglePostImageLambdaVersionNCpN3awjQsB7oIspYpHS8UrWiTCcfcAtH5tcDGP0"
+              "Ref": "GetSinglePostImageLambdaVersionX0h8IDw96PPbU2yaKGdk4cPEACMHPSsrSPF0HIaUdA"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-GetSinglePostImageLambdaFunctionQualifiedArn"
@@ -1150,7 +1150,7 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionLNLp1VRpjYAnoK8g9P1CFQ3esgdTC3qpBJhIspdtvQ"
+        "versionLogicalId": "AppLambdaVersion2CVwgXo5DyltGw2kVziuUQrstUVascj37P485jrOcg"
       },
       "restApiHandler": {
         "handler": "server/server.restHandler",
@@ -1170,7 +1170,7 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "RestApiHandlerLambdaVersionXUt2br2XQMOwO0ufw9oqYhUUnSS3X99qmIbVqQ8frk"
+        "versionLogicalId": "RestApiHandlerLambdaVersionmfWPEBsTwmTn0UtFwkGxEuoouJHvrF1C4pM4J8UhIY"
       },
       "getSinglePostImage": {
         "handler": "server/server.getSinglePostImage",
@@ -1204,7 +1204,7 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GetSinglePostImageLambdaVersionNCpN3awjQsB7oIspYpHS8UrWiTCcfcAtH5tcDGP0"
+        "versionLogicalId": "GetSinglePostImageLambdaVersionX0h8IDw96PPbU2yaKGdk4cPEACMHPSsrSPF0HIaUdA"
       }
     },
     "configValidationMode": "warn",
@@ -1232,7 +1232,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717780215005-2024-06-07T17:10:15.005Z"
       }
     },
     "appId": null,
@@ -1241,7 +1241,7 @@
     "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717779675990-2024-06-07T17:01:15.990Z",
+    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717780215005-2024-06-07T17:10:15.005Z",
     "artifact": "serverless-express-apollo.zip"
   }
 }
