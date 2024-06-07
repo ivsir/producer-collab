@@ -38,7 +38,6 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 };
-// Define the OPTIONS middleware
 const handleOptionsRequest = (req, res, next) => {
   if (req.method === "OPTIONS") {
     res.set({
@@ -50,8 +49,11 @@ const handleOptionsRequest = (req, res, next) => {
   }
   next(); // Pass control to the next middleware function
 };
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+// Define the OPTIONS middleware
+
 // app.use(cors({
 //   origin: "*", // Allow requests from all origins (replace with your specific origins)
 //   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
