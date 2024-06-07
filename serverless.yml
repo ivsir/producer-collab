@@ -64,7 +64,17 @@ functions:
       - http:
           path: singlepost-image
           method: GET
-          cors: true          
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            methods:
+              - GET
+              - OPTIONS        
 
 plugins:
   - serverless-offline

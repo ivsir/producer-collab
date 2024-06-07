@@ -257,7 +257,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.graphqlHandler",
                 "Runtime": "nodejs20.x",
@@ -290,7 +290,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.restHandler",
                 "Runtime": "nodejs20.x",
@@ -323,7 +323,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getSinglePostImage",
                 "Runtime": "nodejs20.x",
@@ -554,8 +554,8 @@
                       "StatusCode": "200",
                       "ResponseParameters": {
                         "method.response.header.Access-Control-Allow-Origin": "'*'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
+                        "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'"
                       },
                       "ResponseTemplates": {
                         "application/json": ""
@@ -709,7 +709,7 @@
                 "GetSinglePostImageLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1717735249197": {
+            "ApiGatewayDeployment1717736096421": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -1189,17 +1189,15 @@
                 "cors": {
                   "origin": "*",
                   "methods": [
-                    "OPTIONS",
-                    "GET"
+                    "GET",
+                    "OPTIONS"
                   ],
                   "headers": [
                     "Content-Type",
-                    "X-Amz-Date",
                     "Authorization",
-                    "X-Api-Key",
-                    "X-Amz-Security-Token",
-                    "X-Amz-User-Agent",
-                    "X-Amzn-Trace-Id"
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
                   ],
                   "allowCredentials": "<REDACTED>"
                 },
@@ -1238,10 +1236,10 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z"
       }
     },
-    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  httpApi:\n    cors:\n      allowedOrigins:\n        - '*'\n      allowedHeaders:\n        - Content-Type\n        - Authorization\n        - x-user-id\n        - x-file-type\n        - x-project-author\n      allowedMethods:\n        - GET\n        - POST\n        - PUT\n        - DELETE\n        - OPTIONS\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  app:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  restApiHandler:\n    handler: server/server.restHandler\n    events:\n      - httpApi:\n          path: /{proxy+}\n          method: ANY\n  getSinglePostImage:\n    handler: server/server.getSinglePostImage\n    events:\n      - http:\n          path: singlepost-image\n          method: GET\n          cors: true          \n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-east-1\n  httpApi:\n    cors:\n      allowedOrigins:\n        - '*'\n      allowedHeaders:\n        - Content-Type\n        - Authorization\n        - x-user-id\n        - x-file-type\n        - x-project-author\n      allowedMethods:\n        - GET\n        - POST\n        - PUT\n        - DELETE\n        - OPTIONS\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  app:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  restApiHandler:\n    handler: server/server.restHandler\n    events:\n      - httpApi:\n          path: /{proxy+}\n          method: ANY\n  getSinglePostImage:\n    handler: server/server.getSinglePostImage\n    events:\n      - http:\n          path: singlepost-image\n          method: GET\n          cors:\n            origin: '*'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            methods:\n              - GET\n              - OPTIONS        \n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
     "command": [
       "deploy"
     ],
@@ -1270,7 +1268,7 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:614288690243:stack/serverless-express-apollo-dev/a73a55d0-229e-11ef-8669-120b3274691f",
     "serviceProviderAwsCfStackCreated": "2024-06-04T18:17:07.845Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-07T04:41:27.746Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-07T04:55:34.672Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {

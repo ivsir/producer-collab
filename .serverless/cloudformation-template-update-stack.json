@@ -193,7 +193,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.graphqlHandler",
         "Runtime": "nodejs20.x",
@@ -226,7 +226,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.restHandler",
         "Runtime": "nodejs20.x",
@@ -259,7 +259,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717736104958-2024-06-07T04:55:04.958Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.getSinglePostImage",
         "Runtime": "nodejs20.x",
@@ -490,8 +490,8 @@
               "StatusCode": "200",
               "ResponseParameters": {
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'"
               },
               "ResponseTemplates": {
                 "application/json": ""
@@ -645,7 +645,7 @@
         "GetSinglePostImageLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717735249197": {
+    "ApiGatewayDeployment1717736096421": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
