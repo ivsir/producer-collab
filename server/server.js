@@ -38,17 +38,17 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 };
-const handleOptionsRequest = (req, res, next) => {
-  if (req.method === "OPTIONS") {
-    res.set({
-      "Access-Control-Allow-Origin": "*", // Update with your specific origins if needed
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-user-id, x-file-type, x-project-author",
-    });
-    return res.status(200).end();
-  }
-  next(); // Pass control to the next middleware function
-};
+// const handleOptionsRequest = (req, res, next) => {
+//   if (req.method === "OPTIONS") {
+//     res.set({
+//       "Access-Control-Allow-Origin": "*", // Update with your specific origins if needed
+//       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+//       "Access-Control-Allow-Headers": "Content-Type, Authorization, x-user-id, x-file-type, x-project-author",
+//     });
+//     return res.status(200).end();
+//   }
+//   next(); // Pass control to the next middleware function
+// };
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -59,9 +59,12 @@ app.use(express.json());
 //   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
 //   allowedHeaders: ["Content-Type", "Authorization", "x-user-id", "x-file-type", "x-project-author"], // Allow specified headers
 // }));
-// app.use(cors()); 
+app.use(cors({
+  origin: 'https://main.dan6kz7trfabu.amplifyapp.com',
+  // Additional options if needed
+}));
 // app.use(cors(corsOptions));
-app.use(handleOptionsRequest)
+// app.use(handleOptionsRequest)
 
 // Define your routes for image upload and retrieval here
 app.post("/create-s3-folder", async (req, res) => {
@@ -294,45 +297,6 @@ exports.getSinglePostImage = async (event) => {
     };
   }
 };
-
-
-// exports.getSinglePostImage = async (event) => {
-//   // Extract project author from request headers
-//   const projectAuthor = event.headers["x-project-author"];
-
-//   // Check if project author is present
-//   if (!projectAuthor) {
-//     return {
-//       statusCode: 400,
-//       body: JSON.stringify({ message: "Bad request" }),
-//     };
-//   }
-
-//   try {
-//     // Get presigned URLs for images of the specified project author
-//     const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
-
-//     // If there is an error, return error response
-//     if (error) {
-//       return {
-//         statusCode: 400,
-//         body: JSON.stringify({ message: error.message }),
-//       };
-//     }
-
-//     // Return presigned URLs as response
-//     return {
-//       statusCode: 200,
-//       body: JSON.stringify(presignedUrls),
-//     };
-//   } catch (error) {
-//     // Return error response if an exception occurs
-//     return {
-//       statusCode: 500,
-//       body: JSON.stringify({ message: "Internal server error" }),
-//     };
-//   }
-// };
 
 exports.graphqlHandler = server.createHandler({
   cors: {
