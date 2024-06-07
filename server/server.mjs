@@ -73,6 +73,10 @@ const startApolloServer = async (typeDefs, resolvers) => {
     });
   });
 };
+app.use(cors({
+  origin: 'http://localhost:3000',
+  // Additional options if needed
+}));
 
 
 // Define your routes for image upload and retrieval here
