@@ -8,6 +8,27 @@
       "name": "aws",
       "runtime": "nodejs20.x",
       "region": "us-east-1",
+      "httpApi": {
+        "cors": {
+          "allowedOrigins": [
+            "*"
+          ],
+          "allowedHeaders": [
+            "Content-Type",
+            "Authorization",
+            "x-user-id",
+            "x-file-type",
+            "x-project-author"
+          ],
+          "allowedMethods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+          ]
+        }
+      },
       "environment": {
         "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
         "MY_AWS_PROFILE": "ivsir-general",
@@ -122,6 +143,12 @@
               "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-restApiHandler"
             }
           },
+          "GetSinglePostImageLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-getSinglePostImage"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -213,7 +240,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717715393297-2024-06-06T23:09:53.297Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.graphqlHandler",
               "Runtime": "nodejs20.x",
@@ -246,7 +273,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1717715393297-2024-06-06T23:09:53.297Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.restHandler",
               "Runtime": "nodejs20.x",
@@ -272,24 +299,67 @@
               "RestApiHandlerLogGroup"
             ]
           },
-          "AppLambdaVersionjfCLlIM5qgNgVOsy6h795VfzaZrZGESbpz9e1sZemnE": {
+          "GetSinglePostImageLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z/serverless-express-apollo.zip"
+              },
+              "Handler": "server/server.getSinglePostImage",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "serverless-express-apollo-dev-getSinglePostImage",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
+                  "MY_AWS_PROFILE": "ivsir-general",
+                  "MY_AWS_REGION": "us-west-1",
+                  "BUCKET": "react-image-upload-ivsir"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetSinglePostImageLogGroup"
+            ]
+          },
+          "AppLambdaVersionLNLp1VRpjYAnoK8g9P1CFQ3esgdTC3qpBJhIspdtvQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "bAHFKRnuUtaEvsfucEMVcfpmM4/+2EEts5CbBmcDMm4="
+              "CodeSha256": "6u1oSrNbZ/JmvJPldBnSXFEDDJiybrOj7bj+RvGS3PE="
             }
           },
-          "RestApiHandlerLambdaVersionVigkg281iGc5NXAudNeLOIATnNwC6fM67Fv4MTyck": {
+          "RestApiHandlerLambdaVersionXUt2br2XQMOwO0ufw9oqYhUUnSS3X99qmIbVqQ8frk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RestApiHandlerLambdaFunction"
               },
-              "CodeSha256": "bAHFKRnuUtaEvsfucEMVcfpmM4/+2EEts5CbBmcDMm4="
+              "CodeSha256": "6u1oSrNbZ/JmvJPldBnSXFEDDJiybrOj7bj+RvGS3PE="
+            }
+          },
+          "GetSinglePostImageLambdaVersionNCpN3awjQsB7oIspYpHS8UrWiTCcfcAtH5tcDGP0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetSinglePostImageLambdaFunction"
+              },
+              "CodeSha256": "6u1oSrNbZ/JmvJPldBnSXFEDDJiybrOj7bj+RvGS3PE="
             }
           },
           "ApiGatewayRestApi": {
@@ -329,6 +399,21 @@
                 ]
               },
               "PathPart": "playground",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSinglepostDashimage": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "singlepost-image",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -418,6 +503,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePlayground"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodSinglepostDashimageOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceSinglepostDashimage"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -516,7 +646,53 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1717715383852": {
+          "ApiGatewayMethodSinglepostDashimageGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceSinglepostDashimage"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetSinglePostImageLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetSinglePostImageLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1717735249197": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -527,8 +703,10 @@
             "DependsOn": [
               "ApiGatewayMethodGraphqlOptions",
               "ApiGatewayMethodPlaygroundOptions",
+              "ApiGatewayMethodSinglepostDashimageOptions",
               "ApiGatewayMethodGraphqlAny",
-              "ApiGatewayMethodPlaygroundAny"
+              "ApiGatewayMethodPlaygroundAny",
+              "ApiGatewayMethodSinglepostDashimageGet"
             ]
           },
           "AppLambdaPermissionApiGateway": {
@@ -568,11 +746,67 @@
               }
             }
           },
+          "GetSinglePostImageLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetSinglePostImageLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "HttpApi": {
             "Type": "AWS::ApiGatewayV2::Api",
             "Properties": {
               "Name": "dev-serverless-express-apollo",
-              "ProtocolType": "HTTP"
+              "ProtocolType": "HTTP",
+              "CorsConfiguration": {
+                "AllowHeaders": [
+                  "Content-Type",
+                  "Authorization",
+                  "x-user-id",
+                  "x-file-type",
+                  "x-project-author"
+                ],
+                "AllowMethods": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "DELETE",
+                  "OPTIONS"
+                ],
+                "AllowOrigins": [
+                  "*"
+                ]
+              }
             }
           },
           "HttpApiStage": {
@@ -673,7 +907,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionjfCLlIM5qgNgVOsy6h795VfzaZrZGESbpz9e1sZemnE"
+              "Ref": "AppLambdaVersionLNLp1VRpjYAnoK8g9P1CFQ3esgdTC3qpBJhIspdtvQ"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-AppLambdaFunctionQualifiedArn"
@@ -682,10 +916,19 @@
           "RestApiHandlerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RestApiHandlerLambdaVersionVigkg281iGc5NXAudNeLOIATnNwC6fM67Fv4MTyck"
+              "Ref": "RestApiHandlerLambdaVersionXUt2br2XQMOwO0ufw9oqYhUUnSS3X99qmIbVqQ8frk"
             },
             "Export": {
               "Name": "sls-serverless-express-apollo-dev-RestApiHandlerLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetSinglePostImageLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetSinglePostImageLambdaVersionNCpN3awjQsB7oIspYpHS8UrWiTCcfcAtH5tcDGP0"
+            },
+            "Export": {
+              "Name": "sls-serverless-express-apollo-dev-GetSinglePostImageLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -907,7 +1150,7 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionjfCLlIM5qgNgVOsy6h795VfzaZrZGESbpz9e1sZemnE"
+        "versionLogicalId": "AppLambdaVersionLNLp1VRpjYAnoK8g9P1CFQ3esgdTC3qpBJhIspdtvQ"
       },
       "restApiHandler": {
         "handler": "server/server.restHandler",
@@ -927,7 +1170,43 @@
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "RestApiHandlerLambdaVersionVigkg281iGc5NXAudNeLOIATnNwC6fM67Fv4MTyck"
+        "versionLogicalId": "RestApiHandlerLambdaVersionXUt2br2XQMOwO0ufw9oqYhUUnSS3X99qmIbVqQ8frk"
+      },
+      "getSinglePostImage": {
+        "handler": "server/server.getSinglePostImage",
+        "events": [
+          {
+            "http": {
+              "path": "singlepost-image",
+              "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "serverless-express-apollo-dev-getSinglePostImage",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetSinglePostImageLambdaVersionNCpN3awjQsB7oIspYpHS8UrWiTCcfcAtH5tcDGP0"
       }
     },
     "configValidationMode": "warn",
@@ -955,7 +1234,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717715393297-2024-06-06T23:09:53.297Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z"
       }
     },
     "appId": null,
@@ -964,7 +1243,7 @@
     "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717715393297-2024-06-06T23:09:53.297Z",
+    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717735257975-2024-06-07T04:40:57.975Z",
     "artifact": "serverless-express-apollo.zip"
   }
 }

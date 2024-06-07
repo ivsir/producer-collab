@@ -25,6 +25,7 @@ import Profile from "./components/accountBox/Profile";
 const httpLink = createHttpLink({
   // uri: "/graphql",
   uri: "https://17yjc57zyk.execute-api.us-east-1.amazonaws.com/dev/graphql",
+  
   // uri: "http://localhost:4001/dev/graphql"
 });
 
