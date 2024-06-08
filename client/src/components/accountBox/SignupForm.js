@@ -23,7 +23,7 @@ import {
 } from "../accountBox/Common";
 
 // const baseURL = process.env.REACT_APP_API_URL
-const baseURL = window.location.origin
+const baseURL = "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev"
 
 console.log(baseURL)
 export function SignupForm() {

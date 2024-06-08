@@ -20,7 +20,7 @@ function ProfileCard(props) {
     variables: { username: AuthService.getUsername() },
   });
   const projects = userData?.user.projects || [];
-  const URL = "https://5wgel7uoui.execute-api.us-east-1.amazonaws.com/images";
+  const URL = "/images";
 
   const [imageUrls, setImageUrls] = useState({});
   const [refetch, setRefetch] = useState(0);
