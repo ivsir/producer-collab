@@ -127,7 +127,7 @@ function Comments({ projectId }) {
 
   // this is the data from the join button
   const location = useLocation();
-
+  console.log("location",location)
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
     // pass URL parameter
     variables: { projectId: location.state.projects._id },
