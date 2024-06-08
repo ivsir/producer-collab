@@ -263,6 +263,10 @@ exports.createS3FolderHandler = async (event, context, callback) => {
 
     const response = {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify({ message: 'S3 folder created successfully' }),
     };
     callback(null, response);
@@ -287,6 +291,10 @@ exports.getUserFoldersHandler = async (event, context, callback) => {
 
     const response = {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify(objects),
     };
     callback(null, response);
@@ -328,6 +336,10 @@ exports.uploadHandler = async (event, context, callback) => {
 
     const response = {
       statusCode: 201,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify({ key }),
     };
     callback(null, response);
