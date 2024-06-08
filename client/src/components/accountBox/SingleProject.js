@@ -43,7 +43,7 @@ const SingleProject = () => {
   const onJoin = async (event) => {
     event.preventDefault();
     const memberId = AuthService.getId();
-
+    console.log("member id",memberId)
     try {
       const { data } = await member({
         variables: {
