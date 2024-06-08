@@ -39,7 +39,7 @@ const SingleProject = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const navigate = useNavigate();
   const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-
+  console.log("navigation",navigate)
   const onJoin = async (event) => {
     event.preventDefault();
     const memberId = AuthService.getId();
