@@ -6,9 +6,11 @@ const {
   S3Client,
 } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const Busboy = require("busboy")
 const { v4: uuid } = require("uuid");
 const dotenv = require('dotenv');
 dotenv.config();
+
 
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
@@ -32,6 +34,32 @@ const uploadToS3 = async ({ file, userId }) => {
     console.error(error);
     return { error };
   }
+};
+
+const parseForm = (event) => {
+  return new Promise((resolve, reject) => {
+    const busboy = new Busboy({ headers: event.headers });
+    const result = { files: [] };
+    
+    busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+      result.files.push({ fieldname, file, filename, encoding, mimetype });
+    });
+
+    busboy.on('field', (fieldname, value) => {
+      result[fieldname] = value;
+    });
+
+    busboy.on('finish', () => {
+      resolve(result);
+    });
+
+    busboy.on('error', (error) => {
+      reject(error);
+    });
+
+    busboy.write(event.body, event.isBase64Encoded ? 'base64' : 'binary');
+    busboy.end();
+  });
 };
 
 const getImageKeysByUser = async (userId) => {
@@ -139,6 +167,7 @@ const getAllUserImageKeysAndPresignedUrls = async () => {
 
 module.exports = {
   uploadToS3,
+  parseForm,
   getImageKeysByUser,
   getUserPresignedUrls,
   getPresignedUrls,

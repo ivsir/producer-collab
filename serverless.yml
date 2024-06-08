@@ -162,7 +162,37 @@ functions:
               - x-file-type
               - x-project-author
             allowCredentials: false
-     
+  uploadImage:
+    handler: server/server.uploadImageHandler
+    events:
+      - http:
+          path: images
+          method: post
+          cors:
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
+
+  uploadAudio:
+    handler: server/server.uploadAudioHandler
+    events:
+      - http:
+          path: audiofiles
+          method: post
+          cors: 
+            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
+            headers:
+              - Content-Type
+              - Authorization
+              - x-user-id
+              - x-file-type
+              - x-project-author
+            allowCredentials: false
   # restApiHandler:
   #   handler: server/server.restHandler
   #   events:

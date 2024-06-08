@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const serverless = require('serverless-http');
-const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3 } = require("./s3.js");
+const { getAllUserImageKeysAndPresignedUrls, getUserPresignedUrls, uploadToS3, parseForm } = require("./s3.js");
 // const { ApolloServer } = require("apollo-server-express");
 const { ApolloServer } = require("apollo-server-lambda");
 const { authMiddleware } = require("./utils/auth.js");
@@ -440,17 +440,19 @@ exports.getImagesHandler = async (event, context, callback) => {
 };
 
 exports.getAudioFilesHandler = async (event, context, callback) => {
-  try {
-    const userId = event.headers['x-project-author'];
+  const userId = event.headers['x-project-author'];
 
-    if (!userId) {
-      const response = {
-        statusCode: 400,
-        body: JSON.stringify({ message: "Bad request" }),
-      };
-      callback(null, response);
-      return;
-    }
+  if (!userId) {
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Bad request" }),
+    };
+    callback(null, response);
+    return;
+  }
+
+  
+  try {
 
     const { error, presignedUrls } = await getUserPresignedUrls(userId);
 
@@ -531,4 +533,95 @@ exports.getFilesHandler = async (event, context, callback) => {
   }
 };
 
+exports.uploadImage = async (event, context, callback) => {
+  try {
+    const userId = event.headers['x-user-id'];
+
+    if (!userId) {
+      return callback(null, {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Bad request' }),
+      });
+    }
+
+    const result = await parseForm(event);
+
+    if (result.files.length === 0) {
+      return callback(null, {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Bad request' }),
+      });
+    }
+
+    const { file, filename } = result.files[0];
+    const { key, error } = await uploadToS3({ fileStream: file, fileName: filename, userId });
+
+    if (error) {
+      return callback(null, {
+        statusCode: 500,
+        body: JSON.stringify({ message: error.message }),
+      });
+    }
+
+    callback(null, {
+      statusCode: 201,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify({ key }),
+    });
+  } catch (error) {
+    callback(null, {
+      statusCode: 500,
+      body: JSON.stringify({ message: error.message }),
+    });
+  }
+};
+
+exports.uploadAudio = async (event, context, callback) => {
+  try {
+    const userId = event.headers['x-user-id'];
+
+    if (!userId) {
+      return callback(null, {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Bad request' }),
+      });
+    }
+
+    const result = await parseForm(event);
+
+    if (result.files.length === 0) {
+      return callback(null, {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Bad request' }),
+      });
+    }
+
+    const { file, filename } = result.files[0];
+    const { key, error } = await uploadToS3({ fileStream: file, fileName: filename, userId });
+
+    if (error) {
+      return callback(null, {
+        statusCode: 500,
+        body: JSON.stringify({ message: error.message }),
+      });
+    }
+
+    callback(null, {
+      statusCode: 201,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify({ key }),
+    });
+  } catch (error) {
+    callback(null, {
+      statusCode: 500,
+      body: JSON.stringify({ message: error.message }),
+    });
+  }
+};
 // module.exports.restHandler = serverless(app);
