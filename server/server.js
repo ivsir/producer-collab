@@ -533,7 +533,7 @@ exports.getFilesHandler = async (event, context, callback) => {
   }
 };
 
-exports.uploadImage = async (event, context, callback) => {
+exports.uploadImageHandler = async (event, context, callback) => {
   try {
     const userId = event.headers['x-user-id'];
 
@@ -579,7 +579,7 @@ exports.uploadImage = async (event, context, callback) => {
   }
 };
 
-exports.uploadAudio = async (event, context, callback) => {
+exports.uploadAudioHandler = async (event, context, callback) => {
   try {
     const userId = event.headers['x-user-id'];
 

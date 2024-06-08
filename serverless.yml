@@ -166,7 +166,7 @@ functions:
     handler: server/server.uploadImageHandler
     events:
       - http:
-          path: images
+          path: upload-image
           method: post
           cors:
             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
@@ -182,7 +182,7 @@ functions:
     handler: server/server.uploadAudioHandler
     events:
       - http:
-          path: audiofiles
+          path: upload-audio
           method: post
           cors: 
             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'
