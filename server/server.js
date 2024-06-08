@@ -531,7 +531,7 @@ exports.getFilesHandler = async (event, context, callback) => {
     };
     callback(null, response);
   }
-};
+}
 
 exports.uploadImageHandler = async (event, context, callback) => {
   try {
@@ -562,15 +562,15 @@ exports.uploadImageHandler = async (event, context, callback) => {
         body: JSON.stringify({ message: error.message }),
       });
     }
-
-    callback(null, {
+    const response = {
       statusCode: 201,
       headers: {
         'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
         'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify({ key }),
-    });
+    };
+    callback(null, response)
   } catch (error) {
     callback(null, {
       statusCode: 500,
@@ -578,6 +578,7 @@ exports.uploadImageHandler = async (event, context, callback) => {
     });
   }
 };
+
 
 exports.uploadAudioHandler = async (event, context, callback) => {
   try {
@@ -609,14 +610,15 @@ exports.uploadAudioHandler = async (event, context, callback) => {
       });
     }
 
-    callback(null, {
+    const response = {
       statusCode: 201,
       headers: {
         'Access-Control-Allow-Origin': 'https://main.dan6kz7trfabu.amplifyapp.com',
         'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify({ key }),
-    });
+    };
+    callback(null, response)
   } catch (error) {
     callback(null, {
       statusCode: 500,
@@ -624,4 +626,3 @@ exports.uploadAudioHandler = async (event, context, callback) => {
     });
   }
 };
-// module.exports.restHandler = serverless(app);

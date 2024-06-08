@@ -52,6 +52,7 @@ const ProjectForm = () => {
     responseData: audioResponse,
   } = audioMutation({ url: audioURL }, userId);
 
+  console.log("userid",userId)
   const handleUpload = async (file) => {
     console.log("step 4");
 

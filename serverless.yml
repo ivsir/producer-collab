@@ -164,6 +164,7 @@ functions:
             allowCredentials: false
   uploadImage:
     handler: server/server.uploadImageHandler
+    timeout: 30 
     events:
       - http:
           path: upload-image
@@ -180,6 +181,7 @@ functions:
 
   uploadAudio:
     handler: server/server.uploadAudioHandler
+    timeout: 30 
     events:
       - http:
           path: upload-audio
