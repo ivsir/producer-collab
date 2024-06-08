@@ -223,7 +223,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.graphqlHandler",
         "Runtime": "nodejs20.x",
@@ -256,7 +256,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.singlePostImageHandler",
         "Runtime": "nodejs20.x",
@@ -289,7 +289,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.createS3FolderHandler",
         "Runtime": "nodejs20.x",
@@ -322,7 +322,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.uploadHandler",
         "Runtime": "nodejs20.x",
@@ -355,7 +355,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.getUserFoldersHandler",
         "Runtime": "nodejs20.x",
@@ -388,7 +388,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.getImagesHandler",
         "Runtime": "nodejs20.x",
@@ -421,7 +421,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.getAudioFilesHandler",
         "Runtime": "nodejs20.x",
@@ -454,7 +454,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+          "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
         },
         "Handler": "server/server.getFilesHandler",
         "Runtime": "nodejs20.x",
@@ -1526,7 +1526,7 @@
         "GetFilesLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1717804189787": {
+    "ApiGatewayDeployment1717806814491": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {

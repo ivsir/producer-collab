@@ -266,7 +266,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.graphqlHandler",
                 "Runtime": "nodejs20.x",
@@ -299,7 +299,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.singlePostImageHandler",
                 "Runtime": "nodejs20.x",
@@ -332,7 +332,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.createS3FolderHandler",
                 "Runtime": "nodejs20.x",
@@ -365,7 +365,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadHandler",
                 "Runtime": "nodejs20.x",
@@ -398,7 +398,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getUserFoldersHandler",
                 "Runtime": "nodejs20.x",
@@ -431,7 +431,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getImagesHandler",
                 "Runtime": "nodejs20.x",
@@ -464,7 +464,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getAudioFilesHandler",
                 "Runtime": "nodejs20.x",
@@ -497,7 +497,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getFilesHandler",
                 "Runtime": "nodejs20.x",
@@ -1569,7 +1569,7 @@
                 "GetFilesLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1717804189787": {
+            "ApiGatewayDeployment1717806814491": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -2410,7 +2410,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717804199138-2024-06-07T23:49:59.138Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1717806822236-2024-06-08T00:33:42.236Z"
       }
     },
     "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-west-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  # app:\n  #   handler: server/server.restHandler\n  #   events:\n  #     - http:\n  #         path: /\n  #         method: any\n  #         cors:\n  #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n  #           headers:\n  #             - Content-Type\n  #             - Authorization\n  #             - x-user-id\n  #             - x-file-type\n  #             - x-project-author\n  #           allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n     \n  # restApiHandler:\n  #   handler: server/server.restHandler\n  #   events:\n  #     - httpApi:\n  #         path: /{proxy+}\n  #         method: ANY     \n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
@@ -2442,36 +2442,36 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-west-1:614288690243:stack/serverless-express-apollo-dev/a6a38ab0-2528-11ef-b8f6-0623946ef4b5",
     "serviceProviderAwsCfStackCreated": "2024-06-07T23:49:59.727Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-07T23:50:52.122Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-08T00:34:03.029Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "GetFilesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getFiles:1",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getFiles:5",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetFilesLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateS3FolderLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-createS3Folder:2",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-createS3Folder:6",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-CreateS3FolderLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetUserFoldersLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getUserFolders:2",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getUserFolders:6",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetUserFoldersLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GraphqlLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-graphql:2",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-graphql:6",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GraphqlLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetAudioFilesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getAudioFiles:1",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getAudioFiles:5",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetAudioFilesLambdaFunctionQualifiedArn"
       },
@@ -2488,19 +2488,19 @@
       },
       {
         "OutputKey": "SinglePostImageLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-singlePostImage:2",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-singlePostImage:6",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-SinglePostImageLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UploadLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-upload:2",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-upload:6",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-UploadLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetImagesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getImages:2",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getImages:6",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetImagesLambdaFunctionQualifiedArn"
       }
