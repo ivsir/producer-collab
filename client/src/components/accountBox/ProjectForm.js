@@ -104,6 +104,8 @@ const ProjectForm = () => {
   ) {
     setProjectImage(imageResponse.key);
     setProjectAudio(audioResponse.key);
+    console.log("project image key", projectImage)
+    console.log("project image key", projectAudio)
     setUploadCompleted(true);
   }
 
