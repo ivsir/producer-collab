@@ -415,6 +415,7 @@ const ProjectForm = () => {
 
   useEffect(() => {
     if (uploadCompleted) {
+      console.log("uploadCompleted")
       addProjectLink();
     }
   }, [uploadCompleted]);
