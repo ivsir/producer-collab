@@ -370,8 +370,8 @@ import Auth from "../../utils/auth";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
-const URL = "/images";
-const audioURL = "/audiofiles";
+const URL = "/upload-image";
+const audioURL = "/upload-audio";
 
 const ErrorText = ({ error }) => {
   if (error) {
