@@ -89,7 +89,6 @@ function ExploreCard(props) {
           project.projectImage,
           currentAuthor
         );
-        console.log("urls",projectImageUrl)
         const projectAudioUrl = findProjectAudioUrl(
           project.projectAudio,
           currentAuthor
