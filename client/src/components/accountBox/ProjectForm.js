@@ -407,6 +407,7 @@ const ProjectForm = () => {
 
   useEffect(() => {
     if (imageResponse && imageResponse.key && audioResponse && audioResponse.key && !uploadCompleted) {
+      console.log("response keys",imageResponse.key,audioResponse.key)
       setProjectImage(imageResponse.key);
       setProjectAudio(audioResponse.key);
       setUploadCompleted(true);
