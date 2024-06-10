@@ -269,6 +269,8 @@ exports.graphqlHandler = server.createHandler({
   },
 });
 
+
+
 exports.createS3FolderHandler = async (event, context, callback) => {
   const { userId } = JSON.parse(event.body);
 
@@ -610,15 +612,7 @@ exports.uploadImageHandler = async (event, context, callback) => {
         body: JSON.stringify({ message: "Bad request: No images uploaded" }),
       });
     }
-
-    // const { file, filename } = result.files[0];
-    // console.log("Image received:", filename, "User ID:", userId);
-
-    // const { key, error } = await uploadToS3({
-    //   file,
-    //   userId,
-    // });
-
+    
     const { fieldname, buffer, filename, encoding, mimetype } = result.files[0];
     console.log("Image received:", filename, "User ID:", userId);
 
@@ -678,14 +672,6 @@ exports.uploadAudioHandler = async (event, context, callback) => {
         body: JSON.stringify({ message: "Bad request: No audio uploaded" }),
       });
     }
-
-    // const { file, filename } = result.files[0];
-    // console.log("Image received:", filename, "User ID:", userId);
-
-    // const { key, error } = await uploadToS3({
-    //   file,
-    //   userId,
-    // });
 
     const { fieldname, buffer, filename, encoding, mimetype } = result.files[0];
     console.log("Audio received:", filename, "User ID:", userId);

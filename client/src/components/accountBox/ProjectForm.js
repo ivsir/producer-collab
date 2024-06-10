@@ -46,11 +46,17 @@ const ProjectForm = () => {
     responseData: imageResponse,
   } = imgMutation({ url: URL }, userId);
 
+  console.log("image response data",imageResponse)
+
   const {
     mutate: uploadAudio,
     error: uploadAudioError,
     responseData: audioResponse,
   } = audioMutation({ url: audioURL }, userId);
+
+
+  console.log("image response data",audioResponse)
+
 
   console.log("userid",userId)
   const handleUpload = async (file) => {
@@ -105,7 +111,7 @@ const ProjectForm = () => {
     setProjectImage(imageResponse.key);
     setProjectAudio(audioResponse.key);
     console.log("project image key", projectImage)
-    console.log("project image key", projectAudio)
+    console.log("project audio key", projectAudio)
     setUploadCompleted(true);
   }
 
