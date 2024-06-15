@@ -6,12 +6,10 @@ import AuthService from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
 import AudioPlayer from "./AudioPlayer.js";
 import { CircularProgress, Text } from "@chakra-ui/react";
-import { ProjectImageCard, ImageContainer, ExploreContainer } from "./Common.js";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
-import { SinglePostContainer } from "./Common";
 import { ADD_MEMBER } from "../../utils/mutations";
 
 const SingleProject = () => {
@@ -83,8 +81,8 @@ const SingleProject = () => {
   }
 
   return (
-    <ExploreContainer>
-      <SinglePostContainer>
+    <div>
+      <div>
         <div className="my-3 single-post-container">
           {imagesLoading && (
             <CircularProgress
@@ -100,18 +98,18 @@ const SingleProject = () => {
               No images found
             </Text>
           )}
-          <ImageContainer>
+          <div>
             {/* {imageUrls?.length > 0 &&
             imageUrls.map((url) => (
               <ImageCard src={url} alt="Image" key={url} />
               ))} */}
-            <ProjectImageCard
+            <div
               src={projectImageUrl}
               alt="Image"
               key={projectImageUrl}
             />
             {/* <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} /> */}
-          </ImageContainer>
+          </div>
           <h2>
             {project.projectTitle} <br />
           </h2>
@@ -134,8 +132,8 @@ const SingleProject = () => {
             Join project
           </button>
         </div>
-      </SinglePostContainer>
-    </ExploreContainer>
+      </div>
+    </div>
   );
 };
 

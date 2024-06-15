@@ -1,46 +1,39 @@
 import React from "react";
-// import "./style/nav.css";
-import { SideNav, NavLinks, LinkStyle, NavLinkA, NavIcon } from "./Common.js";
 import Auth from "../../utils/auth.js";
 import { Link } from "react-router-dom";
-import Home from "../../assets/Home.png";
+import Home from "../../assets/prodcollab.svg";
 import Upload from "../../assets/Upload.png";
-import Profile from "../../assets/Profile.png";
 
-function sideNav() {
+function SideNav() {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
 
   return (
-    <SideNav>
-      <NavLinks>
-        <Link style={LinkStyle} to="/explore">
-          <NavIcon src={Home} />
+    <div className="inline-flex relative">
+      <nav className="flex flex-col gap-4 p-12 text-nowrap w-[16rem] h-screen sticky top-0">
+        <Link to="/explore">
+          <img src={Home} alt="Home" /> {/* Corrected usage of <Link> */}
         </Link>
         {Auth.loggedIn() ? (
           <>
-            <Link style={LinkStyle} to="/projectform">
-              <NavIcon src={Upload} />
-              
+            <Link to="/projectform">
+              <h2 className="text-lg">Add Song</h2>
             </Link>
-            <Link style={LinkStyle} to="/profile">
-              <NavIcon src={Profile} />
-              
+            <Link to="/profile">
+              <h2 className="text-lg">My Profile</h2>
             </Link>
-            <Link style={LinkStyle} onClick={logout} to="/">
-              <NavLinkA>Logout</NavLinkA>
+            <Link onClick={logout} to="/">
+              <h2 className="text-lg">Logout</h2>
             </Link>
           </>
         ) : (
-          <Link style={LinkStyle} to="/">
-            <NavLinkA>Login</NavLinkA>
-          </Link>
+          <Link to="/">Login</Link>
         )}
-      </NavLinks>
-    </SideNav>
+      </nav>
+    </div>
   );
 }
 
-export default sideNav;
+export default SideNav;
