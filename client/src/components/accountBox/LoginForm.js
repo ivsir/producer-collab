@@ -38,9 +38,9 @@ export function LoginForm(props) {
   return (
     <div>
       <form className="flex flex-row w-full justify-between" id="login-container" onSubmit={handleFormSubmit}>
-        <div className="flex flex-col justify-end items-start">
+        <div className="flex flex-col justify-end items-start mb-1">
           Need an account?{" "}
-          <div className="flex flex-row gap-2 text-gray-500">
+          <div className="flex flex-row gap-2 text-gray-500 text-sm">
             <Link className="hover:text-white" id="bold" to="#" onClick={switchToSignup}>
               Sign Up
             </Link>
@@ -77,5 +77,6 @@ export function LoginForm(props) {
       </form>
       {error && <div className="text-red-500">Error logging in</div>}
     </div>
+
   );
 }

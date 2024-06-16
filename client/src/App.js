@@ -58,7 +58,7 @@ function App() {
             element={<div>{<AccountBox />}</div>}
           />
           <Route
-            path="/explore"
+            path="/home"
             element={
               <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
                 <SideNav />
@@ -110,7 +110,7 @@ function App() {
               </div>
             }
           />
-          {/* <Route
+          <Route
             path="/comments"
             element={
               <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
@@ -118,7 +118,7 @@ function App() {
                 <Comments />
               </div>
             }
-          /> */}
+          />
         </Routes>
       </Router>
     </ApolloProvider>

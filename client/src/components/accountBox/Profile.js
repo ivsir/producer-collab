@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
-import ProfileCard from "./ProfileCard";
 import { QUERY_USER } from "../../utils/queries";
+import ProfilePic from "../../assets/images/Profile.png";
 
 const Profile = (props) => {
   const { loading, data: userData } = useQuery(QUERY_USER, {
@@ -16,7 +16,7 @@ const Profile = (props) => {
         <div className="profile-image">
           <img
             className="profile-img"
-            src="https://bit.ly/kent-c-dodds"
+            src={ProfilePic}
             alt="Profile"
           />
         </div>

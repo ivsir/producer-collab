@@ -154,6 +154,7 @@ function ExploreCard(props) {
                   </div>
                   <div className="w-full pb-8 px-8">
                     <AudioPlayer
+                      id="waveform"
                       src={projectAudioUrl}
                       key={projectAudioUrl}
                       onPlay={handleAudioPlay}

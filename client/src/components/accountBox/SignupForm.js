@@ -8,7 +8,8 @@ import { AccountContext } from "../../components/accountBox/AccountContext";
 import InputField from "../elements/InputField";
 
 const baseURL =
-  process.env.REACT_APP_API_URL || "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev";
+  // process.env.REACT_APP_API_URL || "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev";
+  process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 export function SignupForm() {
   const [formState, setFormState] = useState({
@@ -62,9 +63,9 @@ export function SignupForm() {
   return (
     <div>
       <form className="flex flex-row w-full justify-between" id="signup-container" onSubmit={handleFormSubmit}>
-        <div className="flex flex-col justify-end items-start">
+        <div className="flex flex-col justify-end items-start mb-1">
             Already have an account?{" "}
-            <div className="flex flex-row gap-2 text-gray-500">
+            <div className="flex flex-row gap-2 text-gray-500 text-sm">
               <Link className="hover:text-white" id="bold" to="#" onClick={switchToSignin}>
                 Sign In
               </Link>
