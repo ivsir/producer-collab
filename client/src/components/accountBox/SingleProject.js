@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
-import AudioPlayer from "./AudioPlayer.js";
 import { CircularProgress, Text } from "@chakra-ui/react";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import { ADD_MEMBER } from "../../utils/mutations";
+import WaveSurferAudio from "./WaveSurferAudio.js";
 
 const SingleProject = () => {
   const [refetch, setRefetch] = useState(0);
@@ -120,7 +120,7 @@ const SingleProject = () => {
             <blockquote>{project.projectDescription}</blockquote>{" "}
             <div>
               {projectAudioUrl ? (
-                <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
+                <WaveSurferAudio src={projectAudioUrl} key={projectAudioUrl} />
               ) : (
                 <Text>No audio available</Text>
               )}
