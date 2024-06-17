@@ -48,21 +48,19 @@ const ProjectForm = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
 
-  useEffect(() => {
-    if (imageResponse && imageResponse.key && audioResponse && audioResponse.key && !uploadCompleted) {
-      console.log("response keys",imageResponse.key,audioResponse.key)
-      setProjectImage(imageResponse.key);
-      setProjectAudio(audioResponse.key);
-      setUploadCompleted(true);
-    }
-  }, [imageResponse, audioResponse, uploadCompleted]);
-
-  useEffect(() => {
-    if (uploadCompleted) {
-      console.log("uploadCompleted")
-      addProjectLink();
-    }
-  }, [uploadCompleted]);
+  if (
+    imageResponse &&
+    imageResponse.key &&
+    audioResponse &&
+    audioResponse.key &&
+    !uploadCompleted
+  ) {
+    setProjectImage(imageResponse.key);
+    setProjectAudio(audioResponse.key);
+    console.log("project image key", projectImage)
+    console.log("project image key", projectAudio)
+    setUploadCompleted(true);
+  }
 
   const handleUploadImage = () => {
     fileInputRef.current.click();
