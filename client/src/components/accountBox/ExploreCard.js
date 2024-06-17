@@ -229,10 +229,15 @@ function ExploreCard() {
   const [loading, setLoading] = useState(true);
 
   const [selectedProjectId, setSelectedProjectId] = useState(null);
+  
+
+
 
   const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
 
   const wavesurfer = useRef(null);
+
+
 
   useEffect(() => {
     setLoading(true);
@@ -373,6 +378,7 @@ function ExploreCard() {
 
                 <PostTime>{project.createdAt}</PostTime>
               </ProjectTitle>
+
             </CardTitle>
             <button onClick={(event) => handleJoin(event, project._id)} className="profile-button content">
               Add Comment
@@ -380,6 +386,7 @@ function ExploreCard() {
             {selectedProjectId === project._id && (
               <Comments projectId={selectedProjectId} />
             )}
+     
           </ExplorerCard>
         );
       })}

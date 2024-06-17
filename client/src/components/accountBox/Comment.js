@@ -324,13 +324,15 @@ const CommentContainer = styled.div`
   }
 `;
 
-function Comments({ projectId }) {
+function Comments({ projectId}) {
   const [commentText, setCommentText] = useState("");
+  
   const [addComment, { error }] = useMutation(ADD_COMMENT);
 
   const { loading, data, refetch } = useQuery(QUERY_SINGLE_PROJECT, {
     variables: { projectId },
   });
+
 
   useEffect(() => {
     refetch();
@@ -363,6 +365,9 @@ function Comments({ projectId }) {
 
   const renderComments = () => {
     const comments = data?.project.comments || [];
+    console.log("comments",comments.length
+    )
+
     return comments.map((comment, i) => (
       <CommentBox key={i}>
         <div className="comment-box__card">
