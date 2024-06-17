@@ -9,7 +9,7 @@ import { CircularProgress, Text } from "@chakra-ui/react";
 import { ProjectImageCard, ImageContainer, ExploreContainer } from "./Common.js";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
-
+import Comments from "./Comment.js";
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import { SinglePostContainer } from "./Common";
 import { ADD_MEMBER } from "../../utils/mutations";
@@ -17,6 +17,7 @@ import { ADD_MEMBER } from "../../utils/mutations";
 const SingleProject = () => {
   const [refetch, setRefetch] = useState(0);
   const { projectId } = useParams();
+
 
   const URL = "/singlepost-image";
   const URL2 = "/audiofiles";
@@ -39,7 +40,7 @@ const SingleProject = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const navigate = useNavigate();
   const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-  console.log("navigation",navigate)
+  console.log("navigation", navigate)
   const onJoin = async (event) => {
     event.preventDefault();
     const memberId = AuthService.getId();
@@ -129,11 +130,14 @@ const SingleProject = () => {
             </div>
           </div>
         </div>
+        <Comments projectId={projectId} />
         <div className="link-button-wrapper">
           <button onClick={onJoin} className="profile-button content">
             Join project
           </button>
         </div>
+
+
       </SinglePostContainer>
     </ExploreContainer>
   );

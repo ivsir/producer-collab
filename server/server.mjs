@@ -73,10 +73,16 @@ const startApolloServer = async (typeDefs, resolvers) => {
     });
   });
 };
+
+// Use built-in middleware for parsing JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   origin: 'http://localhost:3000',
+  credentials:true
   // Additional options if needed
 }));
+
 
 
 // Define your routes for image upload and retrieval here
