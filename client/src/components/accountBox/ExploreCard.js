@@ -283,7 +283,6 @@ function ExploreCard() {
 
   const findProjectImageUrl = (projectImage, projectAuthor) => {
     const authorImageUrls = imageUrls[projectAuthor] || [];
-
     return authorImageUrls.find((imageUrl) => imageUrl.includes(projectImage));
   };
 
@@ -326,7 +325,7 @@ function ExploreCard() {
         const currentAuthor = project.projectAuthor;
         const projectImageUrl = findProjectImageUrl(project.projectImage, currentAuthor);
         const projectAudioUrl = findProjectAudioUrl(project.projectAudio, currentAuthor);
-
+        console.log(projectImageUrl)
         return (
           <ExplorerCard key={project._id}>
             {loading ? (
