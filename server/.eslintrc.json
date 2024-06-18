@@ -1,0 +1,15 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "latest", // Ensure this supports at least ECMAScript 2023
+    "sourceType": "module" // If you are using ES modules
+  },
+  "env": {
+    "node": true, // If you are using Node.js environment
+    "es2021": true // Adjust to the appropriate ECMAScript version you are targeting
+  },
+  "rules": {
+    // Optional: Enable specific rules related to variable declarations
+    "prefer-const": "error",
+    "no-var": "error"
+  }
+}
