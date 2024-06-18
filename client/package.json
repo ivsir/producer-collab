@@ -26,11 +26,10 @@
     "react-awesome-reveal": "4.2.3",
     "react-dom": "^18.2.0",
     "react-fontawesome": "^1.7.1",
+    "react-lazyload": "^3.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
-    "react-wavesurfer": "0.8.6",
     "styled-components": "^5.2.1",
-    "wavesurfer-react": "^3.0.2",
     "wavesurfer.js": "^7.7.15",
     "web-vitals": "^3.0.4"
   },
