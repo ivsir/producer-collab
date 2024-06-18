@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const {
   GetObjectCommand,
   ListObjectsV2Command,
@@ -8,8 +8,8 @@ const {
 const Busboy = require("busboy")
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const { v4: uuid } = require("uuid");
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 
 const s3 = new S3Client();
