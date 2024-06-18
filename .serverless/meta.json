@@ -1,0 +1,412 @@
+{
+  "/Users/risvitareq/code/producer-collab": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.4",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {},
+    "composeServiceName": null,
+    "servicePath": "/Users/risvitareq/code/producer-collab",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "serverless-express-apollo",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs20.x",
+        "region": "us-west-1",
+        "environment": {
+          "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
+          "MY_AWS_PROFILE": "ivsir-general",
+          "MY_AWS_REGION": "us-west-1",
+          "BUCKET": "react-image-upload-ivsir"
+        },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:PutObject",
+              "s3:GetObject",
+              "s3:ListBucket"
+            ],
+            "Resource": [
+              "arn:aws:s3:::react-image-upload-ivsir/*",
+              "arn:aws:s3:::react-image-upload-ivsir"
+            ]
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "sts:AssumeRole"
+            ],
+            "Resource": "arn:aws:iam::614288690243:user/ivsir"
+          }
+        ],
+        "stage": "dev",
+        "versionFunctions": true
+      },
+      "functions": {
+        "graphql": {
+          "handler": "server/server.graphqlHandler",
+          "events": [
+            {
+              "http": {
+                "path": "graphql",
+                "method": "any",
+                "cors": true
+              }
+            },
+            {
+              "http": {
+                "path": "playground",
+                "method": "ANY",
+                "cors": true
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-graphql"
+        },
+        "singlePostImage": {
+          "handler": "server/server.singlePostImageHandler",
+          "events": [
+            {
+              "http": {
+                "path": "singlepost-image",
+                "method": "get",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-singlePostImage"
+        },
+        "createS3Folder": {
+          "handler": "server/server.createS3FolderHandler",
+          "events": [
+            {
+              "http": {
+                "path": "create-s3-folder",
+                "method": "post",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-createS3Folder"
+        },
+        "upload": {
+          "handler": "server/server.uploadHandler",
+          "events": [
+            {
+              "http": {
+                "path": "upload",
+                "method": "post",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-upload"
+        },
+        "getUserFolders": {
+          "handler": "server/server.getUserFoldersHandler",
+          "events": [
+            {
+              "http": {
+                "path": "user-folders",
+                "method": "get",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-getUserFolders"
+        },
+        "getImages": {
+          "handler": "server/server.getImagesHandler",
+          "events": [
+            {
+              "http": {
+                "path": "images",
+                "method": "get",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-getImages"
+        },
+        "getAudioFiles": {
+          "handler": "server/server.getAudioFilesHandler",
+          "events": [
+            {
+              "http": {
+                "path": "audiofiles",
+                "method": "get",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-getAudioFiles"
+        },
+        "getFiles": {
+          "handler": "server/server.getFilesHandler",
+          "events": [
+            {
+              "http": {
+                "path": "files",
+                "method": "get",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-getFiles"
+        },
+        "uploadImage": {
+          "handler": "server/server.uploadImageHandler",
+          "timeout": 30,
+          "events": [
+            {
+              "http": {
+                "path": "upload-image",
+                "method": "post",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-uploadImage"
+        },
+        "uploadAudio": {
+          "handler": "server/server.uploadAudioHandler",
+          "timeout": 30,
+          "events": [
+            {
+              "http": {
+                "path": "upload-audio",
+                "method": "post",
+                "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "headers": [
+                    "Content-Type",
+                    "Authorization",
+                    "x-user-id",
+                    "x-file-type",
+                    "x-project-author"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                }
+              }
+            }
+          ],
+          "name": "serverless-express-apollo-dev-uploadAudio"
+        }
+      },
+      "plugins": [
+        "serverless-offline",
+        "serverless-prune-plugin"
+      ],
+      "custom": {
+        "serverless-offline": {
+          "httpPort": 4001
+        },
+        "prune": {
+          "automatic": true,
+          "number": 3
+        }
+      },
+      "package": {
+        "exclude": [
+          "client/**",
+          "package-lock.json",
+          "node_modules/**"
+        ],
+        "excludeDevDependencies": true
+      }
+    },
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-west-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  # app:\n  #   handler: server/server.restHandler\n  #   events:\n  #     - http:\n  #         path: /\n  #         method: any\n  #         cors:\n  #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n  #           headers:\n  #             - Content-Type\n  #             - Authorization\n  #             - x-user-id\n  #             - x-file-type\n  #             - x-project-author\n  #           allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  uploadImage:\n    handler: server/server.uploadImageHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-image\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  uploadAudio:\n    handler: server/server.uploadAudioHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-audio\n          method: post\n          cors: \n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  # restApiHandler:\n  #   handler: server/server.restHandler\n  #   events:\n  #     - httpApi:\n  #         path: /{proxy+}\n  #         method: ANY     \n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "error": {
+      "message": "EACCES: permission denied, mkdir '/Users/risvitareq/.serverless/artifacts/ajv-validate-18-06-2024'",
+      "stack": "Error: EACCES: permission denied, mkdir '/Users/risvitareq/.serverless/artifacts/ajv-validate-18-06-2024'",
+      "code": "EACCES"
+    },
+    "params": {},
+    "machineId": "ecb3b0e3eab6ef2c244d4b22497cd04c",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "031ce66e-846a-4177-9803-7027e5d26c87",
+    "orgName": "producercollab",
+    "userId": "Y2DkMTBGVXz0HjQ6bv",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "producercollab",
+    "subscription": null,
+    "userEmail": "ivsirqerat@gmail.com",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "614288690243",
+    "versionSf": "4.1.4",
+    "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-west-1:614288690243:stack/serverless-express-apollo-dev/a6a38ab0-2528-11ef-b8f6-0623946ef4b5",
+    "serviceProviderAwsCfStackCreated": "2024-06-07T23:49:59.727Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-09T20:51:23.920Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "GetFilesLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getFiles:27",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-GetFilesLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UploadAudioLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-uploadAudio:21",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-UploadAudioLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UploadImageLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-uploadImage:22",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-UploadImageLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateS3FolderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-createS3Folder:28",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-CreateS3FolderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetUserFoldersLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getUserFolders:28",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-GetUserFoldersLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GraphqlLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-graphql:28",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-GraphqlLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetAudioFilesLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getAudioFiles:27",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-GetAudioFilesLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-serverless-express-apollo-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-express-apollo-serverlessdeploymentbuck-aoac037ieaot",
+        "ExportName": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
+      },
+      {
+        "OutputKey": "GetImagesLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getImages:28",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-GetImagesLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "SinglePostImageLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-singlePostImage:28",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-SinglePostImageLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UploadLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-upload:28",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-express-apollo-dev-UploadLambdaFunctionQualifiedArn"
+      }
+    ]
+  }
+}

@@ -232,16 +232,17 @@ const server = new ApolloServer({
   // context: authMiddleware,
 });
 
-// const startServer = async () => {
-//   await connectToDatabase();
-//   await server.start();
-//   server.applyMiddleware({ app, path: customGraphQLEndpoint });
+const startServer = async () => {
+  await connectToDatabase();
+  await server.start();
+  server.applyMiddleware({ app, path: customGraphQLEndpoint });
 
-//   app.listen(port, () => {
-//     console.log(`API server running on port ${port}!`);
-//     console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
-//   });
-// };
+  app.listen(port, () => {
+    console.log(`API server running on port ${port}!`);
+    console.log(`Use GraphQL at http://localhost:${port}${server.graphqlPath}`);
+  });
+};
+
 // Apply Apollo Server Lambda handler to the path
 // app.use(customGraphQLEndpoint, server.createHandler());
 
@@ -249,7 +250,7 @@ const server = new ApolloServer({
 //   await dbConnection();
 // };
 
-// startServer();
+startServer();
 // module.exports.handler = serverless(app);
 
 exports.graphqlHandler = server.createHandler({

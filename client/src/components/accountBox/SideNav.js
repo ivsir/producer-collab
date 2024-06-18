@@ -1,46 +1,64 @@
 import React from "react";
-// import "./style/nav.css";
-import { SideNav, NavLinks, LinkStyle, NavLinkA, NavIcon } from "./Common.js";
 import Auth from "../../utils/auth.js";
 import { Link } from "react-router-dom";
-import Home from "../../assets/Home.png";
-import Upload from "../../assets/Upload.png";
-import Profile from "../../assets/Profile.png";
+import Brand from "../../assets/images/prodcollab.svg";
+import Search from "../../assets/images/search.png";
+import Home from "../../assets/images/Home.png"
+import Upload from "../../assets/images/Upload.png";
+import Profile from "../../assets/images/Profile.png"
 
-function sideNav() {
+
+function SideNav() {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
 
   return (
-    <SideNav>
-      <NavLinks>
-        <Link style={LinkStyle} to="/explore">
-          <NavIcon src={Home} />
-        </Link>
+    <div className="inline-flex relative">
+      <nav className="flex flex-col justify-between p-12 text-nowrap w-[18rem] h-screen sticky top-0">
         {Auth.loggedIn() ? (
           <>
-            <Link style={LinkStyle} to="/projectform">
-              <NavIcon src={Upload} />
-              
+          <div className="flex flex-col">
+            <Link className="flex flex-col mb-6 ml-4 w-12" to="/home">
+              <img src={Brand} alt="Home" /> {/* Corrected usage of <Link> */}
             </Link>
-            <Link style={LinkStyle} to="/profile">
-              <NavIcon src={Profile} />
-              
+            <Link className="flex flex-row gap-4 justify-start items-center px-5 py-3 hover:bg-secondary rounded-lg" to="/home">
+              <div className="w-6 h-6">
+                <img src={Home} alt="ProdCollab homepage" /> {/* Corrected usage of <Link> */}
+              </div>
+              <h2 className="text-md">Home</h2>
             </Link>
-            <Link style={LinkStyle} onClick={logout} to="/">
-              <NavLinkA>Logout</NavLinkA>
+            <Link className="flex flex-row gap-4 justify-start items-center px-5 py-3 hover:bg-secondary rounded-lg" to="#">
+              <div className="w-6 h-6">
+                <img src={Search} alt="Discover new music" /> {/* Corrected usage of <Link> */}
+              </div>
+              <h2 className="text-md">Explore</h2>
+            </Link>
+            <Link className="flex flex-row gap-4 justify-start items-center px-5 py-3 hover:bg-secondary rounded-lg" to="/projectform">
+              <div className="w-6 h-6">
+                <img src={Upload} alt="Upload a track" /> {/* Corrected usage of <Link> */}
+              </div>
+              <h2 className="text-md">Upload</h2>
+            </Link>
+            <Link className="flex flex-row gap-4 justify-start items-center px-5 py-3 hover:bg-secondary rounded-lg" to="/profile">
+              <div className="w-6 h-6">
+                <img src={Profile} alt="View your profile" /> {/* Corrected usage of <Link> */}
+              </div>
+              <h2 className="text-md">Profile</h2>
+            </Link>
+          </div>
+
+            <Link className="flex flex-row gap-4 justify-start items-center px-5 py-3 text-white opacity-50 hover:opacity-100 hover:bg-secondary rounded-lg" onClick={logout} to="/">
+              <h2 className="text-md">Logout</h2>
             </Link>
           </>
         ) : (
-          <Link style={LinkStyle} to="/">
-            <NavLinkA>Login</NavLinkA>
-          </Link>
+          <Link to="/">Login</Link>
         )}
-      </NavLinks>
-    </SideNav>
+      </nav>
+    </div>
   );
 }
 
-export default sideNav;
+export default SideNav;
