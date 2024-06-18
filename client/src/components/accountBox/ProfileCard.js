@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import AuthService from "../../utils/auth";
-import axiosClient from "../../config/axios";
+
+import React, { useState } from "react";
+import {
+  ProfileImageContainer,
+  ImageGrid,
+  ImageCard,
+} from "./Common.js";
 import { QUERY_USER } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 import Auth from "../../utils/auth";
+
+import AuthService from "../../utils/auth";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axiosClient from "../../config/axios.js";
 
 function ProfileCard(props) {
   const userId = Auth.getProfile().data.username;
@@ -43,7 +51,13 @@ function ProfileCard(props) {
   };
 
   return (
-    <div className="image-grid">
+    <ImageGrid>
+      {/* <Flex
+        // width="100%" // Display two images per row
+        // p={10} // Adjust padding as needed
+        // direction={"column-reverse"}
+      > */}
+      {/* <ProfileGrid> */}
       {projects.map((project) => {
         const projectImageUrl = findProjectImageUrl(
           project.projectImage,
@@ -51,14 +65,16 @@ function ProfileCard(props) {
         );
 
         return (
-          <Link to={`/projects/${project._id}`} key={project._id}>
-            <div className="profile-image-container">
-              <img className="image-card" src={projectImageUrl} alt={project.projectImage} />
-            </div>
+          <Link to={`/projects/${project._id}`}>
+            <ProfileImageContainer>
+              <ImageCard src={projectImageUrl} key={projectImageUrl} />
+            </ProfileImageContainer>
           </Link>
         );
       })}
-    </div>
+      {/* </ProfileGrid> */}
+      {/* </Flex> */}
+    </ImageGrid>
   );
 }
 

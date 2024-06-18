@@ -9,18 +9,24 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ChakraProvider, Box } from "@chakra-ui/react";
+import theme from "./config/theme";
 import ExploreCard from "./components/accountBox/ExploreCard";
 import About from "./components/accountBox/About";
 import ProfileCard from "./components/accountBox/ProfileCard";
 import ProjectForm from "./components/accountBox/ProjectForm";
 import SingleProject from "./components/accountBox/SingleProject";
-import Comments from "./components/accountBox/Comments";
+import Comments from "./components/accountBox/Comment";
 import SideNav from "./components/accountBox/SideNav";
+
+import { AppContainer, Container } from "./components/accountBox/Common";
 import Profile from "./components/accountBox/Profile";
 
-
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql",
+  // uri: "/graphql",
+  uri: "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev/graphql",
+  
+  // uri: "http://localhost:4001/dev/graphql"
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -44,79 +50,74 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-        {/* <div className="glow-container">
-          <div className="ball"></div>
-          <div className="ball" style={{ animationDelay: '-12s', transform: 'scale(0.35)', animationDuration: '25s' }}></div>
-          <div className="ball" style={{ animationDelay: '-10s', transform: 'scale(0.3)', animationDuration: '15s' }}></div>
-        </div> */}
       <Nav />
       <Router>
         <Routes>
           <Route
             exact
             path="/"
-            element={<div>{<AccountBox />}</div>}
+            element={<AppContainer>{<AccountBox />}</AppContainer>}
           />
           <Route
-            path="/home"
+            path="/explore"
             element={
-              <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
+              <Container>
                 <SideNav />
                 <ExploreCard
                   key={ExploreCard.id}
                   projectTitle={ExploreCard.projectTitle}
                   projectAuthor={ExploreCard.projectAuthor}
                 />
-              </div>
+              </Container>
             }
           />
           <Route path="/about" element={<About />} />
           <Route
             path="/profile"
             element={
-              <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
+              <Container>
                 <SideNav />
                 <Profile
                   key={ProfileCard.id}
                   projectTitle={ProfileCard.projectTitle}
                   projectDescription={ProfileCard.projectDescription}
                 />
-              </div>
+              </Container>
             }
           />
           <Route
             path="/projectform"
             element={
-              <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
+              <Container>
                 <SideNav />
                 <ProjectForm
                   key={ProjectForm.id}
                   projectTitle={ProjectForm.projectTitle}
                   projectDescription={ProjectForm.projectDescription}
                 />
-              </div>
+              </Container>
             }
           />
           <Route
             path="projects/:projectId"
             element={
-              <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
+              <Container>
                 <SideNav />
                 <SingleProject
                   key={SingleProject.id}
                   projectTitle={SingleProject.projectTitle}
                   projectDescription={SingleProject.projectDescription}
                 />
-              </div>
+              </Container>
             }
           />
           <Route
             path="/comments"
             element={
-              <div className="flex flex-row w-full max-w-[80rem] mx-auto h-auto relative">
+              <Container>
                 <SideNav />
                 <Comments />
-              </div>
+              </Container>
             }
           />
         </Routes>

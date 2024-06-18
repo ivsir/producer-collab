@@ -1,4 +1,5 @@
 import React from "react";
+import "./style/nav.css";
 import Auth from "../utils/auth.js";
 
 const Nav = () => {
@@ -7,8 +8,16 @@ const Nav = () => {
     Auth.logout();
   };
   return (
-  <>
-  </>
+    <header>
+      <a href="/explore" className="brand-title">
+        <img
+          className="logo"
+          alt="prodcollab logo"
+          src={require("../assets/prodcollab.png")}
+        ></img>
+        
+      </a>
+    </header>
   );
 };
 

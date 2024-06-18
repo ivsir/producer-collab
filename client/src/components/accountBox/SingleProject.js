@@ -4,13 +4,15 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
+import AudioPlayer from "./AudioPlayer.js";
 import { CircularProgress, Text } from "@chakra-ui/react";
+import { ProjectImageCard, ImageContainer, ExploreContainer } from "./Common.js";
 import imgQueries from "../../utils/imgQueries";
 import { useState } from "react";
 
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
+import { SinglePostContainer } from "./Common";
 import { ADD_MEMBER } from "../../utils/mutations";
-import WaveSurferAudio from "./WaveSurferAudio.js";
 
 const SingleProject = () => {
   const [refetch, setRefetch] = useState(0);
@@ -81,8 +83,8 @@ const SingleProject = () => {
   }
 
   return (
-    <div>
-      <div>
+    <ExploreContainer>
+      <SinglePostContainer>
         <div className="my-3 single-post-container">
           {imagesLoading && (
             <CircularProgress
@@ -98,18 +100,18 @@ const SingleProject = () => {
               No images found
             </Text>
           )}
-          <div>
+          <ImageContainer>
             {/* {imageUrls?.length > 0 &&
             imageUrls.map((url) => (
               <ImageCard src={url} alt="Image" key={url} />
               ))} */}
-            <div
+            <ProjectImageCard
               src={projectImageUrl}
               alt="Image"
               key={projectImageUrl}
             />
             {/* <ImageCard src={cacheBustedImageUrl} alt="Image" key={cacheBustedImageUrl} /> */}
-          </div>
+          </ImageContainer>
           <h2>
             {project.projectTitle} <br />
           </h2>
@@ -120,7 +122,7 @@ const SingleProject = () => {
             <blockquote>{project.projectDescription}</blockquote>{" "}
             <div>
               {projectAudioUrl ? (
-                <WaveSurferAudio src={projectAudioUrl} key={projectAudioUrl} />
+                <AudioPlayer src={projectAudioUrl} key={projectAudioUrl} />
               ) : (
                 <Text>No audio available</Text>
               )}
@@ -132,8 +134,8 @@ const SingleProject = () => {
             Join project
           </button>
         </div>
-      </div>
-    </div>
+      </SinglePostContainer>
+    </ExploreContainer>
   );
 };
 
