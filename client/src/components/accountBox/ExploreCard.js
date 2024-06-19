@@ -40,21 +40,35 @@ function ExploreCard(props) {
         const fetchPromises = projects.map(async (project) => {
           const currentAuthor = project.projectAuthor;
 
-          const imageResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
+          // const imageResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
+          //   headers: {
+          //     "x-project-author": currentAuthor,
+          //     "x-file-type": "image",
+          //   },
+          // });
+
+
+
+          // const audioResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
+          //   headers: {
+          //     "x-project-author": currentAuthor,
+          //     "x-file-type": "audio",
+          //   },
+          // });
+          const imageResponse = await axiosClient.get(`${URL}`, {
             headers: {
               "x-project-author": currentAuthor,
               "x-file-type": "image",
             },
           });
-
-
-
-          const audioResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
+          
+          const audioResponse = await axiosClient.get(`${URL}`, {
             headers: {
               "x-project-author": currentAuthor,
               "x-file-type": "audio",
             },
           });
+          
 
           console.log(`Audio data fetched for author: ${currentAuthor}`);
 
