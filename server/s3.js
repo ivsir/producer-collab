@@ -14,7 +14,6 @@ const { v4: uuid } = require("uuid");
 
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
-const LIMIT = 50; // Adjust the limit as needed
 console.log('Bucket Name:', process.env.BUCKET);
 
 const uploadToS3 = async ({ file, userId }) => {
