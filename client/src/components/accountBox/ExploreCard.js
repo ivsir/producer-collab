@@ -1,7 +1,7 @@
 import axiosClient from "../../config/axios";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import SkeletonLoader from "../hooks/SkeletonLoader";
 import AuthService from "../../utils/auth";
 import LazyLoad from "react-lazyload";
@@ -12,7 +12,8 @@ import WaveSurfer from "wavesurfer.js";
 
 function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
-  const projects = apolloData?.projects || [];
+  // const projects = apolloData?.projects || [];
+  const projects = useMemo(() => apolloData?.projects || [], [apolloData]);
 
   const URL = "/singlepost-image";
 
@@ -104,12 +105,12 @@ function ExploreCard(props) {
     const memberId = AuthService.getId();
 
     try {
-      // await member({
-      //   variables: {
-      //     projectId,
-      //     memberId,
-      //   },
-      // });
+      await member({
+        variables: {
+          projectId,
+          memberId,
+        },
+      });
       setSelectedProjectId(projectId);
     } catch (error) {
       console.log(error);
