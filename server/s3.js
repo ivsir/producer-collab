@@ -14,11 +14,11 @@ const { v4: uuid } = require("uuid");
 
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
+const LIMIT = 50; // Adjust the limit as needed
 console.log('Bucket Name:', process.env.BUCKET);
 
 const uploadToS3 = async ({ file, userId }) => {
   const key = `${userId}/${uuid()}`;
-  console.log("Generated S3 key:", key);
 
   const command = new PutObjectCommand({
     Bucket: BUCKET,
@@ -35,6 +35,25 @@ const uploadToS3 = async ({ file, userId }) => {
     return { error };
   }
 };
+
+// const uploadToS3 = async ({ fileStream, userId, mimetype }) => {
+//   const key = `${userId}/${uuid()}`;
+
+//   const command = new PutObjectCommand({
+//     Bucket: BUCKET,
+//     Key: key,
+//     Body: fileStream,
+//     ContentType: mimetype,
+//   });
+
+//   try {
+//     await s3.send(command);
+//     return { key };
+//   } catch (error) {
+//     console.error("S3 upload error:", error);
+//     return { error };
+//   }
+// };
 
 const parseForm = (event) => {
   return new Promise((resolve, reject) => {
@@ -103,6 +122,7 @@ const getUserPresignedUrls = async (userId) => {
     return { error };
   }
 };
+
 
 const getPresignedUrls = async (userId) => {
   try {
