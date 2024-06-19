@@ -105,12 +105,12 @@ function ExploreCard(props) {
     const memberId = AuthService.getId();
 
     try {
-      await member({
-        variables: {
-          projectId,
-          memberId,
-        },
-      });
+      // await member({
+      //   variables: {
+      //     projectId,
+      //     memberId,
+      //   },
+      // });
       setSelectedProjectId(projectId);
     } catch (error) {
       console.log(error);
