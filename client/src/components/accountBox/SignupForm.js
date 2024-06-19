@@ -37,7 +37,6 @@ export function SignupForm() {
       });
 
       const userId = data.addUser.user.username;
-      console.log("User ID:", userId);
 
       const response = await axios.post(`${baseURL}/create-s3-folder`, {
         userId,
@@ -45,11 +44,8 @@ export function SignupForm() {
           "x-user-id": userId,
         },
       });
-      console.log("S3 Folder Creation Response:", response);
-
       if (response.status === 200) {
         AuthService.login(data.addUser.token);
-        console.log("User Token:", data.addUser.token);
       } else {
         console.error("Failed to create folder:", response.data.error);
       }

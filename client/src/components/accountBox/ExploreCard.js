@@ -7,7 +7,7 @@ import AuthService from "../../utils/auth";
 import LazyLoad from "react-lazyload";
 import "../style/BackgroundVisualizer.css";
 import Comments from "./Comments";
-import { ADD_MEMBER } from "../../utils/mutations";
+import { ADD_MEMBER,  ADD_COMMENT } from "../../utils/mutations";
 import WaveSurfer from "wavesurfer.js";
 
 function ExploreCard(props) {
@@ -24,42 +24,59 @@ function ExploreCard(props) {
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
   const [commentsCount, setCommentsCount] = useState({});
-
+  const [userInteracted, setUserInteracted] = useState(false);
 
   const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
+  const [addComment] = useMutation(ADD_COMMENT); // Use ADD_COMMENT mutation
 
   const wavesurfers = useRef({});
   const currentPlaying = useRef(null); // Track the currently playing audio
 
   useEffect(() => {
-    setLoading(true);
+    const fetchData = async () => {
+      setLoading(true);
 
-    const fetchData = async (projectAuthor) => {
       try {
-        const imageResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
-          headers: {
-            "x-project-author": projectAuthor,
-            "x-file-type": "image",
-          },
-        });
-        const audioResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
-          headers: {
-            "x-project-author": projectAuthor,
-            "x-file-type": "audio",
-          },
+        const fetchPromises = projects.map(async (project) => {
+          const currentAuthor = project.projectAuthor;
+
+          const imageResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
+            headers: {
+              "x-project-author": currentAuthor,
+              "x-file-type": "image",
+            },
+          });
+
+
+
+          const audioResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
+            headers: {
+              "x-project-author": currentAuthor,
+              "x-file-type": "audio",
+            },
+          });
+
+          console.log(`Audio data fetched for author: ${currentAuthor}`);
+
+          return {
+            author: currentAuthor,
+            imageData: imageResponse.data,
+            audioData: audioResponse.data,
+          };
         });
 
-        const imageData = imageResponse.data;
-        const audioData = audioResponse.data;
+        const results = await Promise.all(fetchPromises);
+        
+        const newImageUrls = {};
+        const newAudioUrls = {};
 
-        setImageUrls((prevImageUrls) => ({
-          ...prevImageUrls,
-          [projectAuthor]: imageData,
-        }));
-        setAudioUrls((prevAudioUrls) => ({
-          ...prevAudioUrls,
-          [projectAuthor]: audioData,
-        }));
+        results.forEach(({ author, imageData, audioData }) => {
+          newImageUrls[author] = imageData;
+          newAudioUrls[author] = audioData;
+        });
+
+        setImageUrls(newImageUrls);
+        setAudioUrls(newAudioUrls);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -67,11 +84,11 @@ function ExploreCard(props) {
       }
     };
 
-    projects.forEach((project) => {
-      const currentAuthor = project.projectAuthor;
-      fetchData(currentAuthor);
-    });
+    if (projects.length > 0) {
+      fetchData();
+    }
   }, [projects]);
+
 
   const findProjectImageUrl = (projectImage, projectAuthor) => {
     const authorImageUrls = imageUrls[projectAuthor] || [];
@@ -88,17 +105,18 @@ function ExploreCard(props) {
     const memberId = AuthService.getId();
 
     try {
-      await member({
-        variables: {
-          projectId,
-          memberId,
-        },
-      });
+      // await member({
+      //   variables: {
+      //     projectId,
+      //     memberId,
+      //   },
+      // });
       setSelectedProjectId(projectId);
     } catch (error) {
       console.log(error);
     }
   };
+
 
   const initializeWaveSurfer = (containerRef, audioUrl, projectId) => {
     if (containerRef && !wavesurfers.current[projectId]) {
@@ -122,6 +140,22 @@ function ExploreCard(props) {
       wavesurfers.current[projectId] = wavesurfer;
     }
   };
+
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      setUserInteracted(true);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+
+    if (!userInteracted) {
+      document.addEventListener('click', handleUserInteraction);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleUserInteraction);
+    };
+  }, [userInteracted]);
+
 
   useEffect(() => {
     // Cleanup on component unmount
@@ -245,13 +279,15 @@ function ExploreCard(props) {
                           {likes[project._id]}
                           <button onClick={() => handleLike(project._id)} className="border border-secondary border-opacity-50 p-[6px] rounded-xl overflow-hidden bg-secondary">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill={liked[project._id] ? "red" : "none"} xmlns="http://www.w3.org/2000/svg">
-                              <path d="M11.4116 6.41369L11.9979 7L12.5832 6.41473C13.489 5.5089 14.7176 5 15.9987 5C17.2788 5 18.5067 5.5082 19.4123 6.41296L19.4355 6.43605C19.8094 6.80957 20.1225 7.24502 20.3589 7.71773C21.3335 9.66691 20.9606 12.0394 19.4196 13.5804L13.4142 19.5858C12.6332 20.3668 11.3668 20.3668 10.5858 19.5858L4.58192 13.5819C3.04002 12.04 2.66744 9.66511 3.64263 7.71475C3.87794 7.24412 4.18957 6.81023 4.56144 6.43798L4.58392 6.41547C5.48924 5.50921 6.71768 5 7.99865 5C9.27876 5 10.5064 5.50852 11.4116 6.41369Z" stroke={liked[project._id] ? "none" : "white"} stroke-width="1.5" />
+                              <path d="M11.4116 6.41369L11.9979 7L12.5832 6.41473C13.489 5.5089 14.7176 5 15.9987 5C17.2788 5 18.5067 5.5082 19.4123 6.41296L19.4355 6.43605C19.8094 6.80957 20.1225 7.24502 20.3589 7.71773C21.3335 9.66691 20.9606 12.0394 19.4196 13.5804L13.4142 19.5858C12.6332 20.3668 11.3668 20.3668 10.5858 19.5858L4.58192 13.5819C3.04002 12.04 2.66744 9.66511 3.64263 7.71475C3.87794 7.24412 4.18957 6.81023 4.56144 6.43798L4.58392 6.41547C5.48924 5.50921 6.71768 5 7.99865 5C9.27876 5 10.5064 5.50852 11.4116 6.41369Z" stroke={liked[project._id] ? "none" : "white"} strokeWidth="1.5" />
                             </svg>
                           </button>
                         </div>
                         <div className="flex flex-col justify-center items-center gap-1">
                           {commentsCount[project._id] ?? 0}
-                          <button onClick={(event) => handleJoin(event, project._id)} className="border border-secondary border-opacity-50 p-2 rounded-xl overflow-hidden bg-secondary">
+                          <button 
+                          onClick={(event) => handleJoin(event, project._id)} 
+                          className="border border-secondary border-opacity-50 p-2 rounded-xl overflow-hidden bg-secondary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M20 17.17L18.83 16H4V4H20V17.17ZM20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H18L22 22V4C22 2.9 21.1 2 20 2Z" fill="#FAFAFA" />
                             </svg>
@@ -291,3 +327,4 @@ function ExploreCard(props) {
 }
 
 export default ExploreCard;
+

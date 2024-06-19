@@ -15,6 +15,7 @@ const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
 const URL = "/images";
 const audioURL = "/audiofiles";
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
 
 const ErrorText = ({ error }) => {
   if (error) {
@@ -129,6 +130,11 @@ const ProjectForm = () => {
   };
 
   const handleUpload = async (file) => {
+    if (file.size > MAX_FILE_SIZE) {
+      setImgError("File size exceeds 10 MB");
+      return;
+    }
+
     if (!validFileTypes.includes(file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
@@ -145,6 +151,11 @@ const ProjectForm = () => {
   };
 
   const handleAudioUpload = async (file) => {
+    if (file.size > MAX_FILE_SIZE) {
+      setAudioError("File size exceeds 10 MB");
+      return;
+    }
+
     if (!validAudioTypes.includes(file.type)) {
       setAudioError("File must be in MP3/WAV format");
       return;
