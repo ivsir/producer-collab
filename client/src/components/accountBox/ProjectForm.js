@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { Button, Input, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
@@ -16,6 +16,7 @@ const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
 const URL = "/images";
 const audioURL = "/audiofiles";
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
+
 
 const ErrorText = ({ error }) => {
   if (error) {
@@ -40,6 +41,7 @@ const ProjectForm = () => {
   const audioInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedAudio, setSelectedAudio] = useState(null);
+  const navigate = useNavigate ()
 
   const { mutate: uploadImage, error: uploadError, responseData: imageResponse } = imgMutation({ url: URL }, userId);
   const { mutate: uploadAudio, error: uploadAudioError, responseData: audioResponse } = audioMutation({ url: audioURL }, userId);
@@ -87,7 +89,8 @@ const ProjectForm = () => {
       setProjectDescription("");
       setProjectImage("");
       setProjectAudio("");
-      window.location.assign("/profile");
+      // window.location.assign("/profile");
+      navigate("/profile")
     } catch (err) {
       console.error(err);
     } finally {
