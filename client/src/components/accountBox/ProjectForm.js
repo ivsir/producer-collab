@@ -13,8 +13,14 @@ import InputField from "../elements/InputField";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
-const URL = "/images";
-const audioURL = "/audiofiles";
+
+// const URL = "/images";
+// const audioURL = "/audiofiles";
+
+const URL = "/upload-image"
+const audioURL = "/upload-audio"
+
+
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
 
 const ErrorText = ({ error }) => {
