@@ -252,6 +252,9 @@ const server = new ApolloServer({
 // startServer();
 // module.exports.handler = serverless(app);
 
+
+
+
 exports.graphqlHandler = server.createHandler({
   cors: {
     origin: "*",
