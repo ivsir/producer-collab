@@ -18,7 +18,6 @@ const useMutation = ({ url, method = "POST" }, userId) => {
     
     try {
       axiosClient.defaults.headers.common["x-user-id"] = userId;
-      console.log(userId)
       const response = await axiosClient({ url, method, data });
       const key = response.data.key;
       if (key) {
