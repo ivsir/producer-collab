@@ -80,7 +80,9 @@ const resolvers = {
       { projectTitle, projectDescription, projectImage, projectAudio },
       context
     ) => {
+      console.log('Context in resolver:', context);
       if (context.user) {
+        
         const project = await Project.create({
           projectTitle,
           projectDescription,
@@ -115,6 +117,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addComment: async (parent, { projectId, commentText }, context) => {
+      console.log('Context in resolver:', context);
       if (context.user) {
         return Project.findOneAndUpdate(
           { _id: projectId },
