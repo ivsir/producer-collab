@@ -54,10 +54,50 @@ const uploadToS3 = async ({ file, userId }) => {
 //   }
 // };
 
-const parseForm = (event) => {
+// const parseForm = (event) => {
+//   return new Promise((resolve, reject) => {
+//     const bb = new Busboy({ headers: event.headers });
+//     const result = { files: [] };
+
+//     bb.on('file', (fieldname, file, filename, encoding, mimetype) => {
+//       const buffers = [];
+//       file.on('data', (data) => {
+//         buffers.push(data);
+//       });
+//       file.on('end', () => {
+//         result.files.push({
+//           fieldname,
+//           buffer: Buffer.concat(buffers),
+//           filename,
+//           encoding,
+//           mimetype,
+//         });
+//       });
+//     });
+
+//     bb.on('field', (fieldname, value) => {
+//       result[fieldname] = value;
+//     });
+
+//     bb.on('finish', () => {
+//       resolve(result);
+//     });
+
+//     bb.on('error', (error) => {
+//       reject(error);
+//     });
+
+//     bb.write(event.body, event.isBase64Encoded ? 'base64' : 'binary');
+//     bb.end();
+//   });
+// };
+
+
+const parseForm = (event, headers) => {
   return new Promise((resolve, reject) => {
-    const bb = new Busboy({ headers: event.headers });
+    const bb = new Busboy({ headers });
     const result = { files: [] };
+    console.log(bb)
 
     bb.on('file', (fieldname, file, filename, encoding, mimetype) => {
       const buffers = [];
