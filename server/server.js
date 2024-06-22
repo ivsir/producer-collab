@@ -215,22 +215,52 @@ app.get("/files", async (req, res) => {
   return res.json(presignedUrls);
 });
 
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+  
+//   context: async ({ event, context }) => {
+//     // Ensure database connection is established
+//     await connectToDatabase();
+//     return {
+//       headers: event.headers,
+//       functionName: context.functionName,
+//       event,
+//       context,
+//       user: context.user || null, // Add user from context if necessary
+//     };
+//   },
+//   // context: authMiddleware,
+// });
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  
   context: async ({ event, context }) => {
     // Ensure database connection is established
     await connectToDatabase();
+
+    // Call authMiddleware to set the user
+    const user = authMiddleware(event);
+
+    // Log the context to debug
+    console.log('Context before returning:', {
+      headers: event.headers,
+      functionName: context.functionName,
+      event,
+      context,
+      user,
+    });
+
+    // Return the context with the user attached
     return {
       headers: event.headers,
       functionName: context.functionName,
       event,
       context,
-      user: context.user || null, // Add user from context if necessary
+      user,
     };
   },
-  // context: authMiddleware,
 });
 
 // const startServer = async () => {
