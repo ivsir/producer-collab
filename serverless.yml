@@ -219,7 +219,6 @@
 #     - package-lock.json
 #     - node_modules/**
 #   excludeDevDependencies: true
-
 service: serverless-express-apollo
 
 provider:
@@ -254,9 +253,8 @@ functions:
           path: graphql
           method: any
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -268,9 +266,8 @@ functions:
           path: playground
           method: ANY
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -285,16 +282,15 @@ functions:
           path: singlepost-image
           method: get
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
               - x-user-id
               - x-file-type
               - x-project-author
-            allowCredentials: false
+            allowCredentials: true
 
   createS3Folder:
     handler: server/server.createS3FolderHandler
@@ -303,9 +299,8 @@ functions:
           path: create-s3-folder
           method: post
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -321,9 +316,8 @@ functions:
           path: upload
           method: post
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -339,9 +333,8 @@ functions:
           path: user-folders
           method: get
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -357,9 +350,8 @@ functions:
           path: images
           method: get
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -375,9 +367,8 @@ functions:
           path: audiofiles
           method: get
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -393,9 +384,8 @@ functions:
           path: files
           method: get
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               - Authorization
@@ -411,9 +401,8 @@ functions:
           path: upload-image
           method: post
           cors:
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               # - content-type
@@ -431,9 +420,8 @@ functions:
           path: upload-audio
           method: post
           cors: 
-            origins:
+            origin:
               - 'https://main.dan6kz7trfabu.amplifyapp.com'
-              - 'http://localhost:3000'
             headers:
               - Content-Type
               # - content-type
