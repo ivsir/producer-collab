@@ -794,7 +794,7 @@ console.log(headers)
     const response = {
       statusCode: 201,
       headers: {
-        "Access-Control-Allow-Origin": ["https://main.dan6kz7trfabu.amplifyapp.com", "http://localhost:3000"],
+        "Access-Control-Allow-Origin": "https://main.dan6kz7trfabu.amplifyapp.com",
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({ key }),
@@ -867,7 +867,7 @@ exports.uploadAudioHandler = async (event, context, callback) => {
     const response = {
       statusCode: 201,
       headers: {
-        "Access-Control-Allow-Origin": ["https://main.dan6kz7trfabu.amplifyapp.com", "http://localhost:3000"],
+        "Access-Control-Allow-Origin": "https://main.dan6kz7trfabu.amplifyapp.com",
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({ key }),
