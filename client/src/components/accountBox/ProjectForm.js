@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { Button, Input, Text } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
@@ -13,15 +13,14 @@ import InputField from "../elements/InputField";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
-
 // const URL = "/images";
 // const audioURL = "/audiofiles";
 
-const URL = "/upload-image"
-const audioURL = "/upload-audio"
-
+const URL = "/upload-image";
+const audioURL = "/upload-audio";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
+
 
 const ErrorText = ({ error }) => {
   if (error) {
@@ -46,7 +45,7 @@ const ProjectForm = () => {
   const audioInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedAudio, setSelectedAudio] = useState(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate ()
 
   const { mutate: uploadImage, error: uploadError, responseData: imageResponse } = imgMutation({ url: URL }, userId);
   const { mutate: uploadAudio, error: uploadAudioError, responseData: audioResponse } = audioMutation({ url: audioURL }, userId);
@@ -78,15 +77,16 @@ const ProjectForm = () => {
     audioInputRef.current.click();
   };
 
+console.log(projectTitle,projectDescription, projectImage, projectAudio)
+ 
   const addProjectLink = async () => {
-
     try {
       await addProject({
         variables: {
-          projectTitle,
-          projectDescription,
-          projectImage,
-          projectAudio,
+          projectTitle: projectTitle,
+          projectDescription: projectDescription,
+          projectImage: projectImage,
+          projectAudio: projectAudio,
           projectAuthor: userId,
         },
       });

@@ -26,8 +26,8 @@ function ExploreCard(props) {
   const [commentsCount, setCommentsCount] = useState({});
   const [userInteracted, setUserInteracted] = useState(false);
 
-  const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-  const [addComment] = useMutation(ADD_COMMENT); // Use ADD_COMMENT mutation
+  // const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
+  // const [addComment] = useMutation(ADD_COMMENT); // Use ADD_COMMENT mutation
 
   const wavesurfers = useRef({});
   const currentPlaying = useRef(null); // Track the currently playing audio
@@ -68,9 +68,6 @@ function ExploreCard(props) {
               "x-file-type": "audio",
             },
           });
-          
-
-          console.log(`Audio data fetched for author: ${currentAuthor}`);
 
           return {
             author: currentAuthor,
@@ -116,7 +113,7 @@ function ExploreCard(props) {
 
   const handleJoin = async (event, projectId) => {
     event.preventDefault();
-    const memberId = AuthService.getId();
+    // const memberId = AuthService.getId();
 
     try {
       // await member({
