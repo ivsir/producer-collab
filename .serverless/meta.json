@@ -281,7 +281,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.graphqlHandler",
                 "Runtime": "nodejs20.x",
@@ -314,7 +314,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.singlePostImageHandler",
                 "Runtime": "nodejs20.x",
@@ -347,7 +347,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.createS3FolderHandler",
                 "Runtime": "nodejs20.x",
@@ -380,7 +380,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadHandler",
                 "Runtime": "nodejs20.x",
@@ -413,7 +413,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getUserFoldersHandler",
                 "Runtime": "nodejs20.x",
@@ -446,7 +446,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getImagesHandler",
                 "Runtime": "nodejs20.x",
@@ -479,7 +479,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getAudioFilesHandler",
                 "Runtime": "nodejs20.x",
@@ -512,7 +512,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getFilesHandler",
                 "Runtime": "nodejs20.x",
@@ -545,7 +545,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadImageHandler",
                 "Runtime": "nodejs20.x",
@@ -578,7 +578,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadAudioHandler",
                 "Runtime": "nodejs20.x",
@@ -604,104 +604,104 @@
                 "UploadAudioLogGroup"
               ]
             },
-            "GraphqlLambdaVersionpqNRQleahQVlwMP75NlI8Qfq78IuBL8mO7MVIcWk8E": {
+            "GraphqlLambdaVersionqAzZc3fkE0jJgZ27QRURmxr6fJ5aYJOswhtnCCl4hw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GraphqlLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "SinglePostImageLambdaVersionUSE3ORpUB8WGTnnPaJUbKfby5GBKR8yWRYP9dXHDk": {
+            "SinglePostImageLambdaVersionKvQBeC814ndcZBDfY8i7YfUEyOpaYrwhQ2yrIPaiAo": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "SinglePostImageLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "CreateS3FolderLambdaVersionLH0x24qSKm9LuvFOpjwgaRZc7q7DU16kb5gVHIUo": {
+            "CreateS3FolderLambdaVersions0unqXvAEEziMcmX85KWwsZ3CyqaCnaV1gdCaJs": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateS3FolderLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "UploadLambdaVersionThhMoj9upW21y9kqhr5zaEBHf5WYjSnuRqFcnfBB7Q": {
+            "UploadLambdaVersionW6krPnFl5b19r7zUVwAjuceWNVN6Vf9i8ZtQMfmOM": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "UploadLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "GetUserFoldersLambdaVersionciwHQ6rGcTrM7isZuHICCtd0i7al9M5TINw43RYXsjA": {
+            "GetUserFoldersLambdaVersioncUO717FoS0uvHWlkmIPWlcvDW24bgZnT9UpPoSvQ": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetUserFoldersLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "GetImagesLambdaVersionJC93QJiuc0vNTD4udxLWcA2mntRMq0BeztFcWSPj0s": {
+            "GetImagesLambdaVersionNrxvn2Hs6dX5qbTwcLbv1H2rLhjOp9XJLcsM2k5F4Y8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetImagesLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "GetAudioFilesLambdaVersion4Jy1La5kIba6m7R6JdciDqmXAEgZpu0jgHy5EfZPg": {
+            "GetAudioFilesLambdaVersion3NbZw6fbkQdB5RrGyW0UKqO2OjMxR5SBgQuOIXEc26g": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAudioFilesLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "GetFilesLambdaVersionWvCdysRrNwVQ0GLCubrDFNY3nkoaAEptrQmbebbRE": {
+            "GetFilesLambdaVersioniDFn4XAuuozGsKkowf1fLvNv0eN8qQehGBkGu0pPxM0": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetFilesLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "UploadImageLambdaVersiondtr1kVnSBzV3fSwdrQhPKA841TzYa9d48HIBIuKUzA": {
+            "UploadImageLambdaVersionMLgOYKfrHRAtfQykfZSiAYlvm9AycGEyZZHwuNbXEo": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "UploadImageLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
-            "UploadAudioLambdaVersionNUAYcSxo3CUZb0zdwXGIzLPpVwr4yqXz2A99LYq2ZQ": {
+            "UploadAudioLambdaVersionQYih7Ynr4uY0y7Ak7jrq07Xzvp2UXgnMCZc6mVIoToQ": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "UploadAudioLambdaFunction"
                 },
-                "CodeSha256": "LPN43iMxEt//MNV/8UqDRQId+5cekdtRXTTg3hTtrQk="
+                "CodeSha256": "bhvWtZmD7zH1N+ab64iBdVWvbzMUzEejZTWaVLqpsTQ="
               }
             },
             "ApiGatewayRestApi": {
@@ -1882,7 +1882,7 @@
                 "UploadAudioLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1719117736991": {
+            "ApiGatewayDeployment1719118280914": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -2298,7 +2298,7 @@
             "GraphqlLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GraphqlLambdaVersionpqNRQleahQVlwMP75NlI8Qfq78IuBL8mO7MVIcWk8E"
+                "Ref": "GraphqlLambdaVersionqAzZc3fkE0jJgZ27QRURmxr6fJ5aYJOswhtnCCl4hw"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-GraphqlLambdaFunctionQualifiedArn"
@@ -2307,7 +2307,7 @@
             "SinglePostImageLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "SinglePostImageLambdaVersionUSE3ORpUB8WGTnnPaJUbKfby5GBKR8yWRYP9dXHDk"
+                "Ref": "SinglePostImageLambdaVersionKvQBeC814ndcZBDfY8i7YfUEyOpaYrwhQ2yrIPaiAo"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-SinglePostImageLambdaFunctionQualifiedArn"
@@ -2316,7 +2316,7 @@
             "CreateS3FolderLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateS3FolderLambdaVersionLH0x24qSKm9LuvFOpjwgaRZc7q7DU16kb5gVHIUo"
+                "Ref": "CreateS3FolderLambdaVersions0unqXvAEEziMcmX85KWwsZ3CyqaCnaV1gdCaJs"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-CreateS3FolderLambdaFunctionQualifiedArn"
@@ -2325,7 +2325,7 @@
             "UploadLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "UploadLambdaVersionThhMoj9upW21y9kqhr5zaEBHf5WYjSnuRqFcnfBB7Q"
+                "Ref": "UploadLambdaVersionW6krPnFl5b19r7zUVwAjuceWNVN6Vf9i8ZtQMfmOM"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-UploadLambdaFunctionQualifiedArn"
@@ -2334,7 +2334,7 @@
             "GetUserFoldersLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetUserFoldersLambdaVersionciwHQ6rGcTrM7isZuHICCtd0i7al9M5TINw43RYXsjA"
+                "Ref": "GetUserFoldersLambdaVersioncUO717FoS0uvHWlkmIPWlcvDW24bgZnT9UpPoSvQ"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-GetUserFoldersLambdaFunctionQualifiedArn"
@@ -2343,7 +2343,7 @@
             "GetImagesLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetImagesLambdaVersionJC93QJiuc0vNTD4udxLWcA2mntRMq0BeztFcWSPj0s"
+                "Ref": "GetImagesLambdaVersionNrxvn2Hs6dX5qbTwcLbv1H2rLhjOp9XJLcsM2k5F4Y8"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-GetImagesLambdaFunctionQualifiedArn"
@@ -2352,7 +2352,7 @@
             "GetAudioFilesLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAudioFilesLambdaVersion4Jy1La5kIba6m7R6JdciDqmXAEgZpu0jgHy5EfZPg"
+                "Ref": "GetAudioFilesLambdaVersion3NbZw6fbkQdB5RrGyW0UKqO2OjMxR5SBgQuOIXEc26g"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-GetAudioFilesLambdaFunctionQualifiedArn"
@@ -2361,7 +2361,7 @@
             "GetFilesLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetFilesLambdaVersionWvCdysRrNwVQ0GLCubrDFNY3nkoaAEptrQmbebbRE"
+                "Ref": "GetFilesLambdaVersioniDFn4XAuuozGsKkowf1fLvNv0eN8qQehGBkGu0pPxM0"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-GetFilesLambdaFunctionQualifiedArn"
@@ -2370,7 +2370,7 @@
             "UploadImageLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "UploadImageLambdaVersiondtr1kVnSBzV3fSwdrQhPKA841TzYa9d48HIBIuKUzA"
+                "Ref": "UploadImageLambdaVersionMLgOYKfrHRAtfQykfZSiAYlvm9AycGEyZZHwuNbXEo"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-UploadImageLambdaFunctionQualifiedArn"
@@ -2379,7 +2379,7 @@
             "UploadAudioLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "UploadAudioLambdaVersionNUAYcSxo3CUZb0zdwXGIzLPpVwr4yqXz2A99LYq2ZQ"
+                "Ref": "UploadAudioLambdaVersionQYih7Ynr4uY0y7Ak7jrq07Xzvp2UXgnMCZc6mVIoToQ"
               },
               "Export": {
                 "Name": "sls-serverless-express-apollo-dev-UploadAudioLambdaFunctionQualifiedArn"
@@ -2556,7 +2556,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GraphqlLambdaVersionpqNRQleahQVlwMP75NlI8Qfq78IuBL8mO7MVIcWk8E"
+          "versionLogicalId": "GraphqlLambdaVersionqAzZc3fkE0jJgZ27QRURmxr6fJ5aYJOswhtnCCl4hw"
         },
         "singlePostImage": {
           "handler": "server/server.singlePostImageHandler",
@@ -2590,7 +2590,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "SinglePostImageLambdaVersionUSE3ORpUB8WGTnnPaJUbKfby5GBKR8yWRYP9dXHDk"
+          "versionLogicalId": "SinglePostImageLambdaVersionKvQBeC814ndcZBDfY8i7YfUEyOpaYrwhQ2yrIPaiAo"
         },
         "createS3Folder": {
           "handler": "server/server.createS3FolderHandler",
@@ -2624,7 +2624,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateS3FolderLambdaVersionLH0x24qSKm9LuvFOpjwgaRZc7q7DU16kb5gVHIUo"
+          "versionLogicalId": "CreateS3FolderLambdaVersions0unqXvAEEziMcmX85KWwsZ3CyqaCnaV1gdCaJs"
         },
         "upload": {
           "handler": "server/server.uploadHandler",
@@ -2658,7 +2658,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "UploadLambdaVersionThhMoj9upW21y9kqhr5zaEBHf5WYjSnuRqFcnfBB7Q"
+          "versionLogicalId": "UploadLambdaVersionW6krPnFl5b19r7zUVwAjuceWNVN6Vf9i8ZtQMfmOM"
         },
         "getUserFolders": {
           "handler": "server/server.getUserFoldersHandler",
@@ -2692,7 +2692,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetUserFoldersLambdaVersionciwHQ6rGcTrM7isZuHICCtd0i7al9M5TINw43RYXsjA"
+          "versionLogicalId": "GetUserFoldersLambdaVersioncUO717FoS0uvHWlkmIPWlcvDW24bgZnT9UpPoSvQ"
         },
         "getImages": {
           "handler": "server/server.getImagesHandler",
@@ -2726,7 +2726,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetImagesLambdaVersionJC93QJiuc0vNTD4udxLWcA2mntRMq0BeztFcWSPj0s"
+          "versionLogicalId": "GetImagesLambdaVersionNrxvn2Hs6dX5qbTwcLbv1H2rLhjOp9XJLcsM2k5F4Y8"
         },
         "getAudioFiles": {
           "handler": "server/server.getAudioFilesHandler",
@@ -2760,7 +2760,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAudioFilesLambdaVersion4Jy1La5kIba6m7R6JdciDqmXAEgZpu0jgHy5EfZPg"
+          "versionLogicalId": "GetAudioFilesLambdaVersion3NbZw6fbkQdB5RrGyW0UKqO2OjMxR5SBgQuOIXEc26g"
         },
         "getFiles": {
           "handler": "server/server.getFilesHandler",
@@ -2794,7 +2794,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetFilesLambdaVersionWvCdysRrNwVQ0GLCubrDFNY3nkoaAEptrQmbebbRE"
+          "versionLogicalId": "GetFilesLambdaVersioniDFn4XAuuozGsKkowf1fLvNv0eN8qQehGBkGu0pPxM0"
         },
         "uploadImage": {
           "handler": "server/server.uploadImageHandler",
@@ -2828,7 +2828,7 @@
           "memory": 1024,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "UploadImageLambdaVersiondtr1kVnSBzV3fSwdrQhPKA841TzYa9d48HIBIuKUzA"
+          "versionLogicalId": "UploadImageLambdaVersionMLgOYKfrHRAtfQykfZSiAYlvm9AycGEyZZHwuNbXEo"
         },
         "uploadAudio": {
           "handler": "server/server.uploadAudioHandler",
@@ -2862,7 +2862,7 @@
           "memory": 1024,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "UploadAudioLambdaVersionNUAYcSxo3CUZb0zdwXGIzLPpVwr4yqXz2A99LYq2ZQ"
+          "versionLogicalId": "UploadAudioLambdaVersionQYih7Ynr4uY0y7Ak7jrq07Xzvp2UXgnMCZc6mVIoToQ"
         }
       },
       "plugins": [
@@ -2887,7 +2887,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719117744480-2024-06-23T04:42:24.480Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z"
       }
     },
     "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-west-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors: true\n      - http:\n          path: playground\n          method: ANY\n          cors: true\n  # app:\n  #   handler: server/server.restHandler\n  #   events:\n  #     - http:\n  #         path: /\n  #         method: any\n  #         cors:\n  #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n  #           headers:\n  #             - Content-Type\n  #             - Authorization\n  #             - x-user-id\n  #             - x-file-type\n  #             - x-project-author\n  #           allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  uploadImage:\n    handler: server/server.uploadImageHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-image\n          method: post\n          cors:\n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  uploadAudio:\n    handler: server/server.uploadAudioHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-audio\n          method: post\n          cors: \n            origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  # restApiHandler:\n  #   handler: server/server.restHandler\n  #   events:\n  #     - httpApi:\n  #         path: /{proxy+}\n  #         method: ANY     \n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
@@ -2921,48 +2921,48 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-west-1:614288690243:stack/serverless-express-apollo-dev/a6a38ab0-2528-11ef-b8f6-0623946ef4b5",
     "serviceProviderAwsCfStackCreated": "2024-06-07T23:49:59.727Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-23T04:42:45.700Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-23T04:51:49.589Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "GetFilesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getFiles:42",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getFiles:43",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetFilesLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UploadAudioLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-uploadAudio:36",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-uploadAudio:37",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-UploadAudioLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UploadImageLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-uploadImage:37",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-uploadImage:38",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-UploadImageLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateS3FolderLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-createS3Folder:43",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-createS3Folder:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-CreateS3FolderLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetUserFoldersLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getUserFolders:43",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getUserFolders:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetUserFoldersLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GraphqlLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-graphql:43",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-graphql:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GraphqlLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetAudioFilesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getAudioFiles:42",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getAudioFiles:43",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetAudioFilesLambdaFunctionQualifiedArn"
       },
@@ -2979,19 +2979,19 @@
       },
       {
         "OutputKey": "GetImagesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getImages:43",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-getImages:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-GetImagesLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "SinglePostImageLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-singlePostImage:43",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-singlePostImage:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-SinglePostImageLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UploadLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-upload:43",
+        "OutputValue": "arn:aws:lambda:us-west-1:614288690243:function:serverless-express-apollo-dev-upload:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-express-apollo-dev-UploadLambdaFunctionQualifiedArn"
       }
