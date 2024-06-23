@@ -281,7 +281,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.graphqlHandler",
                 "Runtime": "nodejs20.x",
@@ -314,7 +314,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.singlePostImageHandler",
                 "Runtime": "nodejs20.x",
@@ -347,7 +347,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.createS3FolderHandler",
                 "Runtime": "nodejs20.x",
@@ -380,7 +380,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadHandler",
                 "Runtime": "nodejs20.x",
@@ -413,7 +413,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getUserFoldersHandler",
                 "Runtime": "nodejs20.x",
@@ -446,7 +446,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getImagesHandler",
                 "Runtime": "nodejs20.x",
@@ -479,7 +479,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getAudioFilesHandler",
                 "Runtime": "nodejs20.x",
@@ -512,7 +512,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.getFilesHandler",
                 "Runtime": "nodejs20.x",
@@ -545,7 +545,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadImageHandler",
                 "Runtime": "nodejs20.x",
@@ -578,7 +578,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
+                  "S3Key": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z/serverless-express-apollo.zip"
                 },
                 "Handler": "server/server.uploadAudioHandler",
                 "Runtime": "nodejs20.x",
@@ -913,7 +913,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -958,7 +958,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -982,7 +982,8 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": true,
                       "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
+                      "method.response.header.Access-Control-Allow-Methods": true,
+                      "method.response.header.Access-Control-Allow-Credentials": "<REDACTED>"
                     },
                     "ResponseModels": {}
                   }
@@ -1000,10 +1001,11 @@
                       "ResponseParameters": {
                         "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
                         "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                        "method.response.header.Access-Control-Allow-Credentials": "<REDACTED>"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1048,7 +1050,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1093,7 +1095,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1138,7 +1140,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1183,7 +1185,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1228,7 +1230,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1273,7 +1275,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1318,7 +1320,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1363,7 +1365,7 @@
                         "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                       },
                       "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                        "application/json": ""
                       }
                     }
                   ]
@@ -1882,7 +1884,7 @@
                 "UploadAudioLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1719118658066": {
+            "ApiGatewayDeployment1719120156546": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -2506,6 +2508,7 @@
                 "path": "graphql",
                 "method": "any",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "ANY"
@@ -2517,11 +2520,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2531,6 +2530,7 @@
                 "path": "playground",
                 "method": "any",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "ANY"
@@ -2542,11 +2542,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2568,6 +2564,7 @@
                 "path": "singlepost-image",
                 "method": "get",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "GET"
@@ -2579,11 +2576,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2605,6 +2598,7 @@
                 "path": "create-s3-folder",
                 "method": "post",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "POST"
@@ -2616,11 +2610,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2642,6 +2632,7 @@
                 "path": "upload",
                 "method": "post",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "POST"
@@ -2653,11 +2644,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2679,6 +2666,7 @@
                 "path": "user-folders",
                 "method": "get",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "GET"
@@ -2690,11 +2678,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2716,6 +2700,7 @@
                 "path": "images",
                 "method": "get",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "GET"
@@ -2727,11 +2712,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2753,6 +2734,7 @@
                 "path": "audiofiles",
                 "method": "get",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "GET"
@@ -2764,11 +2746,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2790,6 +2768,7 @@
                 "path": "files",
                 "method": "get",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "GET"
@@ -2801,11 +2780,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2828,6 +2803,7 @@
                 "path": "upload-image",
                 "method": "post",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "POST"
@@ -2839,11 +2815,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2865,6 +2837,7 @@
                 "path": "upload-audio",
                 "method": "post",
                 "cors": {
+                  "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                   "methods": [
                     "OPTIONS",
                     "POST"
@@ -2876,11 +2849,7 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
+                  "allowCredentials": "<REDACTED>"
                 },
                 "integration": "AWS_PROXY"
               }
@@ -2916,17 +2885,17 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719120163701-2024-06-23T05:22:43.701Z"
       }
     },
-    "serviceRawFile": "# service: serverless-express-apollo\n\n# provider:\n#   name: aws\n#   runtime: nodejs20.x\n#   region: us-west-1\n#   environment:\n#     MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n#     MY_AWS_PROFILE: ivsir-general\n#     MY_AWS_REGION: us-west-1\n#     BUCKET: react-image-upload-ivsir\n\n#   iamRoleStatements:\n#     - Effect: Allow\n#       Action:\n#         - s3:PutObject\n#         - s3:GetObject\n#         - s3:ListBucket\n#       Resource:\n#         - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n#         - \"arn:aws:s3:::react-image-upload-ivsir\"\n#     - Effect: Allow\n#       Action:\n#         - sts:AssumeRole\n#       Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\n# functions:\n#   graphql:\n#     handler: server/server.graphqlHandler\n#     events:\n#       - http:\n#           path: graphql\n#           method: any\n#           cors: true\n#       - http:\n#           path: playground\n#           method: ANY\n#           cors: true\n#   # app:\n#   #   handler: server/server.restHandler\n#   #   events:\n#   #     - http:\n#   #         path: /\n#   #         method: any\n#   #         cors:\n#   #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#   #           headers:\n#   #             - Content-Type\n#   #             - Authorization\n#   #             - x-user-id\n#   #             - x-file-type\n#   #             - x-project-author\n#   #           allowCredentials: false\n#   singlePostImage:\n#     handler: server/server.singlePostImageHandler\n#     events:\n#       - http:\n#           path: singlepost-image\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   createS3Folder:\n#     handler: server/server.createS3FolderHandler\n#     events:\n#       - http:\n#           path: create-s3-folder\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   upload:\n#     handler: server/server.uploadHandler\n#     events:\n#       - http:\n#           path: upload\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getUserFolders:\n#     handler: server/server.getUserFoldersHandler\n#     events:\n#       - http:\n#           path: user-folders\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getImages:\n#     handler: server/server.getImagesHandler\n#     events:\n#       - http:\n#           path: images\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getAudioFiles:\n#     handler: server/server.getAudioFilesHandler\n#     events:\n#       - http:\n#           path: audiofiles\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getFiles:\n#     handler: server/server.getFilesHandler\n#     events:\n#       - http:\n#           path: files\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n#   uploadImage:\n#     handler: server/server.uploadImageHandler\n#     timeout: 30 \n#     events:\n#       - http:\n#           path: upload-image\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   uploadAudio:\n#     handler: server/server.uploadAudioHandler\n#     timeout: 30 \n#     events:\n#       - http:\n#           path: upload-audio\n#           method: post\n#           cors: \n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n#   # restApiHandler:\n#   #   handler: server/server.restHandler\n#   #   events:\n#   #     - httpApi:\n#   #         path: /{proxy+}\n#   #         method: ANY     \n\n# plugins:\n#   - serverless-offline\n#   - serverless-prune-plugin\n\n# custom:\n#   serverless-offline:\n#     httpPort: 4001\n#   prune:\n#     automatic: true\n#     number: 3\n\n# package:\n#   exclude:\n#     - client/** \n#     - package-lock.json\n#     - node_modules/**\n#   excludeDevDependencies: true\nservice: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-west-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n      - http:\n          path: playground\n          method: ANY\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  uploadImage:\n    handler: server/server.uploadImageHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-image\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              # - content-type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  uploadAudio:\n    handler: server/server.uploadAudioHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-audio\n          method: post\n          cors: \n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              # - content-type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
+    "serviceRawFile": "# service: serverless-express-apollo\n\n# provider:\n#   name: aws\n#   runtime: nodejs20.x\n#   region: us-west-1\n#   environment:\n#     MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n#     MY_AWS_PROFILE: ivsir-general\n#     MY_AWS_REGION: us-west-1\n#     BUCKET: react-image-upload-ivsir\n\n#   iamRoleStatements:\n#     - Effect: Allow\n#       Action:\n#         - s3:PutObject\n#         - s3:GetObject\n#         - s3:ListBucket\n#       Resource:\n#         - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n#         - \"arn:aws:s3:::react-image-upload-ivsir\"\n#     - Effect: Allow\n#       Action:\n#         - sts:AssumeRole\n#       Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\n# functions:\n#   graphql:\n#     handler: server/server.graphqlHandler\n#     events:\n#       - http:\n#           path: graphql\n#           method: any\n#           cors: true\n#       - http:\n#           path: playground\n#           method: ANY\n#           cors: true\n#   # app:\n#   #   handler: server/server.restHandler\n#   #   events:\n#   #     - http:\n#   #         path: /\n#   #         method: any\n#   #         cors:\n#   #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#   #           headers:\n#   #             - Content-Type\n#   #             - Authorization\n#   #             - x-user-id\n#   #             - x-file-type\n#   #             - x-project-author\n#   #           allowCredentials: false\n#   singlePostImage:\n#     handler: server/server.singlePostImageHandler\n#     events:\n#       - http:\n#           path: singlepost-image\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   createS3Folder:\n#     handler: server/server.createS3FolderHandler\n#     events:\n#       - http:\n#           path: create-s3-folder\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   upload:\n#     handler: server/server.uploadHandler\n#     events:\n#       - http:\n#           path: upload\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getUserFolders:\n#     handler: server/server.getUserFoldersHandler\n#     events:\n#       - http:\n#           path: user-folders\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getImages:\n#     handler: server/server.getImagesHandler\n#     events:\n#       - http:\n#           path: images\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getAudioFiles:\n#     handler: server/server.getAudioFilesHandler\n#     events:\n#       - http:\n#           path: audiofiles\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getFiles:\n#     handler: server/server.getFilesHandler\n#     events:\n#       - http:\n#           path: files\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n#   uploadImage:\n#     handler: server/server.uploadImageHandler\n#     timeout: 30 \n#     events:\n#       - http:\n#           path: upload-image\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   uploadAudio:\n#     handler: server/server.uploadAudioHandler\n#     timeout: 30 \n#     events:\n#       - http:\n#           path: upload-audio\n#           method: post\n#           cors: \n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n#   # restApiHandler:\n#   #   handler: server/server.restHandler\n#   #   events:\n#   #     - httpApi:\n#   #         path: /{proxy+}\n#   #         method: ANY     \n\n# plugins:\n#   - serverless-offline\n#   - serverless-prune-plugin\n\n# custom:\n#   serverless-offline:\n#     httpPort: 4001\n#   prune:\n#     automatic: true\n#     number: 3\n\n# package:\n#   exclude:\n#     - client/** \n#     - package-lock.json\n#     - node_modules/**\n#   excludeDevDependencies: true\nservice: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-west-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n      - http:\n          path: playground\n          method: ANY\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: true\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  uploadImage:\n    handler: server/server.uploadImageHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-image\n          method: post\n          cors:\n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              # - content-type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  uploadAudio:\n    handler: server/server.uploadAudioHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-audio\n          method: post\n          cors: \n            origin:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n            headers:\n              - Content-Type\n              # - content-type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n\ncustom:\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
     "command": [
       "deploy"
     ],
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "92022f5c5bc7053b8718d8b733b3f75a",
+    "machineId": "32ed87677a93c12942a1ec48256d0fd5",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
     "orgId": "031ce66e-846a-4177-9803-7027e5d26c87",
@@ -2950,7 +2919,7 @@
     "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-west-1:614288690243:stack/serverless-express-apollo-dev/a6a38ab0-2528-11ef-b8f6-0623946ef4b5",
     "serviceProviderAwsCfStackCreated": "2024-06-07T23:49:59.727Z",
-    "serviceProviderAwsCfStackUpdated": "2024-06-23T04:58:11.216Z",
+    "serviceProviderAwsCfStackUpdated": "2024-06-23T05:23:11.283Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
