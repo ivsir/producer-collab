@@ -261,7 +261,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.graphqlHandler",
               "Runtime": "nodejs20.x",
@@ -294,7 +294,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.singlePostImageHandler",
               "Runtime": "nodejs20.x",
@@ -327,7 +327,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.createS3FolderHandler",
               "Runtime": "nodejs20.x",
@@ -360,7 +360,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.uploadHandler",
               "Runtime": "nodejs20.x",
@@ -393,7 +393,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.getUserFoldersHandler",
               "Runtime": "nodejs20.x",
@@ -426,7 +426,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.getImagesHandler",
               "Runtime": "nodejs20.x",
@@ -459,7 +459,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.getAudioFilesHandler",
               "Runtime": "nodejs20.x",
@@ -492,7 +492,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.getFilesHandler",
               "Runtime": "nodejs20.x",
@@ -525,7 +525,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.uploadImageHandler",
               "Runtime": "nodejs20.x",
@@ -558,7 +558,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z/serverless-express-apollo.zip"
+                "S3Key": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z/serverless-express-apollo.zip"
               },
               "Handler": "server/server.uploadAudioHandler",
               "Runtime": "nodejs20.x",
@@ -888,12 +888,12 @@
                   {
                     "StatusCode": "200",
                     "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": "'*'",
-                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -933,12 +933,12 @@
                   {
                     "StatusCode": "200",
                     "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": "'*'",
-                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -983,7 +983,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1028,7 +1028,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1073,7 +1073,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1118,7 +1118,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1163,7 +1163,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1208,7 +1208,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1253,7 +1253,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1298,7 +1298,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1343,7 +1343,7 @@
                       "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
                     },
                     "ResponseTemplates": {
-                      "application/json": ""
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
                     }
                   }
                 ]
@@ -1862,7 +1862,7 @@
               "UploadAudioLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1719118280914": {
+          "ApiGatewayDeployment1719118658066": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2500,21 +2500,22 @@
               "path": "graphql",
               "method": "any",
               "cors": {
-                "origin": "*",
                 "methods": [
                   "OPTIONS",
                   "ANY"
                 ],
                 "headers": [
                   "Content-Type",
-                  "X-Amz-Date",
                   "Authorization",
-                  "X-Api-Key",
-                  "X-Amz-Security-Token",
-                  "X-Amz-User-Agent",
-                  "X-Amzn-Trace-Id"
+                  "x-user-id",
+                  "x-file-type",
+                  "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2524,21 +2525,22 @@
               "path": "playground",
               "method": "any",
               "cors": {
-                "origin": "*",
                 "methods": [
                   "OPTIONS",
                   "ANY"
                 ],
                 "headers": [
                   "Content-Type",
-                  "X-Amz-Date",
                   "Authorization",
-                  "X-Api-Key",
-                  "X-Amz-Security-Token",
-                  "X-Amz-User-Agent",
-                  "X-Amzn-Trace-Id"
+                  "x-user-id",
+                  "x-file-type",
+                  "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2560,7 +2562,6 @@
               "path": "singlepost-image",
               "method": "get",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "GET"
@@ -2572,7 +2573,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2594,7 +2599,6 @@
               "path": "create-s3-folder",
               "method": "post",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "POST"
@@ -2606,7 +2610,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2628,7 +2636,6 @@
               "path": "upload",
               "method": "post",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "POST"
@@ -2640,7 +2647,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2662,7 +2673,6 @@
               "path": "user-folders",
               "method": "get",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "GET"
@@ -2674,7 +2684,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2696,7 +2710,6 @@
               "path": "images",
               "method": "get",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "GET"
@@ -2708,7 +2721,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2730,7 +2747,6 @@
               "path": "audiofiles",
               "method": "get",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "GET"
@@ -2742,7 +2758,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2764,7 +2784,6 @@
               "path": "files",
               "method": "get",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "GET"
@@ -2776,7 +2795,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2799,7 +2822,6 @@
               "path": "upload-image",
               "method": "post",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "POST"
@@ -2811,7 +2833,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2833,7 +2859,6 @@
               "path": "upload-audio",
               "method": "post",
               "cors": {
-                "origin": "https://main.dan6kz7trfabu.amplifyapp.com",
                 "methods": [
                   "OPTIONS",
                   "POST"
@@ -2845,7 +2870,11 @@
                   "x-file-type",
                   "x-project-author"
                 ],
-                "allowCredentials": false
+                "allowCredentials": false,
+                "origins": [
+                  "https://main.dan6kz7trfabu.amplifyapp.com",
+                  "http://localhost:3000"
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -2884,7 +2913,7 @@
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
         "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z"
+        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z"
       }
     },
     "appId": null,
@@ -2893,7 +2922,7 @@
     "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719118287682-2024-06-23T04:51:27.682Z",
+    "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719118665539-2024-06-23T04:57:45.539Z",
     "artifact": "serverless-express-apollo.zip"
   }
 }
