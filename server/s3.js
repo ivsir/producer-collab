@@ -8,13 +8,9 @@ const {
 const Busboy = require("busboy")
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const { v4: uuid } = require("uuid");
-// const dotenv = require('dotenv');
-// dotenv.config();
-
-
 const s3 = new S3Client();
 const BUCKET = process.env.BUCKET || "react-image-upload-ivsir";
-console.log('Bucket Name:', process.env.BUCKET);
+
 
 const uploadToS3 = async ({ file, userId }) => {
   console.log(file)
@@ -35,65 +31,6 @@ const uploadToS3 = async ({ file, userId }) => {
     return { error };
   }
 };
-
-// const uploadToS3 = async ({ fileStream, userId, mimetype }) => {
-//   const key = `${userId}/${uuid()}`;
-
-//   const command = new PutObjectCommand({
-//     Bucket: BUCKET,
-//     Key: key,
-//     Body: fileStream,
-//     ContentType: mimetype,
-//   });
-
-//   try {
-//     await s3.send(command);
-//     return { key };
-//   } catch (error) {
-//     console.error("S3 upload error:", error);
-//     return { error };
-//   }
-// };
-
-// const parseForm = (event) => {
-//   return new Promise((resolve, reject) => {
-//     const bb = new Busboy({ headers: event.headers });
-//     const result = { files: [] };
-
-//     bb.on('file', (fieldname, file, filename, encoding, mimetype) => {
-//       const buffers = [];
-//       file.on('data', (data) => {
-//         buffers.push(data);
-//       });
-//       file.on('end', () => {
-//         result.files.push({
-//           fieldname,
-//           buffer: Buffer.concat(buffers),
-//           filename,
-//           encoding,
-//           mimetype,
-//         });
-//       });
-//     });
-
-//     bb.on('field', (fieldname, value) => {
-//       result[fieldname] = value;
-//     });
-
-//     bb.on('finish', () => {
-//       resolve(result);
-//     });
-
-//     bb.on('error', (error) => {
-//       reject(error);
-//     });
-
-//     bb.write(event.body, event.isBase64Encoded ? 'base64' : 'binary');
-//     bb.end();
-//   });
-// };
-
-
 
 const parseForm = (event, headers) => {
   return new Promise((resolve, reject) => {
