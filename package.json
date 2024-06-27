@@ -37,6 +37,7 @@
     "svgo": "^3.2.0"
   },
   "devDependencies": {
+    "serverless-apigw-binary": "^0.4.4",
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-offline": "^13.6.0",
     "serverless-prune-plugin": "^2.0.2",

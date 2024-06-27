@@ -446,8 +446,15 @@ functions:
 plugins:
   - serverless-offline
   - serverless-prune-plugin
-
+  - serverless-apigw-binary
 custom:
+  apigwBinary:
+    types:
+      - 'image/jpeg'
+      - 'image/png'
+      - 'audio/wav'
+      - 'audio/mpeg'
+      - 'multipart/form-data'
   serverless-offline:
     httpPort: 4001
   prune:

@@ -304,21 +304,67 @@ const parseForm = (event, headers) => {
     });
 
     bb.on('field', (fieldname, value) => {
+      console.log(`Field event: fieldname=${fieldname}, value=${value}`);
       result[fieldname] = value;
     });
 
     bb.on('finish', () => {
+      console.log('Busboy finish event');
       resolve(result);
     });
 
     bb.on('error', (error) => {
+      console.error('Busboy error event:', error);
       reject(error);
     });
 
+    console.log('Writing body to Busboy');
     bb.write(event.body, event.isBase64Encoded ? 'base64' : 'binary');
     bb.end();
   });
 };
+
+// const parseForm = (event, headers) => {
+//   return new Promise((resolve, reject) => {
+//     const busboy = new Busboy({
+//       headers
+//     });
+
+//     const body = {};
+//     const chunks = [];
+
+//     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+//       body.filename = filename;
+//       body.encoding = encoding;
+//       body.mimetype = mimetype;
+
+//       file.on('readable', () => {
+//         let chunk;
+//         while (null !== (chunk = file.read())) {
+//           chunks.push(chunk);
+//         }
+//       });
+
+//       file.on('end', () => {
+//         body.documentContent = Buffer.concat(chunks);
+//       });
+//     });
+
+//     busboy.on('field', (fieldname, val) => {
+//       body[fieldname] = val;
+//     });
+
+//     busboy.on('finish', () => {
+//       resolve(body);
+//     });
+
+//     busboy.on('error', (err) => {
+//       reject(err);
+//     });
+
+//     busboy.end(event.body, 'base64');
+//   });
+// }
 
 const getImageKeysByUser = async (userId) => {
   const command = new ListObjectsV2Command({
