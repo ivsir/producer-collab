@@ -28,6 +28,12 @@ export const QUERY_PROJECTS = gql`
       projectAuthor
       projectAudio
       createdAt
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
       projectMembers {
         _id
         memberUsername

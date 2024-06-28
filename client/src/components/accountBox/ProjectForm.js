@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { Button, Input, Text } from "@chakra-ui/react";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
@@ -13,14 +13,8 @@ import InputField from "../elements/InputField";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 const validAudioTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
-// const URL = "/images";
-// const audioURL = "/audiofiles";
-
 const URL = "/upload-image";
 const audioURL = "/upload-audio";
-
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB in bytes
-
 
 const ErrorText = ({ error }) => {
   if (error) {
@@ -45,7 +39,6 @@ const ProjectForm = () => {
   const audioInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedAudio, setSelectedAudio] = useState(null);
-  const navigate = useNavigate ()
 
   const { mutate: uploadImage, error: uploadError, responseData: imageResponse } = imgMutation({ url: URL }, userId);
   const { mutate: uploadAudio, error: uploadAudioError, responseData: audioResponse } = audioMutation({ url: audioURL }, userId);
@@ -77,16 +70,14 @@ const ProjectForm = () => {
     audioInputRef.current.click();
   };
 
-console.log(projectTitle,projectDescription, projectImage, projectAudio)
- 
   const addProjectLink = async () => {
     try {
       await addProject({
         variables: {
-          projectTitle: projectTitle,
-          projectDescription: projectDescription,
-          projectImage: projectImage,
-          projectAudio: projectAudio,
+          projectTitle,
+          projectDescription,
+          projectImage,
+          projectAudio,
           projectAuthor: userId,
         },
       });
@@ -95,8 +86,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
       setProjectDescription("");
       setProjectImage("");
       setProjectAudio("");
-      // window.location.assign("/profile");
-      navigate("/profile")
+      window.location.assign("/profile");
     } catch (err) {
       console.error(err);
     } finally {
@@ -139,11 +129,6 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
   };
 
   const handleUpload = async (file) => {
-    if (file.size > MAX_FILE_SIZE) {
-      setImgError("File size exceeds 10 MB");
-      return;
-    }
-
     if (!validFileTypes.includes(file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
@@ -160,11 +145,6 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
   };
 
   const handleAudioUpload = async (file) => {
-    if (file.size > MAX_FILE_SIZE) {
-      setAudioError("File size exceeds 10 MB");
-      return;
-    }
-
     if (!validAudioTypes.includes(file.type)) {
       setAudioError("File must be in MP3/WAV format");
       return;
@@ -233,7 +213,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
         {Auth.loggedIn() ? (
           <form className="flex flex-col h-auto" onSubmit={handleFormSubmit}>
             <div className="flex flex-row gap-4 mb-16 justify-between w-full">
-              
+
               <div className="flex flex-col w-full">
                 <h2 className="text-sm mb-2">
                 Covert Art <span className="text-white opacity-50">(.png, .jpg)</span>
@@ -265,7 +245,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
 
                     >
                     Upload Image or Drag & Drop
-                    <img width={32} src={UploadIcon}/>
+                    <img width={32} src={UploadIcon} alt="upload icon"/>
                     <div className="flex flex-row justify-center items-center gap-2 text-sm">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.33325 9.99998H8.66659V11.3333H7.33325V9.99998ZM7.33325 4.66665H8.66659V8.66665H7.33325V4.66665ZM7.99325 1.33331C4.31325 1.33331 1.33325 4.31998 1.33325 7.99998C1.33325 11.68 4.31325 14.6666 7.99325 14.6666C11.6799 14.6666 14.6666 11.68 14.6666 7.99998C14.6666 4.31998 11.6799 1.33331 7.99325 1.33331ZM7.99992 13.3333C5.05325 13.3333 2.66659 10.9466 2.66659 7.99998C2.66659 5.05331 5.05325 2.66665 7.99992 2.66665C10.9466 2.66665 13.3333 5.05331 13.3333 7.99998C13.3333 10.9466 10.9466 13.3333 7.99992 13.3333Z" fill="currentColor"/>
@@ -278,7 +258,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
                 </div>
                 <ErrorText error={uploadError && uploadError.message} />
               </div>
-              
+
               <div className="flex flex-col w-full">
                 <h2 className="text-sm mb-2">
                 Audio File <span className="text-white opacity-50">(.mp3, .wav)</span>
@@ -287,7 +267,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
                 onDrop={handleDropAudio}
                 onDragOver={handleDragOver}
                 className="flex flex-col justify-center items-center border-dashed border-2 border-secondary rounded-2xl overflow-hidden">
-                
+
                 <div className="flex justify-end border-b w-full h-full border-secondary bg-secondary">
                   <svg width="100%" height="100%" viewBox="0 0 280 128" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_750_2748)">
@@ -308,7 +288,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
                   type="button"
                   >
                   Upload Audio or Drag & Drop
-                  <img width={32} src={UploadIcon}/>
+                  <img width={32} src={UploadIcon} alt="upload icon"/>
                   <div className="flex flex-row justify-center items-center gap-2 text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.33325 9.99998H8.66659V11.3333H7.33325V9.99998ZM7.33325 4.66665H8.66659V8.66665H7.33325V4.66665ZM7.99325 1.33331C4.31325 1.33331 1.33325 4.31998 1.33325 7.99998C1.33325 11.68 4.31325 14.6666 7.99325 14.6666C11.6799 14.6666 14.6666 11.68 14.6666 7.99998C14.6666 4.31998 11.6799 1.33331 7.99325 1.33331ZM7.99992 13.3333C5.05325 13.3333 2.66659 10.9466 2.66659 7.99998C2.66659 5.05331 5.05325 2.66665 7.99992 2.66665C10.9466 2.66665 13.3333 5.05331 13.3333 7.99998C13.3333 10.9466 10.9466 13.3333 7.99992 13.3333Z" fill="currentColor"/>
@@ -320,11 +300,11 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
                 {selectedAudio && <h2 className="bg-tertiary px-4 py-2 rounded-lg text-white text-xs mb-6">{selectedAudio.name} ✅</h2>}
               </div>
               <ErrorText error={uploadAudioError && uploadAudioError.message} />
-            
-              
+
+
               </div>
             </div>
-            
+
             {/* Title and Description Input */}
             <div className="flex flex-col">
               <InputField
@@ -341,7 +321,8 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
                   name="projectDescription"
                   placeholder="Project Description..."
                   value={projectDescription}
-                  className="bg-secondary border border-secondary placeholder:opacity-50 text-white p-4 w-full rounded-xl resize-y mb-4"                onChange={handleChange}
+                  className="bg-secondary border border-secondary placeholder:opacity-50 text-white p-4 w-full rounded-xl resize-y mb-4"
+                  onChange={handleChange}
                   onFocus={() => setShowAsterisk(false)}
                   onBlur={() => setShowAsterisk(true)}
                 >
@@ -352,7 +333,7 @@ console.log(projectTitle,projectDescription, projectImage, projectAudio)
               </div>
 
             </div>
-            
+
             <button className="bg-blue-600 w-full py-2 rounded-lg disabled:bg-secondary" type="submit" disabled={uploading}>
               Upload Track
             </button>
