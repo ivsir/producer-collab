@@ -140,13 +140,13 @@ function ProfileCard(props) {
   }, [projects]);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-      {userProjects.map((project) => {
-        const projectImageUrl = findProjectImageUrl(project.projectImage, currentAuthor);
+    <LazyLoad className="w-full max-h-[20rem]" once>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+        {userProjects.map((project) => {
+          const projectImageUrl = findProjectImageUrl(project.projectImage, currentAuthor);
 
-        return (
-          <div key={project._id} className="flex flex-col relative rounded-xl border border-primary overflow-hidden">
-            <LazyLoad className="w-full max-h-[20rem]" once>
+          return (
+            <div key={project._id} className="flex flex-col relative rounded-xl border border-primary overflow-hidden">
               <div className="flex justify-center items-center w-full min-w-[45rem] relative">
                 <SkeletonLoader />
               </div>
@@ -174,45 +174,45 @@ function ProfileCard(props) {
                   <h2 className="w-full text-3xl text-center">Loading content...</h2>
                 )}
               </div>
-            </LazyLoad>
 
-            <div className="w-full absolute bottom-0 bg-gradient-to-t from-[#0A0A0B] to-transparent">
-              <div className="flex flex-col justify-center items-end overflow-visible">
-                <div className="w-full pb-8 pt-40 px-4">
-                  <div className="flex flex-row justify-between items-center relative w-full gap-8">
-                    <div className="flex flex-col justify-start items-start w-full gap-2">
-                      <h1 className="text-xl font-semibold">{project.projectTitle}</h1>
-                      {/* Any other project details */}
-                    </div>
-
-                    <div className="inline-flex flex-col gap-2">
-                      <div className="flex flex-col justify-center items-center gap-1">
-                        {likes[project._id]}
-                        {/* Like button */}
+              <div className="w-full absolute bottom-0 bg-gradient-to-t from-[#0A0A0B] to-transparent">
+                <div className="flex flex-col justify-center items-end overflow-visible">
+                  <div className="w-full pb-8 pt-40 px-4">
+                    <div className="flex flex-row justify-between items-center relative w-full gap-8">
+                      <div className="flex flex-col justify-start items-start w-full gap-2">
+                        <h1 className="text-xl font-semibold">{project.projectTitle}</h1>
+                        {/* Any other project details */}
                       </div>
-                      <div className="flex flex-col justify-center items-center gap-1">
-                        {commentsCount[project._id] ?? 0}
-                        {/* Join button */}
+
+                      <div className="inline-flex flex-col gap-2">
+                        <div className="flex flex-col justify-center items-center gap-1">
+                          {likes[project._id]}
+                          {/* Like button */}
+                        </div>
+                        <div className="flex flex-col justify-center items-center gap-1">
+                          {commentsCount[project._id] ?? 0}
+                          {/* Join button */}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="absolute right-[-26rem] bg-primary rounded-xl h-auto w-full max-w-[24rem] max-h-[32rem] overflow-scroll z-50">
+                {selectedProjectId === project._id && (
+                  <Comments
+                    projectId={project._id}
+                    setCommentsCount={(count) =>
+                      setCommentsCount((prev) => ({ ...prev, [project._id]: count }))
+                    }
+                  />
+                )}
+              </div>
             </div>
-            <div className="absolute right-[-26rem] bg-primary rounded-xl h-auto w-full max-w-[24rem] max-h-[32rem] overflow-scroll z-50">
-              {selectedProjectId === project._id && (
-                <Comments
-                  projectId={project._id}
-                  setCommentsCount={(count) =>
-                    setCommentsCount((prev) => ({ ...prev, [project._id]: count }))
-                  }
-                />
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </LazyLoad>
   );
 }
 
