@@ -14,8 +14,6 @@ function Comments({ projectId }) {
   const { loading, data, refetch } = useQuery(QUERY_SINGLE_PROJECT, {
     variables: { projectId },
   });
-
-  console.log(data)
   useEffect(() => {
     refetch();
   }, [projectId, refetch]);
@@ -47,7 +45,6 @@ function Comments({ projectId }) {
 
   const renderComments = () => {
     const comments = data?.project.comments || [];
-    console.log(comments.length)
     return comments.map((comment, i) => (
       <div key={i}>
         <div className="flex flex-row gap-3 border border-secondary px-4 py-4 rounded-xl mb-4 justify-start">

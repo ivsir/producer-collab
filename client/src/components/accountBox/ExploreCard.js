@@ -530,7 +530,6 @@ function ExploreCard(props) {
     projects.forEach((project) => {
       initialLikes[project._id] = project.likes || 0;
       initialLiked[project._id] = false;
-      console.log(project.comments.length)
       initialCommentsCount[project._id] = project.comments.length || 0; // Initialize comment count
     });
 
