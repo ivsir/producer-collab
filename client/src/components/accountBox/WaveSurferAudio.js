@@ -1,30 +1,66 @@
-// import React, { useEffect, useRef } from 'react';
+// // import React, { useEffect, useRef } from 'react';
 
-// const AudioPlayer = ({ src, onPlay }) => {
-//   const audioRef = useRef(null);
+// // const AudioPlayer = ({ src, onPlay }) => {
+// //   const audioRef = useRef(null);
+
+// //   useEffect(() => {
+// //     const audioElement = audioRef.current;
+
+// //     const handlePlay = () => {
+// //       if (onPlay) {
+// //         onPlay(audioElement);
+// //       }
+// //     };
+
+// //     audioElement.addEventListener('play', handlePlay);
+
+// //     return () => {
+// //       audioElement.removeEventListener('play', handlePlay);
+// //     };
+// //   }, [onPlay]);
+
+// //   return <audio className="w-full" ref={audioRef} src={src} controls />;
+// // };
+
+// // export default AudioPlayer;
+
+// //Wavesurfer Audio Player
+// import { useEffect, useRef } from 'react';
+// import WaveSurfer from 'wavesurfer.js';
+
+// function WaveSurferAudio ({ audioUrl, projectId }) {
+//   const wavesurferRef = useRef(null);
 
 //   useEffect(() => {
-//     const audioElement = audioRef.current;
+//     if (wavesurferRef.current) {
+//       const wavesurfer = WaveSurfer.create({
+//         container: wavesurferRef.current,
+//         waveColor: 'gray',
+//         progressColor: 'white',
+//         cursorColor: 'transparent',
+//         height: 100,
+//         barWidth: 6,
+//         barGap: 4,
+//         barRadius: 8,
+//         backend: 'WebAudio',
+//       });
 
-//     const handlePlay = () => {
-//       if (onPlay) {
-//         onPlay(audioElement);
-//       }
-//     };
+//       wavesurfer.load(audioUrl);
+//       wavesurfer.on('ready', () => {
+//         console.log('WaveSurfer is ready');
+//       });
 
-//     audioElement.addEventListener('play', handlePlay);
+//       return () => {
+//         wavesurfer.destroy();
+//       };
+//     }
+//   }, [audioUrl]);
 
-//     return () => {
-//       audioElement.removeEventListener('play', handlePlay);
-//     };
-//   }, [onPlay]);
+//   return <div ref={wavesurferRef}></div>;
+// }
 
-//   return <audio className="w-full" ref={audioRef} src={src} controls />;
-// };
+// export default WaveSurferAudio ;
 
-// export default AudioPlayer;
-
-//Wavesurfer Audio Player
 import { useEffect, useRef } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 
