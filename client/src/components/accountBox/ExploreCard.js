@@ -1,13 +1,13 @@
 import axiosClient from "../../config/axios";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo, Suspense, memo } from "react";
 import SkeletonLoader from "../hooks/SkeletonLoader";
 import AuthService from "../../utils/auth";
 import LazyLoad from "react-lazyload";
 import "../style/BackgroundVisualizer.css";
 import Comments from "./Comments";
-import { ADD_MEMBER,  ADD_COMMENT } from "../../utils/mutations";
+import { ADD_MEMBER, ADD_COMMENT } from "../../utils/mutations";
 import WaveSurfer from "wavesurfer.js";
 
 function ExploreCard(props) {
@@ -25,10 +25,6 @@ function ExploreCard(props) {
   const [liked, setLiked] = useState({});
   const [commentsCount, setCommentsCount] = useState({});
   const [userInteracted, setUserInteracted] = useState(false);
-
-  // const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-  // const [addComment] = useMutation(ADD_COMMENT); // Use ADD_COMMENT mutation
-
   const wavesurfers = useRef({});
   const currentPlaying = useRef(null); // Track the currently playing audio
 
@@ -39,35 +35,22 @@ function ExploreCard(props) {
       try {
         const fetchPromises = projects.map(async (project) => {
           const currentAuthor = project.projectAuthor;
-
-          // const imageResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
-          //   headers: {
-          //     "x-project-author": currentAuthor,
-          //     "x-file-type": "image",
-          //   },
-          // });
-
-
-
-          // const audioResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
-          //   headers: {
-          //     "x-project-author": currentAuthor,
-          //     "x-file-type": "audio",
-          //   },
-          // });
-          const imageResponse = await axiosClient.get(`${URL}`, {
+          const imagePromise = axiosClient.get(`${URL}`, {
             headers: {
               "x-project-author": currentAuthor,
               "x-file-type": "image",
             },
           });
-          
-          const audioResponse = await axiosClient.get(`${URL}`, {
+
+          const audioPromise = axiosClient.get(`${URL}`, {
             headers: {
               "x-project-author": currentAuthor,
               "x-file-type": "audio",
             },
           });
+
+          // Await both promises concurrently
+          const [imageResponse, audioResponse] = await Promise.all([imagePromise, audioPromise]);
 
           return {
             author: currentAuthor,
@@ -77,7 +60,7 @@ function ExploreCard(props) {
         });
 
         const results = await Promise.all(fetchPromises);
-        
+
         const newImageUrls = {};
         const newAudioUrls = {};
 
@@ -88,6 +71,10 @@ function ExploreCard(props) {
 
         setImageUrls(newImageUrls);
         setAudioUrls(newAudioUrls);
+
+        // Store data in localStorage
+        localStorage.setItem("imageUrls", JSON.stringify(newImageUrls));
+        localStorage.setItem("audioUrls", JSON.stringify(newAudioUrls));
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -99,6 +86,20 @@ function ExploreCard(props) {
       fetchData();
     }
   }, [projects]);
+
+  useEffect(() => {
+    // Retrieve data from localStorage on component mount
+    const storedImageUrls = localStorage.getItem("imageUrls");
+    const storedAudioUrls = localStorage.getItem("audioUrls");
+
+    if (storedImageUrls) {
+      setImageUrls(JSON.parse(storedImageUrls));
+    }
+
+    if (storedAudioUrls) {
+      setAudioUrls(JSON.parse(storedAudioUrls));
+    }
+  }, []);
 
 
   const findProjectImageUrl = (projectImage, projectAuthor) => {
@@ -113,15 +114,7 @@ function ExploreCard(props) {
 
   const handleJoin = async (event, projectId) => {
     event.preventDefault();
-    // const memberId = AuthService.getId();
-
     try {
-      // await member({
-      //   variables: {
-      //     projectId,
-      //     memberId,
-      //   },
-      // });
       setSelectedProjectId(projectId);
     } catch (error) {
       console.log(error);
@@ -219,7 +212,59 @@ function ExploreCard(props) {
     setCommentsCount(initialCommentsCount); // Set initial comment counts
   }, [projects]);
 
+  const LazyLoadedImage = memo(({ projectImageUrl }) => (
+    <Suspense fallback={<SkeletonLoader />}>
+      <LazyLoad className="w-full min-w-[45rem]" once>
+        <div className="overflow-hidden rounded-tl-xl rounded-tr-xl">
+          {projectImageUrl ? (
+            <img
+              src={projectImageUrl}
+              alt="Project"
+              loading="lazy"
+              style={{
+                width: '100%',
+                minHeight: '90vh',
+                height: 'auto',
+                objectFit: 'cover',
+              }}
+            />
+          ) : (
+            <h2 className="w-full text-3xl text-center">Loading content...</h2>
+          )}
+        </div>
+      </LazyLoad>
+    </Suspense>
+  ));
 
+
+  const LazyLoadedAudio = ({ project, currentAuthor, loading, projectAudioUrl }) => {
+    return (
+      <div className="flex flex-col justify-start items-start w-full gap-2">
+        <h1 className="text-3xl font-semibold">
+          {project.projectTitle}
+        </h1>
+        <h2 className="project-author">
+          <span className="text-white opacity-50">prod. </span>@{currentAuthor}
+        </h2>
+        {loading ? (
+          <div />
+        ) : (
+          projectAudioUrl ? (
+            <Suspense fallback={<SkeletonLoader />}>
+                <div
+                  className="w-full pt-4 pb-6"
+                  ref={(ref) => {
+                    initializeWaveSurfer(ref, projectAudioUrl, project._id);
+                  }}
+                />
+            </Suspense>
+          ) : (
+            <h2>No audio available</h2>
+          )
+        )}
+      </div>
+    )
+  }
 
   return (
     <div className="w-full relative z-50">
@@ -231,7 +276,7 @@ function ExploreCard(props) {
         return (
           <div className="flex flex-row max-w-[45rem] h-[90vh] relative rounded-xl border border-primary overflow-hidden my-12" key={project._id}>
             <div className="flex flex-col relative">
-              <LazyLoad className="w-full min-w-[45rem]" once>
+              {/* <LazyLoad className="w-full min-w-[45rem]" once>
                 <div className="overflow-hidden rounded-tl-xl rounded-tr-xl">
                   {loading ? (
                     <div className="flex justify-center items-center w-full min-w-[45rem] relative">
@@ -256,13 +301,14 @@ function ExploreCard(props) {
                     <h2 className="w-full text-3xl text-center">Loading content...e</h2>
                   )}
                 </div>
-              </LazyLoad>
+              </LazyLoad> */}
 
+              <LazyLoadedImage projectImageUrl={projectImageUrl} />
               <div className="w-full absolute bottom-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B] to-transparent">
                 <div className="flex flex-col justify-center items-end overflow-visible">
                   <div className="w-full pb-8 pt-40 px-8">
                     <div className="flex flex-row justify-between items-center relative w-full gap-8">
-
+{/* 
                       <div className="flex flex-col justify-start items-start w-full gap-2">
                         <h1 className="text-3xl font-semibold">
                           {project.projectTitle}
@@ -283,8 +329,8 @@ function ExploreCard(props) {
                           )
                         )}
                         {!loading && !projectAudioUrl && <h2>No audio available</h2>}
-                      </div>
-
+                      </div> */}
+                      <LazyLoadedAudio project={project} currentAuthor={currentAuthor} loading={loading} projectAudioUrl={projectAudioUrl} />
                       <div className="inline-flex flex-col gap-2">
                         <div className="flex flex-col justify-center items-center gap-1">
                           {likes[project._id]}
@@ -296,9 +342,9 @@ function ExploreCard(props) {
                         </div>
                         <div className="flex flex-col justify-center items-center gap-1">
                           {commentsCount[project._id] ?? 0}
-                          <button 
-                          onClick={(event) => handleJoin(event, project._id)} 
-                          className="border border-secondary border-opacity-50 p-2 rounded-xl overflow-hidden bg-secondary">
+                          <button
+                            onClick={(event) => handleJoin(event, project._id)}
+                            className="border border-secondary border-opacity-50 p-2 rounded-xl overflow-hidden bg-secondary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M20 17.17L18.83 16H4V4H20V17.17ZM20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H18L22 22V4C22 2.9 21.1 2 20 2Z" fill="#FAFAFA" />
                             </svg>
@@ -334,7 +380,9 @@ function ExploreCard(props) {
         );
       })}
     </div>
+    
   );
+
 }
 
 export default ExploreCard;

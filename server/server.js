@@ -414,6 +414,9 @@ exports.uploadHandler = async (event, context, callback) => {
 //   }
 // };
 
+
+let cachedPresignedUrls;
+
 exports.singlePostImageHandler = async (event, context, callback) => {
   try {
     const projectAuthor = event.headers["x-project-author"];
@@ -422,6 +425,20 @@ exports.singlePostImageHandler = async (event, context, callback) => {
       const response = {
         statusCode: 400,
         body: JSON.stringify({ message: "Bad request" }),
+      };
+      callback(null, response);
+      return;
+    }
+
+    // Check if cached data exists and is recent enough
+    if (cachedPresignedUrls) {
+      const response = {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": event.headers.origin || allowedOrigins[0], // Adjust as per your CORS setup
+        },
+        body: JSON.stringify(cachedPresignedUrls),
       };
       callback(null, response);
       return;
@@ -437,6 +454,8 @@ exports.singlePostImageHandler = async (event, context, callback) => {
       callback(null, response);
       return;
     }
+
+    cachedPresignedUrls = presignedUrls; // Update cache with fresh data
 
     const allowedOrigins = [
       'https://main.dan6kz7trfabu.amplifyapp.com',
@@ -467,6 +486,60 @@ exports.singlePostImageHandler = async (event, context, callback) => {
     callback(null, response);
   }
 };
+
+// exports.singlePostImageHandler = async (event, context, callback) => {
+//   try {
+//     const projectAuthor = event.headers["x-project-author"];
+
+//     if (!projectAuthor) {
+//       const response = {
+//         statusCode: 400,
+//         body: JSON.stringify({ message: "Bad request" }),
+//       };
+//       callback(null, response);
+//       return;
+//     }
+
+//     const { error, presignedUrls } = await getUserPresignedUrls(projectAuthor);
+
+//     if (error) {
+//       const response = {
+//         statusCode: 400,
+//         body: JSON.stringify({ message: error.message }),
+//       };
+//       callback(null, response);
+//       return;
+//     }
+
+//     const allowedOrigins = [
+//       'https://main.dan6kz7trfabu.amplifyapp.com',
+//       'http://localhost:3000'
+//     ];
+
+//     const origin = event.headers.origin;
+//     const responseHeaders = {
+//       "Access-Control-Allow-Credentials": true,
+//     };
+
+//     if (allowedOrigins.includes(origin)) {
+//       responseHeaders["Access-Control-Allow-Origin"] = origin;
+//     }
+
+//     const response = {
+//       statusCode: 200,
+//       headers: responseHeaders,
+//       body: JSON.stringify(presignedUrls),
+//     };
+//     callback(null, response);
+//   } catch (error) {
+//     console.error("Error processing request:", error);
+//     const response = {
+//       statusCode: 500,
+//       body: JSON.stringify({ message: "Internal server error" }),
+//     };
+//     callback(null, response);
+//   }
+// };
 
 
 
@@ -638,140 +711,6 @@ exports.getFilesHandler = async (event, context, callback) => {
   }
 };
 
-// exports.uploadImageHandler = async (event, context, callback) => {
-//   try {
-//     const userId = event.headers["x-user-id"];
-
-//     if (!userId) {
-//       console.error("Missing user ID");
-//       return callback(null, {
-//         statusCode: 400,
-//         body: JSON.stringify({ message: "Bad request: Missing user ID" }),
-//       });
-//     }
-//    // Clone the headers to avoid manipulating the original headers object
-//    const headers = { ...event.headers };
-//    if (!headers['content-type'] && headers['Content-Type']) {
-//      headers['content-type'] = headers['Content-Type'];
-//    }
-
-// console.log(headers)
-
-//     const result = await parseForm(event, headers);
-
-//     if (!result.files || result.files.length === 0) {
-//       console.error("No Image uploaded");
-//       return callback(null, {
-//         statusCode: 400,
-//         body: JSON.stringify({ message: "Bad request: No Image uploaded" }),
-//       });
-//     }
-
-//     const { fieldname, buffer, filename, encoding, mimetype } = result.files[0];
-//     console.log("Image received:", filename, "User ID:", userId);
-
-//     const { key, error } = await uploadToS3({
-//       file: { buffer, mimetype },
-//       userId,
-//     });
-
-//     if (error) {
-//       console.error("Error uploading to S3:", error);
-//       return callback(null, {
-//         statusCode: 500,
-//         body: JSON.stringify({ message: error.message }),
-//       });
-//     }
-
-//     console.log("Image uploaded successfully. S3 key:", key);
-
-//     const response = {
-//       statusCode: 201,
-//       headers: {
-//         "Access-Control-Allow-Origin": ["https://main.dan6kz7trfabu.amplifyapp.com", "http://localhost:3000"],
-//         "Access-Control-Allow-Credentials": true,
-//       },
-//       body: JSON.stringify({ key }),
-//     };
-//     callback(null, response);
-//   } catch (error) {
-//     console.error("Failed to upload Image:", error);
-//     const response = {
-//       statusCode: 500,
-//       body: JSON.stringify({ message: error.message }),
-//     };
-//     callback(null, response);
-//   }
-// };
-
-
-// exports.uploadAudioHandler = async (event, context, callback) => {
-//   try {
-//     const userId = event.headers["x-user-id"];
-
-//     if (!userId) {
-//       console.error("Missing user ID");
-//       return callback(null, {
-//         statusCode: 400,
-//         body: JSON.stringify({ message: "Bad request: Missing user ID" }),
-//       });
-//     }
-
-//    // Clone the headers to avoid manipulating the original headers object
-//    const headers = { ...event.headers };
-//    if (!headers['content-type'] && headers['Content-Type']) {
-//     headers['content-type'] = headers['Content-Type'];
-//   }
-
-
-//     const result = await parseForm(event, headers);
-
-//     console.log(result)
-
-//     if (!result.files || result.files.length === 0) {
-//       console.error("No audio uploaded");
-//       return callback(null, {
-//         statusCode: 400,
-//         body: JSON.stringify({ message: "Bad request: No audio uploaded" }),
-//       });
-//     }
-
-//     const { fieldname, buffer, filename, encoding, mimetype } = result.files[0];
-//     console.log("Audio received:", filename, "User ID:", userId);
-
-//     const { key, error } = await uploadToS3({
-//       file: { buffer, mimetype },
-//       userId,
-//     });
-
-//     if (error) {
-//       console.error("Error uploading to S3:", error);
-//       return callback(null, {
-//         statusCode: 500,
-//         body: JSON.stringify({ message: error.message }),
-//       });
-//     }
-
-//     console.log("Audio uploaded successfully. S3 key:", key);
-
-//     const response = {
-//       statusCode: 201,
-//       headers: {
-//         "Access-Control-Allow-Origin": ["https://main.dan6kz7trfabu.amplifyapp.com", "http://localhost:3000"],
-//         "Access-Control-Allow-Credentials": true,
-//       },
-//       body: JSON.stringify({ key }),
-//     };
-//     callback(null, response);
-//   } catch (error) {
-//     console.error("Failed to upload audio:", error);
-//     const response = {
-//       statusCode: 500,
-//       body: JSON.stringify({ message: error.message }),
-//     };
-//     callback(null, response);
-//   }
-// };
 
 const handleUpload = async (event, callback, type) => {
   const allowedOrigins = [

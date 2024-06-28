@@ -17,12 +17,13 @@ import SingleProject from "./components/accountBox/SingleProject";
 import Comments from "./components/accountBox/Comments";
 import SideNav from "./components/accountBox/SideNav";
 import Profile from "./components/accountBox/Profile";
-
+import { persistCache } from 'apollo-cache-persist';
+import { useEffect } from "react";
 
 const httpLink = createHttpLink({
   // uri: "http://localhost:3001/graphql",
-  // uri: "http://localhost:4001/dev/graphql",
-  uri: "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev/graphql",
+  uri: "http://localhost:4001/dev/graphql",
+  // uri: "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -44,6 +45,26 @@ const client = new ApolloClient({
 });
 
 function App() {
+  useEffect(() => {
+    const initializeApollo = async () => {
+      // Create Apollo Client instance
+      const client = new ApolloClient({
+        link: authLink.concat(httpLink),
+        cache: new InMemoryCache(),
+      });
+
+      // Persist Apollo Client cache
+      await persistCache({
+        cache: client.cache,
+        storage: window.localStorage, // Choose your storage provider
+      });
+
+      // Assign the Apollo Client instance to the component state or context if needed
+      // setState({ apolloClient: client });
+    };
+
+    initializeApollo();
+  }, []);
   return (
     <ApolloProvider client={client}>
         {/* <div className="glow-container">
