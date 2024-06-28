@@ -78,7 +78,6 @@ import { ADD_MEMBER } from "../../utils/mutations";
 
 function ProfileCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
-  // const projects = apolloData?.projects || [];
   const projects = useMemo(() => apolloData?.projects || [], [apolloData]);
 
   const URL = "/singlepost-image";
@@ -89,9 +88,6 @@ function ProfileCard(props) {
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
   const [commentsCount, setCommentsCount] = useState({});
-    const { loadingUser, data: userData } = useQuery(QUERY_USER, {
-    variables: { username: AuthService.getUsername() },
-  });
 
   useEffect(() => {
     setLoading(true);
@@ -116,12 +112,6 @@ function ProfileCard(props) {
         setLoading(false);
       }
     };
-
-    // projects.forEach((project) => {
-    //   // const currentAuthor = project.projectAuthor;
-    //   const currentAuthor = Auth.getProfile().data.username;
-    //   fetchData(currentAuthor);
-    // });
     const currentAuthor = Auth.getProfile().data.username;
     fetchData(currentAuthor);
   }, [projects]);
@@ -133,21 +123,21 @@ function ProfileCard(props) {
 
   const currentAuthor = Auth.getProfile().data.username;
   const userProjects = projects.filter((project) => project.projectAuthor === currentAuthor);
-  // useEffect(() => {
-  //   const initialLikes = {};
-  //   const initialLiked = {};
-  //   const initialCommentsCount = {};
+  useEffect(() => {
+    const initialLikes = {};
+    const initialLiked = {};
+    const initialCommentsCount = {};
 
-  //   projects.forEach((project) => {
-  //     initialLikes[project._id] = project.likes || 0;
-  //     initialLiked[project._id] = false;
-  //     initialCommentsCount[project._id] = project.commentsCount || 0;
-  //   });
+    projects.forEach((project) => {
+      initialLikes[project._id] = project.likes || 0;
+      initialLiked[project._id] = false;
+      initialCommentsCount[project._id] = project.comments.length || 0;
+    });
 
-  //   setLikes(initialLikes);
-  //   setLiked(initialLiked);
-  //   setCommentsCount(initialCommentsCount);
-  // }, [projects]);
+    setLikes(initialLikes);
+    setLiked(initialLiked);
+    setCommentsCount(initialCommentsCount);
+  }, [projects]);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">

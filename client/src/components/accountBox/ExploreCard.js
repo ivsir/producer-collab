@@ -61,7 +61,7 @@
 //               "x-file-type": "image",
 //             },
 //           });
-          
+
 //           const audioResponse = await axiosClient.get(`${URL}`, {
 //             headers: {
 //               "x-project-author": currentAuthor,
@@ -77,7 +77,7 @@
 //         });
 
 //         const results = await Promise.all(fetchPromises);
-        
+
 //         const newImageUrls = {};
 //         const newAudioUrls = {};
 
@@ -339,8 +339,9 @@
 
 // export default ExploreCard;
 
+import axios from 'axios';
 import axiosClient from "../../config/axios";
-import { QUERY_PROJECTS } from "../../utils/queries";
+import { QUERY_PROJECTS, QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { useEffect, useState, useRef, useMemo } from "react";
 import SkeletonLoader from "../hooks/SkeletonLoader";
@@ -353,8 +354,11 @@ import WaveSurfer from "wavesurfer.js";
 
 function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
+
+
   // const projects = apolloData?.projects || [];
   const projects = useMemo(() => apolloData?.projects || [], [apolloData]);
+
 
   const URL = "/singlepost-image";
 
@@ -365,29 +369,37 @@ function ExploreCard(props) {
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
   const [commentsCount, setCommentsCount] = useState({});
-
-
-  const [member, { error, dataMember }] = useMutation(ADD_MEMBER);
-
   const wavesurfers = useRef({});
   const currentPlaying = useRef(null); // Track the currently playing audio
 
+
+
   useEffect(() => {
-    setLoading(true);
+
+    const abortControllers = {};
 
     const fetchData = async (projectAuthor) => {
+
+      if (abortControllers[projectAuthor]) {
+        abortControllers[projectAuthor].abort();
+      }
+      const abortController = new AbortController();
+      abortControllers[projectAuthor] = abortController;
+
       try {
         const imageResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
           headers: {
             "x-project-author": projectAuthor,
             "x-file-type": "image",
           },
+          signal: abortController.signal,
         });
         const audioResponse = await axiosClient.get(`${URL}?${new Date().getTime()}`, {
           headers: {
             "x-project-author": projectAuthor,
             "x-file-type": "audio",
           },
+          signal: abortController.signal,
         });
 
         const imageData = imageResponse.data;
@@ -402,16 +414,35 @@ function ExploreCard(props) {
           [projectAuthor]: audioData,
         }));
       } catch (error) {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error);
+        if (axios.isAxiosError(error) && error.code !== 'ERR_CANCELED') {
+          console.error("Error fetching data:", error);
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    projects.forEach((project) => {
-      const currentAuthor = project.projectAuthor;
-      fetchData(currentAuthor);
-    });
+    setLoading(true);
+
+    // projects.forEach((project) => {
+    //   const currentAuthor = project.projectAuthor;
+    //   fetchData(currentAuthor);
+    // });
+
+
+    const fetchAllData = async () => {
+      for (const project of projects) {
+        await fetchData(project.projectAuthor);
+      }
+    };
+
+    fetchAllData();
+
+    return () => {
+      Object.values(abortControllers).forEach((controller) => controller.abort());
+    };
+
   }, [projects]);
 
 
@@ -454,15 +485,14 @@ function ExploreCard(props) {
       });
 
       wavesurfers.current[projectId] = wavesurfer;
+
+      return () => {
+        wavesurfer.destroy(); // Ensure each instance is destroyed on unmount
+        delete wavesurfers.current[projectId];
+      };
     }
   };
 
-  useEffect(() => {
-    // Cleanup on component unmount
-    return () => {
-      Object.values(wavesurfers.current).forEach((ws) => ws.destroy());
-    };
-  }, []);
 
   const handlePlayPause = (projectId) => {
     if (wavesurfers.current[projectId]) {
@@ -500,7 +530,8 @@ function ExploreCard(props) {
     projects.forEach((project) => {
       initialLikes[project._id] = project.likes || 0;
       initialLiked[project._id] = false;
-      initialCommentsCount[project._id] = project.commentsCount || 0; // Initialize comment count
+      console.log(project.comments.length)
+      initialCommentsCount[project._id] = project.comments.length || 0; // Initialize comment count
     });
 
     setLikes(initialLikes);
@@ -516,7 +547,6 @@ function ExploreCard(props) {
         const currentAuthor = project.projectAuthor;
         const projectImageUrl = findProjectImageUrl(project.projectImage, currentAuthor);
         const projectAudioUrl = findProjectAudioUrl(project.projectAudio, currentAuthor);
-
         return (
           <div className="flex flex-row max-w-[45rem] h-[90vh] relative my-12" key={project._id}>
             <div className="flex flex-col relative rounded-xl border border-primary overflow-hidden">
@@ -619,7 +649,8 @@ function ExploreCard(props) {
             <div className="absolute right-[-26rem] bg-primary rounded-xl h-auto w-full max-w-[24rem] max-h-[32rem] overflow-scroll z-50">
               {selectedProjectId === project._id && (
                 <Comments
-                  projectId={project._id} setCommentsCount={(count) => setCommentsCount((prev) => ({ ...prev, [project._id]: count }))}
+                  projectId={project._id}
+                  setCommentsCount={props.setCommentsCount}
                 />)}
             </div>
           </div >
