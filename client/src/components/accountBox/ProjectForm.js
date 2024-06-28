@@ -213,7 +213,7 @@ const ProjectForm = () => {
         {Auth.loggedIn() ? (
           <form className="flex flex-col h-auto" onSubmit={handleFormSubmit}>
             <div className="flex flex-row gap-4 mb-16 justify-between w-full">
-              
+
               <div className="flex flex-col w-full">
                 <h2 className="text-sm mb-2">
                 Covert Art <span className="text-white opacity-50">(.png, .jpg)</span>
@@ -245,7 +245,7 @@ const ProjectForm = () => {
 
                     >
                     Upload Image or Drag & Drop
-                    <img width={32} src={UploadIcon}/>
+                    <img width={32} src={UploadIcon} alt="upload icon"/>
                     <div className="flex flex-row justify-center items-center gap-2 text-sm">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.33325 9.99998H8.66659V11.3333H7.33325V9.99998ZM7.33325 4.66665H8.66659V8.66665H7.33325V4.66665ZM7.99325 1.33331C4.31325 1.33331 1.33325 4.31998 1.33325 7.99998C1.33325 11.68 4.31325 14.6666 7.99325 14.6666C11.6799 14.6666 14.6666 11.68 14.6666 7.99998C14.6666 4.31998 11.6799 1.33331 7.99325 1.33331ZM7.99992 13.3333C5.05325 13.3333 2.66659 10.9466 2.66659 7.99998C2.66659 5.05331 5.05325 2.66665 7.99992 2.66665C10.9466 2.66665 13.3333 5.05331 13.3333 7.99998C13.3333 10.9466 10.9466 13.3333 7.99992 13.3333Z" fill="currentColor"/>
@@ -258,7 +258,7 @@ const ProjectForm = () => {
                 </div>
                 <ErrorText error={uploadError && uploadError.message} />
               </div>
-              
+
               <div className="flex flex-col w-full">
                 <h2 className="text-sm mb-2">
                 Audio File <span className="text-white opacity-50">(.mp3, .wav)</span>
@@ -267,7 +267,7 @@ const ProjectForm = () => {
                 onDrop={handleDropAudio}
                 onDragOver={handleDragOver}
                 className="flex flex-col justify-center items-center border-dashed border-2 border-secondary rounded-2xl overflow-hidden">
-                
+
                 <div className="flex justify-end border-b w-full h-full border-secondary bg-secondary">
                   <svg width="100%" height="100%" viewBox="0 0 280 128" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_750_2748)">
@@ -288,7 +288,7 @@ const ProjectForm = () => {
                   type="button"
                   >
                   Upload Audio or Drag & Drop
-                  <img width={32} src={UploadIcon}/>
+                  <img width={32} src={UploadIcon} alt="upload icon"/>
                   <div className="flex flex-row justify-center items-center gap-2 text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.33325 9.99998H8.66659V11.3333H7.33325V9.99998ZM7.33325 4.66665H8.66659V8.66665H7.33325V4.66665ZM7.99325 1.33331C4.31325 1.33331 1.33325 4.31998 1.33325 7.99998C1.33325 11.68 4.31325 14.6666 7.99325 14.6666C11.6799 14.6666 14.6666 11.68 14.6666 7.99998C14.6666 4.31998 11.6799 1.33331 7.99325 1.33331ZM7.99992 13.3333C5.05325 13.3333 2.66659 10.9466 2.66659 7.99998C2.66659 5.05331 5.05325 2.66665 7.99992 2.66665C10.9466 2.66665 13.3333 5.05331 13.3333 7.99998C13.3333 10.9466 10.9466 13.3333 7.99992 13.3333Z" fill="currentColor"/>
@@ -300,11 +300,11 @@ const ProjectForm = () => {
                 {selectedAudio && <h2 className="bg-tertiary px-4 py-2 rounded-lg text-white text-xs mb-6">{selectedAudio.name} ✅</h2>}
               </div>
               <ErrorText error={uploadAudioError && uploadAudioError.message} />
-            
-              
+
+
               </div>
             </div>
-            
+
             {/* Title and Description Input */}
             <div className="flex flex-col">
               <InputField
@@ -321,7 +321,8 @@ const ProjectForm = () => {
                   name="projectDescription"
                   placeholder="Project Description..."
                   value={projectDescription}
-                  className="bg-secondary border border-secondary placeholder:opacity-50 text-white p-4 w-full rounded-xl resize-y mb-4"                onChange={handleChange}
+                  className="bg-secondary border border-secondary placeholder:opacity-50 text-white p-4 w-full rounded-xl resize-y mb-4"
+                  onChange={handleChange}
                   onFocus={() => setShowAsterisk(false)}
                   onBlur={() => setShowAsterisk(true)}
                 >
@@ -332,7 +333,7 @@ const ProjectForm = () => {
               </div>
 
             </div>
-            
+
             <button className="bg-blue-600 w-full py-2 rounded-lg disabled:bg-secondary" type="submit" disabled={uploading}>
               Upload Track
             </button>

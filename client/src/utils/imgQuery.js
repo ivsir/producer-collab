@@ -4,7 +4,7 @@ import axiosClient from '../config/axios';
 const useQuery = (url, refetch, userId) => {
   const [state, setState] = useState({
     data: null,
-    isLoading: true,
+    isloading: false,
     error: '',
   });
 
@@ -14,9 +14,9 @@ const useQuery = (url, refetch, userId) => {
       
       axiosClient
         .get(url)
-        .then(({ data }) => setState({ data, isLoading: false, error: '' }))
+        .then(({ data }) => setState({ data, isloading: false, error: '' }))
         .catch(error =>
-          setState({ data: null, isLoading: false, error: error.message })
+          setState({ data: null, isloading: false, error: error.message })
         );
     };
 

@@ -107,10 +107,10 @@ function ExploreCard(props) {
         progressColor: 'white',
         cursorColor: 'transparent',
         height: 100,
-        barWidth: 6,
+        barWidth: 4,
         barGap: 4,
         barRadius: 8,
-        backend: 'WebAudio',
+        backend: 'MediaElement',
       });
 
       wavesurfer.load(audioUrl);
@@ -183,9 +183,12 @@ function ExploreCard(props) {
         const projectAudioUrl = findProjectAudioUrl(project.projectAudio, currentAuthor);
 
         return (
-          <div className="flex flex-row max-w-[45rem] h-[90vh] relative rounded-xl border border-primary overflow-hidden my-12" key={project._id}>
-            <div className="flex flex-col relative">
+          <div className="flex flex-row max-w-[45rem] h-[90vh] relative my-12" key={project._id}>
+            <div className="flex flex-col relative rounded-xl border border-primary overflow-hidden">
               <LazyLoad className="w-full min-w-[45rem]" once>
+                {/* <div className="flex justify-center items-center w-full min-w-[45rem] relative">
+                  <SkeletonLoader />
+                </div> */}
                 <div className="overflow-hidden rounded-tl-xl rounded-tr-xl">
                   {loading ? (
                     <div className="flex justify-center items-center w-full min-w-[45rem] relative">
@@ -207,7 +210,9 @@ function ExploreCard(props) {
                     )
                   )}
                   {!loading && !projectImageUrl && (
-                    <h2 className="w-full text-3xl text-center">Loading content...e</h2>
+                    <div className="flex justify-center items-center w-full min-w-[45rem] relative">
+                      <SkeletonLoader />
+                    </div>
                   )}
                 </div>
               </LazyLoad>
@@ -221,7 +226,7 @@ function ExploreCard(props) {
                         <h1 className="text-3xl font-semibold">
                           {project.projectTitle}
                         </h1>
-                        <h2 className="project-author"><span className="text-white opacity-50">prod. </span>@{currentAuthor}</h2>
+                        <h2><span className="text-white opacity-50">prod. </span>@{currentAuthor}</h2>
                         {loading ? (
                           <div />
                         ) : (
@@ -244,7 +249,7 @@ function ExploreCard(props) {
                           {likes[project._id]}
                           <button onClick={() => handleLike(project._id)} className="border border-secondary border-opacity-50 p-[6px] rounded-xl overflow-hidden bg-secondary">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill={liked[project._id] ? "red" : "none"} xmlns="http://www.w3.org/2000/svg">
-                              <path d="M11.4116 6.41369L11.9979 7L12.5832 6.41473C13.489 5.5089 14.7176 5 15.9987 5C17.2788 5 18.5067 5.5082 19.4123 6.41296L19.4355 6.43605C19.8094 6.80957 20.1225 7.24502 20.3589 7.71773C21.3335 9.66691 20.9606 12.0394 19.4196 13.5804L13.4142 19.5858C12.6332 20.3668 11.3668 20.3668 10.5858 19.5858L4.58192 13.5819C3.04002 12.04 2.66744 9.66511 3.64263 7.71475C3.87794 7.24412 4.18957 6.81023 4.56144 6.43798L4.58392 6.41547C5.48924 5.50921 6.71768 5 7.99865 5C9.27876 5 10.5064 5.50852 11.4116 6.41369Z" stroke={liked[project._id] ? "none" : "white"} stroke-width="1.5" />
+                              <path d="M11.4116 6.41369L11.9979 7L12.5832 6.41473C13.489 5.5089 14.7176 5 15.9987 5C17.2788 5 18.5067 5.5082 19.4123 6.41296L19.4355 6.43605C19.8094 6.80957 20.1225 7.24502 20.3589 7.71773C21.3335 9.66691 20.9606 12.0394 19.4196 13.5804L13.4142 19.5858C12.6332 20.3668 11.3668 20.3668 10.5858 19.5858L4.58192 13.5819C3.04002 12.04 2.66744 9.66511 3.64263 7.71475C3.87794 7.24412 4.18957 6.81023 4.56144 6.43798L4.58392 6.41547C5.48924 5.50921 6.71768 5 7.99865 5C9.27876 5 10.5064 5.50852 11.4116 6.41369Z" stroke={liked[project._id] ? "none" : "white"} strokeWidth="1.5" />
                             </svg>
                           </button>
                         </div>
@@ -276,13 +281,13 @@ function ExploreCard(props) {
                 </div>
               </div>
             </div>
-            <div className="absolute right-[-8rem] bg-primary rounded-xl h-auto w-full max-w-[24rem] max-h-[32rem] overflow-scroll z-50">
+            <div className="absolute right-[-26rem] bg-primary rounded-xl h-auto w-full max-w-[24rem] max-h-[32rem] overflow-scroll z-50">
               {selectedProjectId === project._id && (
                 <Comments
                   projectId={project._id} setCommentsCount={(count) => setCommentsCount((prev) => ({ ...prev, [project._id]: count }))}
                 />)}
             </div>
-          </div>
+          </div >
         );
       })}
     </div>

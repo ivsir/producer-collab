@@ -5,7 +5,7 @@ import axiosClient from "../config/axios";
 const useMutation = ({ url, method = "POST" }, userId) => {
   const toast = useToast();
   const [state, setState] = useState({
-    isLoading: false,
+    isloading: false,
     error: "",
     responseData: null,
   });
@@ -13,7 +13,7 @@ const useMutation = ({ url, method = "POST" }, userId) => {
   const fn = async (data) => {
     setState((prev) => ({
       ...prev,
-      isLoading: true,
+      isloading: false,
     }));
     
     try {
@@ -24,7 +24,7 @@ const useMutation = ({ url, method = "POST" }, userId) => {
       if (key) {
         console.log(key);
         setState({
-          isLoading: false,
+          isloading: false,
           error: "",
           responseData: response.data,
         });
@@ -40,7 +40,7 @@ const useMutation = ({ url, method = "POST" }, userId) => {
     } catch (error) {
       console.error("Error in the request:", error);
       setState({
-        isLoading: false,
+        isloading: false,
         error: error.message,
         responseData: null,
       });

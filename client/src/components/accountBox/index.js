@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignupForm";
 import { AccountContext } from "./AccountContext";
-import Home from "../../assets/images/prodcollab.svg";
+import Home from "../../assets/images/prodcollab.png";
 
 export default function AccountBox(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -35,7 +35,7 @@ export default function AccountBox(props) {
                 <h2 className="text-3xl mb-1">Welcome Back</h2>
                 <p className="text-white text-opacity-50 text-sm">Please Enter Your Login Credentials</p>
               </div>
-              <img src={Home} alt="Home" /> {/* Corrected usage of <Link> */}
+              <img src={Home} alt="Home" className="w-12" /> {/* Corrected usage of <Link> */}
             </div>
           )}
           {active === "signup" && (
@@ -44,7 +44,7 @@ export default function AccountBox(props) {
                 <h2 className="text-3xl mb-1">Create Account</h2>
                 <p className="text-white text-opacity-50 text-sm">Please Sign-up to continue!</p>
               </div>
-              <img src={Home} alt="Home" /> {/* Corrected usage of <Link> */}
+              <img src={Home} alt="Home" className="w-12"/> {/* Corrected usage of <Link> */}
             </div>
           )}
           <div>

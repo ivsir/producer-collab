@@ -26,12 +26,12 @@ const SingleProject = () => {
   const currentAuthor = project.projectAuthor;
   const {
     data: imageUrls = [],
-    isLoading: imagesLoading,
+    isloading: imagesLoading,
     error: fetchError,
   } = imgQueries(URL, refetch, currentAuthor);
   const {
     data: audioUrls = [],
-    isLoading: audioLoading,
+    isloading: audioLoading,
     error: fetchAudioError,
   } = imgQueries(URL2, refetch, currentAuthor);
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
