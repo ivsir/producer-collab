@@ -45,6 +45,7 @@ function Comments({ projectId }) {
 
   const renderComments = () => {
     const comments = data?.project.comments || [];
+
     return comments.map((comment, i) => (
       <div key={i}>
         <div className="flex flex-row gap-3 border border-secondary px-4 py-4 rounded-xl mb-4 justify-start">

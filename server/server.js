@@ -243,6 +243,25 @@ const server = new ApolloServer({
       user,
     };
   },
+  // formatError: (error) => {
+  //   // Log the error for debugging purposes
+  //   console.error('Server error:', error);
+
+  //   // Customize the error response based on the error code
+  //   if (error.originalError instanceof AuthenticationError) {
+  //     return {
+  //       message: error.message,
+  //       statusCode: 401, // Unauthorized
+  //       code: 'UNAUTHENTICATED',
+  //     };
+  //   }
+
+  //   // Default error handling
+  //   return {
+  //     message: error.message,
+  //     statusCode: error.extensions?.code || 500,
+  //   };
+  // },
 });
 
 exports.graphqlHandler = server.createHandler({
@@ -265,6 +284,7 @@ exports.graphqlHandler = server.createHandler({
 exports.createS3FolderHandler = async (event, context, callback) => {
   const { userId } = JSON.parse(event.body);
 
+
   try {
     const folderKey = `${userId}/`;
     await s3
@@ -274,17 +294,36 @@ exports.createS3FolderHandler = async (event, context, callback) => {
         Body: "", // Empty body to represent a folder
       })
       .promise();
+    const allowedOrigins = [
+      'https://main.dan6kz7trfabu.amplifyapp.com',
+      'http://localhost:3000'
+    ];
+
+    const origin = event.headers.origin;
+    const responseHeaders = {
+      "Access-Control-Allow-Credentials": true,
+    };
+
+    if (allowedOrigins.includes(origin)) {
+      responseHeaders["Access-Control-Allow-Origin"] = origin;
+    }
 
     const response = {
       statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin":
-          ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
-        "Access-Control-Allow-Credentials": true,
-      },
+      headers: responseHeaders,
       body: JSON.stringify({ message: "S3 folder created successfully" }),
     };
     callback(null, response);
+    // const response = {
+    //   statusCode: 200,
+    //   headers: {
+    //     "Access-Control-Allow-Origin":
+    //       ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+    //     "Access-Control-Allow-Credentials": true,
+    //   },
+    //   body: JSON.stringify({ message: "S3 folder created successfully" }),
+    // };
+    // callback(null, response);
   } catch (error) {
     console.error("Error creating S3 folder:", error);
     const response = {
@@ -308,7 +347,7 @@ exports.getUserFoldersHandler = async (event, context, callback) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify(objects),
@@ -354,7 +393,7 @@ exports.uploadHandler = async (event, context, callback) => {
       statusCode: 201,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({ key }),
@@ -490,7 +529,7 @@ exports.getImagesHandler = async (event, context, callback) => {
         statusCode: 400,
         headers: {
           "Access-Control-Allow-Origin":
-          ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+            ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
           "Access-Control-Allow-Credentials": true,
         },
         body: JSON.stringify({ message: error.message }),
@@ -503,7 +542,7 @@ exports.getImagesHandler = async (event, context, callback) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify(presignedUrls),
@@ -515,7 +554,7 @@ exports.getImagesHandler = async (event, context, callback) => {
       statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({ message: "Internal server error" }),
@@ -532,7 +571,7 @@ exports.getAudioFilesHandler = async (event, context, callback) => {
       statusCode: 400,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({ message: "Bad request" }),
@@ -549,7 +588,7 @@ exports.getAudioFilesHandler = async (event, context, callback) => {
         statusCode: 400,
         headers: {
           "Access-Control-Allow-Origin":
-          ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+            ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
           "Access-Control-Allow-Credentials": true,
         },
         body: JSON.stringify({ message: error.message }),
@@ -562,7 +601,7 @@ exports.getAudioFilesHandler = async (event, context, callback) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify(presignedUrls),
@@ -588,7 +627,7 @@ exports.getFilesHandler = async (event, context, callback) => {
         statusCode: 400,
         headers: {
           "Access-Control-Allow-Origin":
-          ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+            ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
           "Access-Control-Allow-Credentials": true,
         },
         body: JSON.stringify({ message: "Bad request" }),
@@ -617,7 +656,7 @@ exports.getFilesHandler = async (event, context, callback) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify(presignedUrls),
@@ -629,7 +668,7 @@ exports.getFilesHandler = async (event, context, callback) => {
       statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin":
-        ["https://main.dan6kz7trfabu.amplifyapp.com","http://locahost:3000"],
+          ["https://main.dan6kz7trfabu.amplifyapp.com", "http://locahost:3000"],
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({ message: "Internal server error" }),

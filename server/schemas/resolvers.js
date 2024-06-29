@@ -30,17 +30,49 @@ const resolvers = {
     },
   },
   Mutation: {
+    // addUser: async (parent, { username, email, password }) => {
+    //   const existingUser = await User.findOne({
+    //     $or: [{ username }, { email }],
+    //   });
+  
+    //   if (existingUser) {
+    //     throw new Error("Username or email already exists");
+    //   }
+
+    //   const user = await User.create({
+    //     username,
+    //     email,
+    //     password,
+    //   });
+    //   if (!user) {
+    //     throw new Error("User not found");
+    //   }
+    //   const token = signToken(user);
+    //   return { token, user };
+    // },
     addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({
-        username,
-        email,
-        password,
-      });
-      if (!user) {
-        throw new Error("User not found");
-      }
-      const token = signToken(user);
-      return { token, user };
+        const existingUser = await User.findOne({
+          $or: [{ username }, { email }],
+        });
+
+        if (existingUser) {
+          throw new AuthenticationError("Username or email already exists");
+        }
+
+        // Create a new user
+        const user = await User.create({
+          username,
+          email,
+          password,
+        });
+
+        if (!user) {
+          throw new Error("Failed to create user");
+        }
+
+        const token = signToken(user);
+
+        return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
