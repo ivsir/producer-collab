@@ -120,8 +120,8 @@ import axios from "axios";
 import { AccountContext } from "../../components/accountBox/AccountContext";
 import InputField from "../elements/InputField";
 
-const baseURL = "http://localhost:4001/dev";
-  // const baseURL = process.env.REACT_APP_API_URL || "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev";
+// const baseURL = "http://localhost:4001/dev";
+  const baseURL = process.env.REACT_APP_API_URL || "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev";
   // process.env.REACT_APP_API_URL || "http://localhost:3001";
   
 
