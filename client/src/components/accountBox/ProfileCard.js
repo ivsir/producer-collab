@@ -86,7 +86,6 @@ function ProfileCard(props) {
   const [loading, setLoading] = useState(true);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [likes, setLikes] = useState({});
-  const [liked, setLiked] = useState({});
   const [commentsCount, setCommentsCount] = useState({});
 
   useEffect(() => {
@@ -123,20 +122,22 @@ function ProfileCard(props) {
 
   const currentAuthor = Auth.getProfile().data.username;
   const userProjects = projects.filter((project) => project.projectAuthor === currentAuthor);
+
+
   useEffect(() => {
     const initialLikes = {};
     const initialLiked = {};
     const initialCommentsCount = {};
 
     projects.forEach((project) => {
-      initialLikes[project._id] = project.likes || 0;
-      initialLiked[project._id] = false;
-      initialCommentsCount[project._id] = project.comments.length || 0;
+      initialLikes[project._id] = project.likes?.length || 0;
+      // initialLiked[project._id] = project.likes?.some((like) => like.username === AuthService.getProfile().data.username);
+      initialCommentsCount[project._id] = project.comments?.length || 0; // Initialize comment count
     });
 
     setLikes(initialLikes);
-    setLiked(initialLiked);
-    setCommentsCount(initialCommentsCount);
+    // setLiked(initialLiked);
+    setCommentsCount(initialCommentsCount); // Set initial comment counts
   }, [projects]);
 
   return (
@@ -144,7 +145,6 @@ function ProfileCard(props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
         {userProjects.map((project) => {
           const projectImageUrl = findProjectImageUrl(project.projectImage, currentAuthor);
-
           return (
             <div key={project._id} className="flex flex-col relative rounded-xl border border-primary overflow-hidden">
               <div className="flex justify-center items-center w-full min-w-[45rem] relative">
@@ -186,7 +186,7 @@ function ProfileCard(props) {
 
                       <div className="inline-flex flex-col gap-2">
                         <div className="flex flex-col justify-center items-center gap-1">
-                          {likes[project._id]}
+                          {likes[project._id] ?? 0}
                           {/* Like button */}
                         </div>
                         <div className="flex flex-col justify-center items-center gap-1">

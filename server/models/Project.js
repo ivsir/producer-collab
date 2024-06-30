@@ -42,6 +42,18 @@ const projectSchema = new Schema({
       },
     },
   ],
+  likes: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+      username: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

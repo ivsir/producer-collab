@@ -112,17 +112,18 @@
 
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
+import { QUERY_USERS } from "../../utils/queries";
 import AuthService from "../../utils/auth";
 import axios from "axios";
 import { AccountContext } from "../../components/accountBox/AccountContext";
 import InputField from "../elements/InputField";
 
-const baseURL =
-  process.env.REACT_APP_API_URL || "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev";
+const baseURL = "http://localhost:4001/dev";
+  // process.env.REACT_APP_API_URL || "https://hhixki9fn4.execute-api.us-west-1.amazonaws.com/dev";
   // process.env.REACT_APP_API_URL || "http://localhost:3001";
-  // process.env.REACT_APP_API_URL || "http://localhost:4001/dev";
+  
 
 export function SignupForm() {
   const [formState, setFormState] = useState({
@@ -131,8 +132,7 @@ export function SignupForm() {
     password: "",
   });
 
-  const [addUser] = useMutation(ADD_USER);
-
+  const [addUser, {error}] = useMutation(ADD_USER);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -143,7 +143,6 @@ export function SignupForm() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const { data } = await addUser({
         variables: { ...formState },
@@ -166,8 +165,8 @@ export function SignupForm() {
       } else {
         console.error("Failed to create folder:", response.data.error);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -222,6 +221,7 @@ export function SignupForm() {
           </button>
         </div>
       </form>
+      {error && <p className="text-red-500">{error.message}</p>}
     </div>
   );
 }
