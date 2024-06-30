@@ -149,7 +149,6 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addComment: async (parent, { projectId, commentText }, context) => {
-      console.log('Context in resolver:', context);
       if (context.user) {
         return Project.findOneAndUpdate(
           { _id: projectId },
@@ -163,6 +162,38 @@ const resolvers = {
             runValidators: true,
           }
         );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addLike: async (parent, { projectId }, context) => {
+      if (context.user) {
+        const project = await Project.findOneAndUpdate(
+          { _id: projectId },
+          { $addToSet: { likes: { userId: context.user._id, username: context.user.username } } },
+          { new: true, runValidators: true }
+        )
+
+        if (!project) {
+          throw new Error("Project not found");
+        }
+
+        return project;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeLike: async (parent, { projectId }, context) => {
+      if (context.user) {
+        const project = await Project.findOneAndUpdate(
+          { _id: projectId },
+          { $pull: { likes: { userId: context.user._id } } },
+          { new: true, runValidators: true }
+        )
+
+        if (!project) {
+          throw new Error("Project not found");
+        }
+
+        return project;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

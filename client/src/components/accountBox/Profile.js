@@ -49,6 +49,9 @@ const Profile = (props) => {
   });
   const user = userData?.user.username || "";
 
+
+  if (loading) return <p>Loading...</p>;
+
   return (
     <div className="flex flex-col">
       

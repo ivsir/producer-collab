@@ -8,11 +8,40 @@ import AuthService from "../../utils/auth";
 import LazyLoad from "react-lazyload";
 import "../style/BackgroundVisualizer.css";
 import Comments from "./Comments";
-import { ADD_MEMBER } from "../../utils/mutations";
+import { ADD_LIKE, ADD_MEMBER, REMOVE_LIKE } from "../../utils/mutations";
 import WaveSurfer from "wavesurfer.js";
 
 function ExploreCard(props) {
   const { loading: apolloLoading, data: apolloData } = useQuery(QUERY_PROJECTS);
+  const [addLike] = useMutation(ADD_LIKE, {
+
+    update(cache, { data: { addLike } }) {
+      cache.modify({
+        id: cache.identify(addLike.project),
+        fields: {
+          likes(existingLikes = []) {
+            return [...existingLikes, addLike.like];
+          },
+        },
+      });
+    },
+  });
+  const [removeLike] = useMutation(REMOVE_LIKE, {
+    update(cache, { data: { removeLike } }) {
+      cache.modify({
+        id: cache.identify(removeLike.project),
+        fields: {
+          likes(existingLikes = [], { readField }) {
+            return existingLikes.filter(
+              (like) => readField('id', like) !== removeLike.like.id
+            );
+          },
+        },
+      });
+    },
+  });
+
+
   const projects = useMemo(() => apolloData?.projects || [], [apolloData]);
   const URL = "/singlepost-image";
   const [imageUrls, setImageUrls] = useState({});
@@ -75,7 +104,7 @@ function ExploreCard(props) {
         setLoading(false);
       }
     };
-    setLoading(true);
+    // setLoading(true);
     const fetchAllData = async () => {
       for (const project of projects) {
         await fetchData(project.projectAuthor);
@@ -101,15 +130,7 @@ function ExploreCard(props) {
     return authorAudioUrls.find((audioUrl) => audioUrl.includes(projectAudio));
   };
 
-  // const handleJoin = async (event, projectId) => {
-  //   event.preventDefault();
-  //   try {
-  //     setSelectedProjectId(projectId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  
+
   const handleJoin = async (event, projectId) => {
     event.preventDefault();
     setSelectedProjectId((prevSelectedProjectId) =>
@@ -156,23 +177,81 @@ function ExploreCard(props) {
     }
   };
 
-  const handleLike = (projectId) => {
-    setLiked((prevLiked) => {
-      const newLiked = !prevLiked[projectId];
-      return {
-        ...prevLiked,
-        [projectId]: newLiked,
-      };
-    });
-
-    setLikes((prevLikes) => {
-      const newLiked = !liked[projectId];
-      return {
+  const handleLike = async (projectId) => {
+    const userId = AuthService.getProfile().data._id;
+    const username = AuthService.getProfile().data.username;
+    if (!liked[projectId]) {
+      setLikes((prevLikes) => ({
         ...prevLikes,
-        [projectId]: newLiked ? prevLikes[projectId] + 1 : prevLikes[projectId] - 1,
-      };
-    });
+        [projectId]: (prevLikes[projectId] || 0) + 1,
+      }));
+      setLiked((prevLiked) => ({
+        ...prevLiked,
+        [projectId]: true,
+      }));
+      try {
+        await addLike({
+          variables: { projectId, userId, username },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            addLike: {
+              __typename: 'Like',
+              project: { __typename: 'Project', id: projectId },
+              like: { __typename: 'Like', id: 'temp-id', username },
+            },
+          },
+        });
+      } catch (e) {
+        setLikes((prevLikes) => ({
+          ...prevLikes,
+          [projectId]: (prevLikes[projectId] || 1) - 1,
+        }));
+        setLiked((prevLiked) => ({
+          ...prevLiked,
+          [projectId]: false,
+        }));
+        console.error(e);
+      }
+    }
   };
+
+  const handleDislike = async (projectId) => {
+    if (liked[projectId]) {
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [projectId]: (prevLikes[projectId] || 1) - 1,
+      }));
+      setLiked((prevLiked) => ({
+        ...prevLiked,
+        [projectId]: false,
+      }));
+      try {
+        await removeLike({
+          variables: { projectId },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            removeLike: {
+              __typename: 'Like',
+              project: { __typename: 'Project', id: projectId },
+              like: { __typename: 'Like', id: 'temp-id' },
+            },
+          },
+        });
+      } catch (e) {
+        setLikes((prevLikes) => ({
+          ...prevLikes,
+          [projectId]: (prevLikes[projectId] || 0) + 1,
+        }));
+        setLiked((prevLiked) => ({
+          ...prevLiked,
+          [projectId]: true,
+        }));
+        console.error(e);
+      }
+    }
+  };
+
+
 
   useEffect(() => {
     const initialLikes = {};
@@ -180,9 +259,9 @@ function ExploreCard(props) {
     const initialCommentsCount = {};
 
     projects.forEach((project) => {
-      initialLikes[project._id] = project.likes || 0;
-      initialLiked[project._id] = false;
-      initialCommentsCount[project._id] = project.comments.length || 0; // Initialize comment count
+      initialLikes[project._id] = project.likes?.length || 0;
+      initialLiked[project._id] = project.likes?.some((like) => like.username === AuthService.getProfile().data.username);
+      initialCommentsCount[project._id] = project.comments?.length || 0; // Initialize comment count
     });
 
     setLikes(initialLikes);
@@ -190,6 +269,9 @@ function ExploreCard(props) {
     setCommentsCount(initialCommentsCount); // Set initial comment counts
   }, [projects]);
 
+  if (apolloLoading) {
+    return <SkeletonLoader />;
+  }
 
 
   return (
@@ -263,15 +345,18 @@ function ExploreCard(props) {
                       <div className="inline-flex flex-col gap-2">
                         <div className="flex flex-col justify-center items-center gap-1">
                           {likes[project._id]}
-                          <button onClick={() => handleLike(project._id)} className="border border-secondary border-opacity-50 p-[6px] rounded-xl overflow-hidden bg-secondary">
+                          <button onClick={() => { liked[project._id] ? handleDislike(project._id) : handleLike(project._id) }} className="border border-secondary border-opacity-50 p-[6px] rounded-xl overflow-hidden bg-secondary">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill={liked[project._id] ? "red" : "none"} xmlns="http://www.w3.org/2000/svg">
                               <path d="M11.4116 6.41369L11.9979 7L12.5832 6.41473C13.489 5.5089 14.7176 5 15.9987 5C17.2788 5 18.5067 5.5082 19.4123 6.41296L19.4355 6.43605C19.8094 6.80957 20.1225 7.24502 20.3589 7.71773C21.3335 9.66691 20.9606 12.0394 19.4196 13.5804L13.4142 19.5858C12.6332 20.3668 11.3668 20.3668 10.5858 19.5858L4.58192 13.5819C3.04002 12.04 2.66744 9.66511 3.64263 7.71475C3.87794 7.24412 4.18957 6.81023 4.56144 6.43798L4.58392 6.41547C5.48924 5.50921 6.71768 5 7.99865 5C9.27876 5 10.5064 5.50852 11.4116 6.41369Z" stroke={liked[project._id] ? "none" : "white"} strokeWidth="1.5" />
                             </svg>
                           </button>
                         </div>
                         <div className="flex flex-col justify-center items-center gap-1">
-                          {commentsCount[project._id] ?? 0}
-                          <button onClick={(event) => handleJoin(event, project._id)} className="border border-secondary border-opacity-50 p-2 rounded-xl overflow-hidden bg-secondary">
+                          {/* {commentsCount[project._id] ?? 0} */}
+                          <p>{commentsCount[project._id] ?? 0}</p>
+                          <button
+                           onClick={(event) => handleJoin(event, project._id)}
+                            className="border border-secondary border-opacity-50 p-2 rounded-xl overflow-hidden bg-secondary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M20 17.17L18.83 16H4V4H20V17.17ZM20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H18L22 22V4C22 2.9 21.1 2 20 2Z" fill="#FAFAFA" />
                             </svg>
@@ -301,7 +386,7 @@ function ExploreCard(props) {
               {selectedProjectId === project._id && (
                 <Comments
                   projectId={project._id}
-                  // setCommentsCount={props.setCommentsCount}
+                // setCommentsCount={props.setCommentsCount}
                 />)}
             </div>
           </div >

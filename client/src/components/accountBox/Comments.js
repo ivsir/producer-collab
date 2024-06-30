@@ -5,8 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADD_COMMENT } from "../../utils/mutations";
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import Profile from "./Profile";
-
+import Profile from "./Profile"
 
 function Comments({ projectId }) {
   const [commentText, setCommentText] = useState("");
@@ -50,7 +49,7 @@ function Comments({ projectId }) {
       <div key={i}>
         <div className="flex flex-row gap-3 border border-secondary px-4 py-4 rounded-xl mb-4 justify-start">
           <div className="w-8 h-8 rounded-full overflow-hidden border border-primary">
-            <Profile />
+            <Profile/>
           </div>
           <div className="flex flex-col justify-start">
             <h4 className="text-white text-sm opacity-50 flex flex-col justify-between">
