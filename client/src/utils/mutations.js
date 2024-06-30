@@ -97,3 +97,30 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const ADD_LIKE = gql`
+  mutation addLike($projectId: ID!) {
+    addLike(projectId: $projectId) {
+      _id
+      likes {
+        _id
+        userId
+        username
+      }
+    }
+  }
+`;
+
+
+export const REMOVE_LIKE = gql`
+  mutation removeLike($projectId: ID!) {
+    removeLike(projectId: $projectId) {
+      _id
+      likes {
+        _id
+        userId
+        username
+      }
+    }
+  }
+`;

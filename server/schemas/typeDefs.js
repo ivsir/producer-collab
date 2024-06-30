@@ -1,5 +1,5 @@
 // const { gql } = require("apollo-server-express");
-const {gql} = require("apollo-server-lambda");
+const { gql } = require("apollo-server-lambda");
 
 
 const typeDefs = gql`
@@ -21,6 +21,7 @@ const typeDefs = gql`
     projectMembers: [Member]
     createdAt: String
     comments: [Comment]
+    likes: [Likes]
   }
 
   type Comment {
@@ -28,6 +29,12 @@ const typeDefs = gql`
     commentText: String!
     commentAuthor: String!
     createdAt: String!
+  }
+
+  type Likes {
+    _id: ID
+    userId: ID!
+    username: String!
   }
 
   type Member {
@@ -66,6 +73,8 @@ const typeDefs = gql`
       commentText: String!
       commentAuthor: String!
     ): Project
+    addLike(projectId: ID!): Project
+    removeLike(projectId: ID!): Project
     removeProject(projectId: ID!): Project
     removeComment(projectId: ID!, commentId: ID!): Project
   }
