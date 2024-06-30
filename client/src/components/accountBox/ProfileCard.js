@@ -126,7 +126,6 @@ function ProfileCard(props) {
 
   useEffect(() => {
     const initialLikes = {};
-    const initialLiked = {};
     const initialCommentsCount = {};
 
     projects.forEach((project) => {
@@ -136,7 +135,6 @@ function ProfileCard(props) {
     });
 
     setLikes(initialLikes);
-    // setLiked(initialLiked);
     setCommentsCount(initialCommentsCount); // Set initial comment counts
   }, [projects]);
 
