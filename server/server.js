@@ -28,7 +28,7 @@ const upload = multer({ storage });
 const audioStorage = multer.memoryStorage();
 
 const s3 = new AWS.S3();
-const bucketName = "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
+const bucketName = process.env.BUCKET || "react-image-upload-ivsir"; // Replace with your actual S3 bucket name
 
 dotenv.config();
 
@@ -251,7 +251,6 @@ exports.singlePostImageHandler = async (event, context, callback) => {
     callback(null, response);
   }
 };
-
 
 
 exports.getImagesHandler = async (event, context, callback) => {

@@ -7,7 +7,7 @@ async function connectToDatabase() {
     return cachedDbConnection;
   }
 
-  const uri = "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab";
+  const uri = process.env.MONGODB_URI || "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab";
 
   mongoose.set('strictQuery', false);
 
