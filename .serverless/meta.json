@@ -1,11 +1,345 @@
 {
   "/Users/risvitareq/code/producer-collab": {
     "versionSfCore": null,
-    "versionFramework": "4.1.7",
+    "versionFramework": "4.1.11",
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
-    "composeResolverProviders": {},
+    "composeResolverProviders": {
+      "env": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "serverless-express-apollo",
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs20.x",
+              "region": "us-west-1",
+              "environment": {
+                "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
+                "MY_AWS_PROFILE": "ivsir-general",
+                "BUCKET": "react-image-upload-ivsir"
+              },
+              "stage": "dev",
+              "versionFunctions": true
+            },
+            "functions": {
+              "graphql": {
+                "handler": "server/server.graphqlHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "graphql",
+                      "method": "any",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "playground",
+                      "method": "ANY",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "singlePostImage": {
+                "handler": "server/server.singlePostImageHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "singlepost-image",
+                      "method": "get",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "createS3Folder": {
+                "handler": "server/server.createS3FolderHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "create-s3-folder",
+                      "method": "post",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "upload": {
+                "handler": "server/server.uploadHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "upload",
+                      "method": "post",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "getUserFolders": {
+                "handler": "server/server.getUserFoldersHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "user-folders",
+                      "method": "get",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "getImages": {
+                "handler": "server/server.getImagesHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "images",
+                      "method": "get",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "getAudioFiles": {
+                "handler": "server/server.getAudioFilesHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "audiofiles",
+                      "method": "get",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "getFiles": {
+                "handler": "server/server.getFilesHandler",
+                "events": [
+                  {
+                    "http": {
+                      "path": "files",
+                      "method": "get",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "uploadImage": {
+                "handler": "server/server.uploadImageHandler",
+                "timeout": 30,
+                "events": [
+                  {
+                    "http": {
+                      "path": "upload-image",
+                      "method": "post",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "uploadAudio": {
+                "handler": "server/server.uploadAudioHandler",
+                "timeout": 30,
+                "events": [
+                  {
+                    "http": {
+                      "path": "upload-audio",
+                      "method": "post",
+                      "cors": {
+                        "origins": [
+                          "https://main.dan6kz7trfabu.amplifyapp.com",
+                          "http://localhost:3000"
+                        ],
+                        "headers": [
+                          "Content-Type",
+                          "Authorization",
+                          "x-user-id",
+                          "x-file-type",
+                          "x-project-author"
+                        ],
+                        "allowCredentials": "<REDACTED>"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "plugins": [
+              "serverless-offline",
+              "serverless-prune-plugin",
+              "serverless-apigw-binary",
+              "dotenv"
+            ],
+            "custom": {
+              "apigwBinary": {
+                "types": [
+                  "image/jpeg",
+                  "image/png",
+                  "audio/wav",
+                  "audio/mpeg",
+                  "multipart/form-data"
+                ]
+              },
+              "serverless-offline": {
+                "httpPort": 4001
+              },
+              "prune": {
+                "automatic": true,
+                "number": 3
+              }
+            },
+            "package": {
+              "exclude": [
+                "client/**",
+                "package-lock.json",
+                "node_modules/**"
+              ],
+              "excludeDevDependencies": true
+            }
+          },
+          "configFileDirPath": "/Users/risvitareq/code/producer-collab",
+          "config": {
+            "type": "env"
+          },
+          "options": {},
+          "stage": "dev"
+        },
+        "resolvers": {}
+      }
+    },
     "composeServiceName": null,
     "servicePath": "/Users/risvitareq/code/producer-collab",
     "serviceConfigFileName": "serverless.yml",
@@ -18,2484 +352,10 @@
         "environment": {
           "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
           "MY_AWS_PROFILE": "ivsir-general",
-          "MY_AWS_REGION": "us-west-1",
           "BUCKET": "react-image-upload-ivsir"
         },
-        "iamRoleStatements": [
-          {
-            "Effect": "Allow",
-            "Action": [
-              "s3:PutObject",
-              "s3:GetObject",
-              "s3:ListBucket"
-            ],
-            "Resource": [
-              "arn:aws:s3:::react-image-upload-ivsir/*",
-              "arn:aws:s3:::react-image-upload-ivsir"
-            ]
-          },
-          {
-            "Effect": "Allow",
-            "Action": [
-              "sts:AssumeRole"
-            ],
-            "Resource": "arn:aws:iam::614288690243:user/ivsir"
-          }
-        ],
         "stage": "dev",
-        "versionFunctions": true,
-        "compiledCloudFormationTemplate": {
-          "AWSTemplateFormatVersion": "2010-09-09",
-          "Description": "The AWS CloudFormation template for this Serverless application",
-          "Resources": {
-            "ServerlessDeploymentBucket": {
-              "Type": "AWS::S3::Bucket",
-              "Properties": {
-                "BucketEncryption": {
-                  "ServerSideEncryptionConfiguration": [
-                    {
-                      "ServerSideEncryptionByDefault": {
-                        "SSEAlgorithm": "AES256"
-                      }
-                    }
-                  ]
-                }
-              }
-            },
-            "ServerlessDeploymentBucketPolicy": {
-              "Type": "AWS::S3::BucketPolicy",
-              "Properties": {
-                "Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "PolicyDocument": {
-                  "Statement": [
-                    {
-                      "Action": "s3:*",
-                      "Effect": "Deny",
-                      "Principal": "*",
-                      "Resource": [
-                        {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":s3:::",
-                              {
-                                "Ref": "ServerlessDeploymentBucket"
-                              },
-                              "/*"
-                            ]
-                          ]
-                        },
-                        {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":s3:::",
-                              {
-                                "Ref": "ServerlessDeploymentBucket"
-                              }
-                            ]
-                          ]
-                        }
-                      ],
-                      "Condition": {
-                        "Bool": {
-                          "aws:SecureTransport": false
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            },
-            "GraphqlLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-graphql"
-              }
-            },
-            "SinglePostImageLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-singlePostImage"
-              }
-            },
-            "CreateS3FolderLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-createS3Folder"
-              }
-            },
-            "UploadLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-upload"
-              }
-            },
-            "GetUserFoldersLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-getUserFolders"
-              }
-            },
-            "GetImagesLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-getImages"
-              }
-            },
-            "GetAudioFilesLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-getAudioFiles"
-              }
-            },
-            "GetFilesLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-getFiles"
-              }
-            },
-            "UploadImageLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-uploadImage"
-              }
-            },
-            "UploadAudioLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/serverless-express-apollo-dev-uploadAudio"
-              }
-            },
-            "IamRoleLambdaExecution": {
-              "Type": "AWS::IAM::Role",
-              "Properties": {
-                "AssumeRolePolicyDocument": {
-                  "Version": "2012-10-17",
-                  "Statement": [
-                    {
-                      "Effect": "Allow",
-                      "Principal": {
-                        "Service": [
-                          "lambda.amazonaws.com"
-                        ]
-                      },
-                      "Action": [
-                        "sts:AssumeRole"
-                      ]
-                    }
-                  ]
-                },
-                "Policies": [
-                  {
-                    "PolicyName": {
-                      "Fn::Join": [
-                        "-",
-                        [
-                          "serverless-express-apollo",
-                          "dev",
-                          "lambda"
-                        ]
-                      ]
-                    },
-                    "PolicyDocument": {
-                      "Version": "2012-10-17",
-                      "Statement": [
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "logs:CreateLogStream",
-                            "logs:CreateLogGroup",
-                            "logs:TagResource"
-                          ],
-                          "Resource": [
-                            {
-                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-apollo-dev*:*"
-                            }
-                          ]
-                        },
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "logs:PutLogEvents"
-                          ],
-                          "Resource": [
-                            {
-                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-apollo-dev*:*:*"
-                            }
-                          ]
-                        },
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "s3:PutObject",
-                            "s3:GetObject",
-                            "s3:ListBucket"
-                          ],
-                          "Resource": [
-                            "arn:aws:s3:::react-image-upload-ivsir/*",
-                            "arn:aws:s3:::react-image-upload-ivsir"
-                          ]
-                        },
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "sts:AssumeRole"
-                          ],
-                          "Resource": "arn:aws:iam::614288690243:user/ivsir"
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "Path": "/",
-                "RoleName": {
-                  "Fn::Join": [
-                    "-",
-                    [
-                      "serverless-express-apollo",
-                      "dev",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      "lambdaRole"
-                    ]
-                  ]
-                }
-              }
-            },
-            "GraphqlLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.graphqlHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-graphql",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "GraphqlLogGroup"
-              ]
-            },
-            "SinglePostImageLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.singlePostImageHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-singlePostImage",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "SinglePostImageLogGroup"
-              ]
-            },
-            "CreateS3FolderLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.createS3FolderHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-createS3Folder",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "CreateS3FolderLogGroup"
-              ]
-            },
-            "UploadLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.uploadHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-upload",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "UploadLogGroup"
-              ]
-            },
-            "GetUserFoldersLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.getUserFoldersHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-getUserFolders",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "GetUserFoldersLogGroup"
-              ]
-            },
-            "GetImagesLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.getImagesHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-getImages",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "GetImagesLogGroup"
-              ]
-            },
-            "GetAudioFilesLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.getAudioFilesHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-getAudioFiles",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "GetAudioFilesLogGroup"
-              ]
-            },
-            "GetFilesLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.getFilesHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-getFiles",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "GetFilesLogGroup"
-              ]
-            },
-            "UploadImageLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.uploadImageHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-uploadImage",
-                "MemorySize": 1024,
-                "Timeout": 30,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "UploadImageLogGroup"
-              ]
-            },
-            "UploadAudioLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": {
-                    "Ref": "ServerlessDeploymentBucket"
-                  },
-                  "S3Key": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z/serverless-express-apollo.zip"
-                },
-                "Handler": "server/server.uploadAudioHandler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "serverless-express-apollo-dev-uploadAudio",
-                "MemorySize": 1024,
-                "Timeout": 30,
-                "Environment": {
-                  "Variables": {
-                    "MONGODB_URI": "mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab",
-                    "MY_AWS_PROFILE": "ivsir-general",
-                    "MY_AWS_REGION": "us-west-1",
-                    "BUCKET": "react-image-upload-ivsir"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "UploadAudioLogGroup"
-              ]
-            },
-            "GraphqlLambdaVersion7TWVihbho62bHkvE46AuOFwyv6NUhwaYEDMCo2Jk0": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "GraphqlLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "SinglePostImageLambdaVersionou92hu6kQeUGDZ5jIs9gk7roqRBAKKhjESk6ORL6Dsk": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "SinglePostImageLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "CreateS3FolderLambdaVersionUgE9rShgJ5fCCqfziyNH3gevmYbc4rVgAKYDEZSQc0": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "CreateS3FolderLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "UploadLambdaVersionnEjg7YvELIGEfj35C87F7uLhuETkDqsY1C8qocJoY": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "UploadLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "GetUserFoldersLambdaVersionbxxmyobf5CyjJ7WtxXjWEpVPYW6i9bCAZBy3spM8": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "GetUserFoldersLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "GetImagesLambdaVersionoNNZY9UuzKKhhDiSEE2HYDWK78pLhwWsPxudkrHn4": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "GetImagesLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "GetAudioFilesLambdaVersionClz1NR3rWEOoqHyZWG41hEJiHMnGJYCBcgFMubYEU": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "GetAudioFilesLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "GetFilesLambdaVersionnFYTTgh2OHQRaX4Mu42OOdmvaGrhxn24VbW7Hap8": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "GetFilesLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "UploadImageLambdaVersionH3fpFFFkqesqm09CTpjkcaFvbGc9L3ClR2dExunPCk": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "UploadImageLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "UploadAudioLambdaVersionLEbBLOrnKqURn3eM5v26zvcrhs3vhqqNOiE1B18Jw": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "UploadAudioLambdaFunction"
-                },
-                "CodeSha256": "eTcC20SzVXE93MwH6HILec9UcFwfieIp7bcD/rzDdvA="
-              }
-            },
-            "ApiGatewayRestApi": {
-              "Type": "AWS::ApiGateway::RestApi",
-              "Properties": {
-                "Name": "dev-serverless-express-apollo",
-                "EndpointConfiguration": {
-                  "Types": [
-                    "EDGE"
-                  ]
-                },
-                "Policy": ""
-              }
-            },
-            "ApiGatewayResourceGraphql": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "graphql",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourcePlayground": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "playground",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceSinglepostDashimage": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "singlepost-image",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceCreateDashs3Dashfolder": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "create-s3-folder",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceUpload": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "upload",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceUserDashfolders": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "user-folders",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceImages": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "images",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceAudiofiles": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "audiofiles",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceFiles": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "files",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceUploadDashimage": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "upload-image",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayResourceUploadDashaudio": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "upload-audio",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodGraphqlOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceGraphql"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodPlaygroundOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourcePlayground"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodSinglepostDashimageOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceSinglepostDashimage"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodCreateDashs3DashfolderOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceCreateDashs3Dashfolder"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodUploadOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUpload"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodUserDashfoldersOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUserDashfolders"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodImagesOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceImages"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodAudiofilesOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceAudiofiles"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodFilesOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceFiles"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodUploadDashimageOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUploadDashimage"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodUploadDashaudioOptions": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "AuthorizationType": "NONE",
-                "HttpMethod": "OPTIONS",
-                "MethodResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": true,
-                      "method.response.header.Access-Control-Allow-Headers": true,
-                      "method.response.header.Access-Control-Allow-Methods": true
-                    },
-                    "ResponseModels": {}
-                  }
-                ],
-                "RequestParameters": {},
-                "Integration": {
-                  "Type": "MOCK",
-                  "RequestTemplates": {
-                    "application/json": "{statusCode:200}"
-                  },
-                  "ContentHandling": "CONVERT_TO_TEXT",
-                  "IntegrationResponses": [
-                    {
-                      "StatusCode": "200",
-                      "ResponseParameters": {
-                        "method.response.header.Access-Control-Allow-Origin": "'https://main.dan6kz7trfabu.amplifyapp.com'",
-                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,x-user-id,x-file-type,x-project-author'",
-                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
-                      },
-                      "ResponseTemplates": {
-                        "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\"https://main[.]dan6kz7trfabu[.]amplifyapp[.]com\") || $origin.matches(\"http://localhost:3000\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                      }
-                    }
-                  ]
-                },
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUploadDashaudio"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodGraphqlAny": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "ANY",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceGraphql"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "GraphqlLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "GraphqlLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodPlaygroundAny": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "ANY",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourcePlayground"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "GraphqlLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "GraphqlLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodSinglepostDashimageGet": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "GET",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceSinglepostDashimage"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "SinglePostImageLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "SinglePostImageLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodCreateDashs3DashfolderPost": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "POST",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceCreateDashs3Dashfolder"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "CreateS3FolderLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "CreateS3FolderLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodUploadPost": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "POST",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUpload"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "UploadLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "UploadLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodUserDashfoldersGet": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "GET",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUserDashfolders"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "GetUserFoldersLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "GetUserFoldersLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodImagesGet": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "GET",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceImages"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "GetImagesLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "GetImagesLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodAudiofilesGet": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "GET",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceAudiofiles"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "GetAudioFilesLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "GetAudioFilesLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodFilesGet": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "GET",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceFiles"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "GetFilesLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "GetFilesLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodUploadDashimagePost": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "POST",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUploadDashimage"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "UploadImageLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "UploadImageLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodUploadDashaudioPost": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "POST",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceUploadDashaudio"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "UploadAudioLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "UploadAudioLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayDeployment1719710616254": {
-              "Type": "AWS::ApiGateway::Deployment",
-              "Properties": {
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "StageName": "dev"
-              },
-              "DependsOn": [
-                "ApiGatewayMethodGraphqlOptions",
-                "ApiGatewayMethodPlaygroundOptions",
-                "ApiGatewayMethodSinglepostDashimageOptions",
-                "ApiGatewayMethodCreateDashs3DashfolderOptions",
-                "ApiGatewayMethodUploadOptions",
-                "ApiGatewayMethodUserDashfoldersOptions",
-                "ApiGatewayMethodImagesOptions",
-                "ApiGatewayMethodAudiofilesOptions",
-                "ApiGatewayMethodFilesOptions",
-                "ApiGatewayMethodUploadDashimageOptions",
-                "ApiGatewayMethodUploadDashaudioOptions",
-                "ApiGatewayMethodGraphqlAny",
-                "ApiGatewayMethodPlaygroundAny",
-                "ApiGatewayMethodSinglepostDashimageGet",
-                "ApiGatewayMethodCreateDashs3DashfolderPost",
-                "ApiGatewayMethodUploadPost",
-                "ApiGatewayMethodUserDashfoldersGet",
-                "ApiGatewayMethodImagesGet",
-                "ApiGatewayMethodAudiofilesGet",
-                "ApiGatewayMethodFilesGet",
-                "ApiGatewayMethodUploadDashimagePost",
-                "ApiGatewayMethodUploadDashaudioPost"
-              ]
-            },
-            "GraphqlLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "GraphqlLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "SinglePostImageLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "SinglePostImageLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "CreateS3FolderLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "CreateS3FolderLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "UploadLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "UploadLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "GetUserFoldersLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "GetUserFoldersLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "GetImagesLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "GetImagesLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "GetAudioFilesLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "GetAudioFilesLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "GetFilesLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "GetFilesLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "UploadImageLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "UploadImageLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "UploadAudioLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "UploadAudioLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            }
-          },
-          "Outputs": {
-            "ServerlessDeploymentBucketName": {
-              "Value": {
-                "Ref": "ServerlessDeploymentBucket"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-ServerlessDeploymentBucketName"
-              }
-            },
-            "GraphqlLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "GraphqlLambdaVersion7TWVihbho62bHkvE46AuOFwyv6NUhwaYEDMCo2Jk0"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-GraphqlLambdaFunctionQualifiedArn"
-              }
-            },
-            "SinglePostImageLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "SinglePostImageLambdaVersionou92hu6kQeUGDZ5jIs9gk7roqRBAKKhjESk6ORL6Dsk"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-SinglePostImageLambdaFunctionQualifiedArn"
-              }
-            },
-            "CreateS3FolderLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "CreateS3FolderLambdaVersionUgE9rShgJ5fCCqfziyNH3gevmYbc4rVgAKYDEZSQc0"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-CreateS3FolderLambdaFunctionQualifiedArn"
-              }
-            },
-            "UploadLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "UploadLambdaVersionnEjg7YvELIGEfj35C87F7uLhuETkDqsY1C8qocJoY"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-UploadLambdaFunctionQualifiedArn"
-              }
-            },
-            "GetUserFoldersLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "GetUserFoldersLambdaVersionbxxmyobf5CyjJ7WtxXjWEpVPYW6i9bCAZBy3spM8"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-GetUserFoldersLambdaFunctionQualifiedArn"
-              }
-            },
-            "GetImagesLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "GetImagesLambdaVersionoNNZY9UuzKKhhDiSEE2HYDWK78pLhwWsPxudkrHn4"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-GetImagesLambdaFunctionQualifiedArn"
-              }
-            },
-            "GetAudioFilesLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "GetAudioFilesLambdaVersionClz1NR3rWEOoqHyZWG41hEJiHMnGJYCBcgFMubYEU"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-GetAudioFilesLambdaFunctionQualifiedArn"
-              }
-            },
-            "GetFilesLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "GetFilesLambdaVersionnFYTTgh2OHQRaX4Mu42OOdmvaGrhxn24VbW7Hap8"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-GetFilesLambdaFunctionQualifiedArn"
-              }
-            },
-            "UploadImageLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "UploadImageLambdaVersionH3fpFFFkqesqm09CTpjkcaFvbGc9L3ClR2dExunPCk"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-UploadImageLambdaFunctionQualifiedArn"
-              }
-            },
-            "UploadAudioLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "UploadAudioLambdaVersionLEbBLOrnKqURn3eM5v26zvcrhs3vhqqNOiE1B18Jw"
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-UploadAudioLambdaFunctionQualifiedArn"
-              }
-            },
-            "ServiceEndpoint": {
-              "Description": "URL of the service endpoint",
-              "Value": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "https://",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    ".execute-api.",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ".",
-                    {
-                      "Ref": "AWS::URLSuffix"
-                    },
-                    "/dev"
-                  ]
-                ]
-              },
-              "Export": {
-                "Name": "sls-serverless-express-apollo-dev-ServiceEndpoint"
-              }
-            }
-          }
-        },
-        "coreCloudFormationTemplate": {
-          "AWSTemplateFormatVersion": "2010-09-09",
-          "Description": "The AWS CloudFormation template for this Serverless application",
-          "Resources": {
-            "ServerlessDeploymentBucket": {
-              "Type": "AWS::S3::Bucket",
-              "Properties": {
-                "BucketEncryption": {
-                  "ServerSideEncryptionConfiguration": [
-                    {
-                      "ServerSideEncryptionByDefault": {
-                        "SSEAlgorithm": "AES256"
-                      }
-                    }
-                  ]
-                }
-              }
-            },
-            "ServerlessDeploymentBucketPolicy": {
-              "Type": "AWS::S3::BucketPolicy",
-              "Properties": {
-                "Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "PolicyDocument": {
-                  "Statement": [
-                    {
-                      "Action": "s3:*",
-                      "Effect": "Deny",
-                      "Principal": "*",
-                      "Resource": [
-                        {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":s3:::",
-                              {
-                                "Ref": "ServerlessDeploymentBucket"
-                              },
-                              "/*"
-                            ]
-                          ]
-                        },
-                        {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":s3:::",
-                              {
-                                "Ref": "ServerlessDeploymentBucket"
-                              }
-                            ]
-                          ]
-                        }
-                      ],
-                      "Condition": {
-                        "Bool": {
-                          "aws:SecureTransport": false
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "Outputs": {
-            "ServerlessDeploymentBucketName": {
-              "Value": {
-                "Ref": "ServerlessDeploymentBucket"
-              }
-            }
-          }
-        },
-        "vpc": {}
+        "versionFunctions": true
       },
       "functions": {
         "graphql": {
@@ -2506,9 +366,9 @@
                 "path": "graphql",
                 "method": "any",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "ANY"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2517,23 +377,18 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             },
             {
               "http": {
                 "path": "playground",
-                "method": "any",
+                "method": "ANY",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "ANY"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2542,23 +397,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-graphql",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "GraphqlLambdaVersion7TWVihbho62bHkvE46AuOFwyv6NUhwaYEDMCo2Jk0"
+          ]
         },
         "singlePostImage": {
           "handler": "server/server.singlePostImageHandler",
@@ -2568,9 +411,9 @@
                 "path": "singlepost-image",
                 "method": "get",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "GET"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2579,23 +422,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-singlePostImage",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "SinglePostImageLambdaVersionou92hu6kQeUGDZ5jIs9gk7roqRBAKKhjESk6ORL6Dsk"
+          ]
         },
         "createS3Folder": {
           "handler": "server/server.createS3FolderHandler",
@@ -2605,9 +436,9 @@
                 "path": "create-s3-folder",
                 "method": "post",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "POST"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2616,23 +447,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-createS3Folder",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "CreateS3FolderLambdaVersionUgE9rShgJ5fCCqfziyNH3gevmYbc4rVgAKYDEZSQc0"
+          ]
         },
         "upload": {
           "handler": "server/server.uploadHandler",
@@ -2642,9 +461,9 @@
                 "path": "upload",
                 "method": "post",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "POST"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2653,23 +472,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-upload",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "UploadLambdaVersionnEjg7YvELIGEfj35C87F7uLhuETkDqsY1C8qocJoY"
+          ]
         },
         "getUserFolders": {
           "handler": "server/server.getUserFoldersHandler",
@@ -2679,9 +486,9 @@
                 "path": "user-folders",
                 "method": "get",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "GET"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2690,23 +497,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-getUserFolders",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "GetUserFoldersLambdaVersionbxxmyobf5CyjJ7WtxXjWEpVPYW6i9bCAZBy3spM8"
+          ]
         },
         "getImages": {
           "handler": "server/server.getImagesHandler",
@@ -2716,9 +511,9 @@
                 "path": "images",
                 "method": "get",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "GET"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2727,23 +522,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-getImages",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "GetImagesLambdaVersionoNNZY9UuzKKhhDiSEE2HYDWK78pLhwWsPxudkrHn4"
+          ]
         },
         "getAudioFiles": {
           "handler": "server/server.getAudioFilesHandler",
@@ -2753,9 +536,9 @@
                 "path": "audiofiles",
                 "method": "get",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "GET"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2764,23 +547,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-getAudioFiles",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "GetAudioFilesLambdaVersionClz1NR3rWEOoqHyZWG41hEJiHMnGJYCBcgFMubYEU"
+          ]
         },
         "getFiles": {
           "handler": "server/server.getFilesHandler",
@@ -2790,9 +561,9 @@
                 "path": "files",
                 "method": "get",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "GET"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2801,23 +572,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-getFiles",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "GetFilesLambdaVersionnFYTTgh2OHQRaX4Mu42OOdmvaGrhxn24VbW7Hap8"
+          ]
         },
         "uploadImage": {
           "handler": "server/server.uploadImageHandler",
@@ -2828,9 +587,9 @@
                 "path": "upload-image",
                 "method": "post",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "POST"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2839,22 +598,11 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-uploadImage",
-          "package": {},
-          "memory": 1024,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "UploadImageLambdaVersionH3fpFFFkqesqm09CTpjkcaFvbGc9L3ClR2dExunPCk"
+          ]
         },
         "uploadAudio": {
           "handler": "server/server.uploadAudioHandler",
@@ -2865,9 +613,9 @@
                 "path": "upload-audio",
                 "method": "post",
                 "cors": {
-                  "methods": [
-                    "OPTIONS",
-                    "POST"
+                  "origins": [
+                    "https://main.dan6kz7trfabu.amplifyapp.com",
+                    "http://localhost:3000"
                   ],
                   "headers": [
                     "Content-Type",
@@ -2876,28 +624,18 @@
                     "x-file-type",
                     "x-project-author"
                   ],
-                  "allowCredentials": "<REDACTED>",
-                  "origins": [
-                    "https://main.dan6kz7trfabu.amplifyapp.com",
-                    "http://localhost:3000"
-                  ]
-                },
-                "integration": "AWS_PROXY"
+                  "allowCredentials": "<REDACTED>"
+                }
               }
             }
-          ],
-          "name": "serverless-express-apollo-dev-uploadAudio",
-          "package": {},
-          "memory": 1024,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "UploadAudioLambdaVersionLEbBLOrnKqURn3eM5v26zvcrhs3vhqqNOiE1B18Jw"
+          ]
         }
       },
       "plugins": [
         "serverless-offline",
         "serverless-prune-plugin",
-        "serverless-apigw-binary"
+        "serverless-apigw-binary",
+        "dotenv"
       ],
       "custom": {
         "apigwBinary": {
@@ -2923,20 +661,20 @@
           "package-lock.json",
           "node_modules/**"
         ],
-        "excludeDevDependencies": true,
-        "artifactsS3KeyDirname": "serverless/serverless-express-apollo/dev/code-artifacts",
-        "artifact": "/Users/risvitareq/code/producer-collab/.serverless/serverless-express-apollo.zip",
-        "artifactDirectoryName": "serverless/serverless-express-apollo/dev/1719710626262-2024-06-30T01:23:46.262Z"
+        "excludeDevDependencies": true
       }
     },
-    "serviceRawFile": "# service: serverless-express-apollo\n\n# provider:\n#   name: aws\n#   runtime: nodejs20.x\n#   region: us-west-1\n#   environment:\n#     MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n#     MY_AWS_PROFILE: ivsir-general\n#     MY_AWS_REGION: us-west-1\n#     BUCKET: react-image-upload-ivsir\n\n#   iamRoleStatements:\n#     - Effect: Allow\n#       Action:\n#         - s3:PutObject\n#         - s3:GetObject\n#         - s3:ListBucket\n#       Resource:\n#         - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n#         - \"arn:aws:s3:::react-image-upload-ivsir\"\n#     - Effect: Allow\n#       Action:\n#         - sts:AssumeRole\n#       Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\n# functions:\n#   graphql:\n#     handler: server/server.graphqlHandler\n#     events:\n#       - http:\n#           path: graphql\n#           method: any\n#           cors: true\n#       - http:\n#           path: playground\n#           method: ANY\n#           cors: true\n#   # app:\n#   #   handler: server/server.restHandler\n#   #   events:\n#   #     - http:\n#   #         path: /\n#   #         method: any\n#   #         cors:\n#   #           origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#   #           headers:\n#   #             - Content-Type\n#   #             - Authorization\n#   #             - x-user-id\n#   #             - x-file-type\n#   #             - x-project-author\n#   #           allowCredentials: false\n#   singlePostImage:\n#     handler: server/server.singlePostImageHandler\n#     events:\n#       - http:\n#           path: singlepost-image\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   createS3Folder:\n#     handler: server/server.createS3FolderHandler\n#     events:\n#       - http:\n#           path: create-s3-folder\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   upload:\n#     handler: server/server.uploadHandler\n#     events:\n#       - http:\n#           path: upload\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getUserFolders:\n#     handler: server/server.getUserFoldersHandler\n#     events:\n#       - http:\n#           path: user-folders\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getImages:\n#     handler: server/server.getImagesHandler\n#     events:\n#       - http:\n#           path: images\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getAudioFiles:\n#     handler: server/server.getAudioFilesHandler\n#     events:\n#       - http:\n#           path: audiofiles\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   getFiles:\n#     handler: server/server.getFilesHandler\n#     events:\n#       - http:\n#           path: files\n#           method: get\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n#   uploadImage:\n#     handler: server/server.uploadImageHandler\n#     timeout: 30 \n#     events:\n#       - http:\n#           path: upload-image\n#           method: post\n#           cors:\n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n\n#   uploadAudio:\n#     handler: server/server.uploadAudioHandler\n#     timeout: 30 \n#     events:\n#       - http:\n#           path: upload-audio\n#           method: post\n#           cors: \n#             origin: 'https://main.dan6kz7trfabu.amplifyapp.com'\n#             headers:\n#               - Content-Type\n#               - Authorization\n#               - x-user-id\n#               - x-file-type\n#               - x-project-author\n#             allowCredentials: false\n#   # restApiHandler:\n#   #   handler: server/server.restHandler\n#   #   events:\n#   #     - httpApi:\n#   #         path: /{proxy+}\n#   #         method: ANY     \n\n# plugins:\n#   - serverless-offline\n#   - serverless-prune-plugin\n\n# custom:\n#   serverless-offline:\n#     httpPort: 4001\n#   prune:\n#     automatic: true\n#     number: 3\n\n# package:\n#   exclude:\n#     - client/** \n#     - package-lock.json\n#     - node_modules/**\n#   excludeDevDependencies: true\n\nservice: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: us-west-1\n  environment:\n    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab\n    MY_AWS_PROFILE: ivsir-general\n    MY_AWS_REGION: us-west-1\n    BUCKET: react-image-upload-ivsir\n\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - s3:PutObject\n        - s3:GetObject\n        - s3:ListBucket\n      Resource:\n        - \"arn:aws:s3:::react-image-upload-ivsir/*\"\n        - \"arn:aws:s3:::react-image-upload-ivsir\"\n    - Effect: Allow\n      Action:\n        - sts:AssumeRole\n      Resource: \"arn:aws:iam::614288690243:user/ivsir\"\n\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n      - http:\n          path: playground\n          method: ANY\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  uploadImage:\n    handler: server/server.uploadImageHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-image\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              # - content-type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  uploadAudio:\n    handler: server/server.uploadAudioHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-audio\n          method: post\n          cors: \n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              # - content-type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n  - serverless-apigw-binary\ncustom:\n  apigwBinary:\n    types:\n      - 'image/jpeg'\n      - 'image/png'\n      - 'audio/wav'\n      - 'audio/mpeg'\n      - 'multipart/form-data'\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
+    "serviceRawFile": "service: serverless-express-apollo\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: ${env:MY_AWS_REGION}  # Reference environment variables using ${env:VAR_NAME}\n  environment:\n    MONGODB_URI: ${env:MONGODB_URI}\n    MY_AWS_PROFILE: ${env:MY_AWS_PROFILE}\n    BUCKET: ${env:BUCKET}\nfunctions:\n  graphql:\n    handler: server/server.graphqlHandler\n    events:\n      - http:\n          path: graphql\n          method: any\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n      - http:\n          path: playground\n          method: ANY\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  singlePostImage:\n    handler: server/server.singlePostImageHandler\n    events:\n      - http:\n          path: singlepost-image\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  createS3Folder:\n    handler: server/server.createS3FolderHandler\n    events:\n      - http:\n          path: create-s3-folder\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  upload:\n    handler: server/server.uploadHandler\n    events:\n      - http:\n          path: upload\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getUserFolders:\n    handler: server/server.getUserFoldersHandler\n    events:\n      - http:\n          path: user-folders\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getImages:\n    handler: server/server.getImagesHandler\n    events:\n      - http:\n          path: images\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getAudioFiles:\n    handler: server/server.getAudioFilesHandler\n    events:\n      - http:\n          path: audiofiles\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  getFiles:\n    handler: server/server.getFilesHandler\n    events:\n      - http:\n          path: files\n          method: get\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n  uploadImage:\n    handler: server/server.uploadImageHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-image\n          method: post\n          cors:\n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\n  uploadAudio:\n    handler: server/server.uploadAudioHandler\n    timeout: 30 \n    events:\n      - http:\n          path: upload-audio\n          method: post\n          cors: \n            origins:\n              - 'https://main.dan6kz7trfabu.amplifyapp.com'\n              - 'http://localhost:3000'\n            headers:\n              - Content-Type\n              - Authorization\n              - x-user-id\n              - x-file-type\n              - x-project-author\n            allowCredentials: false\n\nplugins:\n  - serverless-offline\n  - serverless-prune-plugin\n  - serverless-apigw-binary\n  - dotenv\ncustom:\n  apigwBinary:\n    types:\n      - 'image/jpeg'\n      - 'image/png'\n      - 'audio/wav'\n      - 'audio/mpeg'\n      - 'multipart/form-data'\n  serverless-offline:\n    httpPort: 4001\n  prune:\n    automatic: true\n    number: 3\n\npackage:\n  exclude:\n    - client/** \n    - package-lock.json\n    - node_modules/**\n  excludeDevDependencies: true\n",
     "command": [
-      "deploy"
+      "offline"
     ],
     "options": {},
-    "error": null,
+    "error": {
+      "message": "Plugin2 is not a constructor",
+      "stack": "TypeError: Plugin2 is not a constructor\n    at PluginManager.addPlugin (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:854:273)\n    at file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:854:1435\n    at Array.forEach (<anonymous>)\n    at PluginManager.loadAllPlugins (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:854:1413)\n    at async Serverless.init (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:861:9760)\n    at async runFramework (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:909:880)\n    at async route (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:920:16046)\n    at async Object.run2 [as run] (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:920:16444)\n    at async run3 (file:///Users/risvitareq/.serverless/releases/4.1.11/package/dist/sf-core.js:920:17704)"
+    },
     "params": {},
-    "machineId": "20b622a4114fcb5bbf6590abbfa151bf",
+    "machineId": "9d078afbe4c020182da2d8cdef50ae4d",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
     "orgId": "031ce66e-846a-4177-9803-7027e5d26c87",
@@ -2956,8 +694,7 @@
     "userEmail": "ivsirqerat@gmail.com",
     "serviceProviderAwsCredentials": "<REDACTED>",
     "serviceProviderAwsAccountId": "614288690243",
-    "versionSf": "4.1.7",
-    "serviceProviderAwsCfStackName": "serverless-express-apollo-dev",
+    "versionSf": "4.1.11",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-west-1:614288690243:stack/serverless-express-apollo-dev/a6a38ab0-2528-11ef-b8f6-0623946ef4b5",
     "serviceProviderAwsCfStackCreated": "2024-06-07T23:49:59.727Z",
     "serviceProviderAwsCfStackUpdated": "2024-06-30T01:24:09.484Z",

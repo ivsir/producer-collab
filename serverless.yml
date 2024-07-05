@@ -207,7 +207,7 @@ plugins:
   - serverless-offline
   - serverless-prune-plugin
   - serverless-apigw-binary
-  - dotenv
+  - serverless-dotenv-plugin
 custom:
   apigwBinary:
     types:
