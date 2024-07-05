@@ -3,27 +3,11 @@ service: serverless-express-apollo
 provider:
   name: aws
   runtime: nodejs20.x
-  region: us-west-1
+  region: ${env:MY_AWS_REGION}  # Reference environment variables using ${env:VAR_NAME}
   environment:
-    MONGODB_URI: mongodb+srv://ivsir:Ulang1411!@producer-collab.dyoeqvd.mongodb.net/?retryWrites=true&w=majority&appName=producer-collab
-    MY_AWS_PROFILE: ivsir-general
-    MY_AWS_REGION: us-west-1
-    BUCKET: react-image-upload-ivsir
-
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-        - s3:ListBucket
-      Resource:
-        - "arn:aws:s3:::react-image-upload-ivsir/*"
-        - "arn:aws:s3:::react-image-upload-ivsir"
-    - Effect: Allow
-      Action:
-        - sts:AssumeRole
-      Resource: "arn:aws:iam::614288690243:user/ivsir"
-
+    MONGODB_URI: ${env:MONGODB_URI}
+    MY_AWS_PROFILE: ${env:MY_AWS_PROFILE}
+    BUCKET: ${env:BUCKET}
 functions:
   graphql:
     handler: server/server.graphqlHandler
@@ -223,6 +207,7 @@ plugins:
   - serverless-offline
   - serverless-prune-plugin
   - serverless-apigw-binary
+  - serverless-dotenv-plugin
 custom:
   apigwBinary:
     types:
