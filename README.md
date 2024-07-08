@@ -9,6 +9,7 @@ A full-stack social media application built with React, Node.js, Express, MongoD
 - [Architecture](#architecture)
 - [Setup and Installation](#setup-and-installation)
 - [Usage](#usage)
+- [Demonstration](#demonstration)
 - [API Documentation](#api-documentation)
 - [License](#license)
 - [Contact](#contact)
@@ -97,6 +98,13 @@ npm start
 serverless offline
 
 The backend server runs on http://localhost:4001/dev and the frontend runs on http://localhost:3000.
+
+### Demonstration
+
+
+https://github.com/ivsir/producer-collab/assets/106352994/7e2b958d-fe05-4525-8505-609329067083
+
+
 
 ### API Documentation
 User Endpoints
